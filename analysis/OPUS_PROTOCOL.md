@@ -158,3 +158,12 @@ These cases came up repeatedly; decide them the same way every time.
 10. **Speed.** Read the view, compare word by word, zoom only where something is in
     doubt. Most rows need no zoom; a row that needs more than two zooms is probably
     `UNCERTAIN`.
+11. **Raised letters inside full words.** `^` marks the superscript letters of an
+    abbreviation, contraction or ordinal — letters that end a shortened word or stand
+    in for omitted letters: `th^e`, `y^e`, `W^m`, `M^r`, `S:^d`, `Exec:^rs`, `w^tsoever`,
+    `p^rsents`, `24^th`. Some family-B scribes also lift letters (often `e`) inside words
+    written out in full (`Provided`, `hee`); that is a habit of the hand, not an
+    abbreviation — keep those letters flat. Decide raised vs level against the same
+    scribe's letters on the line in this image.
+12. **u / v.** Copy the letter shape (`Nouember`, `Couenant`, `Prouided`) — labels often
+    modernise it; a pointed v and a round u are both common in these hands.
