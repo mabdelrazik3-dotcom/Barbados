@@ -30,7 +30,6 @@ Image.MAX_IMAGE_PIXELS = None
 
 BASE_CONFIG = load_config("configs/base.yaml")
 TEXT_CONFIG = load_config("configs/text_extraction.yaml")
-SEG_CONFIG = load_config("configs/segmentation.yaml")
 ROOT_DIR = Path(BASE_CONFIG["root_dir"])
 DATA_DIR = ROOT_DIR / "data"
 

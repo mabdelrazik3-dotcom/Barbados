@@ -1,6 +1,8 @@
 # 🏝️ Barbados Cadastral Plan Automation
 
-> **Automated extraction of land parcel geometries and metadata from analog survey plans using Vision-Language Models and Deep Learning**
+> **Automated extraction of metadata from analog survey plans using Vision-Language Models**
+>
+> This copy keeps only the text-extraction part of the solution. The segmentation (polygon) part was removed; the original full solution is in the repository's `.zip` and git history.
 
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.5.1-ee4c2c.svg)](https://pytorch.org/)
@@ -16,12 +18,10 @@
 - [⚡ INFERENCE ONLY (Quick Start) ⭐](#-inference-only-quick-start-)
 - [📁 Directory Structure](#-directory-structure)
 - [🏗️ Solution Architecture](#️-solution-architecture)
-  - [Segmentation Pipeline](#1-segmentation-pipeline-)
-  - [Text Extraction Pipeline](#2-text-extraction-pipeline-)
+  - [Text Extraction Pipeline](#text-extraction-pipeline-)
 - [💻 Hardware Requirements](#-hardware-requirements)
 - [🛠️ Installation & Environment Setup](#️-installation--environment-setup)
 - [🎓 Full Training Pipeline](#-full-training-pipeline)
-  - [Segmentation Training](#segmentation-training-)
   - [Text Extraction Training](#text-extraction-training-)
 - [🏆 Competition Results](#-competition-results)
 - [🔗 Key Technologies](#-key-technologies)
@@ -31,20 +31,16 @@
 
 ## 🎯 Project Overview
 
-This solution automates the digitization of cadastral survey plans for the **Barbados Lands and Surveys Department**. It combines **state-of-the-art Vision-Language Models** with **semantic segmentation** to extract:
+This solution automates the digitization of cadastral survey plans for the **Barbados Lands and Surveys Department**. It uses **fine-tuned Vision-Language Models** to extract:
 
-- 🗺️ **Land parcel polygons** (pixel coordinates)
 - 📄 **Metadata fields**: Land Surveyor, Surveyed For, Address, Certified Date, Total Area, Unit of Measurement, Parish, LT Number
 
-The system processes ~700 training plans and ~300 test plans, producing a final submission CSV with geometries and metadata ready for digital registry integration.
+The system processes ~700 training plans and ~300 test plans, producing a submission CSV with metadata ready for digital registry integration.
 
 ### ✨ Key Highlights
 
-- 🤖 **VLM-Powered Alignment**: Qwen3-VL-30B (32B) reasoning model aligns geographic coordinates to pixel space
 - 🧠 **Fine-Tuned OCR**: Qwen3-VL-8B trained with Unsloth LoRA for metadata extraction
 - 🔄 **Auto-Correction**: VLM-based label correction + pseudo-labeling for robust training
-- 🎯 **Bias Regularization**: Surveyor-specific embeddings improve edge case handling- Naming conventions, how middle name initials and geometries are preferred by various surveyors and LT Nums
-- 🔁 **Test-Time Augmentation**: 8-way TTA for robust segmentation predictions
 
 ---
 
@@ -60,7 +56,7 @@ The solution is evaluated using a **weighted multi-metric system**:
 
 | Metric | Weight | Description |
 |--------|--------|-------------|
-| **IoU Polygon** | 0.5 | Intersection over Union for land parcel shapes |
+| **IoU Polygon** | 0.5 | Intersection over Union for land parcel shapes (segmentation part — removed from this copy) |
 | **Word Error Rate (WER)** | 0.2 | Accuracy of extracted text (TargetSurvey field) |
 | **Multi-Column Accuracy (MCA)** | 0.3 | Exact match across 5 metadata fields |
 
@@ -97,8 +93,6 @@ The solution is evaluated using a **weighted multi-metric system**:
 ### **📋 Prerequisites**
 
 - Pre-trained model checkpoints (included in the provided package):
-  - `outputs/seg_model_checkpoints/` (segmentation model)
-  - `outputs/bias_model_checkpoints/bias_model.pt` (bias model)
   - `outputs/qwen3vl8b_finetuned_lora/` (fine-tuned LoRA adapter)
   - `models/Qwen3-VL-8B-Instruct-unsloth-bnb-4bit`(full model to be used with the finetuned LoRA adapter)
 
@@ -158,28 +152,22 @@ bash run_inference.sh
    - Clean and format predictions
    - Output: `data/sub_text_extraction.csv`
 
-2. **Segmentation**
-   - Load segmentation model + bias embeddings
-   - Run 8-way TTA for each image
-   - Extract polygons from masks
-   - Merge with text metadata
-   - **Output**: `data/final_submission.csv` ✅
 
-**Total Runtime**: ~1 hour for 219 test images (1× RTX A6000)
+**Total Runtime**: ~40 minutes for 219 test images (1× RTX A6000)
 
 ### **Step 5: Retrieve Results** 📊
 
-Your final submission is ready at:
+Your text-extraction output is ready at:
 
 ```
-data/final_submission.csv
+data/sub_text_extraction.csv
 ```
 
 **Format**:
 
 ```csv
-ID,TargetSurvey,Certified date,Total Area,Unit of Measurement,Parish,LT Num,geometry
-7703-078,andre clarke d & a developers ltd lot 1 foul bay,2013-11-22,411.0,sq m,St. Philip,77.03.08.014,"[(40621.893, 66595.872), ...]"
+ID,TargetSurvey,Certified date,Total Area,Unit of Measurement,Parish,LT Num
+7703-078,andre clarke d & a developers ltd lot 1 foul bay,2013-11-22,411.0,sq m,St. Philip,77.03.08.014
 ```
 
 ---
@@ -191,7 +179,6 @@ Barbados2/
 │
 ├── 📂 configs/                          # Configuration files
 │   ├── base.yaml                        # Root paths, seed, fold config
-│   ├── segmentation.yaml                # Segmentation hyperparameters
 │   └── text_extraction.yaml             # VLM model configurations
 │
 ├── 📂 data/                             # Training/test data and outputs
@@ -200,32 +187,17 @@ Barbados2/
 │   ├── SampleSubmission.csv             # Submission format template
 │   ├── survey_plans/                    # Input images (.jpg)
 │   ├── df.csv                           # Merged dataset with K-fold splits
-│   ├── geom_px_df.csv                   # Aligned pixel-space polygons
 │   ├── label_corrections.csv            # VLM-corrected metadata
-│   └── final_submission.csv             # 🎯 Final submission file
+│   └── sub_text_extraction.csv          # 🎯 Final text-extraction output
 │
 ├── 📂 models/                           # Pre-trained model checkpoints
-│   ├── Qwen3-VL-30B-A3B-Thinking/       # Reasoning VLM for alignment
 │   └── Qwen3-VL-8B-Instruct-unsloth-bnb-4bit/  # Fine-tunable OCR model
 │
 ├── 📂 outputs/                          # Trained model checkpoints
-│   ├── seg_model_checkpoints/           # Segmentation model weights
-│   ├── bias_model_checkpoints/          # Surveyor bias embeddings
 │   └── qwen3vl8b_finetuned_lora/        # Fine-tuned LoRA adapter
 │
 ├── 📂 preprocessing/
 │   └── create_dataset.py                # Assemble dataset with K-fold splits
-│
-├── 📂 segmentation/
-│   ├── 📂 align_polys/                  # VLM-powered geometry alignment
-│   │   ├── create_qwen_env.sh           # Setup isolated vLLM environment
-│   │   ├── run_qwen_vllm.sh             # Launch Qwen vLLM server
-│   │   └── align_geo_coords_to_px.py    # Geo → pixel coordinate conversion
-│   ├── 📂 train/
-│   │   ├── train_seg.py                 # Lightning Unet++ training
-│   │   └── train_bias.py                # Surveyor bias embedding training
-│   └── 📂 infer/
-│       └── seg_inference.py             # TTA segmentation + final submission
 │
 ├── 📂 text_extraction/
 │   ├── 📂 train/
@@ -240,12 +212,10 @@ Barbados2/
 │   └── prompts.py                       # VLM prompt templates
 │
 ├── 📂 utils/
-│   ├── base_utils.py                    # Config, WKT parsing, alignment
-│   ├── seg_utils.py                     # Bias loading, polygon metrics
+│   ├── base_utils.py                    # Config loading
 │   └── text_utils.py                    # Reproducibility helpers
 │
 ├── 🔧 install.sh                        # Bootstrap main environment
-├── 🚀 run_seg_training.sh               # Orchestrate segmentation training
 ├── 🚀 run_text_training.sh              # Orchestrate text extraction training
 ├── 🚀 run_inference.sh                  # Full inference pipeline
 └── 📄 requirements.txt                  # Python dependencies
@@ -255,112 +225,18 @@ Barbados2/
 
 ## 🏗️ Solution Architecture
 
-The solution is divided into **two parallel pipelines** that converge at inference:
+The text-extraction pipeline runs from preprocessing to the cleaned metadata output:
 
 ```
-                ╔═══════════════════════════════════════════════════════════╗
-                ║              📊 DATA PREPROCESSING                        ║
-                ║   ┌───────────────────────────────────────────────────┐   ║
-                ║   │  create_dataset.py → df.csv (K-fold splits)       │   ║
-                ║   └───────────────────────────────────────────────────┘   ║
-                ╚═══════════════════════════════════════════════════════════╝
-                                         │
-                         ┌───────────────┴───────────────┐
-                         │                               │
-       ╔═════════════════▼═════════════╗   ╔════════════▼═══════════════════╗
-       ║  🗺️  SEGMENTATION PIPELINE   ║   ║  📄 TEXT EXTRACTION PIPELINE   ║
-       ║                               ║   ║                                ║
-       ║  1. Geo→Pixel Alignment       ║   ║  1. Download Models            ║
-       ║     (Qwen 32B VLM)            ║   ║  2. Patchify Images            ║
-       ║  2. Train Unet++              ║   ║  3. Label Correction           ║
-       ║     (EfficientNet-B5)         ║   ║  4. Fine-tune + Pseudos        ║
-       ║  3. Train Bias Model          ║   ║  5. Final Fine-tune            ║
-       ║                               ║   ║                                ║
-       ╚═══════════════╤═══════════════╝   ╚════════════╤═══════════════════╝
-                       │                                │
-                       │              ┌─────────────────▼─────────────────┐
-                       │              │  📝 Text Inference                │
-                       │              │  → sub_text_extraction.csv        │
-                       │              └─────────────────┬─────────────────┘
-                       │                                │
-                       └────────────────┬───────────────┘
-                                        │
-                      ┌─────────────────▼─────────────────┐
-                      │  🎯 Segmentation Inference        │
-                      │  (TTA + Bias Blending)            │
-                      │  → final_submission.csv ✅        │
-                      └───────────────────────────────────┘
+create_dataset.py → df.csv (K-fold splits)
+  → download models → patchify images → label correction
+  → fine-tune + pseudo labels → final fine-tune
+  → text inference → clean_text_preds.py → sub_text_extraction.csv
 ```
 
 ---
 
-### **1. Segmentation Pipeline** 🗺️
-
-Extracts land parcel polygon coordinates using semantic segmentation with surveyor bias regularization.
-
-#### **🔧 Training Phase**
-
-##### **Step 1: Geometry Alignment** 🤖
-
-**Challenge**: Survey plans contain geographic coordinates that must be mapped to pixel space for training.
-
-**Solution**: Use **Qwen3-VL-30B** (32B parameter reasoning VLM) to align coordinates.
-
-- **Script**: `segmentation/align_polys/align_geo_coords_to_px.py`
-- **Method**:
-  1. Launch local vLLM server (`run_qwen_vllm.sh`) with 4-way tensor parallelism
-  2. Send tiled survey plan images + coordinate hints to VLM
-  3. Model reasons about coordinate positions and returns pixel mappings
-- **Output**: `data/geom_px_df.csv` (aligned pixel-space polygons)
-- ⚠️ **Note**: This process is **non-deterministic** due to the stochastic nature of VLMs
-
-##### **Step 2: Segmentation Model Training** 🧠
-
-**Architecture**: **Unet++** with **EfficientNet-B5** encoder (Segmentation Models PyTorch)
-
-- **Script**: `segmentation/train/train_seg.py`
-- **Framework**: PyTorch Lightning
-- **Training Details**:
-  - **Input**: 2048×2048 images (resized from originals - aspect ratio kept)
-  - **Augmentation**: Heavy (rotation ±90°, flips, perspective, elastic deformation, optical distortion)
-  - **Loss**: IoU (Jaccard) loss
-  - **Optimizer**: Adam (lr=0.0003)
-  - **Precision**: 16-bit mixed precision (AMP)
-  - **Validation**: 5-fold cross-validation (fold 2 for validation)
-  - **Epochs**: 120 max with early stopping
-- **Output**: Lightning checkpoint → `outputs/seg_model_checkpoints/`
-
-##### **Step 3: Bias Model Training** 🎯
-
-**Purpose**: Capture surveyor-specific naming conventions and geometry patterns to regularize predictions.
-
-- **Script**: `segmentation/train/train_bias.py`
-- **Method**: Creates per-LT-number (surveyor ID) embeddings encoding:
-  - Typical polygon shapes for that surveyor
-  - Naming conventions and metadata patterns
-- **Usage**: During inference, provides fallback geometries when model confidence is low
-- **Output**: `outputs/bias_model_checkpoints/bias_model.pt`
-
-#### **📡 Inference Phase**
-
-**Script**: `segmentation/infer/seg_inference.py`
-
-**Pipeline**:
-
-1. Load trained Unet++ model and bias embeddings
-2. **Test-Time Augmentation (TTA)**: 8-way augmentation (scale + flip variations)
-3. Ensemble TTA predictions:
-   - Compute IoU between all polygon pairs
-   - Choose polygon with highest average IoU (consistency)
-   - Verify smoothness (lowest perimeter-to-area ratio)
-4. Apply bias-guided geometry refinement for low-confidence predictions
-5. Convert binary masks → polygons via contour extraction + Douglas-Peucker smoothing
-6. Merge with text extraction metadata
-7. **Output**: `data/final_submission.csv` ✅
-
----
-
-### **2. Text Extraction Pipeline** 📄
+### **Text Extraction Pipeline** 📄
 
 Extracts metadata fields using fine-tuned Vision-Language Models with auto-correction and pseudo-labeling.
 
@@ -451,12 +327,10 @@ Extracts metadata fields using fine-tuned Vision-Language Models with auto-corre
 | **RAM** | 256 GB |
 | **CPU** | 32 cores |
 | **Storage** | 2 TB (HDD/SSD) |
-| **Runtime** | ~16 hours total |
+| **Runtime** | ~0.5 hours (text extraction) |
 
 **Runtime Breakdown**:
 
-- Qwen alignment: ~14 hours (dominant bottleneck)
-- Segmentation training: ~1.5 hours
 - Text extraction training: ~0.5 hours
 
 ### **⚡ Inference Environment**
@@ -466,12 +340,11 @@ Extracts metadata fields using fine-tuned Vision-Language Models with auto-corre
 | **GPU** | 1× NVIDIA RTX A6000 (48GB VRAM) |
 | **RAM** | 64 GB |
 | **CPU** | 16 cores |
-| **Runtime** | ~1 hour for 219 test images |
+| **Runtime** | ~40 minutes for 219 test images |
 
 **Runtime Breakdown**:
 
 - Text extraction: ~40 minutes
-- Segmentation: ~20 minutes
 
 ---
 
@@ -500,85 +373,14 @@ source .venv/bin/activate
 **Creates**: `.venv/` with:
 
 - PyTorch 2.5.1 (CUDA 12.4)
-- PyTorch Lightning
 - Unsloth (for LoRA fine-tuning)
-- vLLM 0.10.0
-- Segmentation Models PyTorch (SMP)
-- Transformers 4.57.0
-- GeoPandas, Shapely, OpenCV, Albumentations
-
-### **2. Install Qwen Alignment Environment** 🤖
-
-*(Only required for geometry alignment during training)*
-
-```bash
-bash segmentation/align_polys/create_qwen_env.sh
-```
-
-**Creates**: `.qvenv/` with:
-
-- vLLM 0.11.0 (isolated version for Qwen compatibility)
-- Qwen VL utilities
-- AutoGen
-
-⚠️ **Why separate environment?**
-vLLM 0.11.0 has stricter PyTorch version requirements. The isolated environment prevents dependency conflicts.
+- Transformers 4.57.0, TRL
 
 ---
 
 ## 🎓 Full Training Pipeline
 
 > **⚠️ This section is for training models from scratch. If you only want to run inference with pre-trained models, see the [Inference Only section](#-inference-only-quick-start-) above.**
-
-### **Segmentation Training** 🗺️
-
-#### **Prerequisites**
-
-**Launch Qwen vLLM Server** (required for geometry alignment):
-
-```bash
-# Activate Qwen environment
-source .qvenv/bin/activate
-
-# Start vLLM server on port 8000
-bash segmentation/align_polys/run_qwen_vllm.sh
-```
-
-This starts a local OpenAI-compatible server with:
-
-- Model: Qwen3-VL-30B-A3B-Thinking
-- Tensor parallelism: 4-way (across 4 GPUs)
-- Features: Chunked prefill, reasoning parser
-
-#### **Run Training Pipeline**
-
-```bash
-# Activate main environment
-source .venv/bin/activate
-
-# Run full segmentation training
-bash run_seg_training.sh
-```
-
-**Pipeline Steps**:
-
-1. **Geometry Alignment** (~14 hours)
-   - `align_geo_coords_to_px.py`: VLM aligns geographic → pixel coordinates
-   - Output: `data/geom_px_df.csv`
-
-2. **Dataset Creation** (~5 minutes)
-   - `preprocessing/create_dataset.py`: Merge train/test, create K-folds
-   - Output: `data/df.csv`
-
-3. **Segmentation Model Training** (~1.5 hours)
-   - `segmentation/train/train_seg.py`: Train Unet++ with EfficientNet-B5
-   - Output: `outputs/seg_model_checkpoints/`
-
-4. **Bias Model Training** (~10 minutes)
-   - `segmentation/train/train_bias.py`: Learn surveyor-specific priors
-   - Output: `outputs/bias_model_checkpoints/bias_model.pt`
-
----
 
 ### **Text Extraction Training** 📄
 
@@ -641,11 +443,8 @@ The competition used a weighted multi-metric evaluation:
 
 | Component | Technologies |
 |-----------|-------------|
-| **Segmentation** | PyTorch Lightning, Segmentation Models PyTorch (SMP), Unet++, EfficientNet-B5, Albumentations |
 | **Text Extraction** | Unsloth, Transformers, TRL, Qwen3-VL, BitsAndBytes (4-bit quantization) |
-| **Geometry** | Shapely, GeoPandas, OpenCV, scikit-image, Douglas-Peucker smoothing |
-| **VLM Serving** | vLLM, AutoGen, OpenAI-compatible API |
-| **Training** | PyTorch 2.5.1, CUDA 12.4, Mixed Precision (AMP) |
+| **Training** | PyTorch 2.5.1, CUDA 12.4, bf16 |
 | **Config** | YAML, python-box |
 
 ---

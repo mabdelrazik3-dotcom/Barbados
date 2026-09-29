@@ -2,10 +2,6 @@ qwen3vl8b:
   repo_id: "unsloth/Qwen3-VL-8B-Instruct-unsloth-bnb-4bit"
   image_size: 1024
 
-qwen3vl32b:
-  repo_id: "Qwen/Qwen3-VL-30B-A3B-Thinking"
-  image_size: 1024
-
 gemma327b:
   repo_id: "unsloth/gemma-3-27b-it-bnb-4bit"
   image_size: 896
