@@ -23,6 +23,8 @@ Inputs: `Train.csv`, `Test.csv`, `SampleSubmission.csv`, the line images, and th
 `mega_prompt.md` (v1) and `mega_prompt_v2.md` (v2). Backbones: **Qwen2.5-VL-7B-Instruct**
 and **Qwen3-VL-8B-Instruct** (you can add more in `configs/models.yaml`).
 
+Workflow diagrams (end to end, approach A, approach B, scopes): [`docs/WORKFLOW.md`](docs/WORKFLOW.md).
+
 ---
 
 ## Quick start
