@@ -17,6 +17,8 @@ approach_a:
   prompt: {version: v2, mode: compact}
   dual_target: true                    # teach both readings; the submission uses "transcription"
   dual_order: ink_first                # ink_first | transcription_first
+  infer_backend: hf                    # A adapters also tune the vision tower (first_place LoRA), which vLLM's
+                                       # LoRA support skips -> keep them on hf (null = the global backend)
 
   label_correction:
     enabled: true

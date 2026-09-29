@@ -71,3 +71,5 @@ train_presets:
     bf16: true
     num_workers: 2
     logging_steps: 1
+    max_seq_length: 8192           # prompt + up to 3 line views (Unsloth defaults to 2048)
+    unsloth_resize: max            # keep the view sizes used at inference (Unsloth's default "min" shrinks them)

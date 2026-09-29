@@ -162,7 +162,10 @@ assistant: answer JSON*. Each adapter stores its prompt/view/answer format in
 
 **Backends.** `hf` (transformers) runs anywhere. `vllm` is much faster for generation and
 judging, and caches the shared prompt prefix. Soups made with `cat` have rank = the sum of
-their members' ranks, so `vllm.max_lora_rank` must be at least that sum.
+their members' ranks, so `vllm.max_lora_rank` must be at least that sum. Approach A's
+adapters also tune the vision tower (the 1st-place LoRA setting), and vLLM's LoRA support
+skips those layers. So A models use `approach_a.infer_backend` (default `hf`) even when the
+global backend is `vllm`.
 
 **Memory.** A 7B/8B model in bf16 needs about 17–19 GB for inference. LoRA training with
 gradient checkpointing needs more. Set `load_in_4bit: true` on a model for QLoRA / 4-bit

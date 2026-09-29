@@ -94,7 +94,9 @@ class VLLMBackend:
                         text = seq.text or ""
                         if text.startswith(inputs[i]["prompt"]):
                             text = text[len(inputs[i]["prompt"]):]
-                        results[i].append(self._candidate(text, "beam", r, seq.cum_logprob, len(seq.tokens)))
+                        # seq.tokens holds prompt + answer; count the answer (+ end marker) from its text
+                        ntok = len(self.tok(text, add_special_tokens=False)["input_ids"]) + 1
+                        results[i].append(self._candidate(text, "beam", r, seq.cum_logprob, ntok))
             except Exception as exc:  # noqa: BLE001 - beam search support differs across vLLM versions
                 log.warning("vLLM beam search unavailable (%s); using %d low-temperature samples instead", exc, nr)
                 self._sample_run(inputs, nr, float(decode.beam.get("fallback_temperature", 0.5)), 0.95,

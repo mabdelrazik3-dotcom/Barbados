@@ -168,15 +168,19 @@ def stage_a_pseudo(cfg: Cfg, force: bool = False) -> None:
     if not (a.enabled and a.pseudo.enabled):
         return
     lines = load_lines(cfg)
-    pool = lines[lines.split.isin(list(a.pseudo.splits))]
-    if a.pseudo.get("max_rows"):
-        pool = pool.head(int(a.pseudo.max_rows))
     for backbone in a.backbones:
         for scope in cfg.scopes:
             out = pseudo_path(cfg, backbone, scope)
             if out.exists() and not force:
                 log.info("pseudo: %s exists", out)
                 continue
+            # Each scope pseudo-labels its own prediction lines too (images only, labels unused): the full
+            # models self-train on the test lines, so the oof models self-train on the holdout lines, and the
+            # ranker learns from candidates made under the same conditions as the test candidates.
+            own = scope_rows(lines, cfg, scope)[1].ID
+            pool = lines[lines.split.isin(list(a.pseudo.splits)) | lines.ID.isin(own)]
+            if a.pseudo.get("max_rows"):
+                pool = pool.head(int(a.pseudo.max_rows))
             cands = generate_candidates(cfg, backbone, a_model_dir(cfg, 1, backbone, scope), pool,
                                         dict(a.pseudo.decode, include_ink=False), f"pseudo:{backbone}", scope)
             greedy = {c["ID"]: c for c in cands if c["method"] == "greedy"}

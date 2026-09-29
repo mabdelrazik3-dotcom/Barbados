@@ -110,11 +110,11 @@ def load_model(spec: ModelSpec, cfg: Cfg, adapter: str | Path | None = None, mer
     return model
 
 
-def accepts_kwarg(model: Any, name: str) -> bool:
+def accepts_kwarg(model: Any, name: str, method: str = "forward") -> bool:
     import inspect
 
     base = model.get_base_model() if hasattr(model, "get_base_model") else model
     try:
-        return name in inspect.signature(base.forward).parameters
-    except (TypeError, ValueError):
+        return name in inspect.signature(getattr(base, method)).parameters
+    except (TypeError, ValueError, AttributeError):
         return False

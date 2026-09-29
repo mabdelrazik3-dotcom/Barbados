@@ -20,6 +20,7 @@ train_presets:
   first_place: {backend: mock}
 
 approach_a:
+  infer_backend: mock
   label_correction: {batch_size: 8}
 
 approach_b:

@@ -13,12 +13,13 @@ from __future__ import annotations
 
 import argparse
 import importlib
+import os
 import sys
 import time
 
 import yaml
 
-from .config import load_config, to_plain
+from .config import load_config, preset, to_plain
 from .utils import free_gpu, get_logger, set_seed, stage_done, work_path
 
 STAGES = {
@@ -48,6 +49,21 @@ def resolve(name: str):
     return getattr(importlib.import_module(module), func)
 
 
+def import_unsloth_first(cfg, names: list[str], log) -> None:
+    """Unsloth patches transformers when imported, so it has to come before transformers."""
+    presets = []
+    if cfg.approach_a.enabled and {"a_train_first", "a_train_final"} & set(names):
+        presets.append(cfg.approach_a.train)
+    if cfg.approach_b.enabled and "b_train_generators" in names:
+        presets.extend(g.train for g in cfg.approach_b.generators)
+    if any(preset(cfg, "train_presets", p).backend == "unsloth" for p in presets):
+        os.environ.setdefault("UNSLOTH_DISABLE_FAST_GENERATION", "1")
+        try:
+            import unsloth  # noqa: F401
+        except ImportError:
+            log.warning("a training preset uses backend 'unsloth' but unsloth is not installed")
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description="Barbados-Brainiac pipeline")
     p.add_argument("--config", default="configs/brainiac.yaml")
@@ -73,6 +89,7 @@ def main(argv: list[str] | None = None) -> int:
         print("\n".join(names))
         return 0
 
+    import_unsloth_first(cfg, names, log)
     set_seed(int(cfg.seed), bool(cfg.deterministic))
     with open(work_path(cfg, "config_resolved.yaml"), "w", encoding="utf-8") as fh:
         yaml.safe_dump(to_plain(cfg), fh, sort_keys=False, allow_unicode=True)

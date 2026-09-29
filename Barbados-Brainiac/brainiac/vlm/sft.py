@@ -148,6 +148,24 @@ def _train_hf(cfg, spec, lp, tp, dataset, prompt, instruction, out_dir: Path, se
     free_gpu()
 
 
+def _unsloth_collator(collator_cls, model, tokenizer, tp: Cfg):
+    """Unsloth's vision collator, set up to match inference: views are not resized (the line views are
+    already sized for the patch grid) and only the answer is trained (as in the hf path)."""
+    import inspect
+
+    wanted = {
+        "resize": tp.get("unsloth_resize", "max"),
+        "train_on_responses_only": True,
+        "instruction_part": "<|im_start|>user\n",
+        "response_part": "<|im_start|>assistant\n",
+    }
+    params = inspect.signature(collator_cls.__init__).parameters
+    missing = [k for k in wanted if k not in params]
+    if missing:
+        log.warning("UnslothVisionDataCollator has no %s; the prompt/image settings may differ from inference", missing)
+    return collator_cls(model, tokenizer, **{k: v for k, v in wanted.items() if k in params})
+
+
 def _train_unsloth(cfg, spec, lp, tp, dataset, out_dir: Path, seed: int) -> None:
     """The 1st place's training call (unsloth 2025.10 / trl 0.22), with our data and settings."""
     import os
@@ -159,7 +177,8 @@ def _train_unsloth(cfg, spec, lp, tp, dataset, out_dir: Path, seed: int) -> None
 
     source = model_source(spec, unsloth=True)
     model, tokenizer = FastVisionModel.from_pretrained(
-        source, load_in_4bit=bool(spec.load_in_4bit or "bnb-4bit" in source), use_gradient_checkpointing="unsloth"
+        source, load_in_4bit=bool(spec.load_in_4bit or "bnb-4bit" in source), use_gradient_checkpointing="unsloth",
+        max_seq_length=int(tp.get("max_seq_length", 8192)),
     )
     model = FastVisionModel.get_peft_model(
         model,
@@ -179,7 +198,7 @@ def _train_unsloth(cfg, spec, lp, tp, dataset, out_dir: Path, seed: int) -> None
     args = _training_args(tp, out_dir, seed, True)
     args.update(gradient_checkpointing=bool(tp.gradient_checkpointing), tf32=True, dataset_text_field=None,
                 dataset_kwargs={"skip_prepare_dataset": True}, packing=False)
-    trainer = SFTTrainer(model=model, data_collator=UnslothVisionDataCollator(model, tokenizer),
+    trainer = SFTTrainer(model=model, data_collator=_unsloth_collator(UnslothVisionDataCollator, model, tokenizer, tp),
                          train_dataset=dataset, args=SFTConfig(**args))
     trainer.train()
     model.save_pretrained(str(out_dir))

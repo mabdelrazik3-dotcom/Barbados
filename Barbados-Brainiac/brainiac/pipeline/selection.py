@@ -147,7 +147,8 @@ class Member:
                 self.model.fit(train, eval_set=evalset, early_stopping_rounds=es if evalset else None,
                                use_best_model=evalset is not None)
             if Xv is not None:
-                self.best_iteration = max(1, int(self.model.get_best_iteration() or self.iterations) + 1)
+                best = self.model.get_best_iteration()  # 0-based; None without an eval set
+                self.best_iteration = self.iterations if best is None else int(best) + 1
         elif kind == "lightgbm_regressor":
             import lightgbm as lgb
 

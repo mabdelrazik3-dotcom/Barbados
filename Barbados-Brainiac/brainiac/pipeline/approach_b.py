@@ -26,9 +26,9 @@ from ..vlm.base import make_backend
 from ..vlm.sft import train_lora
 from ..vlm.soup import soup_adapters
 from .approach_a import load_pseudo, training_examples
-from .common import (INFER_CHUNK, adapter_settings, answer_for, build_requests, candidates_path, gen_model_dir,
-                     generate_candidates, generator_adapter, judge_path, load_candidate_files, ordered, pool_path,
-                     save_candidates)
+from .common import (INFER_CHUNK, adapter_settings, answer_for, backend_kind, build_requests, candidates_path,
+                     gen_model_dir, generate_candidates, generator_adapter, judge_path, load_candidate_files, ordered,
+                     pool_path, save_candidates)
 
 
 # ------------------------------------------------------------------ generators
@@ -208,12 +208,13 @@ def stage_b_judges(cfg: Cfg, force: bool = False) -> None:
             view = ViewSpec.from_cfg(cfg, settings["view"])
             pool = read_pool(cfg, scope)
             rows = ordered(scope_rows(lines, cfg, scope)[1])
-            backend = make_backend(cfg, model, adapter)
+            kind = backend_kind(cfg, j.generator)
+            backend = make_backend(cfg, model, adapter, kind=kind)
             results = []
             try:
                 for part in chunks(list(range(len(rows))), INFER_CHUNK):
                     sub = rows.iloc[part]
-                    reqs = build_requests(cfg, sub, prompt, view, with_reference=cfg.backend == "mock")
+                    reqs = build_requests(cfg, sub, prompt, view, with_reference=kind == "mock")
                     answers = [[answer_for(settings, c["text"]) for c in pool.get(r.id, [])] for r in reqs]
                     for req, scores in zip(reqs, backend.score(reqs, answers)):
                         for c, s in zip(pool.get(req.id, []), scores):

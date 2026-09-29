@@ -25,6 +25,9 @@ class HFBackend:
         self.device = next(self.model.parameters()).device
         self.end_ids = self._end_token_ids()
         self.keep_logits = accepts_kwarg(self.model, "logits_to_keep")
+        # transformers >= 4.50 would otherwise put back model defaults for every field equal to a global
+        # default - e.g. do_sample=False -> True from Qwen3-VL's generation_config (greedy would sample)
+        self.gen_kwargs = {"use_model_defaults": False} if accepts_kwarg(self.model, "use_model_defaults", "generate") else {}
         log.info("hf backend: %s%s on %s", spec.name, f" + {adapter}" if adapter else "", self.device)
 
     # ------------------------------------------------------------------ helpers
@@ -115,7 +118,7 @@ class HFBackend:
             for method, kw, beam in runs:
                 gc = self._generation_config(decode.max_new_tokens, **kw)
                 with torch.inference_mode():
-                    out = self.model.generate(**enc, generation_config=gc)
+                    out = self.model.generate(**enc, generation_config=gc, **self.gen_kwargs)
                 gen_ids = out.sequences[:, plen:]
                 sums, lengths = self._sequence_logprobs(out, gen_ids, beam)
                 texts = self._decode_texts(gen_ids)

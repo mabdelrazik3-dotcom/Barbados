@@ -90,19 +90,26 @@ def ordered(rows: pd.DataFrame) -> pd.DataFrame:
     return rows.sort_values(["family", "w"]).reset_index(drop=True)
 
 
+def backend_kind(cfg: Cfg, source: str) -> str:
+    """Approach-A adapters tune the vision tower too, which vLLM's LoRA support skips -> own backend."""
+    if source.startswith(("a:", "pseudo:")):
+        return cfg.approach_a.get("infer_backend") or cfg.backend
+    return cfg.backend
+
+
 def generate_candidates(cfg: Cfg, model_name: str, adapter: Path, rows: pd.DataFrame, decode_spec: dict,
                         source: str, scope: str) -> list[dict]:
     settings = adapter_settings(adapter)
     prompt = build_prompt(cfg, settings["prompt"], dual=settings["dual"], dual_order=settings["dual_order"])
     view = ViewSpec.from_cfg(cfg, settings["view"])
     decode = DecodeSpec.from_cfg(decode_spec, int(cfg.hf.max_new_tokens))
-    backend = make_backend(cfg, model_name, adapter)
+    backend = make_backend(cfg, model_name, adapter, kind=backend_kind(cfg, source))
     out: list[dict] = []
     try:
         rows = ordered(rows)
         for part in chunks(list(range(len(rows))), INFER_CHUNK):
             sub = rows.iloc[part]
-            reqs = build_requests(cfg, sub, prompt, view, with_reference=cfg.backend == "mock")
+            reqs = build_requests(cfg, sub, prompt, view, with_reference=backend_kind(cfg, source) == "mock")
             for req, cands in zip(reqs, backend.generate(reqs, decode)):
                 for c in cands:
                     out.append(dict(c.as_row(req.id, source), scope=scope))

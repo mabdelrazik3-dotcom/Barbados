@@ -240,12 +240,13 @@ class CTCReader:
         lp = torch.from_numpy(logp)[:, None, :]
         for text in texts:
             ids, unknown = self.charset.encode(" ".join(text.split()))
-            if len(ids) > t:
+            repeats = sum(1 for a, b in zip(ids, ids[1:]) if a == b)  # CTC needs a blank between repeats
+            if len(ids) + repeats > t:
                 out.append({"nll": 1e4, "unknown": unknown, "n": len(ids)})
                 continue
-            nll = F.ctc_loss(lp, torch.tensor([ids], dtype=torch.long), torch.tensor([t]), torch.tensor([len(ids)]),
-                             blank=0, reduction="sum", zero_infinity=True)
-            out.append({"nll": float(nll), "unknown": unknown, "n": len(ids)})
+            nll = float(F.ctc_loss(lp, torch.tensor([ids], dtype=torch.long), torch.tensor([t]),
+                                   torch.tensor([len(ids)]), blank=0, reduction="sum", zero_infinity=False))
+            out.append({"nll": nll if math.isfinite(nll) else 1e4, "unknown": unknown, "n": len(ids)})
         return out
 
 
