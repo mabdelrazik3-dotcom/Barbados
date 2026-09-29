@@ -117,3 +117,22 @@ QA: 12 of 12 agent corrections re-checked by me at high zoom hold (rows 36, 44, 
 - Missing in labels: a word (`exers or administrators`), a line-end `~`, a struck word
   under a caret insertion (`~any~ ^our`).
 - QA total: 18 of 18 agent corrections re-checked at high zoom hold.
+
+## Units 175–199 and 200–224: 20 MATCH, 22 CORRECTED, 8 UNCERTAIN
+
+- **`,,` in Train.csv: 6 rows in total** (174, 205, 1020, 2161, 3122, 3910), all after a
+  raised or abbreviated word (`w^th,,`, `pl^t,,`, `Def^t,,`, `w^ch,,`, `afores^d ,,`,
+  `dept ,,`). Row 174 verified: the ink has two dots under the raised letters (`:^`).
+  Check the others as their units come in.
+- Misreadings that produce non-words or wrong words (random errors): `Audley this give`
+  for ink `Andby theis giue` (row 191, verified), `I the said Aree` for ink
+  `y:^e said Stree` (row 216, verified: thorn + raised e, cut `Street`), `am` for `any`,
+  `Voadar` for `Voader`, `come` for the slip `cone`.
+- Scribal repetitions removed by labels (`sd The sd Tho` → `sd Tho`); labels complete cut
+  words (`and` for cut `an`, `Lease` for cut `Leas`) and drop cut partial letters.
+- et-sign spelled `and` by the label (row 179); `Ffrance` for `ffrance`; `this` for `theis`;
+  u→v (`giue`, `vnto`).
+- Label artefacts: `*` before words with no ink behind them (row 223), a spaced ` - `
+  inside `foot-lyne`.
+- `considerac"on` (side-by-side double tick) found in a non-A05 hand (row 212).
+- QA total: 20 of 20 agent corrections re-checked at high zoom hold.
