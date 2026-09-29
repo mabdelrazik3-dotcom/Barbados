@@ -64,3 +64,18 @@ Raw material for the prompt verdict. Each entry: batch, what was seen, evidence 
   `Mingo, -` with a comma and a separate dash (row 120).
 - QA: I re-checked rows 58, 63, 69 (`Margan`, `whame`, `unte`) and 112, 116, 120 at high
   zoom — all six agent corrections hold.
+
+## Unit 75–99: 11 MATCH, 9 CORRECTED, 5 UNCERTAIN
+
+- **Worked example v1 #12 / v2 #13 is contradicted by its image (row 80).** Prompt:
+  `Exec:^rs Adm:^rs and assignes, That if the Said Richard` ("raised letters with a colon
+  below"). Ink (verified by me at high zoom): `Exor: & Adm: and assignes, That if th^e
+  Said Richard` — no raised letters in the two abbreviations, `Exor` not `Exec`, an
+  et-sign between them, and the raised e is on `th^e`. The example teaches the `:^rs`
+  pattern from an image that does not show it.
+- Label repeats a phrase the ink has once: `of the some of the some of` (row 86, verified).
+- u→v modernised by labels: `Couenant`, `Prouided`, `neuertheles`.
+- Raised letters both ways: labels miss `th^e` (row 90) and invent `o^r` (row 96).
+- Capitals missed: `Shal`, `Expressed`.
+- Some family-B scribes raise many `e`s inside full words — handled as a hand habit (flat);
+  protocol rule 11 added.
