@@ -65,7 +65,7 @@ def classify(label, opus):
 def main():
     rows = list(csv.DictReader(open(os.path.join(ROOT, "Train.csv"), encoding="utf-8")))
     recs = {}
-    for path in sorted(glob.glob(os.path.join(ROOT, "analysis", "opus_results", "batch_*.jsonl"))):
+    for path in sorted(glob.glob(os.path.join(ROOT, "analysis", "opus_results", "*.jsonl"))):
         for line in open(path, encoding="utf-8"):
             r = json.loads(line)
             recs[r["ID"]] = r  # later record wins

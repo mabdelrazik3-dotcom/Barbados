@@ -1,13 +1,15 @@
-# Brief for one batch agent (filled in per run: BATCH, ROWS)
+# Brief for one unit agent (filled in per run: FIRST, LAST; up to 4 run in parallel)
 
 You are verifying labels of historic handwriting lines (Barbados deed books, 1639–1710)
 for the `opus_label` study. Work only in `/home/user/Barbados`.
 
 1. Read `analysis/OPUS_PROTOCOL.md` completely before starting. It is binding.
-2. Prepare the batch (renders the reading views and prints the rows):
-   `cd /home/user/Barbados && python3 analysis/tools/prep_batch.py {BATCH} 50`
+2. Prepare your unit (renders the reading views and prints the rows):
+   `cd /home/user/Barbados && python3 analysis/tools/prep_batch.py --rows {FIRST} {LAST}`
+   Your unit name is `u{FIRST:04d}_{LAST:04d}` (e.g. u0075_0099).
    Views: `{VIEWS}/<ID>.png`. Zoom: `python3 analysis/tools/zoom.py {ZOOM} <ID> X0 X1 [Y0 Y1]`.
-3. Your rows: {ROWS} of batch {BATCH} (skip any already recorded). Work in groups of 4:
+3. Your rows: {FIRST}–{LAST} (skip any already recorded). Other agents work on other
+   units at the same time — touch only your own unit. Work in groups of 4:
    a. `Read` the 4 views in ONE message (four Read calls side by side).
    b. For each row compare label and ink word by word; a row where every word, capital
       and mark agrees is MATCH without zooming.
@@ -15,7 +17,7 @@ for the `opus_label` study. Work only in `/home/user/Barbados`.
       group in ONE Bash call (chain the zoom.py commands with `&&`), then `Read` them all
       in ONE message. Do not zoom to re-confirm what is already clear.
    d. Record the 4 rows in ONE call:
-      `python3 analysis/tools/record.py {BATCH} <<'EOF'` ... `EOF`
+      `python3 analysis/tools/record.py <unit name> <<'EOF'` ... `EOF`
       (one line per row: `ID || VERDICT || CONF || opus_label or = || notes`) and check
       the diff it prints; re-record a row if the diff shows an edit you did not intend.
    Aim for about 3 tool rounds per group of 4.

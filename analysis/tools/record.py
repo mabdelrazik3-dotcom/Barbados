@@ -1,9 +1,10 @@
 """Record opus_label verdicts for one batch.
 
 Usage (read lines from stdin, quoted heredoc so nothing is expanded):
-    python3 record.py BATCH_NO <<'EOF'
+    python3 record.py BATCH_NO_OR_UNIT <<'EOF'
     ID || VERDICT || CONF || opus_label || notes
     EOF
+BATCH_NO_OR_UNIT is a batch number (batch_NNN) or a unit name such as u0058_0074.
 
 VERDICT  MATCH      the label is exactly what the ink shows (opus_label must be "=")
          CORRECTED  the label is wrong somewhere; opus_label is the full corrected line
@@ -12,7 +13,7 @@ VERDICT  MATCH      the label is exactly what the ink shows (opus_label must be 
 CONF     high | medium | low   (confidence in opus_label as a whole)
 opus_label "=" means: identical to the Train.csv label.
 
-Each accepted row is appended to analysis/opus_results/batch_NNN.jsonl
+Each accepted row is appended to analysis/opus_results/<batch_NNN|unit>.jsonl
 (a later record for the same ID replaces an earlier one when merging).
 Prints a word diff (label -> opus) for every changed row, then the batch progress.
 """
@@ -39,12 +40,13 @@ def word_diff(a, b):
 
 
 def main():
-    n = int(sys.argv[1])
-    batch = json.load(open(os.path.join(ROOT, "analysis", "batches", f"batch_{n:03d}.json"), encoding="utf-8"))
+    arg = sys.argv[1]
+    name = arg if arg.startswith("u") else f"batch_{int(arg):03d}"
+    batch = json.load(open(os.path.join(ROOT, "analysis", "batches", f"{name}.json"), encoding="utf-8"))
     by_id = {it["ID"]: it for it in batch}
     out_dir = os.path.join(ROOT, "analysis", "opus_results")
     os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, f"batch_{n:03d}.jsonl")
+    out_path = os.path.join(out_dir, f"{name}.jsonl")
     ok, bad = 0, 0
     with open(out_path, "a", encoding="utf-8") as fh:
         for raw in sys.stdin:
@@ -98,7 +100,7 @@ def main():
     for l in open(out_path, encoding="utf-8"):
         done.add(json.loads(l)["ID"])
     missing = [it for it in batch if it["ID"] not in done]
-    print(f"# recorded {ok}, rejected {bad}; batch {n}: {len(done)}/{len(batch)} done")
+    print(f"# recorded {ok}, rejected {bad}; {name}: {len(done)}/{len(batch)} done")
     if missing:
         print("# next pending rows:", ", ".join(f"{it['row']}:{it['ID']}" for it in missing[:8]))
 
