@@ -1,0 +1,27 @@
+{
+ "rows_total": 4098,
+ "rows_verdicted": 31,
+ "verdicts": {
+  "CORRECTED": 10,
+  "MATCH": 17,
+  "UNCERTAIN": 4
+ },
+ "diff_types": {
+  "capital": 7,
+  "raised_mark": 6,
+  "punct_mark": 3,
+  "spelling": 3,
+  "cut_word": 1
+ },
+ "by_family": {
+  "A": {
+   "CORRECTED": 10,
+   "MATCH": 16,
+   "UNCERTAIN": 2
+  },
+  "B": {
+   "UNCERTAIN": 2,
+   "MATCH": 1
+  }
+ }
+}
