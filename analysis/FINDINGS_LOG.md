@@ -2,6 +2,28 @@
 
 Raw material for the prompt verdict. Each entry: batch, what was seen, evidence rows.
 
+## How these findings are used (the prompts were built from the Train.csv labels)
+
+The prompts' rules, statistics and worked examples were derived from the Train.csv
+labels, so every label error is inherited by the prompts. Each label→ink difference is
+therefore classified as one of two kinds, and each kind changes the prompt differently:
+
+1. **Random label errors** (repeated words, spellings copied from a sibling copy,
+   misread letters, a completed cut word here but not there). They cannot be predicted,
+   so the prompt follows the ink. Worked examples must come only from rows where
+   label = ink (verdict MATCH); otherwise the prompt pairs an image with text it does
+   not show (e.g. `Exec:^rs Adm:^rs` for ink `Exor: & Adm:`).
+2. **Systematic annotator habits** (for a given ink feature the annotators almost always
+   write the same thing, even when it differs from the ink). The test references come
+   from the same annotators, so the prompt should reproduce the habit. Text-only
+   counting cannot see these; only label-vs-image comparison can. Candidates so far:
+   linked words split (`inthe` → `in the`), u modernised to v (`Nouember` → `November`),
+   separate dots after words dropped, clear capitals written small. Each needs its
+   rate over the full set (P(label form | ink form)) before it becomes a prompt rule.
+
+QA: 12 of 12 agent corrections re-checked by me at high zoom hold (rows 36, 44, 47, 49,
+58, 63, 69, 80, 86, 112, 116, 120, 136, 140, 147 — incl. `Oluant`, `aforesd`, `the`).
+
 ## Batch 1 — pilot (rows 0–33, verdicted by hand)
 
 - **Parallel copies of one formula.** Consecutive rows are the same text written by
