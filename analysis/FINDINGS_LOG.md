@@ -101,3 +101,19 @@ QA: 12 of 12 agent corrections re-checked by me at high zoom hold (rows 36, 44, 
 - Capitals missed: `Shal`, `Expressed`.
 - Some family-B scribes raise many `e`s inside full words — handled as a hand habit (flat);
   protocol rule 11 added.
+
+## Unit 150–174: 7 MATCH, 13 CORRECTED, 5 UNCERTAIN
+
+- **The prompts' `,,` rule (v1 §4.5, v2 §4.5 and §9) rests on 2 label rows in all of
+  Train.csv** (row 174 `w^th,,`, row 1020 `Def^t,, Def^t,, & the p^tt,,`). Row 174's ink
+  (verified by me) has two small dots UNDER the raised `th` — the feature the other
+  annotators write `:^` (`w:^th`). So `,,` is one annotator's alternative spelling of
+  `:^`, not a separate mark. Check row 1020 when its unit is done.
+- Labels modernise spelling/letters: `vnto`→`unto`, `whatsoeuer`→`whatsoever`,
+  `excecutors`→`executors` (scribal slip dropped), `deschargeing`→`dischargeing`,
+  `requisit`→`requisite`, `breadth`→`breadeth`, `sevally`→`servally`.
+- Word substitution toward sense: `Excepted` labelled `expected` (verified); `ult:`
+  labelled `nlt:` (verified).
+- Missing in labels: a word (`exers or administrators`), a line-end `~`, a struck word
+  under a caret insertion (`~any~ ^our`).
+- QA total: 18 of 18 agent corrections re-checked at high zoom hold.
