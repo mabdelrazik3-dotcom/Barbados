@@ -1,0 +1,154 @@
+[    0.1 min] [CLASSIFY] pixel features of 90 images in 3s
+[    0.1 min] [CLASSIFY] mode fixed: 10 sub-classes
+sub-class class  train  inner  val  test  unlisted  height  width   paper   tint  contrast  stroke_rel  sharp  edge_ratio
+      A01     A      4      0    3     1         0    95.0 1150.0 169.165 62.686    63.002       0.075  0.208       0.546
+      A02     A      2      0    0     1         0    57.0  772.0 204.310 49.233    99.692       0.069  0.262       0.226
+      A03     A      6      0    0     0         1    52.0 1021.0 206.842 47.520    84.789       0.061  0.214       0.125
+      A04     A      1      0    0     0         0    45.0 1011.0 199.506 55.817    93.864       0.088  0.243       0.050
+      A05     A     13      3    3     2         3    65.0 1112.0 200.724 50.621    91.026       0.053  0.265       0.320
+      A06     A      7      2    0     0         0    46.0 1101.0 206.565 46.228    85.905       0.081  0.232       0.171
+      A07     A      6      1    3     0         0    48.0 1136.5 195.575 52.888   100.620       0.090  0.219       0.101
+      B01     B      6      0    0     0         0   306.5 4046.0 180.830 63.229    78.482       0.057  0.088       0.447
+      B02     B     11      0    1     3         1   377.5 4107.0 162.058 67.966    57.015       0.031  0.124       0.562
+      B03     B      4      0    2     0         0   437.0 5290.0 170.889 67.439    76.848       0.042  0.082       0.598
+[    0.1 min] [CLASSIFY] train+val lines: sub-class x old A1/A2/A3/B group
+old group    A1   A2    A3     B
+sub-class                       
+A01           1    6     0     0
+A02           1    0     1     0
+A03           4    0     2     0
+A04           1    0     0     0
+A05        1643  376  1000     0
+A06           9    0     0     0
+A07          10    0     0     0
+B01           0    0     0     6
+B02           0    0     0  1027
+B03           0    0     0     6
+[    0.1 min] [CLASSIFY] saved subclass_assignments.csv (ID, split, class, subclass, pixel features)
+[    0.1 min] [PROMPTS] conventions measured on the TRAIN lines of each sub-class (% of lines):
+        n  chars  words  caret  colon    amp  thorn    ff  digit  tilde  comma  Said    sd  cap_words
+A01   4.0   52.0    8.5   25.0    0.0   25.0    0.0  25.0    0.0    0.0   50.0   0.0   0.0       34.0
+A02   2.0   42.5    8.5    0.0    0.0    0.0    0.0   0.0    0.0    0.0    0.0   0.0   0.0       23.6
+A03   6.0   55.0    9.0   33.3    0.0    0.0   50.0   0.0   16.7    0.0    0.0   0.0   0.0       24.3
+A04   1.0   82.0   15.0    0.0    0.0  100.0    0.0   0.0    0.0    0.0    0.0   0.0   0.0        0.0
+A05  13.0   78.0   14.0   15.4    0.0    7.7    0.0   0.0    0.0    0.0    7.7   0.0   0.0        8.0
+A06   7.0   66.0   11.0   14.3    0.0    0.0    0.0   0.0   14.3    0.0   14.3   0.0   0.0       20.6
+A07   6.0   64.0   13.0    0.0   16.7   83.3   33.3   0.0    0.0    0.0    0.0   0.0  16.7        5.3
+B01   6.0   58.5   11.5    0.0    0.0    0.0    0.0   0.0    0.0    0.0   16.7  16.7   0.0       16.5
+B02  11.0   50.0    9.0   27.3   18.2    0.0    0.0   9.1    9.1    0.0   18.2   0.0   0.0       27.7
+B03   4.0   67.5   11.5    0.0    0.0    0.0    0.0   0.0    0.0    0.0    0.0   0.0   0.0       28.2
+[    0.1 min] [PROMPTS] characters per prompt: A01=5818, A02=5685, A03=5858, A04=5650, A05=6195, A06=5858, A07=5768, B01=5882, B02=6247, B03=5757
+[    0.1 min] [FEW-SHOT] example pools (Fold-0 TRAIN lines only): A01=4, A02=2, A03=6, A04=1, A05=13, A06=7, A07=6, B01=6, B02=11, B03=4
+[    0.1 min] [GUIDE] submission_offline_best.csv: 1374 lines from column 'Target'
+[    0.1 min] [GUIDE] EXP_002__ENS_7b8b_mbrq__D2_b5nb_ens__val.csv: 819 lines from column 'pred'
+[    0.1 min] [GUIDE] covers 7/7 test and 0/5 unlisted lines
+[    0.1 min] [GUIDE] guide on the 819 val lines: official 0.89861 | per sub-class {"A01": "n=   3 score=0.8525 w/line=2.667 c/line=4.000", "A05": "n=   3 score=0.9184 w/line=1.667 c/line=1.333", "A07": "n=   3 score=0.9601 w/line=0.667 c/line=1.333", "B02": "n=   1 score=1.0000 w/line=0.000 c/line=0.000", "B03": "n=   2 score=0.7951 w/line=3.500 c/line=6.500"}
+[    0.2 min] [MODEL] q3 + fresh LoRA r=32 (19 target module names, vision LoRA on) — B matrices start at zero, so 'before' = base model
+[    0.2 min] [MODEL] prompt lengths in tokens: A01=1553, A02=1491, A03=1573, A04=1514, A05=1674, A06=1541, A07=1577, B01=1584, B02=1708, B03=1520
+[    0.2 min] [CONVERSATION] val line wVsxHXvGovSA5903 (sub-class A07, 2 solved examples: ['VO21eVMkK6yYPNjh', '7BZjlemlbtSecskN']) = 2290 tokens
+
+==============================================================================================================
+[    0.2 min] INFERENCE BEFORE FINE-TUNING (sample)
+==============================================================================================================
+[    0.2 min] [before] val: 4/4 lines | 110 lines/min | ETA 0.0 min | running official score (top-1) 0.0108
+[    0.2 min] [before] 8nyC2jUQfe1uyCWU [A01]
+      GT  : shall Come I Lucie Mitchell of the parish of St. Phillipp
+      PRED: incred轵 progn]; 黾 יצירת坟original
+[    0.2 min] [before] SGoNc4BiqzEjWHCM [A07]
+      GT  : bill beareing date to the prsents Have given granted bargained Sold
+      PRED: incred Taxes蛹ader Buffalo rud仓储Head
+[    0.2 min] [before] CduRh5IjwfP6hYb8 [B02]
+      GT  : S:^t Michaells in the Island aforesaid and then and there
+      PRED: später.sigฮา Permissions(javaxخلق Cupertino actionable
+[    0.2 min] [before] VAL top1  : official 0.01080 | word/line 11.250 | char/line 57.250 | n=4 (sample)
+[    0.2 min] [before]   per sub-class: {"A01": "n=   1 score=0.0780 w/line=11.000 c/line=51.000", "A05": "n=   1 score=-0.2326 w/line=13.000 c/line=76.000", "A07": "n=   1 score=0.0598 w/line=11.000 c/line=53.000", "B02": "n=   1 score=0.1379 w/line=10.000 c/line=49.000"}
+[    0.2 min] [before]   vs GUIDE (0.97008) on the same lines: -0.95928 CI95 [-1.13996,-0.83220] P(better)=0.000
+[    0.2 min] [before] VAL mbr   : official 0.01534 | word/line 11.250 | char/line 56.750 | n=4 (sample)
+[    0.2 min] [before]   per sub-class: {"A01": "n=   1 score=0.0871 w/line=11.000 c/line=50.000", "A05": "n=   1 score=-0.2326 w/line=13.000 c/line=76.000", "A07": "n=   1 score=0.0598 w/line=11.000 c/line=53.000", "B02": "n=   1 score=0.1470 w/line=10.000 c/line=48.000"}
+[    0.2 min] [before]   vs GUIDE (0.97008) on the same lines: -0.95473 CI95 [-1.13769,-0.82311] P(better)=0.000
+
+==============================================================================================================
+[    0.2 min] [TRAIN ft1] 60 lines -> 120 rows (by sub-class {'A01': 4, 'A02': 2, 'A03': 6, 'A04': 1, 'A05': 13, 'A06': 7, 'A07': 6, 'B01': 6, 'B02': 11, 'B03': 4}) | lr 0.0002 | batch 1 x accumulation 4 | ~4 steps | validation every 2 steps on 3 inner lines
+==============================================================================================================
+[    0.5 min] [VALID ft1] step 2/4 ep 0.07 | train loss nan | inner loss 11.9535 | inner official -0.0907 (word/line 13.667, char/line 57.333, n=3) | 3s  <- best so far
+[    0.8 min] [VALID ft1] step 4/4 ep 0.13 | train loss nan | inner loss 11.9458 | inner official -0.0846 (word/line 13.667, char/line 56.667, n=3) | 3s  <- best so far
+[    0.8 min] [CKPT ft1] keeping the last step 4
+[    0.8 min] [TRAIN ft1] done in 0.6 min | answer-mask checks 3/3 OK
+[    0.8 min] [TRAIN ft1] adapter saved -> D:/HANAFY/ROAD/work/dryrun_tpl/qwen-vl-ocr/final\ROAD_work_tiny_q3\fold0\ft1
+
+==============================================================================================================
+[    0.8 min] INFERENCE AFTER FINE-TUNING
+==============================================================================================================
+[    0.8 min] [after] val: 5/12 lines | 124 lines/min | ETA 0.1 min | running official score (top-1) 0.0552
+[    0.9 min] [after] val: 10/12 lines | 103 lines/min | ETA 0.0 min | running official score (top-1) 0.0230
+[    0.9 min] [after] val: 12/12 lines | 105 lines/min | ETA 0.0 min | running official score (top-1) 0.0028
+[    0.9 min] [after] VAL top1  : official 0.00284 | word/line 11.750 | char/line 55.833 | n=12
+[    0.9 min] [after]   per sub-class: {"A01": "n=   3 score=0.1621 w/line=10.000 c/line=46.333", "A05": "n=   3 score=-0.2396 w/line=14.333 c/line=70.667", "A07": "n=   3 score=0.0139 w/line=11.667 c/line=55.000", "B02": "n=   1 score=0.1470 w/line=10.000 c/line=48.000", "B03": "n=   2 score=0.0390 w/line=11.500 c/line=53.000"}
+[    0.9 min] [after]   vs GUIDE (0.89861) on the same lines: -0.89577 CI95 [-1.02513,-0.77569] P(better)=0.000
+[    0.9 min] [after] VAL mbr   : official -0.00246 | word/line 11.750 | char/line 56.417 | n=12
+[    0.9 min] [after]   per sub-class: {"A01": "n=   3 score=0.1652 w/line=10.000 c/line=46.000", "A05": "n=   3 score=-0.2548 w/line=14.333 c/line=72.333", "A07": "n=   3 score=0.0078 w/line=11.667 c/line=55.667", "B02": "n=   1 score=0.1470 w/line=10.000 c/line=48.000", "B03": "n=   2 score=0.0345 w/line=11.500 c/line=53.500"}
+[    0.9 min] [after]   vs GUIDE (0.89861) on the same lines: -0.90107 CI95 [-1.03100,-0.78024] P(better)=0.000
+[    0.9 min] [after] fine-tuning effect on the 4 lines decoded before: -0.00909 CI95 [-0.02727,+0.00909]
+[    1.0 min] [after] test: 5/7 lines | 114 lines/min | ETA 0.0 min
+[    1.0 min] [after] test: 7/7 lines | 112 lines/min | ETA 0.0 min
+[    1.0 min] [after] unlisted: 5/5 lines | 132 lines/min | ETA 0.0 min
+[    1.1 min] [JUDGE] the model scored 12 guide lines that were not in its 5-best (0.1 min)
+[    1.1 min] [JUDGE] after: val score by guide weight 0.0:-0.00246, 0.2:0.00739, 0.35:0.01269, 0.5:0.89861, 0.65:0.89861, 0.8:0.89861, 1.0:0.89861 | chosen 0.5 | honest 5-fold CV score of this choice 0.89861 +- 0.00000 (guide alone = weight 1.0, model + judge alone = weight 0.0). For RUN_MODE='full' set GUIDE_WEIGHT=0.5
+[    1.1 min] [after] VAL judged (guide weight 0.5) per sub-class: {"A01": "n=   3 score=0.8525 w/line=2.667 c/line=4.000", "A05": "n=   3 score=0.9184 w/line=1.667 c/line=1.333", "A07": "n=   3 score=0.9601 w/line=0.667 c/line=1.333", "B02": "n=   1 score=1.0000 w/line=0.000 c/line=0.000", "B03": "n=   2 score=0.7951 w/line=3.500 c/line=6.500"}
+[    1.1 min] [after] VAL comments: {"judge chose the guide over the model top-1": 12}
+[    1.2 min] [JUDGE] the model scored 7 guide lines that were not in its 5-best (0.1 min)
+[    1.2 min] [PSEUDO] after: guide weight 0.5 | 12 lines -> pseudo_labels_after.csv | kept for training 9 (75%) | agreement with guide 0.0% | mean confidence 0.693
+[    1.2 min] [PSEUDO] after: kept per sub-class {"A01": 1, "A02": 1, "A03": 1, "A05": 3, "B02": 3}
+
+==============================================================================================================
+[    1.2 min] SELF-TRAINING ROUND 1: 60 train + 9 pseudo-labelled lines
+==============================================================================================================
+
+==============================================================================================================
+[    1.2 min] [TRAIN self1] 69 lines -> 138 rows (by sub-class {'A01': 5, 'A02': 3, 'A03': 7, 'A04': 1, 'A05': 16, 'A06': 7, 'A07': 6, 'B01': 6, 'B02': 14, 'B03': 4}) | lr 0.0001 | batch 1 x accumulation 4 | ~4 steps | validation every 2 steps on 3 inner lines
+==============================================================================================================
+[    1.5 min] [VALID self1] step 2/4 ep 0.06 | train loss nan | inner loss 11.9429 | inner official -0.0846 (word/line 13.667, char/line 56.667, n=3) | 3s  <- best so far
+[    1.8 min] [VALID self1] step 4/4 ep 0.12 | train loss nan | inner loss 11.9394 | inner official -0.0846 (word/line 13.667, char/line 56.667, n=3) | 2s
+[    1.8 min] [CKPT self1] RESTORED step 2 (inner_official -0.0846) instead of the last step 4 (inner official -0.0846)
+[    1.8 min] [TRAIN self1] done in 0.6 min | answer-mask checks 3/3 OK
+[    1.8 min] [TRAIN self1] adapter saved -> D:/HANAFY/ROAD/work/dryrun_tpl/qwen-vl-ocr/final\ROAD_work_tiny_q3\fold0\self1
+[    1.9 min] [self1] val: 5/12 lines | 113 lines/min | ETA 0.1 min | running official score (top-1) 0.0624
+[    1.9 min] [self1] val: 10/12 lines | 109 lines/min | ETA 0.0 min | running official score (top-1) 0.0176
+[    1.9 min] [self1] val: 12/12 lines | 111 lines/min | ETA 0.0 min | running official score (top-1) -0.0017
+[    1.9 min] [self1] VAL top1  : official -0.00170 | word/line 11.750 | char/line 56.333 | n=12
+[    1.9 min] [self1]   per sub-class: {"A01": "n=   3 score=0.1561 w/line=10.000 c/line=47.000", "A05": "n=   3 score=-0.2578 w/line=14.333 c/line=72.667", "A07": "n=   3 score=0.0199 w/line=11.667 c/line=54.333", "B02": "n=   1 score=0.1470 w/line=10.000 c/line=48.000", "B03": "n=   2 score=0.0390 w/line=11.500 c/line=53.000"}
+[    1.9 min] [self1]   vs GUIDE (0.89861) on the same lines: -0.90032 CI95 [-1.02797,-0.78345] P(better)=0.000
+[    1.9 min] [self1] VAL mbr   : official -0.00095 | word/line 11.750 | char/line 56.250 | n=12
+[    1.9 min] [self1]   per sub-class: {"A01": "n=   3 score=0.1652 w/line=10.000 c/line=46.000", "A05": "n=   3 score=-0.2487 w/line=14.333 c/line=71.667", "A07": "n=   3 score=0.0078 w/line=11.667 c/line=55.667", "B02": "n=   1 score=0.1470 w/line=10.000 c/line=48.000", "B03": "n=   2 score=0.0345 w/line=11.500 c/line=53.500"}
+[    1.9 min] [self1]   vs GUIDE (0.89861) on the same lines: -0.89956 CI95 [-1.02949,-0.77765] P(better)=0.000
+[    1.9 min] [self1] vs 'after' on val (MBR): +0.00152 CI95 [-0.00379,+0.00682] P(better)=0.704
+[    2.0 min] [self1] test: 5/7 lines | 110 lines/min | ETA 0.0 min
+[    2.0 min] [self1] test: 7/7 lines | 105 lines/min | ETA 0.0 min
+[    2.1 min] [JUDGE] the model scored 12 guide lines that were not in its 5-best (0.1 min)
+[    2.1 min] [JUDGE] self1: val score by guide weight 0.0:-0.00095, 0.2:0.00360, 0.35:0.00587, 0.5:0.89861, 0.65:0.89861, 0.8:0.89861, 1.0:0.89861 | chosen 0.5 | honest 5-fold CV score of this choice 0.89861 +- 0.00000 (guide alone = weight 1.0, model + judge alone = weight 0.0). For RUN_MODE='full' set GUIDE_WEIGHT=0.5
+[    2.1 min] [self1] VAL judged (guide weight 0.5) per sub-class: {"A01": "n=   3 score=0.8525 w/line=2.667 c/line=4.000", "A05": "n=   3 score=0.9184 w/line=1.667 c/line=1.333", "A07": "n=   3 score=0.9601 w/line=0.667 c/line=1.333", "B02": "n=   1 score=1.0000 w/line=0.000 c/line=0.000", "B03": "n=   2 score=0.7951 w/line=3.500 c/line=6.500"}
+[    2.1 min] [self1] VAL comments: {"judge chose the guide over the model top-1": 12}
+[    2.2 min] [JUDGE] the model scored 7 guide lines that were not in its 5-best (0.1 min)
+[    2.2 min] [PSEUDO] self1: guide weight 0.5 | 7 lines -> pseudo_labels_self1.csv | kept for training 5 (71%) | agreement with guide 0.0% | mean confidence 0.570
+[    2.2 min] [PSEUDO] self1: kept per sub-class {"A01": 1, "A02": 1, "A05": 1, "B02": 2}
+
+==============================================================================================================
+[    2.2 min] SUMMARY (official score on the 819 Fold-0 val lines, per sub-class):
+           option  has_test  val_score  word/line  char/line    A01  A02  A03  A04     A05  A06    A07  B01   B02    B03
+     after/judged      True     0.8986     1.8333     2.7500 0.8525  NaN  NaN  NaN  0.9184  NaN 0.9601  NaN 1.000 0.7951
+     self1/judged      True     0.8986     1.8333     2.7500 0.8525  NaN  NaN  NaN  0.9184  NaN 0.9601  NaN 1.000 0.7951
+            guide      True     0.8986     1.8333     2.7500 0.8525  NaN  NaN  NaN  0.9184  NaN 0.9601  NaN 1.000 0.7951
+ after/model_top1      True     0.0028    11.7500    55.8333 0.1621  NaN  NaN  NaN -0.2396  NaN 0.0139  NaN 0.147 0.0390
+  self1/model_mbr      True    -0.0009    11.7500    56.2500 0.1652  NaN  NaN  NaN -0.2487  NaN 0.0078  NaN 0.147 0.0345
+ self1/model_top1      True    -0.0017    11.7500    56.3333 0.1561  NaN  NaN  NaN -0.2578  NaN 0.0199  NaN 0.147 0.0390
+  after/model_mbr      True    -0.0025    11.7500    56.4167 0.1652  NaN  NaN  NaN -0.2548  NaN 0.0078  NaN 0.147 0.0345
+ before/model_mbr     False        NaN        NaN        NaN    NaN  NaN  NaN  NaN     NaN  NaN    NaN  NaN   NaN    NaN
+before/model_top1     False        NaN        NaN        NaN    NaN  NaN  NaN  NaN     NaN  NaN    NaN  NaN   NaN    NaN
+==============================================================================================================
+[    2.2 min] submission.csv <- after/judged | rows 7 | empty replaced 0
+[    2.2 min] pseudo_labels.csv <- stage 'self1' (7 lines, 5 kept for training)
+
+==============================================================================================================
+[    2.2 min] RUN FINISHED in 0.04 h
+==============================================================================================================
+[    2.2 min] final adapter (stage 'self1') -> D:/HANAFY/ROAD/work/dryrun_tpl\final_lora

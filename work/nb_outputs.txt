@@ -1,0 +1,70 @@
+
+######## CELL 1 output stream
+wheels dir: /kaggle/input/datasets/haniagamal/teleco-wheels/wheels   found: 84 wheels
+
+######## CELL 4 output stream
+transformers 5.0.0 | VLM class: AutoModelForImageTextToText
+torch 2.10.0+cu128 | cuda True | bf16 True
+GPU: NVIDIA RTX PRO 6000 Blackwell Server Edition
+
+######## CELL 5 output stream
+Model source: /kaggle/input/models/qwen-lm/qwen-3-vl/transformers/32b-instruct/1
+Folds to train: [0] | ensemble: vote
+
+######## CELL 6 output stream
+TRAIN_CSV : /kaggle/input/datasets/haniagamal/road-barbados/Train.csv -> True
+TEST_CSV  : /kaggle/input/datasets/haniagamal/road-barbados/Test.csv -> True
+IMAGES_DIR: /kaggle/input/datasets/haniagamal/road-barbados/images/images -> True
+BASE_MODEL: /kaggle/input/models/qwen-lm/qwen-3-vl/transformers/32b-instruct/1 -> True
+
+######## CELL 9 output stream
+[DATASET] found=4093, missing=0, excluded_corrupt=5
+Total samples: 4093 | folds: 5
+  fold 0: train=3274  val=819
+  fold 1: train=3274  val=819
+  fold 2: train=3274  val=819
+  fold 3: train=3275  val=818
+  fold 4: train=3275  val=818
+label char length: p50=62 p95=85 p99=92 max=108
+
+######## CELL 10 output stream
+CORRUPT_IDS: 5
+
+######## CELL 10 output display_data
+<Figure size 1650x340 with 6 Axes> [keys: ['text/plain', 'image/png']]
+######## CELL 11 output display_data
+<Figure size 2100x720 with 20 Axes> [keys: ['text/plain', 'image/png']]
+######## CELL 11 output stream
+scipy(elastic) available: True | enabled: AUG_ROTATE, AUG_SHEAR, AUG_ELASTIC, AUG_HJITTER, AUG_PAD, AUG_PHOTO, AUG_TINT, AUG_ILLUM, AUG_STROKE, AUG_BLEED, AUG_NOISE, AUG_JPEG
+
+######## CELL 14 output stream
+`use_fast` is set to `True` but the image processor class does not have a fast version.  Falling back to the slow version.
+
+######## CELL 14 output stream
+test rows: 1374
+MODE: TRAIN+INFER
+
+MODELS this session (3): ['/kaggle/input/models/qwen-lm/qwen2.5-vl/transformers/7b-instruct/2', '/kaggle/input/models/qwen-lm/qwen-3-vl/transformers/8b-instruct/1', '/kaggle/input/models/qwen-lm/qwen-3-vl/transformers/32b-instruct/1'] | FOLDS: [0]
+
+############### FOLD 0 ###############
+
+=========== MODEL transformers_7b_instruct_2  (fold 0) ===========
+[processor] direct load failed; repairing. cause: ValueError('Unrecognized image processor in /kaggle/input/models/qwen-lm/qwen2.5-vl/transformers/7b-instruct/2. Should have a `image_processor_type` key in its preprocessor_config.json of config.json,
+[processor-repair] image_processor_type -> Qwen2VLImageProcessorFast
+[processor] loaded: Qwen2_5_VLProcessor | image_processor: Qwen2VLImageProcessorFast
+[transformers_7b_instruct_2] train=6548 earlystop=328 oof=491
+
+######## CELL 14 output display_data
+Loading weights:   0%|          | 0/729 [00:00<?, ?it/s] [keys: ['text/plain', 'application/vnd.jupyter.widget-view+json']]
+######## CELL 14 output stream
+[lora] LORA_VISION=ON -> +162 vision/merger modules
+
+######## CELL 14 output stream
+warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+
+######## CELL 14 output stream
+trainable params: 103,649,280 || all params: 8,395,815,936 || trainable%: 1.2345
+[transformers_7b_instruct_2] training...
+
+######## CELL 14 output display_data
+<IPython.core.display.HTML object> [keys: ['text/plain', 'text/html']]

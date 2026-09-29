@@ -1,0 +1,7 @@
+root_dir: /media/brainiac/Fidem1/Barbados2
+test_images_dir: /media/brainiac/Fidem1/Barbados2/data/survey_plans
+test_csv_path: /media/brainiac/Fidem1/Barbados2/data/Test.csv
+
+seed: 123
+folds: 5
+val_fold: 2

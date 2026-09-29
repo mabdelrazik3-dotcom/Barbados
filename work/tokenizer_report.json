@@ -1,0 +1,910 @@
+{
+ "q25_7b": {
+  "vocab_size": 151665,
+  "tokens_per_label": {
+   "0": 6.0,
+   "5": 10.0,
+   "50": 15.0,
+   "95": 23.0,
+   "99": 27.0,
+   "100": 34.0
+  },
+  "mean_tokens_per_label": 15.629819424109321,
+  "chars_per_token": 3.981967494652699,
+  "tokens_per_word_mean": 1.3744292237442923,
+  "tokens_per_word_caret_words": 3.5470183486238533,
+  "tokens_per_word_colon_words": 2.980769230769231,
+  "tokens_per_word_hapax": 2.2664277180406214,
+  "tokens_per_word_frequent(>=20)": 1.1428027176328657,
+  "tokens_per_word_capitalised": 1.640254805543138,
+  "single_token_word_frac": 0.7467809301218378,
+  "words_ge4_tokens_frac": 0.027440541885779827,
+  "max_tokens_label": 34,
+  "examples": {
+   "W^m": [
+    " W",
+    "^",
+    "m"
+   ],
+   "y^e": [
+    " y",
+    "^",
+    "e"
+   ],
+   "M^r": [
+    " M",
+    "^",
+    "r"
+   ],
+   "Adm^rs": [
+    " Ad",
+    "m",
+    "^",
+    "rs"
+   ],
+   "w^th": [
+    " w",
+    "^",
+    "th"
+   ],
+   "w^ch": [
+    " w",
+    "^",
+    "ch"
+   ],
+   "Exec:^rs": [
+    " Exec",
+    ":^",
+    "rs"
+   ],
+   "S:^d": [
+    " S",
+    ":^",
+    "d"
+   ],
+   "heires": [
+    " he",
+    "ires"
+   ],
+   "assignes": [
+    " assign",
+    "es"
+   ],
+   "publique": [
+    " pub",
+    "lique"
+   ],
+   "ffebruary": [
+    " f",
+    "fe",
+    "bruary"
+   ],
+   "Xpian": [
+    " X",
+    "p",
+    "ian"
+   ],
+   "Pson": [
+    " P",
+    "son"
+   ],
+   "sd": [
+    " sd"
+   ],
+   "&": [
+    " &"
+   ],
+   "theis": [
+    " the",
+    "is"
+   ],
+   "hould": [
+    " h",
+    "ould"
+   ],
+   "whome": [
+    " wh",
+    "ome"
+   ],
+   "Barbados": [
+    " Barb",
+    "ados"
+   ],
+   "~~~~~~~": [
+    " ~",
+    "~~~~",
+    "~~"
+   ],
+   "aforesaid": [
+    " a",
+    "fo",
+    "res",
+    "aid"
+   ],
+   "Slaues": [
+    " S",
+    "la",
+    "ues"
+   ],
+   "viz^t": [
+    " viz",
+    "^",
+    "t"
+   ],
+   "easmt^s": [
+    " eas",
+    "mt",
+    "^",
+    "s"
+   ],
+   "pfitts": [
+    " pf",
+    "itt",
+    "s"
+   ],
+   "comodities": [
+    " com",
+    "od",
+    "ities"
+   ]
+  },
+  "top_words_highest_fertility": [
+   [
+    "aforesaid,",
+    5,
+    8
+   ],
+   [
+    "1641",
+    5,
+    11
+   ],
+   [
+    "1647",
+    5,
+    13
+   ],
+   [
+    "1642",
+    5,
+    6
+   ],
+   [
+    "1659",
+    5,
+    7
+   ],
+   [
+    "1640",
+    5,
+    28
+   ],
+   [
+    "1643",
+    5,
+    6
+   ],
+   [
+    "25^th",
+    5,
+    5
+   ],
+   [
+    "1644",
+    5,
+    6
+   ],
+   [
+    "15^th",
+    5,
+    5
+   ],
+   [
+    "apperteyneing",
+    5,
+    5
+   ],
+   [
+    "28^th",
+    5,
+    5
+   ],
+   [
+    "24^th",
+    5,
+    6
+   ],
+   [
+    "1654",
+    5,
+    5
+   ],
+   [
+    "th'appurtenances",
+    5,
+    5
+   ],
+   [
+    "aforesaid",
+    4,
+    148
+   ],
+   [
+    "aforesd",
+    4,
+    27
+   ],
+   [
+    "Appurtenances",
+    4,
+    5
+   ],
+   [
+    "w^tsoever",
+    4,
+    23
+   ],
+   [
+    "Adm:^rs",
+    4,
+    9
+   ],
+   [
+    "Adm^rs",
+    4,
+    33
+   ],
+   [
+    "behoofe",
+    4,
+    17
+   ],
+   [
+    "enfeoffed",
+    4,
+    17
+   ],
+   [
+    "appurtenances",
+    4,
+    26
+   ],
+   [
+    "Incumbrances",
+    4,
+    6
+   ]
+  ],
+  "punct_standalone_token_rate": {
+   "^": 0.772,
+   ":": 0.681,
+   "&": 0.996,
+   "~": 0.897,
+   "_": 0.633,
+   "-": 0.92,
+   ".": 0.675,
+   ",": 0.982,
+   ";": 0.96,
+   "'": 0.243,
+   "\"": 0.944,
+   "(": 0.95,
+   ")": 0.935,
+   "?": 0.5,
+   "+": 1.0,
+   "*": 1.0,
+   "|": 1.0,
+   "#": 1.0,
+   "\\": 1.0
+  }
+ },
+ "q3_8b": {
+  "vocab_size": 151669,
+  "tokens_per_label": {
+   "0": 6.0,
+   "5": 10.0,
+   "50": 15.0,
+   "95": 23.0,
+   "99": 27.0,
+   "100": 34.0
+  },
+  "mean_tokens_per_label": 15.629819424109321,
+  "chars_per_token": 3.981967494652699,
+  "tokens_per_word_mean": 1.3744292237442923,
+  "tokens_per_word_caret_words": 3.5470183486238533,
+  "tokens_per_word_colon_words": 2.980769230769231,
+  "tokens_per_word_hapax": 2.2664277180406214,
+  "tokens_per_word_frequent(>=20)": 1.1428027176328657,
+  "tokens_per_word_capitalised": 1.640254805543138,
+  "single_token_word_frac": 0.7467809301218378,
+  "words_ge4_tokens_frac": 0.027440541885779827,
+  "max_tokens_label": 34,
+  "examples": {
+   "W^m": [
+    " W",
+    "^",
+    "m"
+   ],
+   "y^e": [
+    " y",
+    "^",
+    "e"
+   ],
+   "M^r": [
+    " M",
+    "^",
+    "r"
+   ],
+   "Adm^rs": [
+    " Ad",
+    "m",
+    "^",
+    "rs"
+   ],
+   "w^th": [
+    " w",
+    "^",
+    "th"
+   ],
+   "w^ch": [
+    " w",
+    "^",
+    "ch"
+   ],
+   "Exec:^rs": [
+    " Exec",
+    ":^",
+    "rs"
+   ],
+   "S:^d": [
+    " S",
+    ":^",
+    "d"
+   ],
+   "heires": [
+    " he",
+    "ires"
+   ],
+   "assignes": [
+    " assign",
+    "es"
+   ],
+   "publique": [
+    " pub",
+    "lique"
+   ],
+   "ffebruary": [
+    " f",
+    "fe",
+    "bruary"
+   ],
+   "Xpian": [
+    " X",
+    "p",
+    "ian"
+   ],
+   "Pson": [
+    " P",
+    "son"
+   ],
+   "sd": [
+    " sd"
+   ],
+   "&": [
+    " &"
+   ],
+   "theis": [
+    " the",
+    "is"
+   ],
+   "hould": [
+    " h",
+    "ould"
+   ],
+   "whome": [
+    " wh",
+    "ome"
+   ],
+   "Barbados": [
+    " Barb",
+    "ados"
+   ],
+   "~~~~~~~": [
+    " ~",
+    "~~~~",
+    "~~"
+   ],
+   "aforesaid": [
+    " a",
+    "fo",
+    "res",
+    "aid"
+   ],
+   "Slaues": [
+    " S",
+    "la",
+    "ues"
+   ],
+   "viz^t": [
+    " viz",
+    "^",
+    "t"
+   ],
+   "easmt^s": [
+    " eas",
+    "mt",
+    "^",
+    "s"
+   ],
+   "pfitts": [
+    " pf",
+    "itt",
+    "s"
+   ],
+   "comodities": [
+    " com",
+    "od",
+    "ities"
+   ]
+  },
+  "top_words_highest_fertility": [
+   [
+    "aforesaid,",
+    5,
+    8
+   ],
+   [
+    "1641",
+    5,
+    11
+   ],
+   [
+    "1647",
+    5,
+    13
+   ],
+   [
+    "1642",
+    5,
+    6
+   ],
+   [
+    "1659",
+    5,
+    7
+   ],
+   [
+    "1640",
+    5,
+    28
+   ],
+   [
+    "1643",
+    5,
+    6
+   ],
+   [
+    "25^th",
+    5,
+    5
+   ],
+   [
+    "1644",
+    5,
+    6
+   ],
+   [
+    "15^th",
+    5,
+    5
+   ],
+   [
+    "apperteyneing",
+    5,
+    5
+   ],
+   [
+    "28^th",
+    5,
+    5
+   ],
+   [
+    "24^th",
+    5,
+    6
+   ],
+   [
+    "1654",
+    5,
+    5
+   ],
+   [
+    "th'appurtenances",
+    5,
+    5
+   ],
+   [
+    "aforesaid",
+    4,
+    148
+   ],
+   [
+    "aforesd",
+    4,
+    27
+   ],
+   [
+    "Appurtenances",
+    4,
+    5
+   ],
+   [
+    "w^tsoever",
+    4,
+    23
+   ],
+   [
+    "Adm:^rs",
+    4,
+    9
+   ],
+   [
+    "Adm^rs",
+    4,
+    33
+   ],
+   [
+    "behoofe",
+    4,
+    17
+   ],
+   [
+    "enfeoffed",
+    4,
+    17
+   ],
+   [
+    "appurtenances",
+    4,
+    26
+   ],
+   [
+    "Incumbrances",
+    4,
+    6
+   ]
+  ],
+  "punct_standalone_token_rate": {
+   "^": 0.772,
+   ":": 0.681,
+   "&": 0.996,
+   "~": 0.897,
+   "_": 0.633,
+   "-": 0.92,
+   ".": 0.675,
+   ",": 0.982,
+   ";": 0.96,
+   "'": 0.243,
+   "\"": 0.944,
+   "(": 0.95,
+   ")": 0.935,
+   "?": 0.5,
+   "+": 1.0,
+   "*": 1.0,
+   "|": 1.0,
+   "#": 1.0,
+   "\\": 1.0
+  }
+ },
+ "q3_32b": {
+  "vocab_size": 151669,
+  "tokens_per_label": {
+   "0": 6.0,
+   "5": 10.0,
+   "50": 15.0,
+   "95": 23.0,
+   "99": 27.0,
+   "100": 34.0
+  },
+  "mean_tokens_per_label": 15.629819424109321,
+  "chars_per_token": 3.981967494652699,
+  "tokens_per_word_mean": 1.3744292237442923,
+  "tokens_per_word_caret_words": 3.5470183486238533,
+  "tokens_per_word_colon_words": 2.980769230769231,
+  "tokens_per_word_hapax": 2.2664277180406214,
+  "tokens_per_word_frequent(>=20)": 1.1428027176328657,
+  "tokens_per_word_capitalised": 1.640254805543138,
+  "single_token_word_frac": 0.7467809301218378,
+  "words_ge4_tokens_frac": 0.027440541885779827,
+  "max_tokens_label": 34,
+  "examples": {
+   "W^m": [
+    " W",
+    "^",
+    "m"
+   ],
+   "y^e": [
+    " y",
+    "^",
+    "e"
+   ],
+   "M^r": [
+    " M",
+    "^",
+    "r"
+   ],
+   "Adm^rs": [
+    " Ad",
+    "m",
+    "^",
+    "rs"
+   ],
+   "w^th": [
+    " w",
+    "^",
+    "th"
+   ],
+   "w^ch": [
+    " w",
+    "^",
+    "ch"
+   ],
+   "Exec:^rs": [
+    " Exec",
+    ":^",
+    "rs"
+   ],
+   "S:^d": [
+    " S",
+    ":^",
+    "d"
+   ],
+   "heires": [
+    " he",
+    "ires"
+   ],
+   "assignes": [
+    " assign",
+    "es"
+   ],
+   "publique": [
+    " pub",
+    "lique"
+   ],
+   "ffebruary": [
+    " f",
+    "fe",
+    "bruary"
+   ],
+   "Xpian": [
+    " X",
+    "p",
+    "ian"
+   ],
+   "Pson": [
+    " P",
+    "son"
+   ],
+   "sd": [
+    " sd"
+   ],
+   "&": [
+    " &"
+   ],
+   "theis": [
+    " the",
+    "is"
+   ],
+   "hould": [
+    " h",
+    "ould"
+   ],
+   "whome": [
+    " wh",
+    "ome"
+   ],
+   "Barbados": [
+    " Barb",
+    "ados"
+   ],
+   "~~~~~~~": [
+    " ~",
+    "~~~~",
+    "~~"
+   ],
+   "aforesaid": [
+    " a",
+    "fo",
+    "res",
+    "aid"
+   ],
+   "Slaues": [
+    " S",
+    "la",
+    "ues"
+   ],
+   "viz^t": [
+    " viz",
+    "^",
+    "t"
+   ],
+   "easmt^s": [
+    " eas",
+    "mt",
+    "^",
+    "s"
+   ],
+   "pfitts": [
+    " pf",
+    "itt",
+    "s"
+   ],
+   "comodities": [
+    " com",
+    "od",
+    "ities"
+   ]
+  },
+  "top_words_highest_fertility": [
+   [
+    "aforesaid,",
+    5,
+    8
+   ],
+   [
+    "1641",
+    5,
+    11
+   ],
+   [
+    "1647",
+    5,
+    13
+   ],
+   [
+    "1642",
+    5,
+    6
+   ],
+   [
+    "1659",
+    5,
+    7
+   ],
+   [
+    "1640",
+    5,
+    28
+   ],
+   [
+    "1643",
+    5,
+    6
+   ],
+   [
+    "25^th",
+    5,
+    5
+   ],
+   [
+    "1644",
+    5,
+    6
+   ],
+   [
+    "15^th",
+    5,
+    5
+   ],
+   [
+    "apperteyneing",
+    5,
+    5
+   ],
+   [
+    "28^th",
+    5,
+    5
+   ],
+   [
+    "24^th",
+    5,
+    6
+   ],
+   [
+    "1654",
+    5,
+    5
+   ],
+   [
+    "th'appurtenances",
+    5,
+    5
+   ],
+   [
+    "aforesaid",
+    4,
+    148
+   ],
+   [
+    "aforesd",
+    4,
+    27
+   ],
+   [
+    "Appurtenances",
+    4,
+    5
+   ],
+   [
+    "w^tsoever",
+    4,
+    23
+   ],
+   [
+    "Adm:^rs",
+    4,
+    9
+   ],
+   [
+    "Adm^rs",
+    4,
+    33
+   ],
+   [
+    "behoofe",
+    4,
+    17
+   ],
+   [
+    "enfeoffed",
+    4,
+    17
+   ],
+   [
+    "appurtenances",
+    4,
+    26
+   ],
+   [
+    "Incumbrances",
+    4,
+    6
+   ]
+  ],
+  "punct_standalone_token_rate": {
+   "^": 0.772,
+   ":": 0.681,
+   "&": 0.996,
+   "~": 0.897,
+   "_": 0.633,
+   "-": 0.92,
+   ".": 0.675,
+   ",": 0.982,
+   ";": 0.96,
+   "'": 0.243,
+   "\"": 0.944,
+   "(": 0.95,
+   ")": 0.935,
+   "?": 0.5,
+   "+": 1.0,
+   "*": 1.0,
+   "|": 1.0,
+   "#": 1.0,
+   "\\": 1.0
+  }
+ },
+ "q3_8b_vs_q3_32b_identical_first500": true,
+ "q25_vs_q3_identical_label_frac": 1.0,
+ "q25_7b_template_full": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nPROMPT<|im_end|>\n<|im_start|>assistant\nLABEL<|im_end|>\n",
+ "q25_7b_template_prompt": "<|im_start|>system\nYou are a helpful assistant.<|im_end|>\n<|im_start|>user\nPROMPT<|im_end|>\n<|im_start|>assistant\n",
+ "q25_7b_pad_eos": [
+  "<|endoftext|>",
+  "<|im_end|>"
+ ],
+ "q3_8b_template_full": "<|im_start|>user\nPROMPT<|im_end|>\n<|im_start|>assistant\nLABEL<|im_end|>\n",
+ "q3_8b_template_prompt": "<|im_start|>user\nPROMPT<|im_end|>\n<|im_start|>assistant\n",
+ "q3_8b_pad_eos": [
+  "<|endoftext|>",
+  "<|im_end|>"
+ ]
+}

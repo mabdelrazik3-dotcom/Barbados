@@ -1,0 +1,130 @@
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+
+==== A01: train 385 test 130 unl 60 | px h96 w1176 asp 12.2 paper 161 tint 66 contrast 61 stroke_rel 0.086 sharp 0.184 edge 0.58 band 0.42
+   text: chars 47 words 9 | ^ 16% : 3% & 3% + 0.0% thorn 1% ff 4% digit 1% ~ 1.3% _ 0.3% end- 1.3% '" 0.3% . 4% , 15% capwords 0.25 Said 5% said 13% sd 0%
+   val n=74 8B-MBR 0.8940 ens 0.9030 | 8B word-error classes {'casing': 30, 'punct/markup': 8, 'spelling': 76}
+   top subs: [('Said->said', 3), ('shall->Shall', 1), ('St.->S.^t', 1), ('often->other', 1), ('valuable->valluable', 1), ('considerations->Considerations', 1), ('Well->well', 1), ('him->himselfe', 1), ('Reynall->Reynell', 1), ('Admini->Admin', 1), ('satisfied->Satisfied', 1), ('Cotherington->Catterington', 1)]
+   chars dropped [(' ', 12), ('.', 4), ('r', 4), ('a', 4), ('s', 4), ('n', 3), (',', 3), ('i', 2)] | added [('e', 12), (' ', 9), ('t', 6), ('s', 5), ('f', 3), ('a', 3), ('r', 3), (',', 3)]
+   distinctive: ['___', 'publique', 'heard', 'Merchant', 'Appearer', 'recovered', 'Secretary', 'protest', 'Act', 'By', 'did', 'against', 'Assignes', 'Said', 'England', 'yee', ',', 'it', 'yeare', 'Land']
+     | New Stone house for the seruants Lodgeing or
+     | presents, I doe Solemnly protest against the
+     | Thomas Richardson Gunners Mate of the said
+     | Samuells Boatswaime and him this deponent
+     | of Their appurtennces to Them the said William
+
+==== A02: train 195 test 81 unl 34 | px h60 w777 asp 13.1 paper 202 tint 49 contrast 93 stroke_rel 0.058 sharp 0.226 edge 0.17 band 0.26
+   text: chars 47 words 9 | ^ 19% : 8% & 8% + 0.0% thorn 4% ff 0% digit 22% ~ 3.6% _ 0.0% end- 4.1% '" 2.6% . 9% , 10% capwords 0.28 Said 0% said 4% sd 0%
+   val n=47 8B-MBR 0.9216 ens 0.9259 | 8B word-error classes {'spelling': 32, 'punct/markup': 8, 'casing': 9}
+   top subs: [('Franncis->Francis', 2), ('Sealed->sealed', 2), ('delived->delivered', 2), ('signed->Signed', 2), ('Def^t,,->Def^tt', 2), ('Pratt~->Wyatt', 1), ('Wyatt->Pratt', 1), ('Stede->Steele', 1), ("th'other->other", 1), (':-->-', 1), ('-dated->dated', 1), ('Philp->Phillp', 1)]
+   chars dropped [(' ', 6), (',', 4), ('e', 3), ('n', 2), ('^', 2), ('1', 2), ('2', 2), ('~', 1)] | added [(' ', 10), ('e', 5), ('i', 3), ('r', 3), ('-', 2), ('s', 2), ('l', 1), ('M', 1)]
+   distinctive: ['public', 'prsence', 'Signed', 'Sealed', 'delivered', '1640', 'presence', '1641', 'x', 'Instrument', 'By', 'May', 'protest', 'act', 'June', 'This', 'seale', 'us', 'W^m', 'it']
+     | w^th in named premisses was given by ye within
+     | Sealed and delivered in the presence of
+     | Sealed and delivered in the prsence of
+     | Signed sealed and delivered in the prsence of us & possession given
+     | Sealed & delivered in the pnce of us Joseph Taylor
+
+==== A03: train 376 test 90 unl 55 | px h55 w1020 asp 18.6 paper 207 tint 44 contrast 90 stroke_rel 0.058 sharp 0.224 edge 0.20 band 0.33
+   text: chars 55 words 10 | ^ 11% : 5% & 5% + 0.0% thorn 24% ff 0% digit 6% ~ 3.2% _ 0.3% end- 5.3% '" 0.5% . 3% , 3% capwords 0.16 Said 0% said 17% sd 2%
+   val n=87 8B-MBR 0.9513 ens 0.9533 | 8B word-error classes {'spelling': 45, 'punct/markup': 10, 'casing': 9}
+   top subs: [('M^r.->M^r', 2), ('I->&', 1), ('Bearnes->Beames', 1), ('sue->one', 1), ('he->hee', 1), ('Handcock->Hancock', 1), ('w^th,,->w^th', 1), ('.&->&', 1), ('stocks->stock', 1), ('catle->cattle', 1), ('Phineos-Smith->Smith', 1), ('thousand->Thousand', 1)]
+   chars dropped [('~', 9), (' ', 8), (',', 4), ('.', 4), ('e', 4), ('r', 3), ('n', 2), ('s', 2)] | added [('e', 4), ('t', 2), (' ', 2), ('s', 2), ('m', 2), ('~', 1), ('C', 1), ('r', 1)]
+   distinctive: ['plantation', 'confirme', 'parish', 'seales', 'Assignes', 'ye', 'person', 'buildings', 'hands', 'over', 'executors', 'present', 'done', 'seale', 'ever', 'Edward', 'sett', 'time', 'date', 'bargained']
+     | Land belowe the Rocke to the seaside path in breadth but two
+     | (except before excepted) to the said Christopher Bishopp his heires
+     | admistrs ~and~ or by or with his leave assent consent privity or p'curement
+     | Administrators and Assignes against any other person or
+     | .& to her two children Robert & Ann to them & either of them
+
+==== A04: train 157 test 62 unl 31 | px h47 w1024 asp 21.7 paper 200 tint 52 contrast 100 stroke_rel 0.091 sharp 0.223 edge 0.11 band 0.33
+   text: chars 56 words 11 | ^ 10% : 8% & 49% + 0.0% thorn 24% ff 1% digit 2% ~ 0.6% _ 1.3% end- 8.3% '" 0.0% . 4% , 3% capwords 0.18 Said 1% said 7% sd 20%
+   val n=26 8B-MBR 0.9091 ens 0.9094 | 8B word-error classes {'spelling': 23, 'punct/markup': 6, 'casing': 6}
+   top subs: [('assigns->assignes', 1), ('Tho->Tho:', 1), ('assigne->assignes', 1), ('confirm->confirmed', 1), ('bargain->bargained', 1), ('seals->seale', 1), ('24^th->25^th', 1), ('mch->March', 1), ('.->-', 1), ('exprssed->expressed', 1), ('there->three', 1), ('schedules->Schedules', 1)]
+   chars dropped [(' ', 4), ('t', 3), ('e', 2), ('.', 2), ('o', 1), (',', 1), ('^', 1), ('n', 1)] | added [('e', 8), (' ', 3), ('i', 3), ('s', 2), ('d', 2), ('r', 2), ('M', 1), ('a', 1)]
+   distinctive: ['yt', 'sd', 'wch', 'Adm^rs', 'interest', 'may', 'title', '&', 'ye', 'Robert', 'at', '-', 'hundred', 'from', 'good', 'pounds', 'be', 'doe', 'other', 'heires']
+     | Susanah Leake our heires executors administrators
+     | Sixty and Eight and in the Twentieth year of
+     | I Robert Lea doe hereby accknowledge this day to have delivd
+     | Sledge, and one Crowe, Three Padds One Packe Sadle tree
+     | or any pte or pcell thereof except before excepted, onely or any
+
+==== A05: train 1038 test 383 unl 193 | px h64 w1101 asp 17.4 paper 202 tint 50 contrast 92 stroke_rel 0.052 sharp 0.248 edge 0.29 band 0.26
+   text: chars 72 words 13 | ^ 17% : 3% & 5% + 0.2% thorn 6% ff 0% digit 6% ~ 2.1% _ 0.1% end- 1.3% '" 3.9% . 3% , 1% capwords 0.16 Said 0% said 23% sd 2%
+   val n=206 8B-MBR 0.9285 ens 0.9366 | 8B word-error classes {'spelling': 160, 'punct/markup': 31, 'casing': 37}
+   top subs: [('and->And', 4), ('adminstrs->admistrs', 3), ('excrs->exers', 2), ('assignes->assynes', 2), ('wt^soever->w^tsoever', 2), ('this->theis', 2), ('writeing->writing', 2), ('that->That', 2), ('being->beinge', 1), ('Barbados-->Barbados', 1), ('16th->16^th', 1), ('prsents->presents', 1)]
+   chars dropped [(' ', 17), ('e', 14), ('^', 11), ('s', 10), ('n', 9), ('~', 8), ('i', 7), ('d', 7)] | added [('e', 19), (' ', 17), ('r', 10), ('i', 9), ('n', 7), ('^', 6), ('s', 6), ('x', 5)]
+   distinctive: ['Peeter', 'assynes', 'planters', 'exers', 'tenne', 'twentie', 'knowe', 'wooll', 'untill', 'admistrs', 'Everlastinge', 'theise', 'servants', 'send', 'bindeth', 'anie', 'withall', 'bargaines', 'excers', 'Capt']
+     | Knowe all men by these presents that I John Simpson of the Island of Barbados in
+     | with ye said John Thurbrane his heires executors administrators or
+     | said Read or his Lawfull Attorney doe pay & deliver unto the said
+     | said Thomas Grigg and James Chrichlow our heires exers or assignes or
+     | exers admrs and ~assignes~ every of them that it shall and may belawfull
+
+==== A06: train 334 test 106 unl 69 | px h48 w1106 asp 23.2 paper 206 tint 46 contrast 89 stroke_rel 0.086 sharp 0.231 edge 0.14 band 0.31
+   text: chars 65 words 12 | ^ 5% : 2% & 7% + 0.3% thorn 3% ff 0% digit 4% ~ 2.1% _ 0.0% end- 1.5% '" 0.0% . 2% , 3% capwords 0.16 Said 0% said 31% sd 1%
+   val n=60 8B-MBR 0.9315 ens 0.9381 | 8B word-error classes {'spelling': 44, 'casing': 18, 'punct/markup': 4}
+   top subs: [('Sixty->sixty', 2), ('Seizin->Sign', 1), ('bargaind->bargained', 1), ('premises->premisses', 1), ('Piggot->Piggott', 1), ('loading->landing', 1), ('Tunnage->Turnage', 1), ('betwixt->behind', 1), ('Tonn->Tonne', 1), ('Tunnage->Sumege', 1), ('afore->aforesaid', 1), ('the->this', 1)]
+   chars dropped [('r', 7), ('e', 6), (' ', 4), ('s', 4), ('i', 2), ('a', 2), ('n', 2), ('^', 2)] | added [('e', 6), ('t', 3), ('i', 2), (' ', 2), ('n', 2), ('r', 2), ('^', 2), ('s', 1)]
+   distinctive: ['owners', 'sum', 'ship', 'manifest', 'appearer', 'having', 'year', 'sixty', 'personally', 'heirs', 'Secretary', 'against', 'which', 'there', 'hath', 'did', 'do', 'appeared', 'administrators', 'six']<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+<stdin>:23: UserWarning: This pattern is interpreted as a regular expression, and has match groups. To actually get the groups, use str.extract.
+
+     | of the goods and Merchandise aboard the said ship belonging to Capt
+     | Come Consigned to us Jointly from any person or persons whatsoever
+     | assignes one sixteenth parte of the above said ship called the hopewell
+     | Sugar is to be recovered against him or any one with him concerned
+     | Buckly which by the consent and request of each party being
+
+==== A07: train 569 test 177 unl 92 | px h49 w1122 asp 22.8 paper 199 tint 53 contrast 100 stroke_rel 0.084 sharp 0.236 edge 0.14 band 0.33
+   text: chars 67 words 12 | ^ 14% : 12% & 41% + 0.4% thorn 22% ff 0% digit 6% ~ 4.0% _ 0.2% end- 1.4% '" 0.5% . 1% , 0% capwords 0.18 Said 0% said 10% sd 17%
+   val n=112 8B-MBR 0.9301 ens 0.9328 | 8B word-error classes {'punct/markup': 19, 'spelling': 86, 'casing': 20}
+   top subs: [('adm^rs->Adm^rs', 3), ('Captn->Captn:', 2), ('Adm^rs->Admrs', 2), ('consideracons->Consideracons', 2), ('o^r->or', 1), ('betwix->belwise', 1), ('30th->30^th', 1), ('Flecther->Fletcher', 1), ('Blacks->Blacke', 1), ('exec^rs->Exec^rs', 1), ('Porch->Parch', 1), ('As->as', 1)]
+   chars dropped [(' ', 13), ('^', 9), ('e', 8), ('i', 6), ('l', 5), ('~', 3), ('t', 2), ('s', 2)] | added [('e', 16), (' ', 6), ('s', 5), ('r', 5), ('^', 4), ('t', 3), ('n', 3), ('i', 3)]
+   distinctive: ['Admrs', 'Captn:', 'aforesd', 'Noell', 'Willm', '1647', 'mchantable', 'evy', 'Exrs', 'divs', 'Our', 'wth', 'duties', 'Tho', 'sd', 'Hugh', 'yt', 'Ex^rs', 'pfitts', 'Gent']
+     | doe bargain & sell & confirm lett unto Mr William Hathcott
+     | the six thousand pounds of Tobaccoe and if in case yt ye said Sixe
+     | absolutely give grt: bgaine & sell unto ye sd John & Rich^d Two acres
+     | dispose of all and evy ~all~ pcell of land which by deed or writing
+     | be it more or less wthin the ould Bands Scituate lying & being
+
+==== B01: train 278 test 91 unl 44 | px h332 w4120 asp 12.6 paper 182 tint 64 contrast 79 stroke_rel 0.049 sharp 0.082 edge 0.39 band 0.36
+   text: chars 58 words 10 | ^ 22% : 9% & 12% + 0.0% thorn 4% ff 4% digit 4% ~ 1.4% _ 0.7% end- 9.4% '" 0.0% . 10% , 22% capwords 0.27 Said 7% said 14% sd 2%
+   val n=51 8B-MBR 0.8610 ens 0.8685 | 8B word-error classes {'spelling': 61, 'punct/markup': 18, 'casing': 20}
+   top subs: [('Said->said', 3), ('adm^rs.->adm^rs', 2), ('M^.r->M^r', 2), ('aforesaid->aforesaid,', 2), ('Allexander->Alexander', 1), ('~Dantee~->David', 1), ('He->I', 1), ('ass->ass^s', 1), ('Estimation->Estimacon', 1), ('Sucred->Sacred', 1), ('(->(Executors', 1), ('pounds->Pounds,', 1)]
+   chars dropped [(' ', 16), ('e', 12), ('r', 8), ('.', 7), ('s', 6), ('t', 6), ('-', 6), ('~', 5)] | added [('e', 5), (' ', 5), ('^', 4), ('-', 4), ('s', 3), (',', 3), ('t', 3), ('c', 3)]
+   distinctive: ['Hundred', 'Acres', 'premises', 'Deed', 'y^e', 'Six', 'Charles', 'free', 'Land', 'written', 'bee', 'Said', ',', 'yeare', 'Assignes', 'hold', 'This', '-', 'every', 'above']
+     | date at Westminster the fower and twentieth day of ffeb^ry
+     | accons, Suite, or Suites, Debts, Judgets , Quare
+     | their heires and Seales the day and yeare first above written
+     | Every and either of them, Have given granted bargained Sold aliened
+     | any other incumbrance or Incumbrances whatsoever and wee the said
+
+==== B02: train 592 test 209 unl 88 | px h357 w4186 asp 11.7 paper 158 tint 68 contrast 54 stroke_rel 0.031 sharp 0.140 edge 0.62 band 0.47
+   text: chars 53 words 10 | ^ 26% : 26% & 12% + 0.0% thorn 3% ff 5% digit 3% ~ 0.7% _ 0.0% end- 4.6% '" 0.0% . 6% , 28% capwords 0.27 Said 8% said 7% sd 1%
+   val n=119 8B-MBR 0.8907 ens 0.9010 | 8B word-error classes {'spelling': 117, 'punct/markup': 41, 'casing': 38}
+   top subs: [('Said->said', 5), ('Euer->Ever', 2), ('S:^d->S^d', 2), ('Same->same', 2), ('Six->-', 2), ('bills->title', 1), ('Rent->Pent.', 1), ('do->doe', 1), ('Sec^rys:->Sec:^rys', 1), ('Satt->Satta', 1), ('Bargained->bargained', 1), ('Ann->Ann:', 1)]
+   chars dropped [(' ', 20), (':', 17), ('e', 12), ('^', 11), ('r', 10), (',', 7), ('s', 6), ('.', 5)] | added [(' ', 14), ('e', 13), (':', 10), ('a', 8), ('s', 7), ('t', 6), (',', 5), ('.', 4)]
+   distinctive: ['John:', 'Exec:^rs', 'S:^t', 'heyres', 'Lawfully', 'Saide', 'Ever', 'saide', 'Adm:^rs', 'S:^d', 'parrish', 'Lands', 'Singular', 'Same', 'Seale', ':', ',', 'hee', 'Said', 'Deed']
+     | the intent that W:^ch the proffitts frome the same ar
+     | yeare of the reigne of our Sovereigne Lord Char
+     | safty amen Dated in barbados the 30:^th July 1692
+     | the Saide Phillip Bell and ffrancis Bell Severally
+     | to his and theire solee proper use and uses for
+
+==== B03: train 169 test 45 unl 21 | px h355 w5326 asp 15.0 paper 170 tint 70 contrast 70 stroke_rel 0.041 sharp 0.096 edge 0.39 band 0.35
+   text: chars 73 words 13 | ^ 29% : 14% & 14% + 0.0% thorn 4% ff 3% digit 7% ~ 1.2% _ 0.6% end- 3.0% '" 0.0% . 7% , 22% capwords 0.25 Said 6% said 25% sd 1%
+   val n=37 8B-MBR 0.7881 ens 0.7925 | 8B word-error classes {'punct/markup': 18, 'spelling': 71, 'casing': 16}
+   top subs: [('This->(This', 1), ('Mackward->Martward', 1), ('Dumesnell->SimeSnell', 1), ('Soverigne->Sovereigne', 1), ('England->Engl', 1), ('Proffits->Profitts', 1), ('aboves:^d->abov^e', 1), ('Rich^d:->Rich:^d', 1), ('Done->Done,', 1), ('m^r->M^r', 1), ('promise->Promise', 1), ('M^:r->M:^r', 1)]
+   chars dropped [(' ', 13), ('e', 12), ('s', 8), (':', 8), ('i', 5), ('d', 3), ('r', 3), ('.', 3)] | added [(' ', 11), ('t', 8), ('s', 7), (',', 7), ('e', 5), (':', 5), ('n', 5), ('.', 3)]
+   distinctive: ['_', 'money', 'part', 'bee', 'had', 'mee', 'under', 'without', 'Said', 'on', 'thereof', 'him', 'Richard', ',', 'is', 'And', 'made', 'a', 'by', 'this']
+     | Know yee that wee the said adam payne, and my wife for divers good causes
+     | Att tenn dayes Sight of this my first of exchange my nor
+     | of land being part of the Plantation mee the said Thomas Rennolls conteyneing
+     | These are to Lye Certifie all whome it may concerne that upon
+     | in this Island and made oath on the Holy Evangelists of Almighty God that hee did

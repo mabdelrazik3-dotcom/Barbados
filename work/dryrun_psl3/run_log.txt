@@ -1,0 +1,107 @@
+[    0.1 min] [CLASSIFY] pixel features of 72 images in 3s
+[    0.1 min] [CLASSIFY] mode fixed: 10 sub-classes
+sub-class class  train  val  test  unlisted  height  width   paper   tint  contrast  stroke_rel  sharp
+      A01     A      6    0     1         0   108.0 1169.0 163.593 64.751    62.371       0.068  0.186
+      A02     A      3    0     1         0    55.5  831.5 206.342 43.964    87.360       0.063  0.205
+      A03     A      9    0     0         1    48.5 1013.5 206.134 47.539    85.384       0.062  0.248
+      A04     A      1    0     0         0    38.0 1040.0 192.502 51.874    95.482       0.097  0.249
+      A05     A     15    0     2         3    60.0 1128.5 201.000 49.867    91.122       0.055  0.243
+      A06     A      3    0     0         0    51.0 1092.0 207.102 44.903    90.829       0.082  0.229
+      A07     A      8    0     0         0    49.0 1110.0 199.246 53.148    98.665       0.080  0.227
+      B01     B      4    0     0         0   386.0 4153.0 188.482 62.390    82.737       0.032  0.085
+      B02     B      9    0     3         1   382.0 4227.0 156.470 69.071    53.288       0.032  0.154
+      B03     B      2    0     0         0   287.5 5430.5 156.292 67.924    57.499       0.046  0.134
+[    0.1 min] [CLASSIFY] saved subclass_assignments.csv (ID, split, class, old group, subclass, pixel features)
+[    0.1 min] [PROMPTS] conventions measured on the training lines of each sub-class (% of lines):
+        n  chars  words  caret  colon   amp  thorn   ff  digit  tilde  comma  Said   sd  cap_words
+A01   6.0   48.0    8.5   16.7   16.7   0.0    0.0  0.0    0.0    0.0   16.7  16.7  0.0       29.6
+A02   3.0   41.0    8.0   33.3    0.0   0.0   33.3  0.0   33.3    0.0    0.0   0.0  0.0       25.0
+A03   9.0   60.0   10.0   11.1    0.0   0.0   11.1  0.0   11.1    0.0   11.1   0.0  0.0        7.5
+A04   1.0   68.0   14.0    0.0    0.0   0.0    0.0  0.0    0.0    0.0    0.0   0.0  0.0       28.6
+A05  15.0   72.0   13.0   26.7   13.3   0.0    0.0  0.0   13.3    0.0   13.3   0.0  0.0       18.2
+A06   3.0   64.0   11.0    0.0    0.0   0.0    0.0  0.0   33.3    0.0    0.0   0.0  0.0       27.6
+A07   8.0   74.0   12.0   12.5   12.5  75.0   25.0  0.0    0.0   12.5    0.0   0.0  0.0       16.8
+B01   4.0   57.0    9.5   25.0   25.0   0.0    0.0  0.0    0.0    0.0   25.0   0.0  0.0       20.3
+B02   9.0   51.0   10.0   11.1   22.2   0.0    0.0  0.0    0.0    0.0   44.4   0.0  0.0       33.3
+B03   2.0   74.5   11.0   50.0   50.0  50.0   50.0  0.0    0.0    0.0    0.0  50.0  0.0       31.6
+[    0.1 min] [FEW-SHOT] example pools (training lines only): A01=6, A02=3, A03=9, A04=1, A05=15, A06=3, A07=8, B01=4, B02=9, B03=2
+[    0.1 min] [GUIDE] submission_offline_best.csv: 1374 lines from column 'Target'
+[    0.1 min] [GUIDE] covers 7/7 test and 0/5 unlisted lines
+
+==============================================================================================================
+[    0.1 min] LABELERS:
+  q3_auto            model q3   scheme shared   prompt exp002    few-shot K=0 | adapter D:/HANAFY/ROAD/work/dryrun/qwen-vl-ocr/final\ROAD_work_tiny_q3\fold0
+  q3_subclass        model q3   scheme subclass prompt classwise few-shot K=0 | adapter D:/HANAFY/ROAD/work/dryrun_mega_adapters/ROAD_work_tiny_q3/fold0 / q3_subclass__{key} for ['A1', 'A2', 'A3', 'B']
+  q25_base_fewshot   model q25  scheme shared   prompt detailed  few-shot K=2 | adapter none (base model)
+==============================================================================================================
+
+==============================================================================================================
+[    0.1 min] LABELER q3_auto: loading q3 (shared, prompt=exp002, K=0) for ['test', 'unlisted']
+==============================================================================================================
+[    0.1 min] [q3_auto] conversation of line MzQuRiUbPFsq6Azy (A05/A3, 0 examples): 263 tokens
+<|im_start|>user
+This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.<|vision_start|><IMAGE><|vision_end|><|im_end|>
+<|im_start|>assistant
+
+[    0.2 min] [q3_auto] test: 5/7 lines | 194 lines/min | ETA 0.0 min | guide judged on 5 lines
+[    0.2 min] [q3_auto] test: 7/7 lines | 180 lines/min | ETA 0.0 min | guide judged on 7 lines
+[    0.2 min] [q3_auto] unlisted: 5/5 lines | 264 lines/min | ETA 0.0 min | guide judged on 0 lines
+[    0.2 min] [q3_auto] done in 0.1 min
+
+==============================================================================================================
+[    0.2 min] LABELER q3_subclass: loading q3 (subclass, prompt=classwise, K=0) for ['test', 'unlisted']
+==============================================================================================================
+[    0.2 min] [q3_subclass] conversation of line MzQuRiUbPFsq6Azy (A05/A3, 0 examples): 379 tokens
+handwritten line exactly as written. This is not modern English: keep the original spelling, capital letters, abbreviations and marks (^ for superscript letters, : for suspensions, &, ff). Do not modernize, expand or correct anything. If parts of neighbouring lines are visible, transcribe only the central line. This line comes from a Barbados legal record of the 1630s-1660s. Common conventions in these documents: & for 'and', ye and yt for 'the' and 'that', sd for 'said', and spellings such as heires, assignes, publique. The crop is loose and often shows parts of the lines above and below; the central line is usually long.<|vision_start|><IMAGE><|vision_end|><|im_end|>
+<|im_start|>assistant
+
+[    0.3 min] [q3_subclass] test: 5/7 lines | 166 lines/min | ETA 0.0 min | guide judged on 5 lines
+[    0.3 min] [q3_subclass] test: 7/7 lines | 167 lines/min | ETA 0.0 min | guide judged on 7 lines
+[    0.3 min] [q3_subclass] unlisted: 5/5 lines | 105 lines/min | ETA 0.0 min | guide judged on 0 lines
+[    0.3 min] [q3_subclass] done in 0.1 min
+
+==============================================================================================================
+[    0.3 min] LABELER q25_base_fewshot: loading q25 (shared, prompt=detailed, K=2) for ['test', 'unlisted']
+==============================================================================================================
+[    0.4 min] [q25_base_fewshot] conversation of line MzQuRiUbPFsq6Azy (A05/A3, 2 examples): 2690 tokens
+RMAT (MANDATORY)
+Return ONLY the transcription of the line as plain text on one line: no quotes, no labels, no explanations, no markdown.
+
+RETURN ONLY THE TRANSCRIPTION.<|im_end|>
+<|im_start|>user
+<|vision_start|><IMAGE><|vision_end|>Transcribe this line.<|im_end|>
+<|im_start|>assistant
+thousand nyne hundred twentie and seaven pounds of the like condiconed comoditie<|im_end|>
+<|im_start|>user
+<|vision_start|><IMAGE><|vision_end|>Transcribe this line.<|im_end|>
+<|im_start|>assistant
+To all christian people to whome thus present writing shall come I Robert Lee of the island of<|im_end|>
+<|im_start|>user
+<|vision_start|><IMAGE><|vision_end|>Transcribe this line.<|im_end|>
+<|im_start|>assistant
+
+[    0.4 min] [q25_base_fewshot] test: 5/7 lines | 63 lines/min | ETA 0.0 min | guide judged on 5 lines
+[    0.5 min] [q25_base_fewshot] test: 7/7 lines | 63 lines/min | ETA 0.0 min | guide judged on 7 lines
+[    0.5 min] [q25_base_fewshot] unlisted: 5/5 lines | 161 lines/min | ETA 0.0 min | guide judged on 0 lines
+[    0.5 min] [q25_base_fewshot] done in 0.2 min
+[    0.5 min] [RESCORE] off — each labeler scored its own 5-best + the guide
+[    0.5 min] [POOL] labeler weights: q3_auto=1.0, q3_subclass=1.0, q25_base_fewshot=1.0
+
+==============================================================================================================
+[    0.5 min] PSEUDO-LABELS per split and sub-class:
+                   lines  kept  mean_conf  guide_agrees  all_top1_agree
+split    subclass                                                      
+test     A01           1     1      0.651           1.0             0.0
+         A02           1     1      0.592           1.0             0.0
+         A05           2     1      0.468           1.0             0.0
+         B02           3     2      0.604           1.0             0.0
+unlisted A03           1     1      0.661           0.0             0.0
+         A05           3     2      0.619           0.0             0.0
+         B02           1     1      0.665           0.0             0.0
+==============================================================================================================
+[    0.5 min] pseudo_labels.csv: 12 lines ({'test': np.int64(7), 'unlisted': np.int64(5)}) | kept for training 9 (75%) | expected line score of the kept lines 0.6309 (uncalibrated: 1 - risk) | comments: {"guide chosen by the judged pool": 7, "no guide: pooled MBR of the labelers": 5}
+[    0.5 min] submission.csv: the test pseudo-labels in submission format (for a leaderboard check)
+
+==============================================================================================================
+[    0.5 min] RUN FINISHED in 0.01 h | outputs in D:/HANAFY/ROAD/work/dryrun_psl3: pseudo_labels.csv, pseudo_labels_val_check.csv, submission.csv, labeler_outputs/, subclass_assignments.csv, subclass_prompts.json, trial_results.csv, run_log.txt
+==============================================================================================================

@@ -1,0 +1,104 @@
+[    1.0 min] [CLASSIFY] pixel features of 84 images in 4s
+[    1.0 min] [CLASSIFY] mode fixed: 10 sub-classes
+sub-class class  train  val  test  unlisted  height  width   paper   tint  contrast  stroke_rel  sharp
+      A01     A      9    3     1         0    94.0 1190.0 151.465 65.934    61.593       0.091  0.168
+      A02     A      1    0     1         0    65.5  741.5 202.642 53.041    99.941       0.059  0.236
+      A03     A      4    0     0         1    53.0 1004.0 208.681 47.165    82.241       0.060  0.218
+      A04     A      1    0     0         0    57.0 1034.0 203.817 51.286   104.847       0.079  0.182
+      A05     A     19    3     2         3    63.0 1109.0 200.789 49.972    91.132       0.054  0.251
+      A06     A      5    0     0         0    48.0 1107.0 206.565 38.129    89.297       0.077  0.205
+      A07     A      6    3     0         0    50.0 1129.0 194.880 52.456   101.184       0.090  0.242
+      B01     B      1    0     0         0   362.0 4298.0 185.699 59.648    82.544       0.029  0.084
+      B02     B     10    1     3         1   358.0 4270.0 162.739 68.023    57.170       0.032  0.119
+      B03     B      4    2     0         0   407.0 5439.5 174.505 68.125    69.072       0.040  0.099
+[    1.0 min] [CLASSIFY] saved subclass_assignments.csv (ID, split, class, old group, subclass, pixel features)
+[    1.0 min] [PROMPTS] conventions measured on the training lines of each sub-class (% of lines):
+        n  chars  words  caret  colon    amp  thorn   ff  digit  tilde  comma  Said    sd  cap_words
+A01   9.0   46.0    8.0   33.3   11.1   11.1    0.0  0.0    0.0    0.0   11.1   0.0   0.0       24.4
+A02   1.0   36.0    6.0    0.0    0.0    0.0    0.0  0.0    0.0    0.0    0.0   0.0   0.0      100.0
+A03   4.0   59.0   11.5    0.0    0.0    0.0   50.0  0.0    0.0    0.0    0.0   0.0   0.0       10.4
+A04   1.0   53.0   12.0  100.0    0.0  100.0    0.0  0.0  100.0    0.0    0.0   0.0   0.0       41.7
+A05  19.0   74.0   15.0   31.6    0.0    5.3   10.5  0.0    0.0    0.0    0.0   0.0   0.0       14.4
+A06   5.0   54.0   10.0    0.0    0.0    0.0    0.0  0.0    0.0    0.0   20.0   0.0   0.0       24.9
+A07   6.0   64.5   12.0    0.0   16.7   33.3   50.0  0.0    0.0   50.0    0.0   0.0  16.7       20.0
+B01   1.0   58.0   11.0    0.0    0.0    0.0    0.0  0.0    0.0    0.0    0.0   0.0   0.0       18.2
+B02  10.0   57.5   11.0   40.0   50.0   10.0   30.0  0.0   10.0    0.0   20.0  20.0   0.0       26.1
+B03   4.0   75.5   14.0    0.0    0.0    0.0    0.0  0.0    0.0    0.0   50.0   0.0   0.0       13.7
+[    1.0 min] [FEW-SHOT] example pools (training lines only): A01=9, A02=1, A03=4, A04=1, A05=19, A06=5, A07=6, B01=1, B02=10, B03=4
+[    1.0 min] [GUIDE] submission_offline_best.csv: 1374 lines from column 'Target'
+[    1.0 min] [GUIDE] EXP_002__ENS_7b8b_mbrq__D2_b5nb_ens__val.csv: 819 lines from column 'pred'
+[    1.0 min] [GUIDE] covers 7/7 test and 0/5 unlisted lines
+[    1.0 min] [GUIDE] guide on the 12 val lines: official 0.89861 | per sub-class {"A01": "n=   3 score=0.8525 w/line=2.667 c/line=4.000", "A05": "n=   3 score=0.9184 w/line=1.667 c/line=1.333", "A07": "n=   3 score=0.9601 w/line=0.667 c/line=1.333", "B02": "n=   1 score=1.0000 w/line=0.000 c/line=0.000", "B03": "n=   2 score=0.7951 w/line=3.500 c/line=6.500"}
+
+==============================================================================================================
+[    1.0 min] LABELERS:
+  q3_auto            model q3   scheme shared   prompt exp002    few-shot K=0 | adapter D:/HANAFY/ROAD/work/dryrun/qwen-vl-ocr/final\ROAD_work_tiny_q3\fold0
+  q3_subclass        model q3   scheme subclass prompt classwise few-shot K=0 | adapter D:/HANAFY/ROAD/work/dryrun_mega_adapters/ROAD_work_tiny_q3/fold0 / q3_subclass__{key} for ['A1', 'A2', 'A3', 'B']
+  q25_base_fewshot   model q25  scheme shared   prompt detailed  few-shot K=2 | adapter none (base model)
+==============================================================================================================
+
+==============================================================================================================
+[    1.0 min] LABELER q3_auto: loading q3 (shared, prompt=exp002, K=0) for ['val', 'test', 'unlisted']
+==============================================================================================================
+[    1.1 min] [q3_auto] conversation of line wVsxHXvGovSA5903 (A07/A1, 0 examples): 257 tokens
+<|im_start|>user
+This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.<|vision_start|><IMAGE><|vision_end|><|im_end|>
+<|im_start|>assistant
+
+[    1.2 min] [q3_auto] val: 5/12 lines | 59 lines/min | ETA 0.1 min | guide judged on 5 lines | running top-1 official 0.0533
+[    1.3 min] [q3_auto] val: 10/12 lines | 51 lines/min | ETA 0.0 min | guide judged on 10 lines | running top-1 official 0.0285
+[    1.3 min] [q3_auto] val: 12/12 lines | 50 lines/min | ETA 0.0 min | guide judged on 12 lines | running top-1 official 0.0134
+[    1.4 min] [q3_auto] test: 5/7 lines | 51 lines/min | ETA 0.0 min | guide judged on 5 lines
+[    1.5 min] [q3_auto] test: 7/7 lines | 51 lines/min | ETA 0.0 min | guide judged on 7 lines
+[    1.5 min] [q3_auto] unlisted: 5/5 lines | 80 lines/min | ETA 0.0 min | guide judged on 0 lines
+[    1.5 min] [q3_auto] done in 0.5 min
+[    1.5 min] [VAL] q3_auto top-1                      official 0.01345 | word/line 11.750 | char/line 54.667 | n=12 | vs guide -0.88516 CI95 [-1.00430,-0.77115] P(better)=0.000
+[    1.5 min] [VAL]   per sub-class: {"A01": "n=   3 score=0.1652 w/line=10.000 c/line=46.000", "A05": "n=   3 score=-0.2063 w/line=14.333 c/line=67.000", "A07": "n=   3 score=0.0109 w/line=11.667 c/line=55.333", "B02": "n=   1 score=0.1379 w/line=10.000 c/line=49.000", "B03": "n=   2 score=0.0572 w/line=11.500 c/line=51.000"}
+[    1.5 min] [VAL] q3_auto MBR (own 5-best)           official 0.01117 | word/line 11.750 | char/line 54.917 | n=12 | vs guide -0.88744 CI95 [-1.00795,-0.77266] P(better)=0.000
+[    1.5 min] [VAL]   per sub-class: {"A01": "n=   3 score=0.1652 w/line=10.000 c/line=46.000", "A05": "n=   3 score=-0.2124 w/line=14.333 c/line=67.667", "A07": "n=   3 score=0.0109 w/line=11.667 c/line=55.333", "B02": "n=   1 score=0.1561 w/line=10.000 c/line=47.000", "B03": "n=   2 score=0.0436 w/line=11.500 c/line=52.500"}
+
+==============================================================================================================
+[    1.5 min] LABELER q3_subclass: loading q3 (subclass, prompt=classwise, K=0) for ['val', 'test', 'unlisted']
+==============================================================================================================
+[    1.6 min] [q3_subclass] conversation of line wVsxHXvGovSA5903 (A07/A1, 0 examples): 368 tokens
+<|im_start|>user
+Transcribe the handwritten line exactly as written. This is not modern English: keep the original spelling, capital letters, abbreviations and marks (^ for superscript letters, : for suspensions, &, ff). Do not modernize, expand or correct anything. If parts of neighbouring lines are visible, transcribe only the central line. This line comes from a Barbados legal record of the 1630s-1660s. Common conventions in these documents: & for 'and', ye and yt for 'the' and 'that', sd for 'said', and spellings such as heires, assignes, publique. The crop is tight around the line; '&' and ye/yt are very common.<|vision_start|><IMAGE><|vision_end|><|im_end|>
+<|im_start|>assistant
+
+[    1.7 min] [q3_subclass] val: 5/12 lines | 55 lines/min | ETA 0.1 min | guide judged on 5 lines | running top-1 official 0.0606
+[    1.8 min] [q3_subclass] val: 10/12 lines | 55 lines/min | ETA 0.0 min | guide judged on 10 lines | running top-1 official 0.0267
+[    1.8 min] [q3_subclass] val: 12/12 lines | 54 lines/min | ETA 0.0 min | guide judged on 12 lines | running top-1 official 0.0051
+[    1.9 min] [q3_subclass] test: 5/7 lines | 64 lines/min | ETA 0.0 min | guide judged on 5 lines
+[    1.9 min] [q3_subclass] test: 7/7 lines | 69 lines/min | ETA 0.0 min | guide judged on 7 lines
+[    2.0 min] [q3_subclass] unlisted: 5/5 lines | 56 lines/min | ETA 0.0 min | guide judged on 0 lines
+[    2.0 min] [q3_subclass] done in 0.5 min
+[    2.0 min] [VAL] q3_subclass top-1                  official 0.00511 | word/line 11.750 | char/line 55.583 | n=12 | vs guide -0.89350 CI95 [-1.01339,-0.78024] P(better)=0.000
+[    2.0 min] [VAL]   per sub-class: {"A01": "n=   3 score=0.1621 w/line=10.000 c/line=46.333", "A05": "n=   3 score=-0.2245 w/line=14.333 c/line=69.000", "A07": "n=   3 score=0.0199 w/line=11.667 c/line=54.333", "B02": "n=   1 score=0.1470 w/line=10.000 c/line=48.000", "B03": "n=   2 score=0.0208 w/line=11.500 c/line=55.000"}
+[    2.0 min] [VAL] q3_subclass MBR (own 5-best)       official 0.00814 | word/line 11.750 | char/line 55.250 | n=12 | vs guide -0.89047 CI95 [-1.01433,-0.77330] P(better)=0.000
+[    2.0 min] [VAL]   per sub-class: {"A01": "n=   3 score=0.1742 w/line=10.000 c/line=45.000", "A05": "n=   3 score=-0.2336 w/line=14.333 c/line=70.000", "A07": "n=   3 score=0.0230 w/line=11.667 c/line=54.000", "B02": "n=   1 score=0.1652 w/line=10.000 c/line=46.000", "B03": "n=   2 score=0.0208 w/line=11.500 c/line=55.000"}
+
+==============================================================================================================
+[    2.0 min] LABELER q25_base_fewshot: loading q25 (shared, prompt=detailed, K=2) for ['val', 'test', 'unlisted']
+==============================================================================================================
+[    2.1 min] [q25_base_fewshot] conversation of line wVsxHXvGovSA5903 (A07/A1, 2 examples): 2653 tokens
+e scribe's, not modern English.
+
+OUTPUT FORMAT (MANDATORY)
+Return ONLY the transcription of the line as plain text on one line: no quotes, no labels, no explanations, no markdown.
+
+RETURN ONLY THE TRANSCRIPTION.<|im_end|>
+<|im_start|>user
+<|vision_start|><IMAGE><|vision_end|>Transcribe this line.<|im_end|>
+<|im_start|>assistant
+dispose of all and evy ~all~ pcell of land which by deed or writing<|im_end|>
+<|im_start|>user
+<|vision_start|><IMAGE><|vision_end|>Transcribe this line.<|im_end|>
+<|im_start|>assistant
+specialty of ye same date for ye paymt: of ye sume of two hundred<|im_end|>
+<|im_start|>user
+<|vision_start|><IMAGE><|vision_end|>Transcribe this line.<|im_end|>
+<|im_start|>assistant
+
+[    2.3 min] [q25_base_fewshot] val: 5/12 lines | 23 lines/min | ETA 0.3 min | guide judged on 5 lines | running top-1 official 0.0533
+[    2.5 min] [q25_base_fewshot] val: 10/12 lines | 22 lines/min | ETA 0.1 min | guide judged on 10 lines | running top-1 official 0.0203
+[    2.6 min] [q25_base_fewshot] val: 12/12 lines | 22 lines/min | ETA 0.0 min | guide judged on 12 lines | running top-1 official 0.0006

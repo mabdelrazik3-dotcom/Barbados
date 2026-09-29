@@ -1,0 +1,57 @@
+{
+ "mode": "exp002",
+ "profiles": {
+  "A01": {
+   "n": 39,
+   "chars": 67.0,
+   "chars_q25": 56.5,
+   "chars_q75": 76.5,
+   "words": 12.0,
+   "caret": 15.384615384615385,
+   "colon": 2.564102564102564,
+   "amp": 20.51282051282051,
+   "plus": 0.0,
+   "thorn": 12.82051282051282,
+   "ff": 2.564102564102564,
+   "digit": 5.128205128205128,
+   "tilde": 0.0,
+   "under": 0.0,
+   "enddash": 5.128205128205128,
+   "apos": 0.0,
+   "comma": 10.256410256410255,
+   "period": 0.0,
+   "Said": 0.0,
+   "said": 2.564102564102564,
+   "sd": 2.564102564102564,
+   "cap_words": 15.627504182814969
+  },
+  "B01": {
+   "n": 21,
+   "chars": 54.0,
+   "chars_q25": 48.0,
+   "chars_q75": 63.0,
+   "words": 9.0,
+   "caret": 14.285714285714285,
+   "colon": 9.523809523809524,
+   "amp": 0.0,
+   "plus": 0.0,
+   "thorn": 0.0,
+   "ff": 4.761904761904762,
+   "digit": 4.761904761904762,
+   "tilde": 0.0,
+   "under": 0.0,
+   "enddash": 4.761904761904762,
+   "apos": 0.0,
+   "comma": 14.285714285714285,
+   "period": 4.761904761904762,
+   "Said": 4.761904761904762,
+   "said": 19.047619047619047,
+   "sd": 0.0,
+   "cap_words": 24.603967461110322
+  }
+ },
+ "prompts": {
+  "A01": "This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.",
+  "B01": "This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything."
+ }
+}

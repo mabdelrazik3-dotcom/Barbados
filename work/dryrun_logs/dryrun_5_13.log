@@ -1,0 +1,475 @@
+
+######## executing code cell 0: # Cell 1 — OFFLINE install from the wheels dataset
+wheels dir: /kaggle/input/datasets/haniagamal/teleco-wheels/wheels   found: 0 wheels
+
+######## executing code cell 2: # Cell 2 — imports
+transformers 5.13.0 | VLM class: AutoModelForImageTextToText
+torch 2.13.0+cpu | cuda False | bf16 False
+
+######## executing code cell 3: # Cell 3 — CFG  (+ TRIAL definition)
+TRIAL: EXP_001 | Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODE: fold0 | models: 3 | variants: ['D0_orig', 'D1_norep', 'D2_b5nb']
+
+######## executing code cell 4: # Cell 4 — resolve & sanity-check paths
+TRAIN_CSV : D:/HANAFY/ROAD\Train.csv -> True
+TEST_CSV  : D:/HANAFY/ROAD\Test.csv -> True
+IMAGES_DIR: D:/HANAFY/ROAD/images -> True
+MODEL     : D:/HANAFY/ROAD/work/tiny/q3 -> True
+MODEL     : D:/HANAFY/ROAD/work/tiny/q25 -> True
+
+######## executing code cell 5: # Cell 5 — text / image utils + augmentation stack
+
+######## executing code cell 6: # Cell 6 — model & processor loaders (pixel limits enforced + verified)
+
+######## executing code cell 7: # Cell 7 — OFFICIAL metric, MBR / ROVER ensembling, error forensics, paired bootstrap
+official metric + ensemble helpers OK
+
+######## executing code cell 8: # Cell 8 — samples, Fold-0 split (identical IDs to barbados-2), repaired protocol
+[DATASET] found=4093, missing=0, excluded_corrupt=5
+mode=fold0 fold=0: train=3012 inner_ckpt=262 val=819 (ALL scored)
+test rows: 1374 | missing test images: 0
+
+######## executing code cell 9: # Cell 9 — collator with assistant-boundary label masking (unchanged from barbados-2)
+
+######## executing code cell 10: # Cell 10 — batched N-best generation with sequence scores
+
+######## executing code cell 11: # Cell 11 — trial harness: persistence, champion tracking, standard report block
+
+######## executing code cell 12: # Cell 12 — train each model on Fold-0 TRAIN, decode ALL Fold-0 val with every decoding variant,
+[transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+
+=========== MODEL ROAD_work_tiny_q3 (fold0, fold 0) ===========
+[processor] Qwen3VLProcessor | Qwen2VLImageProcessor | probe 1060x57 -> 1952x128 px, 244 visual tokens
+[ROAD_work_tiny_q3] train rows=24 inner_ckpt=4 val(scored)=10
+Loading weights:   0%|          | 0/64 [00:00<?, ?it/s]Loading weights: 100%|██████████| 64/64 [00:00<00:00, 4395.83it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+[lora] LORA_VISION=ON -> +12 vision/merger modules
+trainable params: 118,784 || all params: 19,830,560 || trainable%: 0.5990
+[ROAD_work_tiny_q3] training...
+  0%|          | 0/12 [00:00<?, ?it/s]  8%|▊         | 1/12 [00:01<00:15,  1.38s/it] 17%|█▋        | 2/12 [00:02<00:13,  1.37s/it] 25%|██▌       | 3/12 [00:04<00:12,  1.35s/it] 33%|███▎      | 4/12 [00:05<00:11,  1.38s/it]
+  0%|          | 0/1 [00:00<?, ?it/s][A                                              
+                                     [A 33%|███▎      | 4/12 [00:06<00:11,  1.38s/it]
+100%|██████████| 1/1 [00:00<00:00, 1757.14it/s][A
+                                               [A 42%|████▏     | 5/12 [00:07<00:11,  1.69s/it] 50%|█████     | 6/12 [00:09<00:09,  1.58s/it] 58%|█████▊    | 7/12 [00:10<00:07,  1.46s/it] 67%|██████▋   | 8/12 [00:11<00:05,  1.41s/it]{'eval_loss': '11.93', 'eval_runtime': '0.8124', 'eval_samples_per_second': '4.924', 'eval_steps_per_second': '1.231', 'epoch': '0.3333'}
+
+  0%|          | 0/1 [00:00<?, ?it/s][A                                              
+                                     [A 67%|██████▋   | 8/12 [00:12<00:05,  1.41s/it]
+100%|██████████| 1/1 [00:00<00:00, 2051.00it/s][A
+                                               [A 75%|███████▌  | 9/12 [00:13<00:04,  1.60s/it] 83%|████████▎ | 10/12 [00:14<00:02,  1.46s/it]                                                83%|████████▎ | 10/12 [00:14<00:02,  1.46s/it] 92%|█████████▏| 11/12 [00:17<00:01,  1.72s/it]100%|██████████| 12/12 [00:19<00:00,  1.79s/it]{'eval_loss': '11.91', 'eval_runtime': '0.6216', 'eval_samples_per_second': '6.435', 'eval_steps_per_second': '1.609', 'epoch': '0.6667'}
+{'loss': '11.91', 'grad_norm': '1.954', 'learning_rate': '3.451e-05', 'epoch': '0.8333'}
+
+  0%|          | 0/1 [00:00<?, ?it/s][A                                               
+                                     [A100%|██████████| 12/12 [00:19<00:00,  1.79s/it]
+100%|██████████| 1/1 [00:00<00:00, 2078.45it/s][A
+                                               [A                                               100%|██████████| 12/12 [00:19<00:00,  1.79s/it]100%|██████████| 12/12 [00:19<00:00,  1.66s/it]
+{'eval_loss': '11.91', 'eval_runtime': '0.7816', 'eval_samples_per_second': '5.118', 'eval_steps_per_second': '1.279', 'epoch': '1'}
+{'train_runtime': '19.89', 'train_samples_per_second': '1.207', 'train_steps_per_second': '0.603', 'train_loss': '11.91', 'epoch': '1'}
+[ROAD_work_tiny_q3] label-mask failures: 0
+val/ROAD_work_tiny_q3/D0_orig:   0%|          | 0/3 [00:00<?, ?it/s][transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+val/ROAD_work_tiny_q3/D0_orig:  33%|███▎      | 1/3 [00:01<00:02,  1.44s/it]val/ROAD_work_tiny_q3/D0_orig:  67%|██████▋   | 2/3 [00:02<00:01,  1.28s/it]val/ROAD_work_tiny_q3/D0_orig: 100%|██████████| 3/3 [00:03<00:00,  1.03it/s]                                                                            ==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q3__D0_orig
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D0_orig
+==================================================================
+Official validation score : 0.03970
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 54.3000   corpus CER 0.8873
+Delta vs champion          : +nan  (champion=nan)
+Runtime                    : 0.4 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0298 w/line=11.333 c/line=54.778', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0408 w/line=11.167 c/line=54.333', '70+': 'n=   2 score=-0.2549 w/line=15.500 c/line=67.000', '<50': 'n=   2 score=0.3311 w/line=7.000 c/line=41.500'}
+==================================================================
+val/ROAD_work_tiny_q3/D1_norep:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/D1_norep:  33%|███▎      | 1/3 [00:00<00:01,  1.37it/s]val/ROAD_work_tiny_q3/D1_norep:  67%|██████▋   | 2/3 [00:01<00:00,  1.29it/s]val/ROAD_work_tiny_q3/D1_norep: 100%|██████████| 3/3 [00:01<00:00,  1.83it/s]                                                                             ==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q3__D1_norep
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D1_norep
+==================================================================
+Official validation score : 0.03515
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 54.8000   corpus CER 0.8954
+Delta vs baseline          : -0.00455  CI95 [-0.02818, +0.01727]  P(better)=0.354  improved=2 worsened=3  word/char edits saved=0/-5
+Delta vs champion          : -0.00455  (champion=0.03970)
+Runtime                    : 0.4 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0247 w/line=11.333 c/line=55.333', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0378 w/line=11.167 c/line=54.667', '70+': 'n=   2 score=-0.2231 w/line=15.500 c/line=63.500', '<50': 'n=   2 score=0.2856 w/line=7.000 c/line=46.500'}
+==================================================================
+val/ROAD_work_tiny_q3/D2_b5nb:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/D2_b5nb:  33%|███▎      | 1/3 [00:01<00:02,  1.13s/it]val/ROAD_work_tiny_q3/D2_b5nb:  67%|██████▋   | 2/3 [00:02<00:01,  1.14s/it]val/ROAD_work_tiny_q3/D2_b5nb: 100%|██████████| 3/3 [00:02<00:00,  1.06it/s]                                                                            ==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q3__D2_b5nb
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D2_b5nb
+==================================================================
+Official validation score : 0.03864
+Word edits / line (LB WER) : 11.4000   corpus WER 1.0179
+Char edits / line (LB CER) : 53.5000   corpus CER 0.8742
+Delta vs baseline          : -0.00106  CI95 [-0.02848, +0.02364]  P(better)=0.481  improved=5 worsened=4  word/char edits saved=-2/8
+Delta vs champion          : -0.00106  (champion=0.03970)
+Runtime                    : 0.4 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0286 w/line=11.556 c/line=53.889', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0544 w/line=11.167 c/line=52.833', '70+': 'n=   2 score=-0.2322 w/line=15.500 c/line=64.500', '<50': 'n=   2 score=0.2621 w/line=8.000 c/line=44.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q3__D2_b5nb_mbr
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D2_b5nb+mbr
+==================================================================
+Official validation score : 0.05045
+Word edits / line (LB WER) : 11.4000   corpus WER 1.0179
+Char edits / line (LB CER) : 52.2000   corpus CER 0.8529
+Delta vs baseline          : +0.01076  CI95 [-0.01576, +0.03273]  P(better)=0.814  improved=8 worsened=2  word/char edits saved=-2/21
+Delta vs champion          : +0.01076  (champion=0.03970)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0387 w/line=11.556 c/line=52.778', '1': 'n=   1 score=0.1561 w/line=10.000 c/line=47.000'}
+By label length          : {'50-69': 'n=   6 score=0.0711 w/line=11.167 c/line=51.000', '70+': 'n=   2 score=-0.2322 w/line=15.500 c/line=64.500', '<50': 'n=   2 score=0.2712 w/line=8.000 c/line=43.500'}
+==================================================================
+[ROAD_work_tiny_q3] best decoding on val: D0_orig (0.03970) | all: D0_orig=0.03970, D1_norep=0.03515, D2_b5nb=0.03864, D2_b5nb+mbr=0.05045
+test/ROAD_work_tiny_q3/D0_orig:   0%|          | 0/2 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/D0_orig:  50%|█████     | 1/2 [00:01<00:01,  1.08s/it]test/ROAD_work_tiny_q3/D0_orig: 100%|██████████| 2/2 [00:01<00:00,  1.22it/s]                                                                             test/ROAD_work_tiny_q3/D2_b5nb:   0%|          | 0/2 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/D2_b5nb:  50%|█████     | 1/2 [00:01<00:01,  1.39s/it]test/ROAD_work_tiny_q3/D2_b5nb: 100%|██████████| 2/2 [00:02<00:00,  1.05s/it]                                                                             [ROAD_work_tiny_q3] done in 0.6 min
+
+=========== MODEL ROAD_work_tiny_q25 (fold0, fold 0) ===========
+[processor] Qwen2_5_VLProcessor | Qwen2VLImageProcessor | probe 1060x57 -> 1932x112 px, 276 visual tokens
+[ROAD_work_tiny_q25] train rows=24 inner_ckpt=4 val(scored)=10
+Loading weights:   0%|          | 0/57 [00:00<?, ?it/s]Loading weights: 100%|██████████| 57/57 [00:00<00:00, 2287.39it/s]
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+[lora] LORA_VISION=ON -> +12 vision/merger modules
+trainable params: 110,592 || all params: 19,732,704 || trainable%: 0.5605
+[ROAD_work_tiny_q25] training...
+  0%|          | 0/12 [00:00<?, ?it/s][transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  8%|▊         | 1/12 [00:01<00:11,  1.01s/it] 17%|█▋        | 2/12 [00:02<00:14,  1.48s/it] 25%|██▌       | 3/12 [00:04<00:14,  1.63s/it] 33%|███▎      | 4/12 [00:06<00:12,  1.62s/it]
+  0%|          | 0/1 [00:00<?, ?it/s][A                                              
+                                     [A 33%|███▎      | 4/12 [00:06<00:12,  1.62s/it]
+100%|██████████| 1/1 [00:00<00:00, 1827.58it/s][A
+                                               [A 42%|████▏     | 5/12 [00:08<00:13,  1.93s/it] 50%|█████     | 6/12 [00:10<00:10,  1.83s/it] 58%|█████▊    | 7/12 [00:11<00:08,  1.64s/it] 67%|██████▋   | 8/12 [00:13<00:07,  1.76s/it]{'eval_loss': '11.9', 'eval_runtime': '0.6888', 'eval_samples_per_second': '5.807', 'eval_steps_per_second': '1.452', 'epoch': '0.3333'}
+
+  0%|          | 0/1 [00:00<?, ?it/s][A                                              
+                                     [A 67%|██████▋   | 8/12 [00:14<00:07,  1.76s/it]
+100%|██████████| 1/1 [00:00<00:00, 1842.03it/s][A
+                                               [A 75%|███████▌  | 9/12 [00:16<00:06,  2.14s/it] 83%|████████▎ | 10/12 [00:18<00:04,  2.17s/it]                                                83%|████████▎ | 10/12 [00:18<00:04,  2.17s/it] 92%|█████████▏| 11/12 [00:21<00:02,  2.20s/it]100%|██████████| 12/12 [00:22<00:00,  2.08s/it]{'eval_loss': '11.89', 'eval_runtime': '0.7371', 'eval_samples_per_second': '5.427', 'eval_steps_per_second': '1.357', 'epoch': '0.6667'}
+{'loss': '11.89', 'grad_norm': '1.834', 'learning_rate': '3.451e-05', 'epoch': '0.8333'}
+
+  0%|          | 0/1 [00:00<?, ?it/s][A                                               
+                                     [A100%|██████████| 12/12 [00:23<00:00,  2.08s/it]
+100%|██████████| 1/1 [00:00<00:00, 2122.62it/s][A
+                                               [A                                               100%|██████████| 12/12 [00:23<00:00,  2.08s/it]100%|██████████| 12/12 [00:23<00:00,  1.98s/it]
+{'eval_loss': '11.88', 'eval_runtime': '0.8544', 'eval_samples_per_second': '4.682', 'eval_steps_per_second': '1.17', 'epoch': '1'}
+{'train_runtime': '23.79', 'train_samples_per_second': '1.009', 'train_steps_per_second': '0.504', 'train_loss': '11.89', 'epoch': '1'}
+[ROAD_work_tiny_q25] label-mask failures: 0
+val/ROAD_work_tiny_q25/D0_orig:   0%|          | 0/3 [00:00<?, ?it/s][transformers] The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+val/ROAD_work_tiny_q25/D0_orig:  33%|███▎      | 1/3 [00:01<00:02,  1.15s/it]val/ROAD_work_tiny_q25/D0_orig:  67%|██████▋   | 2/3 [00:02<00:01,  1.20s/it]val/ROAD_work_tiny_q25/D0_orig: 100%|██████████| 3/3 [00:02<00:00,  1.08it/s]                                                                             ==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q25__D0_orig
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D0_orig
+==================================================================
+Official validation score : 0.04697
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 53.5000   corpus CER 0.8742
+Delta vs champion          : -0.00348  (champion=0.05045)
+Runtime                    : 0.5 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0449 w/line=11.333 c/line=53.111', '1': 'n=   1 score=0.0652 w/line=10.000 c/line=57.000'}
+By label length          : {'50-69': 'n=   6 score=0.0484 w/line=11.167 c/line=53.500', '70+': 'n=   2 score=-0.2458 w/line=15.500 c/line=66.000', '<50': 'n=   2 score=0.3356 w/line=7.000 c/line=41.000'}
+==================================================================
+val/ROAD_work_tiny_q25/D1_norep:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/D1_norep:  33%|███▎      | 1/3 [00:00<00:01,  1.50it/s]val/ROAD_work_tiny_q25/D1_norep:  67%|██████▋   | 2/3 [00:01<00:00,  1.45it/s]val/ROAD_work_tiny_q25/D1_norep: 100%|██████████| 3/3 [00:01<00:00,  1.71it/s]                                                                              ==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q25__D1_norep
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D1_norep
+==================================================================
+Official validation score : 0.05152
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 53.0000   corpus CER 0.8660
+Delta vs baseline          : +0.00455  CI95 [-0.00455, +0.01455]  P(better)=0.801  improved=4 worsened=3  word/char edits saved=0/5
+Delta vs champion          : +0.00106  (champion=0.05045)
+Runtime                    : 0.5 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0460 w/line=11.333 c/line=53.000', '1': 'n=   1 score=0.1015 w/line=10.000 c/line=53.000'}
+By label length          : {'50-69': 'n=   6 score=0.0544 w/line=11.167 c/line=52.833', '70+': 'n=   2 score=-0.2367 w/line=15.500 c/line=65.000', '<50': 'n=   2 score=0.3311 w/line=7.000 c/line=41.500'}
+==================================================================
+val/ROAD_work_tiny_q25/D2_b5nb:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/D2_b5nb:  33%|███▎      | 1/3 [00:01<00:02,  1.39s/it]val/ROAD_work_tiny_q25/D2_b5nb:  67%|██████▋   | 2/3 [00:02<00:01,  1.18s/it]val/ROAD_work_tiny_q25/D2_b5nb: 100%|██████████| 3/3 [00:03<00:00,  1.00it/s]                                                                             ==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q25__D2_b5nb
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D2_b5nb
+==================================================================
+Official validation score : 0.05424
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 52.7000   corpus CER 0.8611
+Delta vs baseline          : +0.00727  CI95 [-0.00727, +0.02636]  P(better)=0.783  improved=4 worsened=4  word/char edits saved=0/8
+Delta vs champion          : +0.00273  (champion=0.05152)
+Runtime                    : 0.5 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0439 w/line=11.333 c/line=53.222', '1': 'n=   1 score=0.1470 w/line=10.000 c/line=48.000'}
+By label length          : {'50-69': 'n=   6 score=0.0605 w/line=11.167 c/line=52.167', '70+': 'n=   2 score=-0.2367 w/line=15.500 c/line=65.000', '<50': 'n=   2 score=0.3265 w/line=7.000 c/line=42.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ROAD_work_tiny_q25__D2_b5nb_mbr
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D2_b5nb+mbr
+==================================================================
+Official validation score : 0.05697
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 52.4000   corpus CER 0.8562
+Delta vs baseline          : +0.01000  CI95 [-0.00727, +0.03000]  P(better)=0.850  improved=5 worsened=5  word/char edits saved=0/11
+Delta vs champion          : +0.00273  (champion=0.05424)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 10
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0470 w/line=11.333 c/line=52.889', '1': 'n=   1 score=0.1470 w/line=10.000 c/line=48.000'}
+By label length          : {'50-69': 'n=   6 score=0.0620 w/line=11.167 c/line=52.000', '70+': 'n=   2 score=-0.2413 w/line=15.500 c/line=65.500', '<50': 'n=   2 score=0.3402 w/line=7.000 c/line=40.500'}
+==================================================================
+[ROAD_work_tiny_q25] best decoding on val: D2_b5nb (0.05424) | all: D0_orig=0.04697, D1_norep=0.05152, D2_b5nb=0.05424, D2_b5nb+mbr=0.05697
+test/ROAD_work_tiny_q25/D2_b5nb:   0%|          | 0/2 [00:00<?, ?it/s]test/ROAD_work_tiny_q25/D2_b5nb:  50%|█████     | 1/2 [00:01<00:01,  1.22s/it]test/ROAD_work_tiny_q25/D2_b5nb: 100%|██████████| 2/2 [00:02<00:00,  1.06s/it]                                                                              [ROAD_work_tiny_q25] done in 0.6 min
+
+######## executing code cell 13: # Cell 13 — cross-model ensembles on val (each = one trial), champion selection, submission
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__mbr_top1
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D0_orig/mbr_top1
+==================================================================
+Official validation score : 0.03970
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 54.3000   corpus CER 0.8873
+Delta vs baseline          : +0.00000  CI95 [+0.00000, +0.00000]  P(better)=0.000  improved=0 worsened=0  word/char edits saved=0/0
+Delta vs champion          : -0.01727  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0298 w/line=11.333 c/line=54.778', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0408 w/line=11.167 c/line=54.333', '70+': 'n=   2 score=-0.2549 w/line=15.500 c/line=67.000', '<50': 'n=   2 score=0.3311 w/line=7.000 c/line=41.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D0_orig/word_rover
+==================================================================
+Official validation score : 0.03424
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 54.9000   corpus CER 0.8971
+Delta vs baseline          : -0.00545  CI95 [-0.01636, +0.00000]  P(better)=0.000  improved=0 worsened=1  word/char edits saved=0/-6
+Delta vs champion          : -0.02273  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0237 w/line=11.333 c/line=55.444', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0317 w/line=11.167 c/line=55.333', '70+': 'n=   2 score=-0.2549 w/line=15.500 c/line=67.000', '<50': 'n=   2 score=0.3311 w/line=7.000 c/line=41.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__char_rover
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D0_orig/char_rover
+==================================================================
+Official validation score : 0.02697
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 55.7000   corpus CER 0.9101
+Delta vs baseline          : -0.01273  CI95 [-0.03000, -0.00182]  P(better)=0.000  improved=0 worsened=4  word/char edits saved=0/-14
+Delta vs champion          : -0.03000  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0247 w/line=11.333 c/line=55.333', '1': 'n=   1 score=0.0470 w/line=10.000 c/line=59.000'}
+By label length          : {'50-69': 'n=   6 score=0.0226 w/line=11.167 c/line=56.333', '70+': 'n=   2 score=-0.2640 w/line=15.500 c/line=68.000', '<50': 'n=   2 score=0.3311 w/line=7.000 c/line=41.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__mbr_top1
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D1_norep/mbr_top1
+==================================================================
+Official validation score : 0.03515
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 54.8000   corpus CER 0.8954
+Delta vs baseline          : -0.00455  CI95 [-0.02818, +0.01727]  P(better)=0.354  improved=2 worsened=3  word/char edits saved=0/-5
+Delta vs champion          : -0.02182  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0247 w/line=11.333 c/line=55.333', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0378 w/line=11.167 c/line=54.667', '70+': 'n=   2 score=-0.2231 w/line=15.500 c/line=63.500', '<50': 'n=   2 score=0.2856 w/line=7.000 c/line=46.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__word_rover
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D1_norep/word_rover
+==================================================================
+Official validation score : 0.02879
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 55.5000   corpus CER 0.9069
+Delta vs baseline          : -0.01091  CI95 [-0.03636, +0.01273]  P(better)=0.196  improved=2 worsened=4  word/char edits saved=0/-12
+Delta vs champion          : -0.02818  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0247 w/line=11.333 c/line=55.333', '1': 'n=   1 score=0.0652 w/line=10.000 c/line=57.000'}
+By label length          : {'50-69': 'n=   6 score=0.0271 w/line=11.167 c/line=55.833', '70+': 'n=   2 score=-0.2231 w/line=15.500 c/line=63.500', '<50': 'n=   2 score=0.2856 w/line=7.000 c/line=46.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__char_rover
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D1_norep/char_rover
+==================================================================
+Official validation score : 0.02970
+Word edits / line (LB WER) : 11.2000   corpus WER 1.0000
+Char edits / line (LB CER) : 55.4000   corpus CER 0.9052
+Delta vs baseline          : -0.01000  CI95 [-0.03636, +0.01091]  P(better)=0.198  improved=1 worsened=4  word/char edits saved=0/-11
+Delta vs champion          : -0.02727  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0187 w/line=11.333 c/line=56.000', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0362 w/line=11.167 c/line=54.833', '70+': 'n=   2 score=-0.2277 w/line=15.500 c/line=64.000', '<50': 'n=   2 score=0.2674 w/line=7.000 c/line=48.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_nbest
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/mbr_nbest
+==================================================================
+Official validation score : 0.05462
+Word edits / line (LB WER) : 11.3000   corpus WER 1.0089
+Char edits / line (LB CER) : 52.2000   corpus CER 0.8529
+Delta vs baseline          : +0.01492  CI95 [+0.00023, +0.02909]  P(better)=0.976  improved=8 worsened=2  word/char edits saved=-1/21
+Delta vs champion          : -0.00235  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0434 w/line=11.444 c/line=52.778', '1': 'n=   1 score=0.1561 w/line=10.000 c/line=47.000'}
+By label length          : {'50-69': 'n=   6 score=0.0681 w/line=11.167 c/line=51.333', '70+': 'n=   2 score=-0.2413 w/line=15.500 c/line=65.500', '<50': 'n=   2 score=0.3102 w/line=7.500 c/line=41.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_top1
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/mbr_top1
+==================================================================
+Official validation score : 0.03864
+Word edits / line (LB WER) : 11.4000   corpus WER 1.0179
+Char edits / line (LB CER) : 53.5000   corpus CER 0.8742
+Delta vs baseline          : -0.00106  CI95 [-0.02848, +0.02364]  P(better)=0.481  improved=5 worsened=4  word/char edits saved=-2/8
+Delta vs champion          : -0.01833  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0286 w/line=11.556 c/line=53.889', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0544 w/line=11.167 c/line=52.833', '70+': 'n=   2 score=-0.2322 w/line=15.500 c/line=64.500', '<50': 'n=   2 score=0.2621 w/line=8.000 c/line=44.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__word_rover
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/word_rover
+==================================================================
+Official validation score : 0.03864
+Word edits / line (LB WER) : 11.4000   corpus WER 1.0179
+Char edits / line (LB CER) : 53.5000   corpus CER 0.8742
+Delta vs baseline          : -0.00106  CI95 [-0.02848, +0.02364]  P(better)=0.481  improved=5 worsened=4  word/char edits saved=-2/8
+Delta vs champion          : -0.01833  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0286 w/line=11.556 c/line=53.889', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0544 w/line=11.167 c/line=52.833', '70+': 'n=   2 score=-0.2322 w/line=15.500 c/line=64.500', '<50': 'n=   2 score=0.2621 w/line=8.000 c/line=44.500'}
+==================================================================
+==================================================================
+TRIAL: EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__char_rover
+DESCRIPTION: Corrected-protocol baseline (original training recipe) + decoding challengers (repetition penalty off, beam-5 N-best, MBR) + cross-model ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/char_rover
+==================================================================
+Official validation score : 0.03682
+Word edits / line (LB WER) : 11.4000   corpus WER 1.0179
+Char edits / line (LB CER) : 53.7000   corpus CER 0.8775
+Delta vs baseline          : -0.00288  CI95 [-0.03212, +0.02348]  P(better)=0.433  improved=5 worsened=4  word/char edits saved=-2/6
+Delta vs champion          : -0.02015  (champion=0.05697)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 10
+Empty predictions          : 0   Truncated predictions : 0
+By scan batch (tall>150px): {'0': 'n=   9 score=0.0266 w/line=11.556 c/line=54.111', '1': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+By label length          : {'50-69': 'n=   6 score=0.0514 w/line=11.167 c/line=53.167', '70+': 'n=   2 score=-0.2277 w/line=15.500 c/line=64.000', '<50': 'n=   2 score=0.2576 w/line=8.000 c/line=45.000'}
+==================================================================
+
+VALIDATION RANKING (official score):
+  0.05697  ROAD_work_tiny_q25__D2_b5nb+mbr
+  0.05462  ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_nbest
+  0.05424  ROAD_work_tiny_q25__D2_b5nb
+  0.05152  ROAD_work_tiny_q25__D1_norep   (no test preds)
+  0.05045  ROAD_work_tiny_q3__D2_b5nb+mbr
+  0.04697  ROAD_work_tiny_q25__D0_orig   (no test preds)
+  0.03970  ROAD_work_tiny_q3__D0_orig
+  0.03970  ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__mbr_top1   (no test preds)
+  0.03864  ROAD_work_tiny_q3__D2_b5nb
+  0.03864  ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__word_rover
+  0.03864  ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_top1
+  0.03682  ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__char_rover
+  0.03515  ROAD_work_tiny_q3__D1_norep   (no test preds)
+  0.03515  ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__mbr_top1   (no test preds)
+  0.03424  ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover   (no test preds)
+
+submission.csv <- ROAD_work_tiny_q25__D2_b5nb+mbr  | rows=6 | empty-replaced=0
+
+TRIAL TABLE (this session):
+                                                        trial             variant    score  word_edits_per_line  char_edits_per_line  delta_baseline  p_better_baseline  runtime_min   status
+                          EXP_001__ROAD_work_tiny_q3__D0_orig             D0_orig 0.039697                 11.2                 54.3             NaN                NaN     0.424873 BASELINE
+                         EXP_001__ROAD_work_tiny_q3__D1_norep            D1_norep 0.035152                 11.2                 54.8       -0.004545             0.3536     0.401490 REJECTED
+                          EXP_001__ROAD_work_tiny_q3__D2_b5nb             D2_b5nb 0.038636                 11.4                 53.5       -0.001061             0.4807     0.421169 REJECTED
+                      EXP_001__ROAD_work_tiny_q3__D2_b5nb_mbr         D2_b5nb+mbr 0.050455                 11.4                 52.2        0.010758             0.8135     0.050296 REJECTED
+                         EXP_001__ROAD_work_tiny_q25__D0_orig             D0_orig 0.046970                 11.2                 53.5             NaN                NaN     0.477681 BASELINE
+                        EXP_001__ROAD_work_tiny_q25__D1_norep            D1_norep 0.051515                 11.2                 53.0        0.004545             0.8011     0.458605 REJECTED
+                         EXP_001__ROAD_work_tiny_q25__D2_b5nb             D2_b5nb 0.054242                 11.2                 52.7        0.007273             0.7833     0.481342 REJECTED
+                     EXP_001__ROAD_work_tiny_q25__D2_b5nb_mbr         D2_b5nb+mbr 0.056970                 11.2                 52.4        0.010000             0.8502     0.054064 PROMOTED
+   EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__mbr_top1    D0_orig/mbr_top1 0.039697                 11.2                 54.3        0.000000             0.0000     0.000013 REJECTED
+ EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover  D0_orig/word_rover 0.034242                 11.2                 54.9       -0.005455             0.0000     0.000015 REJECTED
+ EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__char_rover  D0_orig/char_rover 0.026970                 11.2                 55.7       -0.012727             0.0000     0.000698 REJECTED
+  EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__mbr_top1   D1_norep/mbr_top1 0.035152                 11.2                 54.8       -0.004545             0.3536     0.000011 REJECTED
+EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__word_rover D1_norep/word_rover 0.028788                 11.2                 55.5       -0.010909             0.1962     0.000017 REJECTED
+EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__char_rover D1_norep/char_rover 0.029697                 11.2                 55.4       -0.010000             0.1979     0.000576 REJECTED
+  EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_nbest   D2_b5nb/mbr_nbest 0.054621                 11.3                 52.2        0.014924             0.9755     0.000203 REJECTED
+   EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_top1    D2_b5nb/mbr_top1 0.038636                 11.4                 53.5       -0.001061             0.4807     0.000018 REJECTED
+ EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__word_rover  D2_b5nb/word_rover 0.038636                 11.4                 53.5       -0.001061             0.4807     0.000037 REJECTED
+ EXP_001__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__char_rover  D2_b5nb/char_rover 0.036818                 11.4                 53.7       -0.002879             0.4334     0.000893 REJECTED
+
+######## executing code cell 14: # Cell 14 — error forensics: champion vs baseline (where did the change help / hurt?)
+CHAMPION: ROAD_work_tiny_q25__D2_b5nb+mbr
+  ops: {'word_replace': 15, 'word_delete': 97, 'char_replace': 326, 'char_delete': 186, 'char_insert': 12}
+  word_sub_classes: {'3+char': 15}
+  word_sub: [('somme -> 的带领下ounderชัยsafeounderชัยsafeounderชัยsafe', 1), ('Gent -> 的带领下ounderชัยsafeounderชัยsafeounderชัยsafe', 1), ('shall -> ounderชัยTabControl', 1), ('Come -> chicas的带领下ounderชัย⋅ounderชัย', 1), ('bill -> 的带领下ounderชัยsafeounderชัยsafeounderชัย', 1), ('beareing -> משמעות', 1), ('S:^t -> ounderชัย⋅ounderชัย⋅ounderชัย⋅ounder', 1), ('whereon -> 的带领下ounderชัย脱发', 1), ('I -> iphone的带领下ounderชัย甜蜜ounder', 1), ('Barbados- -> 的带领下ounderชัยsafeounderชัยsafeounderชัย', 1), ('16th -> משמעות', 1), ('man -> 的带领下ounderชัยsafeounderชัยsafeounderชัย', 1), ('servant -> משמעות', 1), ('& -> 的带领下ounderชัยsafeounderชัยsafeounderชัยsafe', 1), ('often -> 的带领下ounderชัยsafeounderชัยsafeounderชัยsafe', 1)]
+  word_del: [('the', 5), ('and', 5), ('of', 4), ('good', 2), ('in', 2), ('one', 2), ('ye', 2), ('date', 2), ('I', 2), ('prsents', 2), ('all', 2), ('that', 2), ('twelve', 1), ('thousand', 1), ('pounds', 1), ('Tobaccoe', 1), ('well', 1), ('made', 1), ('am', 1), ('become', 1)]
+  word_ins: []
+  char_sub: [("' '->'r'", 8), ("' '->'ช'", 6), ("' '->'u'", 6), ("' '->'n'", 5), ("'e'->'ั'", 5), ("' '->'ย'", 5), ("' '->'e'", 5), ("' '->'o'", 5), ("' '->'d'", 5), ("'n'->'ย'", 4), ("'t'->'ย'", 4), ("'a'->'ั'", 4), ("'f'->'u'", 3), ("'t'->'d'", 3), ("'l'->'r'", 3), ("'n'->'f'", 3), ("'d'->'e'", 3), ("'a'->'n'", 3), ("'b'->'d'", 3), ("'t'->'f'", 3)]
+  char_del: [("' '", 37), ("'e'", 20), ("'s'", 12), ("'t'", 11), ("'a'", 11), ("'o'", 10), ("'h'", 9), ("'p'", 9), ("'l'", 9), ("'d'", 8), ("'i'", 8), ("'c'", 4), ("'m'", 4), ("'b'", 4), ("'n'", 4), ("'y'", 4), ("'g'", 3), ("'v'", 3), ("'w'", 2), ("'T'", 2)]
+  char_ins: [("'e'", 2), ("'ช'", 2), ("'o'", 1), ("'c'", 1), ("'的'", 1), ("'带'", 1), ("'领'", 1), ("'下'", 1), ("'u'", 1), ("'d'", 1)]
+
+champion vs baseline: {'delta': 0.017272727272727294, 'ci95_lo': 0.007272727272727297, 'ci95_hi': 0.0290909090909091, 'p_better': 0.9999, 'improved': 8, 'worsened': 1, 'word_edits_saved': 0, 'char_edits_saved': 19}
+  delta by tall: {'0': 0.01717, '1': 0.01818}
+  delta by len: {'50-69': 0.02121, '70+': 0.01364, '<50': 0.00909}
+
+  lines most WORSENED by the champion:
+   9bVFZcBcbFr8yg1r | GT: man servant named Howlett one boy called
+      base: פשוט�.gcasetBackground né OTintéตอนนี้펠ük
+      new : 的带领下ounderชัยsafeounderชัยsafeounderชัย משמעות
+
+  loss share of worst 2% lines: 0.145
+
+DRY RUN COMPLETE in 180s
+   fold0_val_ids.csv
+   log_history__ROAD_work_tiny_q25.csv
+   log_history__ROAD_work_tiny_q3.csv
+   qwen-vl-ocr
+   submission.csv
+   submission_source.json
+   trial_configs
+   trial_predictions
+   trial_results.csv
+Traceback (most recent call last):
+  File "D:\HANAFY\ROAD\work\dryrun_notebook.py", line 62, in <module>
+    print(open(f"{OUT}/submission.csv").read()[:400])
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.13_3.13.3824.0_x64__qbz5n2kfra8p0\Lib\encodings\cp1252.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x8f in position 156: character maps to <undefined>
+
+real	3m2.177s
+user	0m0.000s
+sys	0m0.046s

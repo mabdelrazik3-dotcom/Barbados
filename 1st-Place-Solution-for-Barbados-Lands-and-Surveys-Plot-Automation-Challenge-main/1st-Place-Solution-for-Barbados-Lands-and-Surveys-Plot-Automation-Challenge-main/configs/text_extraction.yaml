@@ -1,0 +1,22 @@
+qwen3vl8b:
+  repo_id: "unsloth/Qwen3-VL-8B-Instruct-unsloth-bnb-4bit"
+  image_size: 1024
+
+qwen3vl32b:
+  repo_id: "Qwen/Qwen3-VL-30B-A3B-Thinking"
+  image_size: 1024
+
+gemma327b:
+  repo_id: "unsloth/gemma-3-27b-it-bnb-4bit"
+  image_size: 896
+  max_length: 34048
+  seed: 2025
+  training_args:
+    batch_size: 1
+    max_grad_norm: 0.3
+    warmup_ratio: 0.10
+    learning_rate: 0.0004
+    weight_decay: 0.05
+    lr_scheduler_type: "cosine"
+    max_steps: 30
+    neftune_noise_alpha: 10

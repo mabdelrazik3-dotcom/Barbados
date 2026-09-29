@@ -1,0 +1,2737 @@
+{
+ "n_labels": 4098,
+ "raw_leading_trailing_ws": 98,
+ "raw_double_space": 55,
+ "raw_newline": 0,
+ "raw_tab": 0,
+ "exact_duplicate_labels": 23,
+ "unique_labels": 4085,
+ "n_distinct_chars": 81,
+ "total_chars": 255049,
+ "char_classes": {
+  "upper": [
+   9004,
+   0.0353
+  ],
+  "lower": [
+   199561,
+   0.7824
+  ],
+  "space": [
+   42111,
+   0.1651
+  ],
+  "punct/symbol": [
+   3471,
+   0.0136
+  ],
+  "digit": [
+   902,
+   0.0035
+  ]
+ },
+ "non_ascii_chars": {},
+ "rare_chars_lt20": {
+  "Y": 16,
+  "U": 11,
+  "+": 6,
+  "*": 3,
+  "|": 1,
+  "\"": 18,
+  "Q": 4,
+  "\\": 1,
+  "#": 2,
+  "?": 2
+ },
+ "examples_rare": {
+  "Y": [
+   "of February in the Year of our Lord God one thousand six hundred sixty",
+   "This done and protested the day and Year aforesaid",
+   "Slaues viz^t eight men negroes named old mingo, Young Mingo-"
+  ],
+  "U": [
+   "Intr Ut Supra -Signed by- Gyles Jenkins -",
+   "Intr Ultimo Die unto Leonard Dowden at tene days sight of the sd bill of Exchange and",
+   "y.^e prebargained premises, and also ^all Estate right Tytle Interest, Use"
+  ],
+  "+": [
+   "maner of thing +things whatsoever now thereon growinge + being or any",
+   "whereon I lived and together with all liberties easmt^s pfitts + comodities",
+   "1647 Willm Whitaker of the Island Barbados Gent + Neale Gillaspay of"
+  ],
+  "*": [
+   "*lynes adjoyneing on John Lawrensons plantacon and the foot - lyne upon the *llyle and",
+   "pmisses . and appurtnances to him the said John Tobin* his heires"
+  ],
+  "|": [
+   "Junii 21st 1644| To all Christian people to whome theise pnts shall come greetinge"
+  ],
+  "\"": [
+   "lett or sett ~over~ the said plantac\"on or the stocke or appurtenance bought untill",
+   "the plantac\"on of Wm: Land all windward and to the Gulle",
+   "M^r\" Richard Glascocke made oath before me the 4^th day of February"
+  ],
+  "Q": [
+   "accons, Suite, or Suites, Debts, Judgets , Quare",
+   "As alsoe for & in consideracon of a comptent and Quantitie of mchantable",
+   "difference or by cause of M^r John Quarless his from the begininge"
+  ],
+  "\\": [
+   "planters all\\ that the plantacon where the said Comme Nelane and Patricke"
+  ],
+  "#": [
+   "# 8 Coppers with 1930^lles 10 ladles basons and scumers",
+   "# 1 vice 2 holdfast 2 frees and 2 hatchets"
+  ],
+  "?": [
+   "To all Xpian people to whom these presents shall come, David Robertson?",
+   "Attorney and the Authoritye thereby given is to be force (and vertue?)"
+  ]
+ },
+ "chars_per_line": {
+  "min": 36.0,
+  "p1": 40.0,
+  "p5": 43.0,
+  "p25": 52.0,
+  "p50": 62.0,
+  "p75": 71.0,
+  "p95": 85.0,
+  "p99": 93.0,
+  "max": 120.0,
+  "mean": 62.23743289409468
+ },
+ "words_per_line": {
+  "min": 4.0,
+  "p1": 6.0,
+  "p5": 7.0,
+  "p25": 9.0,
+  "p50": 11.0,
+  "p75": 13.0,
+  "p95": 16.0,
+  "p99": 18.0,
+  "max": 22.0,
+  "mean": 11.275988286969254
+ },
+ "chars_per_word": {
+  "min": 1.0,
+  "p1": 1.0,
+  "p5": 2.0,
+  "p25": 3.0,
+  "p50": 4.0,
+  "p75": 6.0,
+  "p95": 9.0,
+  "p99": 11.0,
+  "max": 17.0,
+  "mean": 4.6081499275033
+ },
+ "lines_le_2_words": 0,
+ "lines_1_word": 0,
+ "n_tokens": 46209,
+ "n_types": 6750,
+ "hapax_types": 4185,
+ "hapax_token_frac": 0.09056677270661559,
+ "top100_words": [
+  [
+   "the",
+   2619
+  ],
+  [
+   "and",
+   2577
+  ],
+  [
+   "of",
+   2279
+  ],
+  [
+   "or",
+   1061
+  ],
+  [
+   "to",
+   933
+  ],
+  [
+   "&",
+   749
+  ],
+  [
+   "in",
+   727
+  ],
+  [
+   "said",
+   698
+  ],
+  [
+   "all",
+   528
+  ],
+  [
+   "by",
+   420
+  ],
+  [
+   "for",
+   418
+  ],
+  [
+   "his",
+   405
+  ],
+  [
+   "ye",
+   352
+  ],
+  [
+   "that",
+   307
+  ],
+  [
+   "unto",
+   290
+  ],
+  [
+   "my",
+   289
+  ],
+  [
+   "heires",
+   284
+  ],
+  [
+   "I",
+   279
+  ],
+  [
+   "Island",
+   252
+  ],
+  [
+   "any",
+   251
+  ],
+  [
+   "this",
+   243
+  ],
+  [
+   "shall",
+   233
+  ],
+  [
+   "have",
+   222
+  ],
+  [
+   "be",
+   220
+  ],
+  [
+   "assignes",
+   219
+  ],
+  [
+   "John",
+   208
+  ],
+  [
+   "day",
+   207
+  ],
+  [
+   "as",
+   205
+  ],
+  [
+   "with",
+   203
+  ],
+  [
+   "one",
+   193
+  ],
+  [
+   "other",
+   190
+  ],
+  [
+   "To",
+   183
+  ],
+  [
+   "these",
+   183
+  ],
+  [
+   "Thomas",
+   166
+  ],
+  [
+   "from",
+   164
+  ],
+  [
+   "land",
+   161
+  ],
+  [
+   "sd",
+   161
+  ],
+  [
+   "aforesaid",
+   148
+  ],
+  [
+   "them",
+   144
+  ],
+  [
+   "upon",
+   140
+  ],
+  [
+   "me",
+   138
+  ],
+  [
+   "pounds",
+   137
+  ],
+  [
+   "doe",
+   135
+  ],
+  [
+   "thousand",
+   132
+  ],
+  [
+   "Barbados",
+   128
+  ],
+  [
+   "our",
+   126
+  ],
+  [
+   "hand",
+   124
+  ],
+  [
+   "-",
+   120
+  ],
+  [
+   "hundred",
+   119
+  ],
+  [
+   "same",
+   108
+  ],
+  [
+   "before",
+   107
+  ],
+  [
+   "hereunto",
+   105
+  ],
+  [
+   "good",
+   104
+  ],
+  [
+   "Said",
+   103
+  ],
+  [
+   "on",
+   101
+  ],
+  [
+   "their",
+   101
+  ],
+  [
+   "a",
+   101
+  ],
+  [
+   "acres",
+   99
+  ],
+  [
+   "presents",
+   97
+  ],
+  [
+   "made",
+   97
+  ],
+  [
+   "people",
+   94
+  ],
+  [
+   "is",
+   94
+  ],
+  [
+   "come",
+   93
+  ],
+  [
+   "Lord",
+   92
+  ],
+  [
+   "him",
+   92
+  ],
+  [
+   "Richard",
+   91
+  ],
+  [
+   ",",
+   88
+  ],
+  [
+   "God",
+   87
+  ],
+  [
+   "whome",
+   86
+  ],
+  [
+   "In",
+   85
+  ],
+  [
+   "above",
+   85
+  ],
+  [
+   "whereof",
+   85
+  ],
+  [
+   "And",
+   84
+  ],
+  [
+   "being",
+   83
+  ],
+  [
+   "thereof",
+   80
+  ],
+  [
+   "William",
+   80
+  ],
+  [
+   "bargained",
+   77
+  ],
+  [
+   "two",
+   76
+  ],
+  [
+   "at",
+   76
+  ],
+  [
+   "yeare",
+   74
+  ],
+  [
+   "now",
+   72
+  ],
+  [
+   "plantacon",
+   71
+  ],
+  [
+   "it",
+   70
+  ],
+  [
+   "Robert",
+   70
+  ],
+  [
+   "granted",
+   69
+  ],
+  [
+   "seale",
+   68
+  ],
+  [
+   "every",
+   68
+  ],
+  [
+   "sett",
+   67
+  ],
+  [
+   "exers",
+   67
+  ],
+  [
+   "right",
+   65
+  ],
+  [
+   "James",
+   64
+  ],
+  [
+   "grant",
+   63
+  ],
+  [
+   "well",
+   61
+  ],
+  [
+   "more",
+   61
+  ],
+  [
+   "paid",
+   61
+  ],
+  [
+   "us",
+   60
+  ],
+  [
+   "whatsoever",
+   60
+  ],
+  [
+   "there",
+   59
+  ],
+  [
+   "under",
+   59
+  ],
+  [
+   "Christian",
+   58
+  ]
+ ],
+ "n_types_multi_casing_ge10": 359,
+ "casing_examples": {
+  "and": {
+   "and": 2577,
+   "And": 84
+  },
+  "the": {
+   "the": 2619,
+   "The": 19
+  },
+  "of": {
+   "of": 2279,
+   "Of": 1
+  },
+  "to": {
+   "To": 183,
+   "to": 933
+  },
+  "or": {
+   "or": 1061,
+   "Or": 3
+  },
+  "in": {
+   "In": 85,
+   "in": 727
+  },
+  "said": {
+   "said": 698,
+   "Said": 103
+  },
+  "all": {
+   "all": 528,
+   "All": 8
+  },
+  "by": {
+   "By": 25,
+   "by": 420
+  },
+  "for": {
+   "for": 418,
+   "For": 2
+  },
+  "his": {
+   "his": 405,
+   "His": 5
+  },
+  "ye": {
+   "ye": 352,
+   "Ye": 1
+  },
+  "that": {
+   "that": 307,
+   "That": 19
+  },
+  "heires": {
+   "heires": 284,
+   "Heires": 8
+  },
+  "unto": {
+   "unto": 290,
+   "Unto": 1
+  },
+  "this": {
+   "this": 243,
+   "This": 40
+  },
+  "i": {
+   "I": 279,
+   "i": 3
+  },
+  "have": {
+   "have": 222,
+   "Have": 47
+  },
+  "assignes": {
+   "assignes": 219,
+   "Assignes": 42
+  },
+  "island": {
+   "Island": 252,
+   "island": 5
+  },
+  "shall": {
+   "shall": 233,
+   "Shall": 18
+  },
+  "be": {
+   "be": 220,
+   "Be": 8
+  },
+  "day": {
+   "day": 207,
+   "Day": 12
+  },
+  "land": {
+   "land": 161,
+   "Land": 56
+  },
+  "as": {
+   "as": 205,
+   "As": 7
+  },
+  "one": {
+   "one": 193,
+   "One": 16
+  },
+  "with": {
+   "with": 203,
+   "With": 1
+  },
+  "these": {
+   "these": 183,
+   "These": 7
+  },
+  "thomas": {
+   "Thomas": 166,
+   "thomas": 1
+  },
+  "from": {
+   "from": 164,
+   "From": 1
+  },
+  "sd": {
+   "sd": 161,
+   "Sd": 2
+  },
+  "aforesaid": {
+   "aforesaid": 148,
+   "aforeSaid": 1
+  },
+  "them": {
+   "them": 144,
+   "Them": 1
+  },
+  "pounds": {
+   "pounds": 137,
+   "Pounds": 5
+  },
+  "doe": {
+   "doe": 135,
+   "Doe": 7
+  },
+  "upon": {
+   "upon": 140,
+   "Upon": 2
+  },
+  "thousand": {
+   "thousand": 132,
+   "Thousand": 9
+  },
+  "me": {
+   "me": 138,
+   "Me": 1
+  },
+  "our": {
+   "our": 126,
+   "Our": 11
+  },
+  "hundred": {
+   "hundred": 119,
+   "Hundred": 10
+  }
+ },
+ "capitalised_word_frac": 0.19364193122551884,
+ "line_initial_cap_frac": 0.2867252318204002,
+ "word_punct_patterns": [
+  [
+   "",
+   43113
+  ],
+  [
+   "&",
+   754
+  ],
+  [
+   "^",
+   609
+  ],
+  [
+   ",",
+   606
+  ],
+  [
+   ":",
+   290
+  ],
+  [
+   "-",
+   167
+  ],
+  [
+   ":^",
+   134
+  ],
+  [
+   ".",
+   111
+  ],
+  [
+   "~",
+   62
+  ],
+  [
+   ".^",
+   47
+  ],
+  [
+   "'",
+   36
+  ],
+  [
+   "^.",
+   35
+  ],
+  [
+   "(",
+   33
+  ],
+  [
+   "^:",
+   33
+  ],
+  [
+   ";",
+   25
+  ],
+  [
+   "~~",
+   24
+  ],
+  [
+   ")",
+   22
+  ],
+  [
+   "_",
+   19
+  ],
+  [
+   "\"",
+   17
+  ],
+  [
+   "___",
+   8
+  ],
+  [
+   "()",
+   7
+  ],
+  [
+   "+",
+   6
+  ],
+  [
+   "^,,",
+   6
+  ],
+  [
+   ":-",
+   4
+  ],
+  [
+   "*",
+   3
+  ],
+  [
+   "--",
+   2
+  ],
+  [
+   ":,",
+   2
+  ],
+  [
+   "#",
+   2
+  ],
+  [
+   "__",
+   2
+  ],
+  [
+   ",,",
+   2
+  ],
+  [
+   "~~~~~~~",
+   2
+  ],
+  [
+   "...",
+   2
+  ],
+  [
+   "|",
+   1
+  ],
+  [
+   "~~~",
+   1
+  ],
+  [
+   ",^",
+   1
+  ],
+  [
+   "''",
+   1
+  ],
+  [
+   "....",
+   1
+  ],
+  [
+   "^\"",
+   1
+  ],
+  [
+   "^..",
+   1
+  ],
+  [
+   ".&",
+   1
+  ]
+ ],
+ "markup": {
+  "caret": {
+   "lines": 688,
+   "occ": 872,
+   "ex": [
+    "omitt Suffered or done ^by the said John Bawdon",
+    "omitt Suffered or Done ^by the Said John Bawdon",
+    "or Meant mentioned or Intended to be Granted & Conveyed unto the s^.d Benj"
+   ]
+  },
+  "colon": {
+   "lines": 370,
+   "occ": 470,
+   "ex": [
+    "I John More doe assign & sett ovr: all my whole right title & interest",
+    "and Impositions whatsoever. And the Said Henry: Hutchin",
+    "Exec:^rs Adm:^rs and assignes, That if the Said Richard"
+   ]
+  },
+  "ampersand": {
+   "lines": 562,
+   "occ": 757,
+   "ex": [
+    "I John More doe assign & sett ovr: all my whole right title & interest",
+    "peny to me oweinge as aforesd & evy or any pte thereof as to my sd",
+    "Mcht & Nathan Gragly of Barbados mchant Ten acres of land lying & being in"
+   ]
+  },
+  "question": {
+   "lines": 2,
+   "occ": 2,
+   "ex": [
+    "To all Xpian people to whom these presents shall come, David Robertson?",
+    "Attorney and the Authoritye thereby given is to be force (and vertue?)"
+   ]
+  },
+  "lbracket": {
+   "lines": 0,
+   "occ": 0,
+   "ex": []
+  },
+  "rbracket": {
+   "lines": 0,
+   "occ": 0,
+   "ex": []
+  },
+  "lparen": {
+   "lines": 39,
+   "occ": 40,
+   "ex": [
+    "French ship call the St. Robert of Rochell in France (where name the said appearer",
+    "French ship call the St. Robert of Rochill in France (where name the said Appearer",
+    "(Good and marchantable) was interlyned & ye word day before the sealinge hereof"
+   ]
+  },
+  "hyphen": {
+   "lines": 163,
+   "occ": 184,
+   "ex": [
+    "age portion to and with the Said Elizabeth Vaughan Now in -",
+    "in habitance in feesimple, And hath in himself good -",
+    "Intr Ut Supra -Signed by- Gyles Jenkins -"
+   ]
+  },
+  "double_hyphen": {
+   "lines": 4,
+   "occ": 6,
+   "ex": [
+    "1681 Murphey Marcous of the Parrish of St.Phillips in the -- Island aforesaid sends greeting in our Lord God everlasting",
+    "Annoq Dom: 1641------ Whereas the above bound en John Greenhill",
+    "Monday to-- now is ouer England Scotland & ffrance & Ireland"
+   ]
+  },
+  "apostrophe": {
+   "lines": 35,
+   "occ": 38,
+   "ex": [
+    "nowe ridinge att ankore in the Barbados & by God's",
+    "and pte in the pish of Andrews Overhills in the Island afores'd abutting and",
+    "Thomas Austin and John Woodcocke doe binde us or'' heires and assignes"
+   ]
+  },
+  "slash": {
+   "lines": 0,
+   "occ": 0,
+   "ex": []
+  },
+  "period": {
+   "lines": 175,
+   "occ": 211,
+   "ex": [
+    "French ship call the St. Robert of Rochell in France (where name the said appearer",
+    "French ship call the St. Robert of Rochill in France (where name the said Appearer",
+    "and Impositions whatsoever. And the Said Henry: Hutchin"
+   ]
+  },
+  "comma": {
+   "lines": 387,
+   "occ": 628,
+   "ex": [
+    "and for Euer guift claime, and Confirme unto my Said Son",
+    "Maurice Morgan , John Earle , John Seberry",
+    "by these presents, that all and singuler the premises, now are and soe shall forever"
+   ]
+  },
+  "semicolon": {
+   "lines": 23,
+   "occ": 25,
+   "ex": [
+    "adm^rs and either of us, and eother of our heyres Xrs; to and wit",
+    "March; 1674 Lord Charles the second by the Grace of God of England,",
+    "This Indenture; made the 25^th day of September"
+   ]
+  },
+  "dquote": {
+   "lines": 16,
+   "occ": 18,
+   "ex": [
+    "lett or sett ~over~ the said plantac\"on or the stocke or appurtenance bought untill",
+    "the plantac\"on of Wm: Land all windward and to the Gulle",
+    "M^r\" Richard Glascocke made oath before me the 4^th day of February"
+   ]
+  },
+  "digit": {
+   "lines": 217,
+   "occ": 902,
+   "ex": [
+    "This 25:^th day of November 1674 made oath",
+    "of Febuary 1641 - Sealed and delivered in the presence",
+    "like cotton wool Ano 1642. And three thousand first day of June after And lastly three"
+   ]
+  },
+  "ff_initial": {
+   "lines": 60,
+   "occ": 63,
+   "ex": [
+    "Vertu^e of ffull power and Authority unto me granted from his most Sacred",
+    "date at Westminster the fower and twentieth day of ffeb^ry",
+    "foure thousand and ffive hundred pounds of Lawfu"
+   ]
+  },
+  "ye": {
+   "lines": 311,
+   "occ": 352,
+   "ex": [
+    "To all Christian people to whome this psent writinge shall come know ye yt I John",
+    "apptening unto him ye sd Benjamin Andrew his heires Exrs admrs or assignes for evr",
+    "of them ye said Christopher Lyne and Elizabeth his wife"
+   ]
+  },
+  "yt": {
+   "lines": 41,
+   "occ": 41,
+   "ex": [
+    "To all Christian people to whome this psent writinge shall come know ye yt I John",
+    "Greetinge in Our Lord God Evlastinge Know ye yt I the",
+    "their heires & assignes & evy of them yt they the sd Stephen Tho James & Martin Noell"
+   ]
+  },
+  "wch": {
+   "lines": 29,
+   "occ": 30,
+   "ex": [
+    "wch is due to us or either of us from Thomas Wall Willm Bradshaw and Wm Wilcocks",
+    "and Jon Robinson windward and butting upon the land wch was",
+    "of this above menconed plantacon being yt pte wch lyeth"
+   ]
+  }
+ },
+ "caret_words_top": [
+  [
+   "W^m",
+   51
+  ],
+  [
+   "y^e",
+   39
+  ],
+  [
+   "M^r",
+   35
+  ],
+  [
+   "Adm^rs",
+   33
+  ],
+  [
+   "w^th",
+   26
+  ],
+  [
+   "w^ch",
+   24
+  ],
+  [
+   "w^tsoever",
+   23
+  ],
+  [
+   "Ex^rs",
+   19
+  ],
+  [
+   "s^d",
+   17
+  ],
+  [
+   "S^t",
+   15
+  ],
+  [
+   "adm^rs",
+   14
+  ],
+  [
+   "Exec:^rs",
+   9
+  ],
+  [
+   "Adm:^rs",
+   9
+  ],
+  [
+   "p^rsents",
+   9
+  ],
+  [
+   "S:^d",
+   9
+  ],
+  [
+   "S:^t",
+   8
+  ],
+  [
+   "Exec^rs",
+   8
+  ],
+  [
+   "Executo^rs",
+   7
+  ],
+  [
+   "y.^e",
+   7
+  ],
+  [
+   "p^rsent",
+   7
+  ],
+  [
+   "Esq^r",
+   7
+  ],
+  [
+   "o^r",
+   6
+  ],
+  [
+   "und:^r",
+   6
+  ],
+  [
+   "24^th",
+   6
+  ],
+  [
+   "m^r",
+   5
+  ],
+  [
+   "25^th",
+   5
+  ],
+  [
+   "Executo:^rs",
+   5
+  ],
+  [
+   "15^th",
+   5
+  ],
+  [
+   "s:^d",
+   5
+  ],
+  [
+   "28^th",
+   5
+  ],
+  [
+   "M^r.",
+   5
+  ],
+  [
+   "p^rmisses",
+   4
+  ],
+  [
+   "17^th",
+   4
+  ],
+  [
+   "w:^ch",
+   4
+  ],
+  [
+   "Capt^n",
+   4
+  ],
+  [
+   "y^t",
+   4
+  ],
+  [
+   "S^t.",
+   4
+  ],
+  [
+   "exec^rs",
+   4
+  ],
+  [
+   "Esq:^r",
+   4
+  ],
+  [
+   "adm:^rs",
+   4
+  ]
+ ],
+ "colon_words_top": [
+  [
+   ":",
+   37
+  ],
+  [
+   "Tho:",
+   14
+  ],
+  [
+   "Exec:^rs",
+   9
+  ],
+  [
+   "Adm:^rs",
+   9
+  ],
+  [
+   "S:^d",
+   9
+  ],
+  [
+   "S:^t",
+   8
+  ],
+  [
+   "Captn:",
+   7
+  ],
+  [
+   "Capt:",
+   7
+  ],
+  [
+   "und:^r",
+   6
+  ],
+  [
+   "John:",
+   6
+  ],
+  [
+   "Thomas:",
+   5
+  ],
+  [
+   "Executo:^rs",
+   5
+  ],
+  [
+   "s:^d",
+   5
+  ],
+  [
+   "Gent:",
+   5
+  ],
+  [
+   "Jon:",
+   5
+  ],
+  [
+   "whatsovr:",
+   4
+  ],
+  [
+   "w:^ch",
+   4
+  ],
+  [
+   "Rich:",
+   4
+  ],
+  [
+   "Esq:^r",
+   4
+  ],
+  [
+   "adm:^rs",
+   4
+  ],
+  [
+   "Robt:",
+   4
+  ],
+  [
+   "Willm:",
+   3
+  ],
+  [
+   "Sterl:",
+   3
+  ],
+  [
+   "Dom:",
+   3
+  ],
+  [
+   "Ano:",
+   3
+  ],
+  [
+   "w:^th",
+   3
+  ],
+  [
+   "S:^r",
+   3
+  ],
+  [
+   "paymt:",
+   3
+  ],
+  [
+   "forevr:",
+   3
+  ],
+  [
+   "Margrett:",
+   3
+  ]
+ ],
+ "ff_words_top": [
+  [
+   "ffive",
+   6
+  ],
+  [
+   "ffebruary",
+   6
+  ],
+  [
+   "ffrance",
+   5
+  ],
+  [
+   "ffor",
+   4
+  ],
+  [
+   "ffrancis",
+   4
+  ],
+  [
+   "fforty",
+   3
+  ],
+  [
+   "Ffrance",
+   2
+  ],
+  [
+   "ffather",
+   2
+  ],
+  [
+   "fford",
+   2
+  ],
+  [
+   "ffa",
+   2
+  ],
+  [
+   "ffirst",
+   2
+  ],
+  [
+   "fformer",
+   2
+  ],
+  [
+   "FFive",
+   1
+  ],
+  [
+   "ffull",
+   1
+  ],
+  [
+   "ffeb^ry",
+   1
+  ],
+  [
+   "ffacto:^r",
+   1
+  ],
+  [
+   "ffarrell",
+   1
+  ],
+  [
+   "ffully",
+   1
+  ],
+  [
+   "Ffifteenth",
+   1
+  ],
+  [
+   "ffeast",
+   1
+  ]
+ ],
+ "top_bigrams": [
+  [
+   "the said",
+   565
+  ],
+  [
+   "of the",
+   434
+  ],
+  [
+   "in the",
+   284
+  ],
+  [
+   "day of",
+   155
+  ],
+  [
+   "to the",
+   155
+  ],
+  [
+   "his heires",
+   138
+  ],
+  [
+   "to be",
+   118
+  ],
+  [
+   "the Island",
+   103
+  ],
+  [
+   "To all",
+   102
+  ],
+  [
+   "or any",
+   101
+  ],
+  [
+   "the sd",
+   97
+  ],
+  [
+   "unto the",
+   91
+  ],
+  [
+   "pounds of",
+   90
+  ],
+  [
+   "and assignes",
+   89
+  ],
+  [
+   "of land",
+   86
+  ],
+  [
+   "of Barbados",
+   86
+  ],
+  [
+   "the same",
+   86
+  ],
+  [
+   "by these",
+   85
+  ],
+  [
+   "to whome",
+   81
+  ],
+  [
+   "shall come",
+   80
+  ],
+  [
+   "the Said",
+   79
+  ],
+  [
+   "upon the",
+   79
+  ],
+  [
+   "Island of",
+   78
+  ],
+  [
+   "and to",
+   78
+  ],
+  [
+   "people to",
+   76
+  ],
+  [
+   "by the",
+   75
+  ],
+  [
+   "my hand",
+   75
+  ],
+  [
+   "these presents",
+   74
+  ],
+  [
+   "for the",
+   74
+  ],
+  [
+   "of them",
+   71
+  ],
+  [
+   "I the",
+   70
+  ],
+  [
+   "that I",
+   67
+  ],
+  [
+   "or assignes",
+   67
+  ],
+  [
+   "acres of",
+   65
+  ],
+  [
+   "all and",
+   60
+  ],
+  [
+   "with the",
+   60
+  ],
+  [
+   "on the",
+   58
+  ],
+  [
+   "my heires",
+   55
+  ],
+  [
+   "all Christian",
+   54
+  ],
+  [
+   "and in",
+   54
+  ]
+ ],
+ "top_trigrams": [
+  [
+   "of the said",
+   83
+  ],
+  [
+   "Island of Barbados",
+   68
+  ],
+  [
+   "of the Island",
+   63
+  ],
+  [
+   "people to whome",
+   62
+  ],
+  [
+   "the Island of",
+   50
+  ],
+  [
+   "acres of land",
+   47
+  ],
+  [
+   "I the said",
+   45
+  ],
+  [
+   "thousand pounds of",
+   44
+  ],
+  [
+   "unto the said",
+   44
+  ],
+  [
+   "hand and seale",
+   44
+  ],
+  [
+   "To all Christian",
+   42
+  ],
+  [
+   "all Christian people",
+   40
+  ],
+  [
+   "the said Thomas",
+   40
+  ],
+  [
+   "have and to",
+   39
+  ],
+  [
+   "by these presents",
+   38
+  ],
+  [
+   "the said John",
+   37
+  ],
+  [
+   "all men by",
+   37
+  ],
+  [
+   "my hand and",
+   36
+  ],
+  [
+   "To have and",
+   35
+  ],
+  [
+   "To all Xpian",
+   34
+  ],
+  [
+   "our Lord God",
+   32
+  ],
+  [
+   "to the said",
+   32
+  ],
+  [
+   "Christian people to",
+   30
+  ],
+  [
+   "of our Lord",
+   29
+  ],
+  [
+   "sett my hand",
+   29
+  ],
+  [
+   "and delivered in",
+   28
+  ],
+  [
+   "to whome these",
+   28
+  ],
+  [
+   "In witness whereof",
+   28
+  ],
+  [
+   "admistrs and assignes",
+   28
+  ],
+  [
+   "all Xpian people",
+   28
+  ],
+  [
+   "delivered in the",
+   27
+  ],
+  [
+   "or any of",
+   27
+  ],
+  [
+   "in the Island",
+   27
+  ],
+  [
+   "Xpian people to",
+   27
+  ],
+  [
+   "pounds of good",
+   27
+  ],
+  [
+   "I have hereunto",
+   26
+  ],
+  [
+   "the said Richard",
+   26
+  ],
+  [
+   "hundred pounds of",
+   26
+  ],
+  [
+   "of this Island",
+   26
+  ],
+  [
+   "have hereunto sett",
+   25
+  ]
+ ],
+ "top_4grams": [
+  [
+   "the Island of Barbados",
+   43
+  ],
+  [
+   "my hand and seale",
+   34
+  ],
+  [
+   "To have and to",
+   33
+  ],
+  [
+   "of the Island of",
+   32
+  ],
+  [
+   "To all Christian people",
+   29
+  ],
+  [
+   "all Christian people to",
+   29
+  ],
+  [
+   "To all Xpian people",
+   28
+  ],
+  [
+   "all Xpian people to",
+   27
+  ],
+  [
+   "Christian people to whome",
+   26
+  ],
+  [
+   "and delivered in the",
+   25
+  ],
+  [
+   "hereunto sett my hand",
+   23
+  ],
+  [
+   "people to whome these",
+   22
+  ],
+  [
+   "Xpian people to whome",
+   22
+  ],
+  [
+   "hand and seale this",
+   21
+  ],
+  [
+   "have and to hould",
+   21
+  ],
+  [
+   "In witness whereof I",
+   20
+  ],
+  [
+   "whereof I have hereunto",
+   20
+  ],
+  [
+   "all men by these",
+   20
+  ],
+  [
+   "Sealed and delivered in",
+   19
+  ],
+  [
+   "have hereunto sett my",
+   19
+  ],
+  [
+   "sett my hand and",
+   19
+  ],
+  [
+   "in our Lord God",
+   18
+  ],
+  [
+   "have and to hold",
+   17
+  ],
+  [
+   "in the prsence of",
+   16
+  ],
+  [
+   "to and with the",
+   16
+  ],
+  [
+   "exers admistrs and assignes",
+   16
+  ],
+  [
+   "I have hereunto sett",
+   16
+  ],
+  [
+   "people to whome theis",
+   16
+  ],
+  [
+   "heires exers admistrs and",
+   16
+  ],
+  [
+   "that I the said",
+   16
+  ],
+  [
+   "witness whereof I have",
+   15
+  ],
+  [
+   "or any of them",
+   15
+  ],
+  [
+   "in the Island of",
+   15
+  ],
+  [
+   "other pson or psons",
+   15
+  ],
+  [
+   "in the yeare of",
+   15
+  ],
+  [
+   "yeare of our Lord",
+   15
+  ],
+  [
+   "Have given granted bargained",
+   15
+  ],
+  [
+   "thousand pounds of good",
+   14
+  ],
+  [
+   "of and from all",
+   14
+  ],
+  [
+   "them or any of",
+   14
+  ]
+ ],
+ "top_char_bigrams": [
+  [
+   "e ",
+   8779
+  ],
+  [
+   "d ",
+   6714
+  ],
+  [
+   "th",
+   5836
+  ],
+  [
+   " t",
+   5589
+  ],
+  [
+   "an",
+   5232
+  ],
+  [
+   "s ",
+   5202
+  ],
+  [
+   " a",
+   5193
+  ],
+  [
+   "he",
+   5064
+  ],
+  [
+   "nd",
+   4553
+  ],
+  [
+   " o",
+   3901
+  ],
+  [
+   "re",
+   3498
+  ],
+  [
+   "er",
+   3466
+  ],
+  [
+   "r ",
+   3263
+  ],
+  [
+   "es",
+   3169
+  ],
+  [
+   "or",
+   2907
+  ],
+  [
+   "in",
+   2801
+  ],
+  [
+   "of",
+   2650
+  ],
+  [
+   "n ",
+   2617
+  ],
+  [
+   "y ",
+   2510
+  ],
+  [
+   "f ",
+   2406
+  ],
+  [
+   " s",
+   2366
+  ],
+  [
+   "on",
+   2217
+  ],
+  [
+   "t ",
+   2212
+  ],
+  [
+   "nt",
+   2201
+  ],
+  [
+   "ll",
+   2108
+  ],
+  [
+   " h",
+   2018
+  ],
+  [
+   "to",
+   1996
+  ],
+  [
+   "en",
+   1941
+  ],
+  [
+   " p",
+   1923
+  ],
+  [
+   "ne",
+   1888
+  ],
+  [
+   "se",
+   1866
+  ],
+  [
+   "ar",
+   1787
+  ],
+  [
+   "o ",
+   1765
+  ],
+  [
+   "ha",
+   1759
+  ],
+  [
+   "is",
+   1672
+  ],
+  [
+   "te",
+   1635
+  ],
+  [
+   "al",
+   1606
+  ],
+  [
+   "ve",
+   1554
+  ],
+  [
+   "ed",
+   1541
+  ],
+  [
+   "l ",
+   1487
+  ]
+ ],
+ "template_4gram_coverage": {
+  "min": 0.0,
+  "p1": 0.0,
+  "p5": 0.0,
+  "p25": 0.0,
+  "p50": 0.0,
+  "p75": 0.4166666666666667,
+  "p95": 0.7777777777777778,
+  "p99": 1.0,
+  "max": 1.0,
+  "mean": 0.20653128792942899
+ },
+ "lines_template_cov_ge_0.5": 784,
+ "n_spelling_variant_pairs_ed1": 738,
+ "spelling_variant_examples": [
+  [
+   "said",
+   801,
+   "paid",
+   62
+  ],
+  [
+   "said",
+   801,
+   "saide",
+   20
+  ],
+  [
+   "said",
+   801,
+   "sayd",
+   6
+  ],
+  [
+   "that",
+   326,
+   "what",
+   12
+  ],
+  [
+   "heires",
+   292,
+   "heyres",
+   37
+  ],
+  [
+   "heires",
+   292,
+   "heirs",
+   26
+  ],
+  [
+   "unto",
+   291,
+   "into",
+   10
+  ],
+  [
+   "this",
+   283,
+   "theis",
+   50
+  ],
+  [
+   "this",
+   283,
+   "thise",
+   2
+  ],
+  [
+   "have",
+   269,
+   "haue",
+   4
+  ],
+  [
+   "have",
+   269,
+   "save",
+   3
+  ],
+  [
+   "have",
+   269,
+   "gave",
+   3
+  ],
+  [
+   "assignes",
+   261,
+   "assigne",
+   15
+  ],
+  [
+   "assignes",
+   261,
+   "assigns",
+   11
+  ],
+  [
+   "assignes",
+   261,
+   "assigned",
+   8
+  ],
+  [
+   "assignes",
+   261,
+   "assgnes",
+   2
+  ],
+  [
+   "island",
+   257,
+   "islands",
+   4
+  ],
+  [
+   "shall",
+   251,
+   "shal",
+   12
+  ],
+  [
+   "shall",
+   251,
+   "hall",
+   5
+  ],
+  [
+   "shall",
+   251,
+   "small",
+   4
+  ],
+  [
+   "land",
+   217,
+   "hand",
+   124
+  ],
+  [
+   "land",
+   217,
+   "lands",
+   57
+  ],
+  [
+   "land",
+   217,
+   "layd",
+   3
+  ],
+  [
+   "land",
+   217,
+   "lane",
+   3
+  ],
+  [
+   "john",
+   208,
+   "johns",
+   7
+  ],
+  [
+   "these",
+   190,
+   "there",
+   59
+  ],
+  [
+   "these",
+   190,
+   "theise",
+   25
+  ],
+  [
+   "these",
+   190,
+   "those",
+   6
+  ],
+  [
+   "these",
+   190,
+   "thiese",
+   4
+  ],
+  [
+   "these",
+   190,
+   "thise",
+   2
+  ],
+  [
+   "other",
+   190,
+   "others",
+   9
+  ],
+  [
+   "other",
+   190,
+   "othere",
+   2
+  ],
+  [
+   "thomas",
+   167,
+   "thoma",
+   3
+  ],
+  [
+   "them",
+   145,
+   "then",
+   46
+  ],
+  [
+   "them",
+   145,
+   "they",
+   28
+  ],
+  [
+   "pounds",
+   142,
+   "pound",
+   6
+  ],
+  [
+   "pounds",
+   142,
+   "bounds",
+   3
+  ],
+  [
+   "pounds",
+   142,
+   "ponds",
+   2
+  ],
+  [
+   "hand",
+   124,
+   "hands",
+   34
+  ],
+  [
+   "same",
+   124,
+   "sume",
+   44
+  ],
+  [
+   "same",
+   124,
+   "sale",
+   40
+  ],
+  [
+   "same",
+   124,
+   "some",
+   35
+  ],
+  [
+   "same",
+   124,
+   "name",
+   33
+  ],
+  [
+   "same",
+   124,
+   "save",
+   3
+  ],
+  [
+   "acres",
+   112,
+   "acre",
+   8
+  ],
+  [
+   "hereunto",
+   105,
+   "thereunto",
+   50
+  ],
+  [
+   "hereunto",
+   105,
+   "whereunto",
+   3
+  ],
+  [
+   "good",
+   105,
+   "goods",
+   50
+  ],
+  [
+   "good",
+   105,
+   "wood",
+   14
+  ],
+  [
+   "good",
+   105,
+   "rood",
+   2
+  ],
+  [
+   "their",
+   104,
+   "theire",
+   57
+  ],
+  [
+   "their",
+   104,
+   "theis",
+   50
+  ],
+  [
+   "their",
+   104,
+   "heir",
+   2
+  ],
+  [
+   "executors",
+   102,
+   "executrs",
+   3
+  ],
+  [
+   "executors",
+   102,
+   "executor",
+   3
+  ],
+  [
+   "executors",
+   102,
+   "exectors",
+   3
+  ],
+  [
+   "come",
+   100,
+   "some",
+   35
+  ],
+  [
+   "come",
+   100,
+   "cole",
+   4
+  ],
+  [
+   "come",
+   100,
+   "came",
+   2
+  ],
+  [
+   "presents",
+   98,
+   "prsents",
+   54
+  ]
+ ],
+ "nn_label_ratio": {
+  "min": 40.0,
+  "p1": 48.0,
+  "p5": 52.0,
+  "p25": 58.0,
+  "p50": 65.0,
+  "p75": 73.0,
+  "p95": 88.0,
+  "p99": 98.0,
+  "max": 100.0,
+  "mean": 66.42288921425086
+ },
+ "labels_with_nn_ratio_ge_100": 23,
+ "labels_with_nn_ratio_ge_95": 90,
+ "labels_with_nn_ratio_ge_90": 166,
+ "labels_with_nn_ratio_ge_80": 547,
+ "labels_with_nn_ratio_ge_70": 1405,
+ "n_label_pairs_ge90": 292,
+ "near_dup_label_examples": [
+  [
+   "uGI8F9Er0c5XwdnX",
+   "By this publique Act and Instrument of protest",
+   "Dqt2gc3V5RJqmLE5",
+   "By this publique Act and Instrument of protest",
+   100
+  ],
+  [
+   "uGI8F9Er0c5XwdnX",
+   "By this publique Act and Instrument of protest",
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   90
+  ],
+  [
+   "uGI8F9Er0c5XwdnX",
+   "By this publique Act and Instrument of protest",
+   "xHo3ICOLBnm5s7zD",
+   "By this publique act and Instrument of protest be",
+   95
+  ],
+  [
+   "uGI8F9Er0c5XwdnX",
+   "By this publique Act and Instrument of protest",
+   "vQVynWmEcBM6vPg2",
+   "By this publique Act and Instruments of protest be it",
+   93
+  ],
+  [
+   "uGI8F9Er0c5XwdnX",
+   "By this publique Act and Instrument of protest",
+   "K0I5shzXqoC7CcOP",
+   "By this public act and Instrument of protest Be",
+   90
+  ],
+  [
+   "Dqt2gc3V5RJqmLE5",
+   "By this publique Act and Instrument of protest",
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   90
+  ],
+  [
+   "Dqt2gc3V5RJqmLE5",
+   "By this publique Act and Instrument of protest",
+   "xHo3ICOLBnm5s7zD",
+   "By this publique act and Instrument of protest be",
+   95
+  ],
+  [
+   "Dqt2gc3V5RJqmLE5",
+   "By this publique Act and Instrument of protest",
+   "vQVynWmEcBM6vPg2",
+   "By this publique Act and Instruments of protest be it",
+   93
+  ],
+  [
+   "Dqt2gc3V5RJqmLE5",
+   "By this publique Act and Instrument of protest",
+   "K0I5shzXqoC7CcOP",
+   "By this public act and Instrument of protest Be",
+   90
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   100
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   94
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   92
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "JNm74xWqztzn0LIS",
+   "By this public act and Instrment of protest be it known",
+   99
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "iGkrEhHmbfIhCSLX",
+   "By this public act and Instrumt of protest Be it known unto",
+   92
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "nIn82gLotIW9KfJ5",
+   "By this publique act and Instrument of protest be it known",
+   96
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "TWcUdm9Ie0q3ymqi",
+   "By this public act and Instrument of protest be it Known &",
+   96
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "OOT3KVdDZMTYK9Bx",
+   "By this public act and instrumt of protest be it Known",
+   95
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "NwEJ0QMb2ouSSua6",
+   "By this publique Act and Instrument of protest, be it knowne",
+   93
+  ],
+  [
+   "eqF93vAKYa4aOeHr",
+   "By this public act and Instrument of protest be it known",
+   "25QaQd6DRUoZxXOB",
+   "By this public act and Instrument of protest be it knowne",
+   99
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   94
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   92
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "JNm74xWqztzn0LIS",
+   "By this public act and Instrment of protest be it known",
+   99
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "iGkrEhHmbfIhCSLX",
+   "By this public act and Instrumt of protest Be it known unto",
+   92
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "nIn82gLotIW9KfJ5",
+   "By this publique act and Instrument of protest be it known",
+   96
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "TWcUdm9Ie0q3ymqi",
+   "By this public act and Instrument of protest be it Known &",
+   96
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "OOT3KVdDZMTYK9Bx",
+   "By this public act and instrumt of protest be it Known",
+   95
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "NwEJ0QMb2ouSSua6",
+   "By this publique Act and Instrument of protest, be it knowne",
+   93
+  ],
+  [
+   "SEYEZ7fwp3MbYkkB",
+   "By this public act and Instrument of protest be it known",
+   "25QaQd6DRUoZxXOB",
+   "By this public act and Instrument of protest be it knowne",
+   99
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   98
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "JNm74xWqztzn0LIS",
+   "By this public act and Instrment of protest be it known",
+   93
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "nIn82gLotIW9KfJ5",
+   "By this publique act and Instrument of protest be it known",
+   91
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "TWcUdm9Ie0q3ymqi",
+   "By this public act and Instrument of protest be it Known &",
+   93
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "xHo3ICOLBnm5s7zD",
+   "By this publique act and Instrument of protest be",
+   93
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "vQVynWmEcBM6vPg2",
+   "By this publique Act and Instruments of protest be it",
+   93
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "OOT3KVdDZMTYK9Bx",
+   "By this public act and instrumt of protest be it Known",
+   90
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "25QaQd6DRUoZxXOB",
+   "By this public act and Instrument of protest be it knowne",
+   93
+  ],
+  [
+   "sQjpjiUTThaMf4j6",
+   "By this public act and Instrument of protest be it",
+   "K0I5shzXqoC7CcOP",
+   "By this public act and Instrument of protest Be",
+   95
+  ],
+  [
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   "JNm74xWqztzn0LIS",
+   "By this public act and Instrment of protest be it known",
+   91
+  ],
+  [
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   "TWcUdm9Ie0q3ymqi",
+   "By this public act and Instrument of protest be it Known &",
+   91
+  ],
+  [
+   "Zer3bZ5I7YFGoqS6",
+   "By this public Act and Instrument of protest be it",
+   "xHo3ICOLBnm5s7zD",
+   "By this publique act and Instrument of protest be",
+   91
+  ]
+ ],
+ "near_dup_groups_ge90": {
+  "n_groups_size_ge2": 44,
+  "rows_in_groups": 166,
+  "largest": [
+   21,
+   17,
+   9,
+   9,
+   9,
+   7,
+   5,
+   5,
+   4,
+   4
+  ]
+ }
+}

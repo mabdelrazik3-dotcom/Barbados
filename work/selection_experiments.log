@@ -1,0 +1,30 @@
+lines 819 | classes {np.str_('A'): 612, np.str_('B'): 207}
+char LM trained on 3274 Fold-0 TRAIN lines | val GT per-char log-prob -1.350 (perplexity 3.86)
+quality weight of 8B (1/lost-points, fixed a priori): 0.511
+
+S0 pooled MBR (quality weights, T=1): 0.91751 | pool oracle 0.94972 | gap 0.03221
+
+S1 temperature, in-sample (optimistic): {0.25: np.float64(0.91535), 0.5: np.float64(0.91698), 0.75: np.float64(0.91734), 1.0: np.float64(0.91751), 1.5: np.float64(0.91759), 2.0: np.float64(0.91786), 3.0: np.float64(0.91747), 5.0: np.float64(0.91752)}
+S1_temperature_cv                          0.91701  delta -0.00050 CI95 [-0.00138,+0.00038] P=0.127  +19/-23 | CV mean 0.91721±0.00019 chosen [((None, 2.0), 12), ((None, 0.75), 1), ((None, 1.5), 1)]
+
+S2 8B weight, in-sample: {0.3: np.float64(0.91159), 0.4: np.float64(0.91494), 0.5: np.float64(0.91694), np.float64(0.511): np.float64(0.91751), 0.6: np.float64(0.91564), 0.7: np.float64(0.91371), 0.8: np.float64(0.91269)}
+   class A: {0.3: np.float64(0.92842), 0.4: np.float64(0.93055), 0.5: np.float64(0.93193), np.float64(0.511): np.float64(0.93239), 0.6: np.float64(0.93144), 0.7: np.float64(0.92997), 0.8: np.float64(0.92854)}
+   class B: {0.3: np.float64(0.86185), 0.4: np.float64(0.86878), 0.5: np.float64(0.87263), np.float64(0.511): np.float64(0.87353), 0.6: np.float64(0.8689), 0.7: np.float64(0.86564), 0.8: np.float64(0.86584)}
+S2_classwise_system_weight_cv              0.91751  delta +0.00000 CI95 [+0.00000,+0.00000] P=0.000  +0/-0 | CV mean 0.91722±0.00025 chosen [((np.str_('A'), np.float64(0.5110164756338816)), 14), ((np.str_('B'), np.float64(0.5110164756338816)), 13), ((np.str_('B'), 0.5), 2), ((np.str_('A'), 0.5), 1)]
+
+S3 char-LM beta, in-sample: {0.0: np.float64(0.91751), 0.05: np.float64(0.91632), 0.1: np.float64(0.91303), 0.2: np.float64(0.90759), 0.3: np.float64(0.90419), 0.5: np.float64(0.90085), 0.75: np.float64(0.89746), 1.0: np.float64(0.89571)}
+S3_charLM_prior_cv                         0.91751  delta +0.00000 CI95 [+0.00000,+0.00000] P=0.000  +0/-0 | CV mean 0.91751±0.00000 chosen [((None, 0.0), 15)]
+
+S4 OOV gamma, in-sample: {0.0: np.float64(0.91751), 0.001: np.float64(0.91762), 0.002: np.float64(0.9177), 0.005: np.float64(0.91785), 0.01: np.float64(0.91735), 0.02: np.float64(0.91685)}
+S4_oov_penalty_cv                          0.91732  delta -0.00019 CI95 [-0.00087,+0.00048] P=0.293  +11/-17 | CV mean 0.91734±0.00016 chosen [((None, 0.005), 10), ((None, 0.001), 4), ((None, 0.002), 1)]
+S1xS3_joint_cv                             0.91687  delta -0.00064 CI95 [-0.00160,+0.00029] P=0.093  +22/-29 | CV mean 0.91717±0.00024 chosen [((None, (2.0, 0.0)), 12), ((None, (0.5, 0.0)), 1), ((None, (1.5, 0.0)), 1)]
+S5_median_search_T1                        0.91780  delta +0.00029 CI95 [-0.00048,+0.00107] P=0.779  +21/-16 | lines changed 42 | outputs not in the pool: 42
+S5_median_search_T1.5                      0.91761  delta +0.00010 CI95 [-0.00093,+0.00110] P=0.580  +31/-31 | lines changed 39 (fixed T, in-sample)
+S5_median_search_T2.0                      0.91785  delta +0.00034 CI95 [-0.00089,+0.00169] P=0.698  +38/-37 | lines changed 39 (fixed T, in-sample)
+
+MBR misses the pool's best candidate on 418 of 819 lines; recoverable points 0.03221
+  gap share by class: {'A': 0.69, 'B': 0.31} | by group: {'A1': 0.356, 'A2': 0.111, 'A3': 0.223, 'B': 0.31}
+  rank of the oracle candidate (8B rank / 7B rank): [('8B#2/7B-', 42), ('8B#3/7B-', 39), ('8B#1/7B-', 39), ('8B-/7B#3', 34), ('8B-/7B#2', 34), ('8B-/7B#1', 29), ('8B-/7B#4', 28), ('8B#4/7B-', 26), ('8B#5/7B-', 21), ('8B-/7B#5', 20)]
+  what differs between MBR pick and oracle pick (word ops): {'spelling': 331, 'casing': 109, 'punct/markup': 75, 'word insert': 62, 'word delete': 43}
+
+wrote D:/HANAFY/ROAD/work/selection_experiments.json

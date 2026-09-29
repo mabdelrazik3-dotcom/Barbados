@@ -1,0 +1,717 @@
+
+######## executing code cell 0: # Cell 1 — OFFLINE install from the wheels dataset
+wheels dir: /kaggle/input/datasets/haniagamal/teleco-wheels/wheels   found: 0 wheels
+
+######## executing code cell 2: # Cell 2 — imports
+transformers 5.0.0 | VLM class: AutoModelForImageTextToText
+torch 2.13.0+cpu | cuda False | bf16 False
+
+######## executing code cell 3: # Cell 3 — CFG  (+ TRIAL definition)
+TRIAL: EXP_002 | Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODE: fold0 | models: 3 | variants: ['D0_orig', 'D1_norep', 'D2_b5nb']
+
+######## executing code cell 4: # Cell 4 — resolve & sanity-check paths
+TRAIN_CSV : D:/HANAFY/ROAD\Train.csv -> True
+TEST_CSV  : D:/HANAFY/ROAD\Test.csv -> True
+IMAGES_DIR: D:/HANAFY/ROAD/images -> True
+MODEL     : D:/HANAFY/ROAD/work/tiny/q3 -> True
+MODEL     : D:/HANAFY/ROAD/work/tiny/q25 -> True
+
+######## executing code cell 5: # Cell 5 — text / image utils + augmentation stack
+[aug] profile=realistic resample=True rotate=±1.0° noise σ=3.1 jpeg q70-92 stroke=thicken@0.15 illum=0.12 fill=paper
+
+######## executing code cell 6: # Cell 6 — model & processor loaders (pixel limits enforced + verified)
+
+######## executing code cell 7: # Cell 7 — OFFICIAL metric, MBR / ROVER ensembling, error forensics, paired bootstrap
+official metric + ensemble helpers OK
+
+######## executing code cell 8: # Cell 8 — samples, Fold-0 split (identical IDs to barbados-2), repaired protocol
+[DATASET] found=4093, missing=0, excluded_corrupt=5
+mode=fold0 fold=0: train=3012 inner_ckpt=262 val=819 (ALL scored)
+group balance  train={'A1': 1248, 'A2': 284, 'A3': 714, 'B': 766}  inner={'A1': 110, 'A2': 23, 'A3': 63, 'B': 66}  val={'A1': 311, 'A2': 75, 'A3': 226, 'B': 207}
+test rows: 1374 | missing test images: 0
+unlisted images (in images/, in neither CSV): 687
+group balance  test= {'A1': 564, 'A2': 129, 'A3': 336, 'B': 345}  unlisted= {'A1': 308, 'A2': 57, 'A3': 169, 'B': 153}
+dry-run groups  val: ['A1', 'A1', 'A2', 'A1', 'B', 'A3', 'A3', 'A2', 'B', 'B', 'A2', 'A3']  test: ['A3', 'A3', 'B', 'B', 'A2', 'B', 'A1']
+dry-run pseudo samples: 0
+
+######## executing code cell 9: # Cell 9 — collator with assistant-boundary label masking (masking unchanged from barbados-2)
+
+######## executing code cell 10: # Cell 10 — batched N-best generation with sequence scores
+
+######## executing code cell 11: # Cell 11 — trial harness: persistence, champion tracking, standard report block
+
+######## executing code cell 12: # Cell 12 — train each model on Fold-0 TRAIN, decode ALL Fold-0 val with every decoding variant,
+
+=========== MODEL ROAD_work_tiny_q3 (fold0, fold 0) ===========
+[processor] Qwen3VLProcessor | Qwen2VLImageProcessorFast | probe 1060x57 -> 1952x128 px, 244 visual tokens
+[ROAD_work_tiny_q3] hyper-parameters: {'LEARNING_RATE': 0.0002, 'NUM_TRAIN_EPOCHS': 1, 'R': 32, 'LORA_ALPHA': 64, 'PER_DEVICE_TRAIN_BATCH_SIZE': 2, 'GRADIENT_ACCUMULATION_STEPS': 1}
+[infer] ROAD_work_tiny_q3 fold0: adapter <- D:/HANAFY/ROAD/work/dry_adapters\ROAD_work_tiny_q3\fold0  (kept unmerged for specialists)
+Loading weights:   0%|          | 0/64 [00:00<?, ?it/s]Loading weights:   2%|▏         | 1/64 [00:00<00:00, 12052.60it/s, Materializing param=lm_head.weight]Loading weights:   2%|▏         | 1/64 [00:00<00:00, 4284.27it/s, Materializing param=lm_head.weight] Loading weights:   3%|▎         | 2/64 [00:00<00:00, 4054.43it/s, Materializing param=model.language_model.embed_tokens.weight]Loading weights:   3%|▎         | 2/64 [00:00<00:00, 2593.08it/s, Materializing param=model.language_model.embed_tokens.weight]Loading weights:   5%|▍         | 3/64 [00:00<00:00, 2756.99it/s, Materializing param=model.language_model.layers.0.input_layernorm.weight]Loading weights:   5%|▍         | 3/64 [00:00<00:00, 2099.60it/s, Materializing param=model.language_model.layers.0.input_layernorm.weight]Loading weights:   6%|▋         | 4/64 [00:00<00:00, 1963.63it/s, Materializing param=model.language_model.layers.0.mlp.down_proj.weight]  Loading weights:   6%|▋         | 4/64 [00:00<00:00, 1783.10it/s, Materializing param=model.language_model.layers.0.mlp.down_proj.weight]Loading weights:   8%|▊         | 5/64 [00:00<00:00, 1837.99it/s, Materializing param=model.language_model.layers.0.mlp.gate_proj.weight]Loading weights:   8%|▊         | 5/64 [00:00<00:00, 1695.90it/s, Materializing param=model.language_model.layers.0.mlp.gate_proj.weight]Loading weights:   9%|▉         | 6/64 [00:00<00:00, 1680.07it/s, Materializing param=model.language_model.layers.0.mlp.up_proj.weight]  Loading weights:   9%|▉         | 6/64 [00:00<00:00, 1500.20it/s, Materializing param=model.language_model.layers.0.mlp.up_proj.weight]Loading weights:  11%|█         | 7/64 [00:00<00:00, 1599.48it/s, Materializing param=model.language_model.layers.0.post_attention_layernorm.weight]Loading weights:  11%|█         | 7/64 [00:00<00:00, 1538.55it/s, Materializing param=model.language_model.layers.0.post_attention_layernorm.weight]Loading weights:  12%|█▎        | 8/64 [00:00<00:00, 1378.35it/s, Materializing param=model.language_model.layers.0.self_attn.k_norm.weight]        Loading weights:  12%|█▎        | 8/64 [00:00<00:00, 1341.91it/s, Materializing param=model.language_model.layers.0.self_attn.k_norm.weight]Loading weights:  14%|█▍        | 9/64 [00:00<00:00, 1302.94it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.weight]Loading weights:  14%|█▍        | 9/64 [00:00<00:00, 1276.11it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.weight]Loading weights:  16%|█▌        | 10/64 [00:00<00:00, 1343.64it/s, Materializing param=model.language_model.layers.0.self_attn.o_proj.weight]Loading weights:  16%|█▌        | 10/64 [00:00<00:00, 1323.00it/s, Materializing param=model.language_model.layers.0.self_attn.o_proj.weight]Loading weights:  17%|█▋        | 11/64 [00:00<00:00, 1349.01it/s, Materializing param=model.language_model.layers.0.self_attn.q_norm.weight]Loading weights:  17%|█▋        | 11/64 [00:00<00:00, 1288.75it/s, Materializing param=model.language_model.layers.0.self_attn.q_norm.weight]Loading weights:  19%|█▉        | 12/64 [00:00<00:00, 1302.61it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.weight]Loading weights:  19%|█▉        | 12/64 [00:00<00:00, 1282.53it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.weight]Loading weights:  20%|██        | 13/64 [00:00<00:00, 1351.99it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.weight]Loading weights:  20%|██        | 13/64 [00:00<00:00, 1336.91it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.weight]Loading weights:  22%|██▏       | 14/64 [00:00<00:00, 1407.59it/s, Materializing param=model.language_model.layers.1.input_layernorm.weight] Loading weights:  22%|██▏       | 14/64 [00:00<00:00, 1336.10it/s, Materializing param=model.language_model.layers.1.input_layernorm.weight]Loading weights:  23%|██▎       | 15/64 [00:00<00:00, 1389.49it/s, Materializing param=model.language_model.layers.1.mlp.down_proj.weight]  Loading weights:  23%|██▎       | 15/64 [00:00<00:00, 1357.82it/s, Materializing param=model.language_model.layers.1.mlp.down_proj.weight]Loading weights:  25%|██▌       | 16/64 [00:00<00:00, 1368.40it/s, Materializing param=model.language_model.layers.1.mlp.gate_proj.weight]Loading weights:  25%|██▌       | 16/64 [00:00<00:00, 1315.52it/s, Materializing param=model.language_model.layers.1.mlp.gate_proj.weight]Loading weights:  27%|██▋       | 17/64 [00:00<00:00, 1314.73it/s, Materializing param=model.language_model.layers.1.mlp.up_proj.weight]  Loading weights:  27%|██▋       | 17/64 [00:00<00:00, 1247.58it/s, Materializing param=model.language_model.layers.1.mlp.up_proj.weight]Loading weights:  28%|██▊       | 18/64 [00:00<00:00, 1222.43it/s, Materializing param=model.language_model.layers.1.post_attention_layernorm.weight]Loading weights:  28%|██▊       | 18/64 [00:00<00:00, 1207.15it/s, Materializing param=model.language_model.layers.1.post_attention_layernorm.weight]Loading weights:  30%|██▉       | 19/64 [00:00<00:00, 1244.85it/s, Materializing param=model.language_model.layers.1.self_attn.k_norm.weight]        Loading weights:  30%|██▉       | 19/64 [00:00<00:00, 1235.19it/s, Materializing param=model.language_model.layers.1.self_attn.k_norm.weight]Loading weights:  31%|███▏      | 20/64 [00:00<00:00, 1284.61it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.weight]Loading weights:  31%|███▏      | 20/64 [00:00<00:00, 1276.51it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.weight]Loading weights:  33%|███▎      | 21/64 [00:00<00:00, 1325.17it/s, Materializing param=model.language_model.layers.1.self_attn.o_proj.weight]Loading weights:  33%|███▎      | 21/64 [00:00<00:00, 1317.25it/s, Materializing param=model.language_model.layers.1.self_attn.o_proj.weight]Loading weights:  34%|███▍      | 22/64 [00:00<00:00, 1365.33it/s, Materializing param=model.language_model.layers.1.self_attn.q_norm.weight]Loading weights:  34%|███▍      | 22/64 [00:00<00:00, 1357.26it/s, Materializing param=model.language_model.layers.1.self_attn.q_norm.weight]Loading weights:  36%|███▌      | 23/64 [00:00<00:00, 1404.15it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.weight]Loading weights:  36%|███▌      | 23/64 [00:00<00:00, 1395.92it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.weight]Loading weights:  38%|███▊      | 24/64 [00:00<00:00, 1441.92it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.weight]Loading weights:  38%|███▊      | 24/64 [00:00<00:00, 1110.25it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.weight]Loading weights:  39%|███▉      | 25/64 [00:00<00:00, 1143.90it/s, Materializing param=model.language_model.norm.weight]                     Loading weights:  39%|███▉      | 25/64 [00:00<00:00, 1139.05it/s, Materializing param=model.language_model.norm.weight]Loading weights:  41%|████      | 26/64 [00:00<00:00, 1175.90it/s, Materializing param=model.visual.blocks.0.attn.proj.bias]Loading weights:  41%|████      | 26/64 [00:00<00:00, 1169.72it/s, Materializing param=model.visual.blocks.0.attn.proj.bias]Loading weights:  42%|████▏     | 27/64 [00:00<00:00, 1205.97it/s, Materializing param=model.visual.blocks.0.attn.proj.weight]Loading weights:  42%|████▏     | 27/64 [00:00<00:00, 1201.63it/s, Materializing param=model.visual.blocks.0.attn.proj.weight]Loading weights:  44%|████▍     | 28/64 [00:00<00:00, 1238.45it/s, Materializing param=model.visual.blocks.0.attn.qkv.bias]   Loading weights:  44%|████▍     | 28/64 [00:00<00:00, 1232.71it/s, Materializing param=model.visual.blocks.0.attn.qkv.bias]Loading weights:  45%|████▌     | 29/64 [00:00<00:00, 1267.16it/s, Materializing param=model.visual.blocks.0.attn.qkv.weight]Loading weights:  45%|████▌     | 29/64 [00:00<00:00, 1262.40it/s, Materializing param=model.visual.blocks.0.attn.qkv.weight]Loading weights:  47%|████▋     | 30/64 [00:00<00:00, 1298.02it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.bias]Loading weights:  47%|████▋     | 30/64 [00:00<00:00, 1293.66it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.bias]Loading weights:  48%|████▊     | 31/64 [00:00<00:00, 1328.95it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.weight]Loading weights:  48%|████▊     | 31/64 [00:00<00:00, 1324.58it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.weight]Loading weights:  50%|█████     | 32/64 [00:00<00:00, 1359.62it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.bias]  Loading weights:  50%|█████     | 32/64 [00:00<00:00, 1354.85it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.bias]Loading weights:  52%|█████▏    | 33/64 [00:00<00:00, 1388.86it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.weight]Loading weights:  52%|█████▏    | 33/64 [00:00<00:00, 1382.74it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.weight]Loading weights:  53%|█████▎    | 34/64 [00:00<00:00, 1416.09it/s, Materializing param=model.visual.blocks.0.norm1.bias]           Loading weights:  53%|█████▎    | 34/64 [00:00<00:00, 1411.66it/s, Materializing param=model.visual.blocks.0.norm1.bias]Loading weights:  55%|█████▍    | 35/64 [00:00<00:00, 1445.06it/s, Materializing param=model.visual.blocks.0.norm1.weight]Loading weights:  55%|█████▍    | 35/64 [00:00<00:00, 1440.52it/s, Materializing param=model.visual.blocks.0.norm1.weight]Loading weights:  56%|█████▋    | 36/64 [00:00<00:00, 1473.90it/s, Materializing param=model.visual.blocks.0.norm2.bias]  Loading weights:  56%|█████▋    | 36/64 [00:00<00:00, 1469.41it/s, Materializing param=model.visual.blocks.0.norm2.bias]Loading weights:  58%|█████▊    | 37/64 [00:00<00:00, 1501.98it/s, Materializing param=model.visual.blocks.0.norm2.weight]Loading weights:  58%|█████▊    | 37/64 [00:00<00:00, 1497.37it/s, Materializing param=model.visual.blocks.0.norm2.weight]Loading weights:  59%|█████▉    | 38/64 [00:00<00:00, 1527.10it/s, Materializing param=model.visual.blocks.1.attn.proj.bias]Loading weights:  59%|█████▉    | 38/64 [00:00<00:00, 1521.85it/s, Materializing param=model.visual.blocks.1.attn.proj.bias]Loading weights:  61%|██████    | 39/64 [00:00<00:00, 1553.28it/s, Materializing param=model.visual.blocks.1.attn.proj.weight]Loading weights:  61%|██████    | 39/64 [00:00<00:00, 1548.67it/s, Materializing param=model.visual.blocks.1.attn.proj.weight]Loading weights:  62%|██████▎   | 40/64 [00:00<00:00, 1580.16it/s, Materializing param=model.visual.blocks.1.attn.qkv.bias]   Loading weights:  62%|██████▎   | 40/64 [00:00<00:00, 1575.43it/s, Materializing param=model.visual.blocks.1.attn.qkv.bias]Loading weights:  64%|██████▍   | 41/64 [00:00<00:00, 1604.54it/s, Materializing param=model.visual.blocks.1.attn.qkv.weight]Loading weights:  64%|██████▍   | 41/64 [00:00<00:00, 1599.32it/s, Materializing param=model.visual.blocks.1.attn.qkv.weight]Loading weights:  66%|██████▌   | 42/64 [00:00<00:00, 1629.70it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.bias]Loading weights:  66%|██████▌   | 42/64 [00:00<00:00, 1622.94it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.bias]Loading weights:  67%|██████▋   | 43/64 [00:00<00:00, 1652.21it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.weight]Loading weights:  67%|██████▋   | 43/64 [00:00<00:00, 1647.24it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.weight]Loading weights:  69%|██████▉   | 44/64 [00:00<00:00, 1677.20it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.bias]  Loading weights:  69%|██████▉   | 44/64 [00:00<00:00, 1672.39it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.bias]Loading weights:  70%|███████   | 45/64 [00:00<00:00, 1699.35it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.weight]Loading weights:  70%|███████   | 45/64 [00:00<00:00, 1694.01it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.weight]Loading weights:  72%|███████▏  | 46/64 [00:00<00:00, 1723.03it/s, Materializing param=model.visual.blocks.1.norm1.bias]           Loading weights:  72%|███████▏  | 46/64 [00:00<00:00, 1718.23it/s, Materializing param=model.visual.blocks.1.norm1.bias]Loading weights:  73%|███████▎  | 47/64 [00:00<00:00, 1719.38it/s, Materializing param=model.visual.blocks.1.norm1.weight]Loading weights:  73%|███████▎  | 47/64 [00:00<00:00, 1700.46it/s, Materializing param=model.visual.blocks.1.norm1.weight]Loading weights:  75%|███████▌  | 48/64 [00:00<00:00, 1561.14it/s, Materializing param=model.visual.blocks.1.norm2.bias]  Loading weights:  75%|███████▌  | 48/64 [00:00<00:00, 1554.79it/s, Materializing param=model.visual.blocks.1.norm2.bias]Loading weights:  77%|███████▋  | 49/64 [00:00<00:00, 1576.27it/s, Materializing param=model.visual.blocks.1.norm2.weight]Loading weights:  77%|███████▋  | 49/64 [00:00<00:00, 1571.78it/s, Materializing param=model.visual.blocks.1.norm2.weight]Loading weights:  78%|███████▊  | 50/64 [00:00<00:00, 1596.43it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.bias]Loading weights:  78%|███████▊  | 50/64 [00:00<00:00, 1592.20it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.bias]Loading weights:  80%|███████▉  | 51/64 [00:00<00:00, 1612.84it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.weight]Loading weights:  80%|███████▉  | 51/64 [00:00<00:00, 1608.37it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.weight]Loading weights:  81%|████████▏ | 52/64 [00:00<00:00, 1630.21it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.bias]  Loading weights:  81%|████████▏ | 52/64 [00:00<00:00, 1625.51it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.bias]Loading weights:  83%|████████▎ | 53/64 [00:00<00:00, 1649.48it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.weight]Loading weights:  83%|████████▎ | 53/64 [00:00<00:00, 1645.32it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.weight]Loading weights:  84%|████████▍ | 54/64 [00:00<00:00, 1667.24it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.bias]        Loading weights:  84%|████████▍ | 54/64 [00:00<00:00, 1662.76it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.bias]Loading weights:  86%|████████▌ | 55/64 [00:00<00:00, 1686.34it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.weight]Loading weights:  86%|████████▌ | 55/64 [00:00<00:00, 1682.30it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.weight]Loading weights:  88%|████████▊ | 56/64 [00:00<00:00, 1706.05it/s, Materializing param=model.visual.merger.linear_fc1.bias]             Loading weights:  88%|████████▊ | 56/64 [00:00<00:00, 1702.10it/s, Materializing param=model.visual.merger.linear_fc1.bias]Loading weights:  89%|████████▉ | 57/64 [00:00<00:00, 1725.76it/s, Materializing param=model.visual.merger.linear_fc1.weight]Loading weights:  89%|████████▉ | 57/64 [00:00<00:00, 1717.33it/s, Materializing param=model.visual.merger.linear_fc1.weight]Loading weights:  91%|█████████ | 58/64 [00:00<00:00, 1738.72it/s, Materializing param=model.visual.merger.linear_fc2.bias]  Loading weights:  91%|█████████ | 58/64 [00:00<00:00, 1723.85it/s, Materializing param=model.visual.merger.linear_fc2.bias]Loading weights:  92%|█████████▏| 59/64 [00:00<00:00, 1745.77it/s, Materializing param=model.visual.merger.linear_fc2.weight]Loading weights:  92%|█████████▏| 59/64 [00:00<00:00, 1741.73it/s, Materializing param=model.visual.merger.linear_fc2.weight]Loading weights:  94%|█████████▍| 60/64 [00:00<00:00, 1764.39it/s, Materializing param=model.visual.merger.norm.bias]        Loading weights:  94%|█████████▍| 60/64 [00:00<00:00, 1760.52it/s, Materializing param=model.visual.merger.norm.bias]Loading weights:  95%|█████████▌| 61/64 [00:00<00:00, 1782.72it/s, Materializing param=model.visual.merger.norm.weight]Loading weights:  95%|█████████▌| 61/64 [00:00<00:00, 1778.66it/s, Materializing param=model.visual.merger.norm.weight]Loading weights:  97%|█████████▋| 62/64 [00:00<00:00, 1799.59it/s, Materializing param=model.visual.patch_embed.proj.bias]Loading weights:  97%|█████████▋| 62/64 [00:00<00:00, 1795.35it/s, Materializing param=model.visual.patch_embed.proj.bias]Loading weights:  98%|█████████▊| 63/64 [00:00<00:00, 1816.94it/s, Materializing param=model.visual.patch_embed.proj.weight]Loading weights:  98%|█████████▊| 63/64 [00:00<00:00, 1812.98it/s, Materializing param=model.visual.patch_embed.proj.weight]Loading weights: 100%|██████████| 64/64 [00:00<00:00, 1835.02it/s, Materializing param=model.visual.pos_embed.weight]       Loading weights: 100%|██████████| 64/64 [00:00<00:00, 1831.19it/s, Materializing param=model.visual.pos_embed.weight]Loading weights: 100%|██████████| 64/64 [00:00<00:00, 1818.05it/s, Materializing param=model.visual.pos_embed.weight]
+val/ROAD_work_tiny_q3/D0_orig:   0%|          | 0/3 [00:00<?, ?it/s]The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+val/ROAD_work_tiny_q3/D0_orig:  33%|███▎      | 1/3 [00:00<00:01,  1.30it/s]val/ROAD_work_tiny_q3/D0_orig:  67%|██████▋   | 2/3 [00:02<00:01,  1.32s/it]val/ROAD_work_tiny_q3/D0_orig: 100%|██████████| 3/3 [00:03<00:00,  1.27s/it]                                                                            ==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3__D0_orig
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D0_orig
+==================================================================
+Official validation score : -0.00549
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 56.7500   corpus CER 0.8631
+Delta vs champion          : +nan  (champion=nan)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0343 w/line=12.000 c/line=58.778', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0018 w/line=11.667 c/line=56.333', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.2006 w/line=14.250 c/line=66.750', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+val/ROAD_work_tiny_q3/D1_norep:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/D1_norep:  33%|███▎      | 1/3 [00:00<00:01,  1.30it/s]val/ROAD_work_tiny_q3/D1_norep:  67%|██████▋   | 2/3 [00:01<00:00,  1.46it/s]val/ROAD_work_tiny_q3/D1_norep: 100%|██████████| 3/3 [00:02<00:00,  1.39it/s]                                                                             ==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3__D1_norep
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D1_norep
+==================================================================
+Official validation score : -0.01004
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.2500   corpus CER 0.8707
+Delta vs baseline          : -0.00455  CI95 [-0.01364, +0.00000]  P(better)=0.000  improved=0 worsened=1  word/char edits saved=0/-6
+Delta vs champion          : -0.00455  (champion=-0.00549)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0404 w/line=12.000 c/line=59.444', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0164 w/line=11.667 c/line=58.333', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.2142 w/line=14.250 c/line=68.250', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+val/ROAD_work_tiny_q3/D2_b5nb:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/D2_b5nb:  33%|███▎      | 1/3 [00:00<00:01,  1.24it/s]val/ROAD_work_tiny_q3/D2_b5nb:  67%|██████▋   | 2/3 [00:01<00:00,  1.18it/s]val/ROAD_work_tiny_q3/D2_b5nb: 100%|██████████| 3/3 [00:02<00:00,  1.14it/s]                                                                            ==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3__D2_b5nb
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D2_b5nb
+==================================================================
+Official validation score : -0.00852
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.0833   corpus CER 0.8682
+Delta vs baseline          : -0.00303  CI95 [-0.01061, +0.00455]  P(better)=0.212  improved=1 worsened=3  word/char edits saved=0/-4
+Delta vs champion          : -0.00303  (champion=-0.00549)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0333 w/line=12.000 c/line=58.667', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0043 w/line=11.667 c/line=57.000', 'A2': 'n=   3 score=0.1530 w/line=10.000 c/line=47.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By label length          : {'50-69': 'n=   7 score=0.0624 w/line=11.000 c/line=52.714', '70+': 'n=   4 score=-0.2119 w/line=14.250 c/line=68.000', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3__D2_b5nb_mbr
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3 | DECODE: D2_b5nb+mbr
+==================================================================
+Official validation score : -0.01534
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.8333   corpus CER 0.8796
+Delta vs baseline          : -0.00985  CI95 [-0.02199, +0.00076]  P(better)=0.040  improved=1 worsened=6  word/char edits saved=0/-13
+Delta vs champion          : -0.00985  (champion=-0.00549)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0414 w/line=12.000 c/line=59.556', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0043 w/line=11.667 c/line=57.000', 'A2': 'n=   3 score=0.1318 w/line=10.000 c/line=49.667', 'A3': 'n=   3 score=-0.2518 w/line=14.333 c/line=72.000', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By label length          : {'50-69': 'n=   7 score=0.0598 w/line=11.000 c/line=53.000', '70+': 'n=   4 score=-0.2119 w/line=14.250 c/line=68.000', '<50': 'n=   1 score=0.2447 w/line=7.000 c/line=51.000'}
+==================================================================
+[ROAD_work_tiny_q3] best decoding on val: D0_orig (-0.00549) | all: D0_orig=-0.00549, D1_norep=-0.01004, D2_b5nb=-0.00852, D2_b5nb+mbr=-0.01534
+test/ROAD_work_tiny_q3/D0_orig:   0%|          | 0/2 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/D0_orig:  50%|█████     | 1/2 [00:00<00:00,  1.25it/s]test/ROAD_work_tiny_q3/D0_orig: 100%|██████████| 2/2 [00:01<00:00,  1.39it/s]                                                                             test/ROAD_work_tiny_q3/D2_b5nb:   0%|          | 0/2 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/D2_b5nb:  50%|█████     | 1/2 [00:01<00:01,  1.02s/it]test/ROAD_work_tiny_q3/D2_b5nb: 100%|██████████| 2/2 [00:02<00:00,  1.09s/it]                                                                             unlisted/ROAD_work_tiny_q3/D2_b5nb:   0%|          | 0/2 [00:00<?, ?it/s]unlisted/ROAD_work_tiny_q3/D2_b5nb:  50%|█████     | 1/2 [00:00<00:00,  1.57it/s]unlisted/ROAD_work_tiny_q3/D2_b5nb: 100%|██████████| 2/2 [00:01<00:00,  2.09it/s]                                                                                 [ROAD_work_tiny_q3] specialist spec_B <- D:/HANAFY/ROAD/work/dry_adapters\ROAD_work_tiny_q3\fold0\spec_B
+val/ROAD_work_tiny_q3/spec_B/D0_orig:   0%|          | 0/1 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/spec_B/D0_orig: 100%|██████████| 1/1 [00:00<00:00,  1.10it/s]                                                                                   [ROAD_work_tiny_q3] spec_B/D0_orig on its 3 val lines vs shared: delta=-0.00606 CI95 [-0.01818,+0.00000] P(better)=0.000
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3@B__D0_orig
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3@B | DECODE: D0_orig
+==================================================================
+Official validation score : -0.00701
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 56.9167   corpus CER 0.8657
+Delta vs baseline          : -0.00152  CI95 [-0.00455, +0.00000]  P(better)=0.000  improved=0 worsened=1  word/char edits saved=0/-2
+Delta vs champion          : -0.00152  (champion=-0.00549)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0343 w/line=12.000 c/line=58.778', 'B': 'n=   3 score=0.0750 w/line=11.000 c/line=51.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0018 w/line=11.667 c/line=56.333', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0750 w/line=11.000 c/line=51.333'}
+By label length          : {'50-69': 'n=   7 score=0.0585 w/line=11.000 c/line=53.143', '70+': 'n=   4 score=-0.2006 w/line=14.250 c/line=66.750', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+test/ROAD_work_tiny_q3/spec_B/D0_orig:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/spec_B/D0_orig: 100%|██████████| 1/1 [00:00<00:00,  1.21it/s]                                                                                    val/ROAD_work_tiny_q3/spec_B/D2_b5nb:   0%|          | 0/1 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/spec_B/D2_b5nb: 100%|██████████| 1/1 [00:01<00:00,  1.17s/it]                                                                                   [ROAD_work_tiny_q3] spec_B/D2_b5nb on its 3 val lines vs shared: delta=-0.00303 CI95 [-0.00909,+0.00000] P(better)=0.000
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3@B__D2_b5nb
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3@B | DECODE: D2_b5nb
+==================================================================
+Official validation score : -0.00928
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.1667   corpus CER 0.8695
+Delta vs baseline          : -0.00076  CI95 [-0.00227, +0.00000]  P(better)=0.000  improved=0 worsened=1  word/char edits saved=0/-1
+Delta vs champion          : -0.00379  (champion=-0.00549)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0333 w/line=12.000 c/line=58.667', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0043 w/line=11.667 c/line=57.000', 'A2': 'n=   3 score=0.1530 w/line=10.000 c/line=47.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.2119 w/line=14.250 c/line=68.000', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+test/ROAD_work_tiny_q3/spec_B/D2_b5nb:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/spec_B/D2_b5nb: 100%|██████████| 1/1 [00:01<00:00,  1.02s/it]                                                                                    [ROAD_work_tiny_q3] specialist spec_A <- D:/HANAFY/ROAD/work/dry_adapters\ROAD_work_tiny_q3\fold0\spec_A
+val/ROAD_work_tiny_q3/spec_A/D0_orig:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/spec_A/D0_orig:  33%|███▎      | 1/3 [00:00<00:01,  1.41it/s]val/ROAD_work_tiny_q3/spec_A/D0_orig:  67%|██████▋   | 2/3 [00:01<00:00,  1.65it/s]val/ROAD_work_tiny_q3/spec_A/D0_orig: 100%|██████████| 3/3 [00:01<00:00,  2.26it/s]                                                                                   [ROAD_work_tiny_q3] spec_A/D0_orig on its 9 val lines vs shared: delta=+0.00101 CI95 [-0.02528,+0.02727] P(better)=0.527
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3@A__D0_orig
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3@A | DECODE: D0_orig
+==================================================================
+Official validation score : -0.00473
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 56.6667   corpus CER 0.8619
+Delta vs baseline          : +0.00076  CI95 [-0.01894, +0.02045]  P(better)=0.517  improved=4 worsened=5  word/char edits saved=0/1
+Delta vs champion          : +0.00076  (champion=-0.00549)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0333 w/line=12.000 c/line=58.667', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0169 w/line=11.667 c/line=54.667', 'A2': 'n=   3 score=0.1076 w/line=10.000 c/line=52.333', 'A3': 'n=   3 score=-0.2245 w/line=14.333 c/line=69.000', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By label length          : {'50-69': 'n=   7 score=0.0741 w/line=11.000 c/line=51.429', '70+': 'n=   4 score=-0.2051 w/line=14.250 c/line=67.250', '<50': 'n=   1 score=0.2447 w/line=7.000 c/line=51.000'}
+==================================================================
+test/ROAD_work_tiny_q3/spec_A/D0_orig:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/spec_A/D0_orig: 100%|██████████| 1/1 [00:00<00:00,  1.53it/s]                                                                                    val/ROAD_work_tiny_q3/spec_A/D2_b5nb:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q3/spec_A/D2_b5nb:  33%|███▎      | 1/3 [00:00<00:01,  1.15it/s]val/ROAD_work_tiny_q3/spec_A/D2_b5nb:  67%|██████▋   | 2/3 [00:01<00:00,  1.15it/s]val/ROAD_work_tiny_q3/spec_A/D2_b5nb: 100%|██████████| 3/3 [00:02<00:00,  1.18it/s]                                                                                   [ROAD_work_tiny_q3] spec_A/D2_b5nb on its 9 val lines vs shared: delta=-0.01894 CI95 [-0.06591,+0.01717] P(better)=0.204
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q3@A__D2_b5nb
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3@A | DECODE: D2_b5nb
+==================================================================
+Official validation score : -0.02273
+Word edits / line (LB WER) : 12.0000   corpus WER 1.0213
+Char edits / line (LB CER) : 57.5000   corpus CER 0.8745
+Delta vs baseline          : -0.01420  CI95 [-0.05019, +0.01232]  P(better)=0.203  improved=4 worsened=4  word/char edits saved=-3/-5
+Delta vs champion          : -0.01799  (champion=-0.00473)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0523 w/line=12.333 c/line=59.222', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0013 w/line=11.667 c/line=56.667', 'A2': 'n=   3 score=0.0902 w/line=11.000 c/line=49.667', 'A3': 'n=   3 score=-0.2457 w/line=14.333 c/line=71.333', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By label length          : {'50-69': 'n=   7 score=0.0767 w/line=11.000 c/line=51.143', '70+': 'n=   4 score=-0.2347 w/line=14.250 c/line=70.500', '<50': 'n=   1 score=0.1288 w/line=10.000 c/line=50.000'}
+==================================================================
+test/ROAD_work_tiny_q3/spec_A/D2_b5nb:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q3/spec_A/D2_b5nb: 100%|██████████| 1/1 [00:00<00:00,  1.49it/s]                                                                                    [ROAD_work_tiny_q3] done in 0.4 min
+
+=========== MODEL ROAD_work_tiny_q25 (fold0, fold 0) ===========
+[processor] Qwen2_5_VLProcessor | Qwen2VLImageProcessorFast | probe 1060x57 -> 1932x112 px, 276 visual tokens
+[ROAD_work_tiny_q25] hyper-parameters: {'LEARNING_RATE': 0.0002, 'NUM_TRAIN_EPOCHS': 1, 'R': 32, 'LORA_ALPHA': 64, 'PER_DEVICE_TRAIN_BATCH_SIZE': 2, 'GRADIENT_ACCUMULATION_STEPS': 1}
+[infer] ROAD_work_tiny_q25 fold0: adapter <- D:/HANAFY/ROAD/work/dry_adapters\ROAD_work_tiny_q25\fold0  (kept unmerged for specialists)
+Loading weights:   0%|          | 0/57 [00:00<?, ?it/s]Loading weights:   2%|▏         | 1/57 [00:00<00:00, 27594.11it/s, Materializing param=lm_head.weight]Loading weights:   2%|▏         | 1/57 [00:00<00:00, 6297.75it/s, Materializing param=lm_head.weight] Loading weights:   4%|▎         | 2/57 [00:00<00:01, 30.05it/s, Materializing param=model.language_model.embed_tokens.weight]Loading weights:   4%|▎         | 2/57 [00:00<00:01, 29.96it/s, Materializing param=model.language_model.embed_tokens.weight]Loading weights:   5%|▌         | 3/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.embed_tokens.weight]Loading weights:   5%|▌         | 3/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.input_layernorm.weight]Loading weights:   5%|▌         | 3/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.input_layernorm.weight]Loading weights:   7%|▋         | 4/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.mlp.down_proj.weight]  Loading weights:   7%|▋         | 4/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.mlp.down_proj.weight]Loading weights:   9%|▉         | 5/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.mlp.gate_proj.weight]Loading weights:   9%|▉         | 5/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.mlp.gate_proj.weight]Loading weights:  11%|█         | 6/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.mlp.up_proj.weight]  Loading weights:  11%|█         | 6/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.mlp.up_proj.weight]Loading weights:  12%|█▏        | 7/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.post_attention_layernorm.weight]Loading weights:  12%|█▏        | 7/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.post_attention_layernorm.weight]Loading weights:  14%|█▍        | 8/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.bias]          Loading weights:  14%|█▍        | 8/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.bias]Loading weights:  16%|█▌        | 9/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.weight]Loading weights:  16%|█▌        | 9/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.weight]Loading weights:  18%|█▊        | 10/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.o_proj.weight]Loading weights:  18%|█▊        | 10/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.o_proj.weight]Loading weights:  19%|█▉        | 11/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.bias]  Loading weights:  19%|█▉        | 11/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.bias]Loading weights:  21%|██        | 12/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.weight]Loading weights:  21%|██        | 12/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.weight]Loading weights:  23%|██▎       | 13/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.bias]  Loading weights:  23%|██▎       | 13/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.bias]Loading weights:  25%|██▍       | 14/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.weight]Loading weights:  25%|██▍       | 14/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.weight]Loading weights:  26%|██▋       | 15/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.input_layernorm.weight] Loading weights:  26%|██▋       | 15/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.input_layernorm.weight]Loading weights:  28%|██▊       | 16/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.mlp.down_proj.weight]  Loading weights:  28%|██▊       | 16/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.mlp.down_proj.weight]Loading weights:  30%|██▉       | 17/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.mlp.gate_proj.weight]Loading weights:  30%|██▉       | 17/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.mlp.gate_proj.weight]Loading weights:  32%|███▏      | 18/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.mlp.up_proj.weight]  Loading weights:  32%|███▏      | 18/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.mlp.up_proj.weight]Loading weights:  33%|███▎      | 19/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.post_attention_layernorm.weight]Loading weights:  33%|███▎      | 19/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.post_attention_layernorm.weight]Loading weights:  35%|███▌      | 20/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.bias]          Loading weights:  35%|███▌      | 20/57 [00:00<00:02, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.bias]Loading weights:  37%|███▋      | 21/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.weight]Loading weights:  37%|███▋      | 21/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.weight]Loading weights:  39%|███▊      | 22/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.o_proj.weight]Loading weights:  39%|███▊      | 22/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.o_proj.weight]Loading weights:  40%|████      | 23/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.bias]  Loading weights:  40%|████      | 23/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.bias]Loading weights:  42%|████▏     | 24/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.weight]Loading weights:  42%|████▏     | 24/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.weight]Loading weights:  44%|████▍     | 25/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.bias]  Loading weights:  44%|████▍     | 25/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.bias]Loading weights:  46%|████▌     | 26/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.weight]Loading weights:  46%|████▌     | 26/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.weight]Loading weights:  47%|████▋     | 27/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.norm.weight]                     Loading weights:  47%|████▋     | 27/57 [00:00<00:01, 18.15it/s, Materializing param=model.language_model.norm.weight]Loading weights:  49%|████▉     | 28/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.proj.bias]Loading weights:  49%|████▉     | 28/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.proj.bias]Loading weights:  51%|█████     | 29/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.proj.weight]Loading weights:  51%|█████     | 29/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.proj.weight]Loading weights:  53%|█████▎    | 30/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.qkv.bias]   Loading weights:  53%|█████▎    | 30/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.qkv.bias]Loading weights:  54%|█████▍    | 31/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.qkv.weight]Loading weights:  54%|█████▍    | 31/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.attn.qkv.weight]Loading weights:  56%|█████▌    | 32/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.down_proj.bias]Loading weights:  56%|█████▌    | 32/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.down_proj.bias]Loading weights:  58%|█████▊    | 33/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.down_proj.weight]Loading weights:  58%|█████▊    | 33/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.down_proj.weight]Loading weights:  60%|█████▉    | 34/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.gate_proj.bias]  Loading weights:  60%|█████▉    | 34/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.gate_proj.bias]Loading weights:  61%|██████▏   | 35/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.gate_proj.weight]Loading weights:  61%|██████▏   | 35/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.gate_proj.weight]Loading weights:  63%|██████▎   | 36/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.up_proj.bias]    Loading weights:  63%|██████▎   | 36/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.up_proj.bias]Loading weights:  65%|██████▍   | 37/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.up_proj.weight]Loading weights:  65%|██████▍   | 37/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.mlp.up_proj.weight]Loading weights:  67%|██████▋   | 38/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.norm1.weight]      Loading weights:  67%|██████▋   | 38/57 [00:00<00:01, 18.15it/s, Materializing param=model.visual.blocks.0.norm1.weight]Loading weights:  68%|██████▊   | 39/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.0.norm2.weight]Loading weights:  68%|██████▊   | 39/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.0.norm2.weight]Loading weights:  70%|███████   | 40/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.proj.bias]Loading weights:  70%|███████   | 40/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.proj.bias]Loading weights:  72%|███████▏  | 41/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.proj.weight]Loading weights:  72%|███████▏  | 41/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.proj.weight]Loading weights:  74%|███████▎  | 42/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.qkv.bias]   Loading weights:  74%|███████▎  | 42/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.qkv.bias]Loading weights:  75%|███████▌  | 43/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.qkv.weight]Loading weights:  75%|███████▌  | 43/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.attn.qkv.weight]Loading weights:  77%|███████▋  | 44/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.down_proj.bias]Loading weights:  77%|███████▋  | 44/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.down_proj.bias]Loading weights:  79%|███████▉  | 45/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.down_proj.weight]Loading weights:  79%|███████▉  | 45/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.down_proj.weight]Loading weights:  81%|████████  | 46/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.gate_proj.bias]  Loading weights:  81%|████████  | 46/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.gate_proj.bias]Loading weights:  82%|████████▏ | 47/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.gate_proj.weight]Loading weights:  82%|████████▏ | 47/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.gate_proj.weight]Loading weights:  84%|████████▍ | 48/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.up_proj.bias]    Loading weights:  84%|████████▍ | 48/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.up_proj.bias]Loading weights:  86%|████████▌ | 49/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.up_proj.weight]Loading weights:  86%|████████▌ | 49/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.mlp.up_proj.weight]Loading weights:  88%|████████▊ | 50/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.norm1.weight]      Loading weights:  88%|████████▊ | 50/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.norm1.weight]Loading weights:  89%|████████▉ | 51/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.norm2.weight]Loading weights:  89%|████████▉ | 51/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.blocks.1.norm2.weight]Loading weights:  91%|█████████ | 52/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.ln_q.weight]   Loading weights:  91%|█████████ | 52/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.ln_q.weight]Loading weights:  93%|█████████▎| 53/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.0.bias] Loading weights:  93%|█████████▎| 53/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.0.bias]Loading weights:  95%|█████████▍| 54/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.0.weight]Loading weights:  95%|█████████▍| 54/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.0.weight]Loading weights:  96%|█████████▋| 55/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.2.bias]  Loading weights:  96%|█████████▋| 55/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.2.bias]Loading weights:  98%|█████████▊| 56/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.2.weight]Loading weights:  98%|█████████▊| 56/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.merger.mlp.2.weight]Loading weights: 100%|██████████| 57/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.patch_embed.proj.weight]Loading weights: 100%|██████████| 57/57 [00:00<00:00, 18.15it/s, Materializing param=model.visual.patch_embed.proj.weight]Loading weights: 100%|██████████| 57/57 [00:00<00:00, 315.75it/s, Materializing param=model.visual.patch_embed.proj.weight]
+val/ROAD_work_tiny_q25/D0_orig:   0%|          | 0/3 [00:00<?, ?it/s]The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+val/ROAD_work_tiny_q25/D0_orig:  33%|███▎      | 1/3 [00:01<00:02,  1.30s/it]val/ROAD_work_tiny_q25/D0_orig:  67%|██████▋   | 2/3 [00:02<00:01,  1.03s/it]val/ROAD_work_tiny_q25/D0_orig: 100%|██████████| 3/3 [00:03<00:00,  1.27s/it]                                                                             ==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25__D0_orig
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D0_orig
+==================================================================
+Official validation score : -0.01004
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.2500   corpus CER 0.8707
+Delta vs champion          : -0.00530  (champion=-0.00473)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0354 w/line=12.000 c/line=58.889', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0078 w/line=11.667 c/line=55.667', 'A2': 'n=   3 score=0.1136 w/line=10.000 c/line=51.667', 'A3': 'n=   3 score=-0.2275 w/line=14.333 c/line=69.333', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By label length          : {'50-69': 'n=   7 score=0.0456 w/line=11.000 c/line=54.571', '70+': 'n=   4 score=-0.1892 w/line=14.250 c/line=65.500', '<50': 'n=   1 score=0.3174 w/line=7.000 c/line=43.000'}
+==================================================================
+val/ROAD_work_tiny_q25/D1_norep:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/D1_norep:  33%|███▎      | 1/3 [00:00<00:01,  1.76it/s]val/ROAD_work_tiny_q25/D1_norep:  67%|██████▋   | 2/3 [00:01<00:00,  1.66it/s]val/ROAD_work_tiny_q25/D1_norep: 100%|██████████| 3/3 [00:02<00:00,  1.31it/s]                                                                              ==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25__D1_norep
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D1_norep
+==================================================================
+Official validation score : -0.08352
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 65.3333   corpus CER 0.9937
+Delta vs baseline          : -0.07348  CI95 [-0.13788, -0.01667]  P(better)=0.003  improved=4 worsened=7  word/char edits saved=0/-97
+Delta vs champion          : -0.07879  (champion=-0.00473)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0838 w/line=12.000 c/line=64.222', 'B': 'n=   3 score=-0.0826 w/line=11.000 c/line=68.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0139 w/line=11.667 c/line=55.000', 'A2': 'n=   3 score=-0.0470 w/line=10.000 c/line=69.333', 'A3': 'n=   3 score=-0.2184 w/line=14.333 c/line=68.333', 'B': 'n=   3 score=-0.0826 w/line=11.000 c/line=68.667'}
+By label length          : {'50-69': 'n=   7 score=-0.0259 w/line=11.000 c/line=62.429', '70+': 'n=   4 score=-0.2188 w/line=14.250 c/line=68.750', '<50': 'n=   1 score=0.0538 w/line=7.000 c/line=72.000'}
+==================================================================
+val/ROAD_work_tiny_q25/D2_b5nb:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/D2_b5nb:  33%|███▎      | 1/3 [00:02<00:04,  2.14s/it]val/ROAD_work_tiny_q25/D2_b5nb:  67%|██████▋   | 2/3 [00:03<00:01,  1.83s/it]val/ROAD_work_tiny_q25/D2_b5nb: 100%|██████████| 3/3 [00:05<00:00,  1.67s/it]                                                                             ==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25__D2_b5nb
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D2_b5nb
+==================================================================
+Official validation score : -0.08277
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 65.2500   corpus CER 0.9924
+Delta vs baseline          : -0.07273  CI95 [-0.13563, -0.01591]  P(better)=0.003  improved=3 worsened=8  word/char edits saved=0/-96
+Delta vs champion          : -0.07803  (champion=-0.00473)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0889 w/line=12.000 c/line=64.778', 'B': 'n=   3 score=-0.0644 w/line=11.000 c/line=66.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0013 w/line=11.667 c/line=56.667', 'A2': 'n=   3 score=-0.0470 w/line=10.000 c/line=69.333', 'A3': 'n=   3 score=-0.2184 w/line=14.333 c/line=68.333', 'B': 'n=   3 score=-0.0644 w/line=11.000 c/line=66.667'}
+By label length          : {'50-69': 'n=   7 score=-0.0207 w/line=11.000 c/line=61.857', '70+': 'n=   4 score=-0.2256 w/line=14.250 c/line=69.500', '<50': 'n=   1 score=0.0538 w/line=7.000 c/line=72.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25__D2_b5nb_mbr
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25 | DECODE: D2_b5nb+mbr
+==================================================================
+Official validation score : -0.06307
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 63.0833   corpus CER 0.9594
+Delta vs baseline          : -0.05303  CI95 [-0.10227, -0.00833]  P(better)=0.008  improved=5 worsened=7  word/char edits saved=0/-70
+Delta vs champion          : -0.05833  (champion=-0.00473)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0737 w/line=12.000 c/line=63.111', 'B': 'n=   3 score=-0.0311 w/line=11.000 c/line=63.000'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0134 w/line=11.667 c/line=58.000', 'A2': 'n=   3 score=0.0106 w/line=10.000 c/line=63.000', 'A3': 'n=   3 score=-0.2184 w/line=14.333 c/line=68.333', 'B': 'n=   3 score=-0.0311 w/line=11.000 c/line=63.000'}
+By label length          : {'50-69': 'n=   7 score=0.0027 w/line=11.000 c/line=59.286', '70+': 'n=   4 score=-0.2188 w/line=14.250 c/line=68.750', '<50': 'n=   1 score=0.0992 w/line=7.000 c/line=67.000'}
+==================================================================
+[ROAD_work_tiny_q25] best decoding on val: D0_orig (-0.01004) | all: D0_orig=-0.01004, D1_norep=-0.08352, D2_b5nb=-0.08277, D2_b5nb+mbr=-0.06307
+test/ROAD_work_tiny_q25/D0_orig:   0%|          | 0/2 [00:00<?, ?it/s]test/ROAD_work_tiny_q25/D0_orig:  50%|█████     | 1/2 [00:00<00:00,  1.12it/s]test/ROAD_work_tiny_q25/D0_orig: 100%|██████████| 2/2 [00:01<00:00,  1.36it/s]                                                                              test/ROAD_work_tiny_q25/D2_b5nb:   0%|          | 0/2 [00:00<?, ?it/s]test/ROAD_work_tiny_q25/D2_b5nb:  50%|█████     | 1/2 [00:01<00:01,  1.25s/it]test/ROAD_work_tiny_q25/D2_b5nb: 100%|██████████| 2/2 [00:02<00:00,  1.04it/s]                                                                              unlisted/ROAD_work_tiny_q25/D2_b5nb:   0%|          | 0/2 [00:00<?, ?it/s]unlisted/ROAD_work_tiny_q25/D2_b5nb:  50%|█████     | 1/2 [00:00<00:00,  1.15it/s]unlisted/ROAD_work_tiny_q25/D2_b5nb: 100%|██████████| 2/2 [00:01<00:00,  1.36it/s]                                                                                  [ROAD_work_tiny_q25] specialist spec_B <- D:/HANAFY/ROAD/work/dry_adapters\ROAD_work_tiny_q25\fold0\spec_B
+val/ROAD_work_tiny_q25/spec_B/D0_orig:   0%|          | 0/1 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/spec_B/D0_orig: 100%|██████████| 1/1 [00:02<00:00,  2.51s/it]                                                                                    [ROAD_work_tiny_q25] spec_B/D0_orig on its 3 val lines vs shared: delta=+0.00000 CI95 [+0.00000,+0.00000] P(better)=0.000
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25@B__D0_orig
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25@B | DECODE: D0_orig
+==================================================================
+Official validation score : -0.01004
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.2500   corpus CER 0.8707
+Delta vs baseline          : +0.00000  CI95 [+0.00000, +0.00000]  P(better)=0.000  improved=0 worsened=0  word/char edits saved=0/0
+Delta vs champion          : -0.00530  (champion=-0.00473)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0354 w/line=12.000 c/line=58.889', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0078 w/line=11.667 c/line=55.667', 'A2': 'n=   3 score=0.1136 w/line=10.000 c/line=51.667', 'A3': 'n=   3 score=-0.2275 w/line=14.333 c/line=69.333', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By label length          : {'50-69': 'n=   7 score=0.0456 w/line=11.000 c/line=54.571', '70+': 'n=   4 score=-0.1892 w/line=14.250 c/line=65.500', '<50': 'n=   1 score=0.3174 w/line=7.000 c/line=43.000'}
+==================================================================
+test/ROAD_work_tiny_q25/spec_B/D0_orig:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q25/spec_B/D0_orig: 100%|██████████| 1/1 [00:02<00:00,  2.62s/it]                                                                                     val/ROAD_work_tiny_q25/spec_B/D2_b5nb:   0%|          | 0/1 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/spec_B/D2_b5nb: 100%|██████████| 1/1 [00:02<00:00,  2.91s/it]                                                                                    [ROAD_work_tiny_q25] spec_B/D2_b5nb on its 3 val lines vs shared: delta=+0.00000 CI95 [+0.00000,+0.00000] P(better)=0.000
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25@B__D2_b5nb
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25@B | DECODE: D2_b5nb
+==================================================================
+Official validation score : -0.08277
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 65.2500   corpus CER 0.9924
+Delta vs baseline          : +0.00000  CI95 [+0.00000, +0.00000]  P(better)=0.000  improved=0 worsened=0  word/char edits saved=0/0
+Delta vs champion          : -0.07803  (champion=-0.00473)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0889 w/line=12.000 c/line=64.778', 'B': 'n=   3 score=-0.0644 w/line=11.000 c/line=66.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0013 w/line=11.667 c/line=56.667', 'A2': 'n=   3 score=-0.0470 w/line=10.000 c/line=69.333', 'A3': 'n=   3 score=-0.2184 w/line=14.333 c/line=68.333', 'B': 'n=   3 score=-0.0644 w/line=11.000 c/line=66.667'}
+By label length          : {'50-69': 'n=   7 score=-0.0207 w/line=11.000 c/line=61.857', '70+': 'n=   4 score=-0.2256 w/line=14.250 c/line=69.500', '<50': 'n=   1 score=0.0538 w/line=7.000 c/line=72.000'}
+==================================================================
+test/ROAD_work_tiny_q25/spec_B/D2_b5nb:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q25/spec_B/D2_b5nb: 100%|██████████| 1/1 [00:01<00:00,  1.67s/it]                                                                                     [ROAD_work_tiny_q25] specialist spec_A <- D:/HANAFY/ROAD/work/dry_adapters\ROAD_work_tiny_q25\fold0\spec_A
+val/ROAD_work_tiny_q25/spec_A/D0_orig:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/spec_A/D0_orig:  33%|███▎      | 1/3 [00:00<00:01,  1.55it/s]val/ROAD_work_tiny_q25/spec_A/D0_orig:  67%|██████▋   | 2/3 [00:01<00:00,  1.07it/s]val/ROAD_work_tiny_q25/spec_A/D0_orig: 100%|██████████| 3/3 [00:02<00:00,  1.58it/s]                                                                                    [ROAD_work_tiny_q25] spec_A/D0_orig on its 9 val lines vs shared: delta=+0.01212 CI95 [-0.01212,+0.03838] P(better)=0.825
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25@A__D0_orig
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25@A | DECODE: D0_orig
+==================================================================
+Official validation score : -0.00095
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 56.2500   corpus CER 0.8555
+Delta vs baseline          : +0.00909  CI95 [-0.00909, +0.02879]  P(better)=0.814  improved=6 worsened=3  word/char edits saved=0/12
+Delta vs champion          : +0.00379  (champion=-0.00473)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0232 w/line=12.000 c/line=57.556', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0169 w/line=11.667 c/line=54.667', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2306 w/line=14.333 c/line=69.667', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By label length          : {'50-69': 'n=   7 score=0.0689 w/line=11.000 c/line=52.000', '70+': 'n=   4 score=-0.2051 w/line=14.250 c/line=67.250', '<50': 'n=   1 score=0.3265 w/line=7.000 c/line=42.000'}
+==================================================================
+test/ROAD_work_tiny_q25/spec_A/D0_orig:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q25/spec_A/D0_orig: 100%|██████████| 1/1 [00:00<00:00,  1.01it/s]                                                                                     val/ROAD_work_tiny_q25/spec_A/D2_b5nb:   0%|          | 0/3 [00:00<?, ?it/s]val/ROAD_work_tiny_q25/spec_A/D2_b5nb:  33%|███▎      | 1/3 [00:01<00:03,  1.57s/it]val/ROAD_work_tiny_q25/spec_A/D2_b5nb:  67%|██████▋   | 2/3 [00:03<00:01,  1.49s/it]val/ROAD_work_tiny_q25/spec_A/D2_b5nb: 100%|██████████| 3/3 [00:03<00:00,  1.12s/it]                                                                                    [ROAD_work_tiny_q25] spec_A/D2_b5nb on its 9 val lines vs shared: delta=+0.07172 CI95 [+0.01010,+0.14343] P(better)=0.990
+==================================================================
+TRIAL: EXP_002__ROAD_work_tiny_q25@A__D2_b5nb
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q25@A | DECODE: D2_b5nb
+==================================================================
+Official validation score : -0.02898
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 59.3333   corpus CER 0.9024
+Delta vs baseline          : +0.05379  CI95 [+0.00455, +0.11364]  P(better)=0.987  improved=5 worsened=3  word/char edits saved=0/71
+Delta vs champion          : -0.02803  (champion=-0.00095)
+Runtime                    : 0.1 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 12
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0172 w/line=12.000 c/line=56.889', 'B': 'n=   3 score=-0.0644 w/line=11.000 c/line=66.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0169 w/line=11.667 c/line=54.667', 'A2': 'n=   3 score=0.1561 w/line=10.000 c/line=47.000', 'A3': 'n=   3 score=-0.2245 w/line=14.333 c/line=69.000', 'B': 'n=   3 score=-0.0644 w/line=11.000 c/line=66.667'}
+By label length          : {'50-69': 'n=   7 score=0.0404 w/line=11.000 c/line=55.143', '70+': 'n=   4 score=-0.2392 w/line=14.250 c/line=71.000', '<50': 'n=   1 score=0.3265 w/line=7.000 c/line=42.000'}
+==================================================================
+test/ROAD_work_tiny_q25/spec_A/D2_b5nb:   0%|          | 0/1 [00:00<?, ?it/s]test/ROAD_work_tiny_q25/spec_A/D2_b5nb: 100%|██████████| 1/1 [00:00<00:00,  1.52it/s]                                                                                     [ROAD_work_tiny_q25] done in 0.6 min
+
+######## executing code cell 13: # Cell 13 — cross-model ensembles on val (each = one trial), champion selection, submission
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25+ork_tiny_q25@A]__D2_b5nb__mbr_nbest
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ENS[work_tiny_q3+ork_tiny_q25+ork_tiny_q25@A]__D2_b5nb__mbr_nbest | DECODE: D2_b5nb/mbr_nbest+specialist
+==================================================================
+Official validation score : -0.02367
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 58.7500   corpus CER 0.8935
+Delta vs baseline          : -0.01818  CI95 [-0.04697, +0.00833]  P(better)=0.091  improved=5 worsened=6  word/char edits saved=0/-24
+Delta vs champion          : -0.02273  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0323 w/line=12.000 c/line=58.556', 'B': 'n=   3 score=0.0023 w/line=11.000 c/line=59.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0048 w/line=11.667 c/line=56.000', 'A2': 'n=   3 score=0.1258 w/line=10.000 c/line=50.333', 'A3': 'n=   3 score=-0.2275 w/line=14.333 c/line=69.333', 'B': 'n=   3 score=0.0023 w/line=11.000 c/line=59.333'}
+By label length          : {'50-69': 'n=   7 score=0.0521 w/line=11.000 c/line=53.857', '70+': 'n=   4 score=-0.2233 w/line=14.250 c/line=69.250', '<50': 'n=   1 score=0.2447 w/line=7.000 c/line=51.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25+ork_tiny_q25@B]__D2_b5nb__mbr_nbest
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ENS[work_tiny_q3+ork_tiny_q25+ork_tiny_q25@B]__D2_b5nb__mbr_nbest | DECODE: D2_b5nb/mbr_nbest+specialist
+==================================================================
+Official validation score : -0.05473
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 62.1667   corpus CER 0.9455
+Delta vs baseline          : -0.04924  CI95 [-0.09242, -0.00985]  P(better)=0.006  improved=4 worsened=8  word/char edits saved=0/-65
+Delta vs champion          : -0.05379  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0737 w/line=12.000 c/line=63.111', 'B': 'n=   3 score=0.0023 w/line=11.000 c/line=59.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0134 w/line=11.667 c/line=58.000', 'A2': 'n=   3 score=0.0106 w/line=10.000 c/line=63.000', 'A3': 'n=   3 score=-0.2184 w/line=14.333 c/line=68.333', 'B': 'n=   3 score=0.0023 w/line=11.000 c/line=59.333'}
+By label length          : {'50-69': 'n=   7 score=0.0170 w/line=11.000 c/line=57.714', '70+': 'n=   4 score=-0.2188 w/line=14.250 c/line=68.750', '<50': 'n=   1 score=0.0992 w/line=7.000 c/line=67.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25+work_tiny_q3@A]__D2_b5nb__mbr_nbest
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ENS[work_tiny_q3+ork_tiny_q25+work_tiny_q3@A]__D2_b5nb__mbr_nbest | DECODE: D2_b5nb/mbr_nbest+specialist
+==================================================================
+Official validation score : -0.01458
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.7500   corpus CER 0.8783
+Delta vs baseline          : -0.00909  CI95 [-0.02424, +0.00608]  P(better)=0.128  improved=3 worsened=7  word/char edits saved=0/-12
+Delta vs champion          : -0.01364  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0404 w/line=12.000 c/line=59.444', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0048 w/line=11.667 c/line=56.000', 'A2': 'n=   3 score=0.1258 w/line=10.000 c/line=50.333', 'A3': 'n=   3 score=-0.2518 w/line=14.333 c/line=72.000', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By label length          : {'50-69': 'n=   7 score=0.0689 w/line=11.000 c/line=52.000', '70+': 'n=   4 score=-0.2256 w/line=14.250 c/line=69.500', '<50': 'n=   1 score=0.2447 w/line=7.000 c/line=51.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25+work_tiny_q3@B]__D2_b5nb__mbr_nbest
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ENS[work_tiny_q3+ork_tiny_q25+work_tiny_q3@B]__D2_b5nb__mbr_nbest | DECODE: D2_b5nb/mbr_nbest+specialist
+==================================================================
+Official validation score : -0.01686
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 58.0000   corpus CER 0.8821
+Delta vs baseline          : -0.01136  CI95 [-0.02424, +0.00000]  P(better)=0.027  improved=1 worsened=6  word/char edits saved=0/-15
+Delta vs champion          : -0.01591  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0414 w/line=12.000 c/line=59.556', 'B': 'n=   3 score=0.0568 w/line=11.000 c/line=53.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0043 w/line=11.667 c/line=57.000', 'A2': 'n=   3 score=0.1288 w/line=10.000 c/line=50.000', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0568 w/line=11.000 c/line=53.333'}
+By label length          : {'50-69': 'n=   7 score=0.0573 w/line=11.000 c/line=53.286', '70+': 'n=   4 score=-0.2119 w/line=14.250 c/line=68.000', '<50': 'n=   1 score=0.2447 w/line=7.000 c/line=51.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__mbr_top1
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D0_orig/mbr_top1
+==================================================================
+Official validation score : -0.00549
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 56.7500   corpus CER 0.8631
+Delta vs baseline          : +0.00000  CI95 [+0.00000, +0.00000]  P(better)=0.000  improved=0 worsened=0  word/char edits saved=0/0
+Delta vs champion          : -0.00455  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0343 w/line=12.000 c/line=58.778', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0018 w/line=11.667 c/line=56.333', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.2006 w/line=14.250 c/line=66.750', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D0_orig/word_rover
+==================================================================
+Official validation score : -0.00095
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 56.2500   corpus CER 0.8555
+Delta vs baseline          : +0.00455  CI95 [+0.00000, +0.01364]  P(better)=0.650  improved=1 worsened=0  word/char edits saved=0/6
+Delta vs champion          : -0.00000  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0283 w/line=12.000 c/line=58.111', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0018 w/line=11.667 c/line=56.333', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2306 w/line=14.333 c/line=69.667', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.1869 w/line=14.250 c/line=65.250', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__char_rover
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D0_orig/char_rover
+==================================================================
+Official validation score : -0.01080
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.3333   corpus CER 0.8720
+Delta vs baseline          : -0.00530  CI95 [-0.02348, +0.00909]  P(better)=0.268  improved=2 worsened=3  word/char edits saved=0/-7
+Delta vs champion          : -0.00985  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0404 w/line=12.000 c/line=59.444', 'B': 'n=   3 score=0.0780 w/line=11.000 c/line=51.000'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0013 w/line=11.667 c/line=56.667', 'A2': 'n=   3 score=0.1136 w/line=10.000 c/line=51.667', 'A3': 'n=   3 score=-0.2336 w/line=14.333 c/line=70.000', 'B': 'n=   3 score=0.0780 w/line=11.000 c/line=51.000'}
+By label length          : {'50-69': 'n=   7 score=0.0482 w/line=11.000 c/line=54.286', '70+': 'n=   4 score=-0.1937 w/line=14.250 c/line=66.000', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__mbr_top1
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D1_norep/mbr_top1
+==================================================================
+Official validation score : -0.01004
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.2500   corpus CER 0.8707
+Delta vs baseline          : -0.00455  CI95 [-0.01364, +0.00000]  P(better)=0.000  improved=0 worsened=1  word/char edits saved=0/-6
+Delta vs champion          : -0.00909  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0404 w/line=12.000 c/line=59.444', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0164 w/line=11.667 c/line=58.333', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.2142 w/line=14.250 c/line=68.250', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__word_rover
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D1_norep/word_rover
+==================================================================
+Official validation score : -0.00777
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.0000   corpus CER 0.8669
+Delta vs baseline          : -0.00227  CI95 [-0.01364, +0.00682]  P(better)=0.268  improved=1 worsened=1  word/char edits saved=0/-3
+Delta vs champion          : -0.00682  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0374 w/line=12.000 c/line=59.111', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0164 w/line=11.667 c/line=58.333', 'A2': 'n=   3 score=0.1439 w/line=10.000 c/line=48.333', 'A3': 'n=   3 score=-0.2396 w/line=14.333 c/line=70.667', 'B': 'n=   3 score=0.0811 w/line=11.000 c/line=50.667'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.2074 w/line=14.250 c/line=67.500', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__char_rover
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D1_norep/char_rover
+==================================================================
+Official validation score : -0.08958
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 66.0000   corpus CER 1.0038
+Delta vs baseline          : -0.08409  CI95 [-0.13864, -0.03182]  P(better)=0.000  improved=2 worsened=7  word/char edits saved=0/-111
+Delta vs champion          : -0.08864  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0919 w/line=12.000 c/line=65.111', 'B': 'n=   3 score=-0.0826 w/line=11.000 c/line=68.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0164 w/line=11.667 c/line=58.333', 'A2': 'n=   3 score=-0.0288 w/line=10.000 c/line=67.333', 'A3': 'n=   3 score=-0.2306 w/line=14.333 c/line=69.667', 'B': 'n=   3 score=-0.0826 w/line=11.000 c/line=68.667'}
+By label length          : {'50-69': 'n=   7 score=-0.0285 w/line=11.000 c/line=62.714', '70+': 'n=   4 score=-0.2415 w/line=14.250 c/line=71.250', '<50': 'n=   1 score=0.0902 w/line=7.000 c/line=68.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_nbest
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/mbr_nbest
+==================================================================
+Official validation score : -0.02595
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 59.0000   corpus CER 0.8973
+Delta vs baseline          : -0.02045  CI95 [-0.05758, +0.00682]  P(better)=0.092  improved=3 worsened=6  word/char edits saved=0/-27
+Delta vs champion          : -0.02500  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0576 w/line=12.000 c/line=61.333', 'B': 'n=   3 score=0.0689 w/line=11.000 c/line=52.000'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0018 w/line=11.667 c/line=56.333', 'A2': 'n=   3 score=0.0530 w/line=10.000 c/line=58.333', 'A3': 'n=   3 score=-0.2275 w/line=14.333 c/line=69.333', 'B': 'n=   3 score=0.0689 w/line=11.000 c/line=52.000'}
+By label length          : {'50-69': 'n=   7 score=0.0534 w/line=11.000 c/line=53.714', '70+': 'n=   4 score=-0.2006 w/line=14.250 c/line=66.750', '<50': 'n=   1 score=0.1174 w/line=7.000 c/line=65.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_top1
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/mbr_top1
+==================================================================
+Official validation score : -0.00852
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 57.0833   corpus CER 0.8682
+Delta vs baseline          : -0.00303  CI95 [-0.01061, +0.00455]  P(better)=0.212  improved=1 worsened=3  word/char edits saved=0/-4
+Delta vs champion          : -0.00758  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0333 w/line=12.000 c/line=58.667', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0043 w/line=11.667 c/line=57.000', 'A2': 'n=   3 score=0.1530 w/line=10.000 c/line=47.333', 'A3': 'n=   3 score=-0.2487 w/line=14.333 c/line=71.667', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By label length          : {'50-69': 'n=   7 score=0.0624 w/line=11.000 c/line=52.714', '70+': 'n=   4 score=-0.2119 w/line=14.250 c/line=68.000', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__word_rover
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/word_rover
+==================================================================
+Official validation score : -0.04110
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 60.6667   corpus CER 0.9227
+Delta vs baseline          : -0.03561  CI95 [-0.11138, +0.00682]  P(better)=0.202  improved=2 worsened=3  word/char edits saved=0/-47
+Delta vs champion          : -0.04015  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0303 w/line=12.000 c/line=58.333', 'B': 'n=   3 score=-0.0735 w/line=11.000 c/line=67.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0043 w/line=11.667 c/line=57.000', 'A2': 'n=   3 score=0.1530 w/line=10.000 c/line=47.333', 'A3': 'n=   3 score=-0.2396 w/line=14.333 c/line=70.667', 'B': 'n=   3 score=-0.0735 w/line=11.000 c/line=67.667'}
+By label length          : {'50-69': 'n=   7 score=0.0027 w/line=11.000 c/line=59.286', '70+': 'n=   4 score=-0.2051 w/line=14.250 c/line=67.250', '<50': 'n=   1 score=0.3083 w/line=7.000 c/line=44.000'}
+==================================================================
+==================================================================
+TRIAL: EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__char_rover
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: ROAD_work_tiny_q3+ROAD_work_tiny_q25 | DECODE: D2_b5nb/char_rover
+==================================================================
+Official validation score : -0.08504
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 65.5000   corpus CER 0.9962
+Delta vs baseline          : -0.07955  CI95 [-0.13788, -0.02727]  P(better)=0.000  improved=2 worsened=8  word/char edits saved=0/-105
+Delta vs champion          : -0.08409  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0929 w/line=12.000 c/line=65.222', 'B': 'n=   3 score=-0.0614 w/line=11.000 c/line=66.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0194 w/line=11.667 c/line=58.667', 'A2': 'n=   3 score=-0.0197 w/line=10.000 c/line=66.333', 'A3': 'n=   3 score=-0.2396 w/line=14.333 c/line=70.667', 'B': 'n=   3 score=-0.0614 w/line=11.000 c/line=66.333'}
+By label length          : {'50-69': 'n=   7 score=-0.0181 w/line=11.000 c/line=61.571', '70+': 'n=   4 score=-0.2460 w/line=14.250 c/line=71.750', '<50': 'n=   1 score=0.0902 w/line=7.000 c/line=68.000'}
+==================================================================
+
+PER-CLASS ROUTING (acceptance rule) — champion: ROAD_work_tiny_q25@A__D0_orig = -0.00095
+   tau^2 (class x candidate interaction variance) = 0.00e+00  -> no class-specific advantage in the data: one model for all
+   class challenger                                                      delta   P(>)   shrunk  sign    pi*d  accept
+   A     ROAD_work_tiny_q3@A__D0_orig                                  -0.0101  0.167  -0.0038  0.00 -0.0058  -
+   A     ENS[work_tiny_q3+ork_tiny_q25+work_tiny_q3@A]__D2_b5nb__mbr_  -0.0172  0.092  -0.0136  0.00 -0.0098  -
+   A     ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover           -0.0051  0.348  +0.0000  0.00 -0.0029  -
+   B     ROAD_work_tiny_q3@B__D0_orig                                  +0.0091  0.857  -0.0061  0.00 +0.0039  -
+   B     ROAD_work_tiny_q3@B__D2_b5nb                                  -0.0030  0.361  -0.0083  0.00 -0.0013  -
+   B     ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover           +0.0152  0.962  +0.0000  0.00 +0.0065  -
+   policy on all val: keep the champion for every class
+   honest split-half score over 30 splits: -0.00428 ± 0.00620 (champion alone -0.00095)
+==================================================================
+TRIAL: EXP_002__ROUTED_by_class
+DESCRIPTION: Realistic augmentation (magnitudes matched to measured archive stats, resampled each time a line is seen) + 32B learning rate 2e-4 -> 1e-4; decoding challengers, cross-model and class-routed ensembles, all on full Fold-0 val
+MODEL: {"A": "ROAD_work_tiny_q25@A__D0_orig", "B": "ROAD_work_tiny_q25@A__D0_orig"} | DECODE: routed (acceptance rule)
+==================================================================
+Official validation score : -0.01837
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 58.1667   corpus CER 0.8847
+Delta vs baseline          : -0.01288  CI95 [-0.02879, +0.00227]  P(better)=0.050  improved=3 worsened=6  word/char edits saved=0/-17
+Delta vs champion          : -0.01742  (champion=-0.00095)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 12   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0465 w/line=12.000 c/line=60.111', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=-0.0073 w/line=11.667 c/line=57.333', 'A2': 'n=   3 score=0.1227 w/line=10.000 c/line=50.667', 'A3': 'n=   3 score=-0.2548 w/line=14.333 c/line=72.333', 'B': 'n=   3 score=0.0659 w/line=11.000 c/line=52.333'}
+By label length          : {'50-69': 'n=   7 score=0.0611 w/line=11.000 c/line=52.857', '70+': 'n=   4 score=-0.2233 w/line=14.250 c/line=69.250', '<50': 'n=   1 score=0.2447 w/line=7.000 c/line=51.000'}
+==================================================================
+   -> for RUN_MODE='full' set ROUTING_MAP={'A': 'D0_orig:ork_tiny_q25@A', 'B': 'D0_orig:ork_tiny_q25@A'}  (ROUTING_LEVEL='class') and SPECIALISTS with the same keys
+
+VALIDATION RANKING (official score):
+  -0.00095  ROAD_work_tiny_q25@A__D0_orig
+  -0.00095  ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover
+  -0.00473  ROAD_work_tiny_q3@A__D0_orig
+  -0.00549  ROAD_work_tiny_q3__D0_orig
+  -0.00549  ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__mbr_top1
+  -0.00701  ROAD_work_tiny_q3@B__D0_orig
+  -0.00777  ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__word_rover   (no test preds)
+  -0.00852  ROAD_work_tiny_q3__D2_b5nb
+  -0.00852  ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_top1
+  -0.00928  ROAD_work_tiny_q3@B__D2_b5nb
+  -0.01004  ROAD_work_tiny_q3__D1_norep   (no test preds)
+  -0.01004  ROAD_work_tiny_q25__D0_orig
+  -0.01004  ROAD_work_tiny_q25@B__D0_orig
+  -0.01004  ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__mbr_top1   (no test preds)
+  -0.01080  ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__char_rover
+pseudo_labels.csv: 12 lines from 2 system(s); risk quantiles 50/70/90% = [0.409, 0.4195, 0.4545]
+
+submission.csv <- ROAD_work_tiny_q25@A__D0_orig  | rows=7 | empty-replaced=0
+
+TRIAL TABLE (this session):
+                                                                     trial                      variant     score  word_edits_per_line  char_edits_per_line  delta_baseline  p_better_baseline  runtime_min   status
+                                       EXP_002__ROAD_work_tiny_q3__D0_orig                      D0_orig -0.005492                11.75            56.750000             NaN                NaN     0.103366 BASELINE
+                                      EXP_002__ROAD_work_tiny_q3__D1_norep                     D1_norep -0.010038                11.75            57.250000       -0.004545             0.0000     0.077835 REJECTED
+                                       EXP_002__ROAD_work_tiny_q3__D2_b5nb                      D2_b5nb -0.008523                11.75            57.083333       -0.003030             0.2117     0.085368 REJECTED
+                                   EXP_002__ROAD_work_tiny_q3__D2_b5nb_mbr                  D2_b5nb+mbr -0.015341                11.75            57.833333       -0.009848             0.0403     0.043882 REJECTED
+                                     EXP_002__ROAD_work_tiny_q3@B__D0_orig                      D0_orig -0.007008                11.75            56.916667       -0.001515             0.0000     0.015286 BASELINE
+                                     EXP_002__ROAD_work_tiny_q3@B__D2_b5nb                      D2_b5nb -0.009280                11.75            57.166667       -0.000758             0.0000     0.019599 REJECTED
+                                     EXP_002__ROAD_work_tiny_q3@A__D0_orig                      D0_orig -0.004735                11.75            56.666667        0.000758             0.5173     0.025013 BASELINE
+                                     EXP_002__ROAD_work_tiny_q3@A__D2_b5nb                      D2_b5nb -0.022727                12.00            57.500000       -0.014205             0.2034     0.042865 REJECTED
+                                      EXP_002__ROAD_work_tiny_q25__D0_orig                      D0_orig -0.010038                11.75            57.250000             NaN                NaN     0.106813 BASELINE
+                                     EXP_002__ROAD_work_tiny_q25__D1_norep                     D1_norep -0.083523                11.75            65.333333       -0.073485             0.0032     0.080926 REJECTED
+                                      EXP_002__ROAD_work_tiny_q25__D2_b5nb                      D2_b5nb -0.082765                11.75            65.250000       -0.072727             0.0032     0.132218 REJECTED
+                                  EXP_002__ROAD_work_tiny_q25__D2_b5nb_mbr                  D2_b5nb+mbr -0.063068                11.75            63.083333       -0.053030             0.0080     0.087617 REJECTED
+                                    EXP_002__ROAD_work_tiny_q25@B__D0_orig                      D0_orig -0.010038                11.75            57.250000        0.000000             0.0000     0.041933 BASELINE
+                                    EXP_002__ROAD_work_tiny_q25@B__D2_b5nb                      D2_b5nb -0.082765                11.75            65.250000        0.000000             0.0000     0.048622 REJECTED
+                                    EXP_002__ROAD_work_tiny_q25@A__D0_orig                      D0_orig -0.000947                11.75            56.250000        0.009091             0.8142     0.034465 BASELINE
+                                    EXP_002__ROAD_work_tiny_q25@A__D2_b5nb                      D2_b5nb -0.028977                11.75            59.333333        0.053788             0.9873     0.061599 REJECTED
+EXP_002__ENS[work_tiny_q3+ork_tiny_q25+ork_tiny_q25@A]__D2_b5nb__mbr_nbest D2_b5nb/mbr_nbest+specialist -0.023674                11.75            58.750000       -0.018182             0.0914     0.000000 REJECTED
+EXP_002__ENS[work_tiny_q3+ork_tiny_q25+ork_tiny_q25@B]__D2_b5nb__mbr_nbest D2_b5nb/mbr_nbest+specialist -0.054735                11.75            62.166667       -0.049242             0.0060     0.000000 REJECTED
+EXP_002__ENS[work_tiny_q3+ork_tiny_q25+work_tiny_q3@A]__D2_b5nb__mbr_nbest D2_b5nb/mbr_nbest+specialist -0.014583                11.75            57.750000       -0.009091             0.1281     0.000000 REJECTED
+EXP_002__ENS[work_tiny_q3+ork_tiny_q25+work_tiny_q3@B]__D2_b5nb__mbr_nbest D2_b5nb/mbr_nbest+specialist -0.016856                11.75            58.000000       -0.011364             0.0269     0.000000 REJECTED
+                EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__mbr_top1             D0_orig/mbr_top1 -0.005492                11.75            56.750000        0.000000             0.0000     0.000023 REJECTED
+              EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__word_rover           D0_orig/word_rover -0.000947                11.75            56.250000        0.004545             0.6497     0.000024 REJECTED
+              EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D0_orig__char_rover           D0_orig/char_rover -0.010795                11.75            57.333333       -0.005303             0.2683     0.001034 REJECTED
+               EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__mbr_top1            D1_norep/mbr_top1 -0.010038                11.75            57.250000       -0.004545             0.0000     0.000009 REJECTED
+             EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__word_rover          D1_norep/word_rover -0.007765                11.75            57.000000       -0.002273             0.2680     0.000022 REJECTED
+             EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D1_norep__char_rover          D1_norep/char_rover -0.089583                11.75            66.000000       -0.084091             0.0002     0.001111 REJECTED
+               EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_nbest            D2_b5nb/mbr_nbest -0.025947                11.75            59.000000       -0.020455             0.0925     0.000245 REJECTED
+                EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__mbr_top1             D2_b5nb/mbr_top1 -0.008523                11.75            57.083333       -0.003030             0.2117     0.000030 REJECTED
+              EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__word_rover           D2_b5nb/word_rover -0.041098                11.75            60.666667       -0.035606             0.2023     0.000035 REJECTED
+              EXP_002__ENS[work_tiny_q3+ork_tiny_q25]__D2_b5nb__char_rover           D2_b5nb/char_rover -0.085038                11.75            65.500000       -0.079545             0.0002     0.001046 REJECTED
+                                                  EXP_002__ROUTED_by_class     routed (acceptance rule) -0.018371                11.75            58.166667       -0.012879             0.0496     0.000000 REJECTED
+
+######## executing code cell 14: # Cell 14 — error forensics: champion vs baseline (where did the change help / hurt?)
+CHAMPION: ROAD_work_tiny_q25@A__D0_orig
+  ops: {'word_replace': 55, 'word_delete': 86, 'char_insert': 10, 'char_replace': 408, 'char_delete': 257}
+  word_sub_classes: {'3+char': 53, 'punct/markup': 1, '2-char': 1}
+  word_sub: [("somme -> ('--", 1), ('of -> timing', 1), ('twelve -> 分', 1), ('thousand -> degreessındaounderชัย逮甜蜜阿尔', 1), ("Gent -> ('--", 1), ('am -> timing', 1), ('become -> 分', 1), ('bound -> degrees>xpathSHIP', 1), ('& -> >', 1), ('engaged -> Nanoprograms甜蜜', 1), ('shall -> _terminal', 1), ('Come -> DWNano報導enanceounderชัย芷', 1), ('I -> digitalWrite', 1), ('Lucie -> "="', 1), ("bill -> ('--", 1), ('beareing -> timing', 1), ('date -> 分', 1), ('to -> degrees>xpathSHIP', 1), ('the -> >', 1), ('prsents -> Nanoprograms甜蜜', 1)]
+  word_del: [('the', 6), ('and', 6), ('of', 5), ('in', 3), ('well', 2), ('pounds', 1), ('good', 1), ('Tobaccoe', 1), ('made', 1), ('one', 1), ('bond', 1), ('o^r', 1), ('specialtie', 1), ('betwix', 1), ('ye', 1), ('date', 1), ('Mitchell', 1), ('parish', 1), ('St.', 1), ('Phillipp', 1)]
+  word_ins: []
+  char_sub: [("' '->'n'", 5), ("' '->'g'", 5), ("' '->'a'", 5), ("' '->'r'", 5), ("' '->'e'", 4), ("' '->'d'", 4), ("'r'->'o'", 4), ("'f'->'i'", 3), ("'o'->'e'", 3), ("'e'->'r'", 3), ("' '->'o'", 3), ("'f'->'u'", 3), ("'t'->'d'", 3), ("'s'->'u'", 3), ("'t'->'n'", 3), ("' '->'u'", 3), ("'m'->' '", 2), ("' '->'i'", 2), ("'t'->'g'", 2), ("'l'->' '", 2)]
+  char_del: [("' '", 34), ("'e'", 33), ("'o'", 21), ("'n'", 19), ("'d'", 14), ("'a'", 14), ("'l'", 14), ("'t'", 12), ("'s'", 11), ("'c'", 10), ("'h'", 10), ("'b'", 7), ("'r'", 7), ("'f'", 6), ("'p'", 4), ("'g'", 4), ("'u'", 4), ("'y'", 4), ("'w'", 4), ("'i'", 3)]
+  char_ins: [("'('", 2), ("'d'", 1), ("'_'", 1), ("'t'", 1), ("'g'", 1), ("'ト'", 1), ("' '", 1), ("'E'", 1), ("'X'", 1)]
+
+champion vs baseline: {'delta': 0.00454545454545451, 'ci95_lo': -0.013636363636363669, 'ci95_hi': 0.022727272727272697, 'p_better': 0.6734, 'improved': 6, 'worsened': 4, 'word_edits_saved': 0, 'char_edits_saved': 6}
+  delta by class: {'A': 0.01111, 'B': -0.01515}
+  delta by group: {'A1': 0.01515, 'A2': 0.0, 'A3': 0.01818, 'B': -0.01515}
+  delta by len: {'50-69': 0.00779, '70+': -0.00455, '<50': 0.01818}
+
+  lines most WORSENED by the champion:
+   rs063BLUtxNXz7qJ | GT: Gent am become bound & engaged in one bond o^r specialtie betwix ye date
+      base: pepper.Make祉 Isis legend Arr_purchaseatel RwandaⓇ
+      new : ('-- timing 分 degrees>xpathSHIP > Nanoprograms甜蜜
+   CduRh5IjwfP6hYb8 | GT: S:^t Michaells in the Island aforesaid and then and there
+      base: 𝑬氧 MODEL wholes screened victims letz():о�_ptr
+      new : 额的标准++]獗的带领下ounderชัย biographyFillColorsafe
+   RkBY1IMdbNG2B9Rd | GT: Roger Burch This first day of July 1681 ffarrell Mackward
+      base: 镦 glBind เพื่อWindowSize dd新华网 teamwork Radeon镑�
+      new : safe biography的带领下ounderชัยTabControlży patië哐@$
+   Fbs5fvY9uFI8OgpO | GT: as Well for him Selfe and Company as allsoe in the behalfe
+      base: 村落"groupですから показ dragon音响 concessמא re락
+      new : EXTI degrees>xpathSHIPounderชัย逮 gums崒 спин
+
+  loss share of worst 2% lines: 0.114
+
+DRY RUN COMPLETE in 85s
+   fold0_val_ids.csv
+   pseudo_labels.csv
+   qwen-vl-ocr
+   routing_map.json
+   submission.csv
+   submission_source.json
+   trial_configs
+   trial_predictions
+   trial_results.csv
+ID,Target
+MzQuRiUbPFsq6Azy,('-- timing 分 degreessında甜蜜阿尔 gdk lys address
+1LrXN25dFz88Spt3,('-- timing 分 degrees◬ proc address.strictEqual Thouاسم
+voWkMuyhO8FAlLr5,獲得 gravid裢tiği[group thụ_DECL的带领下ounderชัย
+iQqdWwQ7uXrATwei,safe biography的带领下ounder日照 dood哐@$ Iterator_routing
+fdbPL2qsoaciDFoi,ounderช

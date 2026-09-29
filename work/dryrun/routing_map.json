@@ -1,0 +1,7 @@
+{
+ "ROUTING_LEVEL": "class",
+ "ROUTING_MAP": {
+  "A": "D1_norep:ork_tiny_q25",
+  "B": "D2_b5nb:work_tiny_q3"
+ }
+}

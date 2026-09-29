@@ -1,0 +1,1046 @@
+{
+ "tall_batch_counts": {
+  "0": {
+   "test": 1029,
+   "train": 3055,
+   "unlisted": 534
+  },
+  "1": {
+   "test": 345,
+   "train": 1043,
+   "unlisted": 153
+  }
+ },
+ "tall_batch_medians": {
+  "width": {
+   "0": 1092.0,
+   "1": 4251.0
+  },
+  "height": {
+   "0": 56.0,
+   "1": 353.0
+  },
+  "aspect": {
+   "0": 18.983,
+   "1": 12.365
+  },
+  "jpeg_quality_est": {
+   "0": 84.965,
+   "1": 84.965
+  },
+  "bg_mean": {
+   "0": 206.449,
+   "1": 171.836
+  },
+  "bg_tint_RB": {
+   "0": 50.846,
+   "1": 67.625
+  },
+  "core_h": {
+   "0": 20.0,
+   "1": 148.0
+  },
+  "stroke_w": {
+   "0": 2.739,
+   "1": 3.82
+  },
+  "ink_h_frac": {
+   "0": 0.963,
+   "1": 0.977
+  },
+  "n_row_peaks": {
+   "0": 1.0,
+   "1": 2.0
+  },
+  "lap_var_norm": {
+   "0": 0.436,
+   "1": 0.019
+  },
+  "noise_sigma": {
+   "0": 2.421,
+   "1": 3.026
+  },
+  "file_bytes": {
+   "0": 15312.5,
+   "1": 269027.0
+  },
+  "q25_kaggle_tokens": {
+   "0": 296.0,
+   "1": 438.0
+  },
+  "q25_kaggle_scale": {
+   "0": 2.059,
+   "1": 0.477
+  },
+  "q3_kaggle_token_rows": {
+   "0": 4.0,
+   "1": 5.0
+  }
+ },
+ "value_counts_jpeg_quality_est": {
+  "84.96475054229936": 6145,
+  "79.97559652928416": 14
+ },
+ "value_counts_jpeg_q0_dc": {
+  "5.0": 6145,
+  "6.0": 14
+ },
+ "value_counts_subsampling": {
+  "2": 6159
+ },
+ "value_counts_mode": {
+  "RGB": 6159
+ },
+ "value_counts_progressive": {
+  "0": 6159
+ },
+ "value_counts_dpi": {
+  "nan": 6145,
+  "600.0": 12,
+  "236.0": 2
+ },
+ "value_counts_has_icc": {
+  "0": 6159
+ },
+ "value_counts_is_grayscale": {
+  "0": 6159
+ },
+ "xheight_px_raw_by_batch": {
+  "count": {
+   "0": 4618.0,
+   "1": 1541.0
+  },
+  "mean": {
+   "0": 24.0,
+   "1": 165.26
+  },
+  "std": {
+   "0": 15.09,
+   "1": 75.85
+  },
+  "min": {
+   "0": 8.0,
+   "1": 39.0
+  },
+  "25%": {
+   "0": 16.0,
+   "1": 115.0
+  },
+  "50%": {
+   "0": 20.0,
+   "1": 148.0
+  },
+  "75%": {
+   "0": 26.0,
+   "1": 191.0
+  },
+  "max": {
+   "0": 149.0,
+   "1": 617.0
+  }
+ },
+ "xheight_px_after_q25_by_batch": {
+  "count": {
+   "0": 4618.0,
+   "1": 1541.0
+  },
+  "mean": {
+   "0": 46.41,
+   "1": 79.08
+  },
+  "std": {
+   "0": 19.66,
+   "1": 37.87
+  },
+  "min": {
+   "0": 16.87,
+   "1": 20.3
+  },
+  "25%": {
+   "0": 35.23,
+   "1": 52.47
+  },
+  "50%": {
+   "0": 42.48,
+   "1": 69.8
+  },
+  "75%": {
+   "0": 51.85,
+   "1": 94.23
+  },
+  "max": {
+   "0": 168.0,
+   "1": 280.0
+  }
+ },
+ "px_per_char_q25_by_batch": {
+  "count": {
+   "0": 3055.0,
+   "1": 1043.0
+  },
+  "mean": {
+   "0": 30.55,
+   "1": 35.53
+  },
+  "std": {
+   "0": 6.05,
+   "1": 6.09
+  },
+  "min": {
+   "0": 13.02,
+   "1": 15.89
+  },
+  "25%": {
+   "0": 26.23,
+   "1": 31.46
+  },
+  "50%": {
+   "0": 30.27,
+   "1": 35.38
+  },
+  "75%": {
+   "0": 34.61,
+   "1": 39.8
+  },
+  "max": {
+   "0": 55.31,
+   "1": 54.07
+  }
+ },
+ "tokens_per_char_q25_by_batch": {
+  "count": {
+   "0": 3055.0,
+   "1": 1043.0
+  },
+  "mean": {
+   "0": 4.812,
+   "1": 7.914
+  },
+  "std": {
+   "0": 1.031,
+   "1": 2.563
+  },
+  "min": {
+   "0": 2.528,
+   "1": 3.281
+  },
+  "25%": {
+   "0": 4.0,
+   "1": 6.083
+  },
+  "50%": {
+   "0": 4.683,
+   "1": 7.684
+  },
+  "75%": {
+   "0": 5.5,
+   "1": 9.463
+  },
+  "max": {
+   "0": 8.333,
+   "1": 20.372
+  }
+ },
+ "visual_tokens_q25_kaggle": {
+  "count": 6159.0,
+  "mean": 330.3,
+  "std": 79.2,
+  "min": 256.0,
+  "25%": 284.0,
+  "50%": 304.0,
+  "75%": 328.0,
+  "max": 1022.0
+ },
+ "visual_tokens_q3_kaggle": {
+  "count": 6159.0,
+  "mean": 254.6,
+  "std": 61.4,
+  "min": 198.0,
+  "25%": 213.0,
+  "50%": 236.0,
+  "75%": 256.0,
+  "max": 768.0
+ },
+ "token_rows_q25_kaggle": {
+  "3": 46,
+  "4": 3348,
+  "5": 1580,
+  "6": 695,
+  "7": 318,
+  "8": 125,
+  "9": 33,
+  "10": 8,
+  "11": 2,
+  "12": 2,
+  "13": 1,
+  "14": 1
+ },
+ "token_rows_q3_kaggle": {
+  "3": 1307,
+  "4": 3233,
+  "5": 1008,
+  "6": 430,
+  "7": 135,
+  "8": 32,
+  "9": 9,
+  "10": 3,
+  "11": 1,
+  "12": 1
+ },
+ "token_rows_q25_default": {
+  "1": 152,
+  "2": 3412,
+  "3": 760,
+  "4": 392,
+  "5": 451,
+  "6": 514,
+  "7": 308,
+  "8": 125,
+  "9": 32,
+  "10": 7,
+  "11": 2,
+  "12": 2,
+  "13": 1,
+  "14": 1
+ },
+ "downscaled_by_ladder_frac": 0.2484169508037019,
+ "ladder_downscale_factor_tall": {
+  "count": 1541.0,
+  "mean": 0.478,
+  "std": 0.078,
+  "min": 0.338,
+  "25%": 0.432,
+  "50%": 0.482,
+  "75%": 0.514,
+  "max": 1.0
+ },
+ "top_image_label_correlations": [
+  [
+   "ink_w_xh",
+   "n_chars",
+   0.445
+  ],
+  [
+   "w_xh",
+   "n_chars",
+   0.44
+  ],
+  [
+   "tenengrad",
+   "n_chars",
+   0.426
+  ],
+  [
+   "lap_var",
+   "n_chars",
+   0.423
+  ],
+  [
+   "aspect",
+   "n_chars",
+   0.422
+  ],
+  [
+   "blockiness",
+   "n_chars",
+   -0.392
+  ],
+  [
+   "tenengrad",
+   "n_words",
+   0.387
+  ],
+  [
+   "aspect",
+   "n_words",
+   0.384
+  ],
+  [
+   "bg_hue",
+   "n_chars",
+   0.379
+  ],
+  [
+   "lap_var_norm",
+   "n_chars",
+   0.375
+  ],
+  [
+   "ink_w_xh",
+   "n_words",
+   0.373
+  ],
+  [
+   "lap_var",
+   "n_words",
+   0.372
+  ],
+  [
+   "w_xh",
+   "n_words",
+   0.368
+  ],
+  [
+   "blockiness",
+   "n_words",
+   -0.338
+  ],
+  [
+   "bg_hue",
+   "n_words",
+   0.331
+  ],
+  [
+   "fisher_sep",
+   "n_chars",
+   -0.33
+  ],
+  [
+   "illum_cv",
+   "n_chars",
+   -0.325
+  ],
+  [
+   "lap_var_norm",
+   "n_words",
+   0.323
+  ],
+  [
+   "edge_grad_rel",
+   "n_chars",
+   0.318
+  ],
+  [
+   "core_h",
+   "n_chars",
+   -0.312
+  ],
+  [
+   "illum_lr_diff",
+   "n_chars",
+   0.306
+  ],
+  [
+   "fisher_sep",
+   "n_words",
+   -0.297
+  ],
+  [
+   "g_p75",
+   "n_chars",
+   0.293
+  ],
+  [
+   "core_h",
+   "upper_frac",
+   0.292
+  ],
+  [
+   "edge_density",
+   "n_chars",
+   0.291
+  ],
+  [
+   "stroke_w_std",
+   "n_chars",
+   -0.286
+  ],
+  [
+   "bg_R",
+   "n_chars",
+   0.285
+  ],
+  [
+   "ink_w_xh",
+   "upper_frac",
+   -0.285
+  ],
+  [
+   "w_xh",
+   "upper_frac",
+   -0.285
+  ],
+  [
+   "g_p50",
+   "n_chars",
+   0.283
+  ],
+  [
+   "edge_grad_rel",
+   "n_words",
+   0.282
+  ],
+  [
+   "ink_R",
+   "n_chars",
+   0.28
+  ],
+  [
+   "n_gaps",
+   "n_words",
+   0.277
+  ],
+  [
+   "illum_cv",
+   "n_words",
+   -0.275
+  ],
+  [
+   "ladder_h",
+   "n_chars",
+   -0.274
+  ],
+  [
+   "ink_mean",
+   "n_chars",
+   0.272
+  ],
+  [
+   "n_gaps",
+   "upper_frac",
+   -0.272
+  ],
+  [
+   "ink_G",
+   "n_chars",
+   0.271
+  ],
+  [
+   "g_p95",
+   "n_chars",
+   0.271
+  ],
+  [
+   "slant_shear",
+   "n_amp",
+   0.271
+  ]
+ ],
+ "length_model_by_batch": {
+  "0": {
+   "coef": [
+    0.36,
+    -0.382
+   ],
+   "intercept": 46.46,
+   "spearman_pred_true": 0.388,
+   "resid_mad": 8.41,
+   "rel_err_p50": 0.136,
+   "rel_err_p90": 0.318
+  },
+  "1": {
+   "coef": [
+    0.362,
+    -1.223
+   ],
+   "intercept": 46.31,
+   "spearman_pred_true": 0.354,
+   "resid_mad": 6.0,
+   "rel_err_p50": 0.111,
+   "rel_err_p90": 0.265
+  }
+ },
+ "len_outliers_resid_gt_0.6": 16,
+ "len_outlier_examples": [
+  [
+   "XBolZ9SHDdJp62hD",
+   "or cause to be notified by mee or any other person or persons that noe debters pay or cause to be paid",
+   1057,
+   82,
+   102,
+   54.7
+  ],
+  [
+   "t0UrASljcgzvBAnO",
+   "1681 Murphey Marcous of the Parrish of St.Phillips in the -- Island aforesaid sends greeting in our Lord God everlasting",
+   5186,
+   425,
+   120,
+   64.4
+  ],
+  [
+   "PuDCCRnGEY59YVkQ",
+   "Judgements wherein he is bound to Robert Harrison by the first day of May next dated y^e 15^th Aprill 1642",
+   1121,
+   64,
+   106,
+   61.3
+  ],
+  [
+   "T3gCkSt5bcuYdswx",
+   "thereunto belonginge or in any wyse appertayneinge To have and to hould all the forebargained",
+   1078,
+   65,
+   93,
+   54.1
+  ],
+  [
+   "tKR69yz8TmeLS1Op",
+   "moveables and immoveables To have and to hould all these demised premises unto him the said Edward",
+   1117,
+   79,
+   98,
+   57.2
+  ],
+  [
+   "oXHyC6Ct3LBtKNdN",
+   "under or them or any of them ( except before excepted )the said mortgage to the abovesaid John",
+   1078,
+   70,
+   94,
+   55.2
+  ],
+  [
+   "VfA8Rllc17Tz2PUR",
+   "two Sales bearing date and w^th these adults and all the mograge Land Chattles buildings",
+   5634,
+   433,
+   88,
+   51.7
+  ],
+  [
+   "W8wdFrxaW9VMnV3p",
+   "was in y^e possession of my late Dec^d: ffather &now in the possession me y^e. s^d. Robert San",
+   4737,
+   303,
+   94,
+   55.3
+  ],
+  [
+   "rat7Ymfb6NaDEgQJ",
+   "Cor leg, at the suit of the item Honu^rble Collo.^ll Edwyn Stede, and Stephen Gascoigne Esq^r",
+   5124,
+   422,
+   93,
+   55.1
+  ],
+  [
+   "oFBwvqCzeCiCwE8o",
+   "Mary, her heires & Assignes, ags:^t all & Every person & persons Shall & Will Warrant & for",
+   5644,
+   506,
+   91,
+   54.7
+  ],
+  [
+   "pRIf9rapdPFuu82M",
+   "and aldormen of y^e City of London have caused the Seale of y^e office of Majorasty of y^e same City",
+   4676,
+   297,
+   100,
+   60.3
+  ],
+  [
+   "WvicwIv0Pl1XRDSE",
+   "To all Xpian People to whome theis prsents shall come greeting in our Lord God Everlasting",
+   1126,
+   81,
+   90,
+   54.6
+  ],
+  [
+   "7s4catKMg7vsDPIH",
+   "to make seale deliver and (if need bee) for the premisses or any part thereof to appeare",
+   1119,
+   54,
+   88,
+   53.8
+  ],
+  [
+   "wwU90P0jpgjqmlMj",
+   "To all Christian people to whome theis pnts shall come greeting in our Lord God Everlasting",
+   1074,
+   80,
+   91,
+   55.7
+  ],
+  [
+   "msoxltaTIircdJsS",
+   "binde our selves our heires execrs and admistrs together with that our plantacon w^ch wee lately",
+   1089,
+   56,
+   96,
+   59.2
+  ]
+ ],
+ "n_row_peaks_by_split": {
+  "1": {
+   "test": 895,
+   "train": 2784,
+   "unlisted": 446
+  },
+  "2": {
+   "test": 433,
+   "train": 1153,
+   "unlisted": 210
+  },
+  "3": {
+   "test": 43,
+   "train": 157,
+   "unlisted": 30
+  },
+  "4": {
+   "test": 3,
+   "train": 4,
+   "unlisted": 1
+  }
+ },
+ "aspect_lt6_by_split": {
+  "test": 2,
+  "train": 6,
+  "unlisted": 0
+ },
+ "gmm_bic_best_k": 12,
+ "gmm_bic": {
+  "2": 391138,
+  "3": 331754,
+  "4": 274724,
+  "5": 246950,
+  "6": 238039,
+  "7": 224064,
+  "8": 218347,
+  "9": 194240,
+  "10": 189254,
+  "11": 171164,
+  "12": 165898
+ },
+ "visual_clusters_k8": [
+  [
+   0.0,
+   1285.0,
+   864.0,
+   266.0,
+   155.0,
+   52.0,
+   1067.0,
+   43.95,
+   54.71,
+   1.91,
+   0.48,
+   18.0
+  ],
+  [
+   1.0,
+   525.0,
+   354.0,
+   119.0,
+   52.0,
+   96.0,
+   1176.0,
+   66.12,
+   59.88,
+   3.82,
+   0.08,
+   42.0
+  ],
+  [
+   2.0,
+   1266.0,
+   858.0,
+   259.0,
+   149.0,
+   50.0,
+   1094.0,
+   53.34,
+   67.55,
+   2.74,
+   0.38,
+   18.0
+  ],
+  [
+   3.0,
+   656.0,
+   449.0,
+   145.0,
+   62.0,
+   373.0,
+   4370.0,
+   68.25,
+   72.42,
+   2.74,
+   0.02,
+   161.5
+  ],
+  [
+   4.0,
+   1549.0,
+   985.0,
+   385.0,
+   179.0,
+   62.0,
+   1093.0,
+   50.83,
+   59.85,
+   1.91,
+   0.54,
+   21.0
+  ],
+  [
+   5.0,
+   506.0,
+   351.0,
+   107.0,
+   48.0,
+   331.0,
+   4179.0,
+   64.91,
+   83.62,
+   5.73,
+   0.01,
+   119.0
+  ],
+  [
+   6.0,
+   358.0,
+   231.0,
+   90.0,
+   37.0,
+   349.0,
+   4164.5,
+   68.95,
+   53.45,
+   1.91,
+   0.04,
+   172.0
+  ],
+  [
+   7.0,
+   14.0,
+   6.0,
+   3.0,
+   5.0,
+   338.5,
+   4227.5,
+   66.26,
+   67.1,
+   2.74,
+   0.04,
+   167.5
+  ]
+ ],
+ "visual_clusters_cols": [
+  "vcluster",
+  "n",
+  "train",
+  "test",
+  "unlisted",
+  "height",
+  "width",
+  "bg_tint",
+  "contrast",
+  "stroke",
+  "sharp",
+  "core_h"
+ ],
+ "cluster_distinctive_words": {
+  "0": [
+   "1",
+   "public",
+   "manifest",
+   "2",
+   "entred",
+   "four",
+   "owners",
+   "france",
+   "known",
+   "personally",
+   "ship",
+   "capt:"
+  ],
+  "0_len": 60.3,
+  "1": [
+   "p^rsent",
+   "heard",
+   "reason",
+   "recovered",
+   "even",
+   "publique",
+   "appearer",
+   "indenture",
+   "merchant",
+   "protest",
+   "against",
+   "sixty"
+  ],
+  "1_len": 48.0,
+  "2": [
+   "wtsoevr",
+   "pd",
+   "ld",
+   "divs",
+   "captn:",
+   "exrs",
+   "mchantable",
+   "aforesd",
+   "exec^rs",
+   "evy",
+   "yt",
+   "bind"
+  ],
+  "2_len": 65.8,
+  "3": [
+   "s:^t",
+   "s:^d",
+   "aforesaid,",
+   "assignes,",
+   "august",
+   "heyres",
+   "adm:^rs",
+   "parrish",
+   "delivery",
+   "hee",
+   "wise",
+   "yeare"
+  ],
+  "3_len": 57.0,
+  "4": [
+   "adminstrs",
+   "guiftes",
+   "philip",
+   "servantes",
+   "domi",
+   "assynes",
+   "grantes",
+   "arthur",
+   "peeter",
+   "thereaboutes",
+   "wool",
+   "myselfe"
+  ],
+  "4_len": 70.7,
+  "5": [
+   "y.^e",
+   "saide",
+   "voluntary",
+   "premises",
+   "ex^rs",
+   "negroes",
+   "discharge",
+   "bee",
+   ",",
+   "parrish",
+   "_",
+   "free"
+  ],
+  "5_len": 60.3,
+  "6": [
+   "___",
+   "_",
+   "exec:^rs",
+   "adm:^rs",
+   "saide",
+   "receipt",
+   "heyres",
+   ":",
+   "theire",
+   "her",
+   "maner",
+   "y^e"
+  ],
+  "6_len": 55.0,
+  "7": [
+   "and"
+  ],
+  "7_len": 58.5
+ },
+ "phash_pairs_ham_le6": 1,
+ "phash_pairs_by_split": {
+  "train | train": 1
+ },
+ "phash_pairs_ham0": 0,
+ "thumb_nn_cos_quantiles": {
+  "count": 6159.0,
+  "mean": 0.7245,
+  "std": 0.0899,
+  "min": 0.3777,
+  "50%": 0.7325,
+  "90%": 0.8342,
+  "99%": 0.8998,
+  "max": 0.941
+ },
+ "thumb_nn_gt_0.97_by_split_pair": {},
+ "adv_auc_train_vs_test": 0.4906,
+ "adv_auc_train_vs_unlisted": 0.4923,
+ "adv_auc_test_vs_unlisted": 0.5286,
+ "split_medians": {
+  "width": {
+   "test": 1120.0,
+   "train": 1118.0,
+   "unlisted": 1111.0
+  },
+  "height": {
+   "test": 65.0,
+   "train": 65.0,
+   "unlisted": 62.0
+  },
+  "aspect": {
+   "test": 16.818,
+   "train": 16.769,
+   "unlisted": 17.569
+  },
+  "tall": {
+   "test": 0.0,
+   "train": 0.0,
+   "unlisted": 0.0
+  },
+  "bg_mean": {
+   "test": 204.17,
+   "train": 204.092,
+   "unlisted": 204.439
+  },
+  "contrast": {
+   "test": 62.809,
+   "train": 62.955,
+   "unlisted": 62.286
+  },
+  "core_h": {
+   "test": 24.0,
+   "train": 24.0,
+   "unlisted": 22.0
+  },
+  "stroke_w": {
+   "test": 2.739,
+   "train": 2.739,
+   "unlisted": 2.739
+  },
+  "lap_var_norm": {
+   "test": 0.367,
+   "train": 0.366,
+   "unlisted": 0.385
+  },
+  "n_row_peaks": {
+   "test": 1.0,
+   "train": 1.0,
+   "unlisted": 1.0
+  }
+ },
+ "split_tall_frac": {
+  "test": 0.2511,
+  "train": 0.2545,
+  "unlisted": 0.2227
+ },
+ "nn_dist_val0_to_train0": {
+  "count": 819.0,
+  "mean": 3.446,
+  "std": 0.674,
+  "min": 2.031,
+  "25%": 2.945,
+  "50%": 3.34,
+  "75%": 3.831,
+  "max": 6.853
+ },
+ "nn_dist_test_to_train0": {
+  "count": 1374.0,
+  "mean": 3.441,
+  "std": 0.697,
+  "min": 1.53,
+  "25%": 2.978,
+  "50%": 3.338,
+  "75%": 3.822,
+  "max": 8.804
+ },
+ "ks_val_vs_test_nn_dist": [
+  0.0292,
+  0.7604
+ ]
+}

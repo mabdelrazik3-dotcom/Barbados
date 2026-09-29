@@ -1,0 +1,15 @@
+flag,base_rate,cv_auc_pixels,auc_scan_group_only,usable
+possible_multiline_label,0.03,0.946,0.667,True
+has_amp,0.137,0.852,0.642,True
+punct_heavy,0.069,0.838,0.773,True
+has_ff,0.016,0.815,0.806,True
+profile_is_P2,0.145,0.8,0.659,True
+has_thorn,0.092,0.775,0.665,True
+has_digit,0.053,0.764,0.621,True
+has_colon_susp,0.081,0.71,0.682,True
+cap_heavy,0.259,0.687,0.616,False
+starts_upper,0.287,0.653,0.553,False
+profile_is_P1,0.209,0.631,0.591,False
+is_formula,0.191,0.612,0.594,False
+has_caret,0.168,0.611,0.607,False
+rare_heavy,0.24,0.56,0.587,False

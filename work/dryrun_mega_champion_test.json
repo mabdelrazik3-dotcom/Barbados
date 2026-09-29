@@ -1,0 +1,59 @@
+{
+ "source": "q25_shared__mbr",
+ "method": "rescore_mbr",
+ "weights": {
+  "q3_shared": 0.9945375776982484,
+  "q3_class": 1.012075905692927,
+  "q3_subclass": 0.995287464655985,
+  "q3_B_cont": 1.0467882632831087,
+  "q25_shared": 1.0246458373762857
+ },
+ "systems": [
+  "q3_shared",
+  "q3_class",
+  "q3_subclass",
+  "q3_B_cont",
+  "q25_shared"
+ ],
+ "val_score": 0.0240530303030303,
+ "SYSTEMS": [
+  {
+   "name": "q3_shared",
+   "model": "q3",
+   "scheme": "shared"
+  },
+  {
+   "name": "q3_class",
+   "model": "q3",
+   "scheme": "class"
+  },
+  {
+   "name": "q3_subclass",
+   "model": "q3",
+   "scheme": "subclass",
+   "class_hp": {
+    "A2": {
+     "MAX_STEPS": 2
+    }
+   }
+  },
+  {
+   "name": "q3_B_cont",
+   "model": "q3",
+   "scheme": "class",
+   "keys": [
+    "B"
+   ],
+   "init": "from:q3_shared",
+   "replay": 0.2,
+   "hp": {
+    "LR_SCHEDULER": "constant_with_warmup"
+   }
+  },
+  {
+   "name": "q25_shared",
+   "model": "q25",
+   "scheme": "shared"
+  }
+ ]
+}

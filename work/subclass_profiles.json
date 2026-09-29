@@ -1,0 +1,1972 @@
+{
+ "A01": {
+  "n_train": 385,
+  "n_test": 130,
+  "n_unl": 60,
+  "height": 96.0,
+  "width": 1176.0,
+  "aspect": 12.22093023255814,
+  "paper": 160.98182678222656,
+  "tint": 65.50455474853516,
+  "contrast": 61.24195098876953,
+  "stroke_rel": 0.0864666843642155,
+  "sharp": 0.1837760372087254,
+  "edge_ratio": 0.5767253382508034,
+  "band_frac": 0.4216867469879518,
+  "chars": 47.0,
+  "words": 9.0,
+  "pct_caret": 15.584415584415584,
+  "pct_colon": 3.116883116883117,
+  "pct_amp": 3.3766233766233764,
+  "pct_plus": 0.0,
+  "pct_thorn": 1.2987012987012987,
+  "pct_ff": 3.6363636363636362,
+  "pct_digit": 1.0389610389610389,
+  "pct_tilde": 1.2987012987012987,
+  "pct_under": 0.2597402597402597,
+  "pct_enddash": 1.2987012987012987,
+  "pct_apos": 0.2597402597402597,
+  "pct_period": 3.896103896103896,
+  "pct_comma": 15.064935064935064,
+  "cap_words": 0.2451017597121493,
+  "pct_said_cap": 5.194805194805195,
+  "pct_said": 13.246753246753245,
+  "pct_sd": 0.0,
+  "distinct_words": [
+   "___",
+   "publique",
+   "heard",
+   "Merchant",
+   "Appearer",
+   "recovered",
+   "Secretary",
+   "protest",
+   "Act",
+   "By",
+   "did",
+   "against",
+   "Assignes",
+   "Said",
+   "England",
+   "yee",
+   ",",
+   "it",
+   "yeare",
+   "Land",
+   "then",
+   "And",
+   "aforesaid",
+   "six",
+   "theire"
+  ],
+  "examples": [
+   "New Stone house for the seruants Lodgeing or",
+   "presents, I doe Solemnly protest against the",
+   "Thomas Richardson Gunners Mate of the said",
+   "Samuells Boatswaime and him this deponent",
+   "of Their appurtennces to Them the said William",
+   "have here unto sett my hand and seale this twenty",
+   "of their goods or Estates in Time and place as of",
+   "people that upon the eightienth day of Septem"
+  ],
+  "val_n": 74,
+  "val_8b": 0.8939905814905815,
+  "val_ens": 0.902989352989353,
+  "err_classes": {
+   "casing": 30,
+   "punct/markup": 8,
+   "spelling": 76
+  },
+  "top_word_subs": [
+   [
+    "Said->said",
+    3
+   ],
+   [
+    "shall->Shall",
+    1
+   ],
+   [
+    "St.->S.^t",
+    1
+   ],
+   [
+    "often->other",
+    1
+   ],
+   [
+    "valuable->valluable",
+    1
+   ],
+   [
+    "considerations->Considerations",
+    1
+   ],
+   [
+    "Well->well",
+    1
+   ],
+   [
+    "him->himselfe",
+    1
+   ],
+   [
+    "Reynall->Reynell",
+    1
+   ],
+   [
+    "Admini->Admin",
+    1
+   ],
+   [
+    "satisfied->Satisfied",
+    1
+   ],
+   [
+    "Cotherington->Catterington",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    12
+   ],
+   [
+    ".",
+    4
+   ],
+   [
+    "r",
+    4
+   ],
+   [
+    "a",
+    4
+   ],
+   [
+    "s",
+    4
+   ],
+   [
+    "n",
+    3
+   ],
+   [
+    ",",
+    3
+   ],
+   [
+    "i",
+    2
+   ]
+  ],
+  "char_added": [
+   [
+    "e",
+    12
+   ],
+   [
+    " ",
+    9
+   ],
+   [
+    "t",
+    6
+   ],
+   [
+    "s",
+    5
+   ],
+   [
+    "f",
+    3
+   ],
+   [
+    "a",
+    3
+   ],
+   [
+    "r",
+    3
+   ],
+   [
+    ",",
+    3
+   ]
+  ]
+ },
+ "A02": {
+  "n_train": 195,
+  "n_test": 81,
+  "n_unl": 34,
+  "height": 60.0,
+  "width": 777.0,
+  "aspect": 13.072727272727272,
+  "paper": 202.2589874267578,
+  "tint": 49.43345642089844,
+  "contrast": 92.93375396728516,
+  "stroke_rel": 0.0575716449322397,
+  "sharp": 0.2258399034607651,
+  "edge_ratio": 0.1679475893312352,
+  "band_frac": 0.2580645161290322,
+  "chars": 47.0,
+  "words": 9.0,
+  "pct_caret": 18.974358974358974,
+  "pct_colon": 8.205128205128204,
+  "pct_amp": 8.205128205128204,
+  "pct_plus": 0.0,
+  "pct_thorn": 4.102564102564102,
+  "pct_ff": 0.0,
+  "pct_digit": 22.05128205128205,
+  "pct_tilde": 3.5897435897435894,
+  "pct_under": 0.0,
+  "pct_enddash": 4.102564102564102,
+  "pct_apos": 2.564102564102564,
+  "pct_period": 9.230769230769232,
+  "pct_comma": 10.256410256410255,
+  "cap_words": 0.2841508918431995,
+  "pct_said_cap": 0.0,
+  "pct_said": 4.102564102564102,
+  "pct_sd": 0.0,
+  "distinct_words": [
+   "public",
+   "prsence",
+   "Signed",
+   "Sealed",
+   "delivered",
+   "1640",
+   "presence",
+   "1641",
+   "x",
+   "Instrument",
+   "By",
+   "May",
+   "protest",
+   "act",
+   "June",
+   "This",
+   "seale",
+   "us",
+   "W^m",
+   "it",
+   "Edward",
+   "hand",
+   "day",
+   "this",
+   "-"
+  ],
+  "examples": [
+   "w^th in named premisses was given by ye within",
+   "Sealed and delivered in the presence of",
+   "Sealed and delivered in the prsence of",
+   "Signed sealed and delivered in the prsence of us & possession given",
+   "Sealed & delivered in the pnce of us Joseph Taylor",
+   "w^ch land is for to be layd out for the best convenience",
+   "Sealed and delivered in the prsence of",
+   "Comander of the ship St. Robert and company did plunder"
+  ],
+  "val_n": 47,
+  "val_8b": 0.9216473243068988,
+  "val_ens": 0.9258542875564153,
+  "err_classes": {
+   "spelling": 32,
+   "punct/markup": 8,
+   "casing": 9
+  },
+  "top_word_subs": [
+   [
+    "Franncis->Francis",
+    2
+   ],
+   [
+    "Sealed->sealed",
+    2
+   ],
+   [
+    "delived->delivered",
+    2
+   ],
+   [
+    "signed->Signed",
+    2
+   ],
+   [
+    "Def^t,,->Def^tt",
+    2
+   ],
+   [
+    "Pratt~->Wyatt",
+    1
+   ],
+   [
+    "Wyatt->Pratt",
+    1
+   ],
+   [
+    "Stede->Steele",
+    1
+   ],
+   [
+    "th'other->other",
+    1
+   ],
+   [
+    ":-->-",
+    1
+   ],
+   [
+    "-dated->dated",
+    1
+   ],
+   [
+    "Philp->Phillp",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    6
+   ],
+   [
+    ",",
+    4
+   ],
+   [
+    "e",
+    3
+   ],
+   [
+    "n",
+    2
+   ],
+   [
+    "^",
+    2
+   ],
+   [
+    "1",
+    2
+   ],
+   [
+    "2",
+    2
+   ],
+   [
+    "~",
+    1
+   ]
+  ],
+  "char_added": [
+   [
+    " ",
+    10
+   ],
+   [
+    "e",
+    5
+   ],
+   [
+    "i",
+    3
+   ],
+   [
+    "r",
+    3
+   ],
+   [
+    "-",
+    2
+   ],
+   [
+    "s",
+    2
+   ],
+   [
+    "l",
+    1
+   ],
+   [
+    "M",
+    1
+   ]
+  ]
+ },
+ "A03": {
+  "n_train": 376,
+  "n_test": 90,
+  "n_unl": 55,
+  "height": 55.0,
+  "width": 1020.0,
+  "aspect": 18.64099821746881,
+  "paper": 207.2201156616211,
+  "tint": 44.222686767578125,
+  "contrast": 90.31698989868164,
+  "stroke_rel": 0.057672617578892596,
+  "sharp": 0.22436799318148898,
+  "edge_ratio": 0.2019891850447979,
+  "band_frac": 0.3333333333333333,
+  "chars": 55.0,
+  "words": 10.0,
+  "pct_caret": 11.436170212765957,
+  "pct_colon": 5.319148936170213,
+  "pct_amp": 5.319148936170213,
+  "pct_plus": 0.0,
+  "pct_thorn": 23.670212765957448,
+  "pct_ff": 0.0,
+  "pct_digit": 6.382978723404255,
+  "pct_tilde": 3.1914893617021276,
+  "pct_under": 0.26595744680851063,
+  "pct_enddash": 5.319148936170213,
+  "pct_apos": 0.5319148936170213,
+  "pct_period": 3.4574468085106385,
+  "pct_comma": 2.925531914893617,
+  "cap_words": 0.16265001056341796,
+  "pct_said_cap": 0.0,
+  "pct_said": 16.75531914893617,
+  "pct_sd": 2.127659574468085,
+  "distinct_words": [
+   "plantation",
+   "confirme",
+   "parish",
+   "seales",
+   "Assignes",
+   "ye",
+   "person",
+   "buildings",
+   "hands",
+   "over",
+   "executors",
+   "present",
+   "done",
+   "seale",
+   "ever",
+   "Edward",
+   "sett",
+   "time",
+   "date",
+   "bargained",
+   "administrators",
+   "bargaine",
+   "three",
+   "granted",
+   "lands"
+  ],
+  "examples": [
+   "Land belowe the Rocke to the seaside path in breadth but two",
+   "(except before excepted) to the said Christopher Bishopp his heires",
+   "admistrs ~and~ or by or with his leave assent consent privity or p'curement",
+   "Administrators and Assignes against any other person or",
+   ".& to her two children Robert & Ann to them & either of them",
+   "of land be it more or less scytuate lying and being in",
+   "whereof I have hereunto sett my hand & seale this 11th of",
+   "This Day personall appeared before me Rob^t. Richard"
+  ],
+  "val_n": 87,
+  "val_8b": 0.9512713340299548,
+  "val_ens": 0.953335074886799,
+  "err_classes": {
+   "spelling": 45,
+   "punct/markup": 10,
+   "casing": 9
+  },
+  "top_word_subs": [
+   [
+    "M^r.->M^r",
+    2
+   ],
+   [
+    "I->&",
+    1
+   ],
+   [
+    "Bearnes->Beames",
+    1
+   ],
+   [
+    "sue->one",
+    1
+   ],
+   [
+    "he->hee",
+    1
+   ],
+   [
+    "Handcock->Hancock",
+    1
+   ],
+   [
+    "w^th,,->w^th",
+    1
+   ],
+   [
+    ".&->&",
+    1
+   ],
+   [
+    "stocks->stock",
+    1
+   ],
+   [
+    "catle->cattle",
+    1
+   ],
+   [
+    "Phineos-Smith->Smith",
+    1
+   ],
+   [
+    "thousand->Thousand",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    "~",
+    9
+   ],
+   [
+    " ",
+    8
+   ],
+   [
+    ",",
+    4
+   ],
+   [
+    ".",
+    4
+   ],
+   [
+    "e",
+    4
+   ],
+   [
+    "r",
+    3
+   ],
+   [
+    "n",
+    2
+   ],
+   [
+    "s",
+    2
+   ]
+  ],
+  "char_added": [
+   [
+    "e",
+    4
+   ],
+   [
+    "t",
+    2
+   ],
+   [
+    " ",
+    2
+   ],
+   [
+    "s",
+    2
+   ],
+   [
+    "m",
+    2
+   ],
+   [
+    "~",
+    1
+   ],
+   [
+    "C",
+    1
+   ],
+   [
+    "r",
+    1
+   ]
+  ]
+ },
+ "A04": {
+  "n_train": 157,
+  "n_test": 62,
+  "n_unl": 31,
+  "height": 47.0,
+  "width": 1024.0,
+  "aspect": 21.6875,
+  "paper": 200.49728393554688,
+  "tint": 52.16267395019531,
+  "contrast": 100.49176788330078,
+  "stroke_rel": 0.0907584448693435,
+  "sharp": 0.2228802340464725,
+  "edge_ratio": 0.1134819724506033,
+  "band_frac": 0.3333333333333333,
+  "chars": 56.0,
+  "words": 11.0,
+  "pct_caret": 10.191082802547772,
+  "pct_colon": 8.280254777070063,
+  "pct_amp": 49.044585987261144,
+  "pct_plus": 0.0,
+  "pct_thorn": 24.203821656050955,
+  "pct_ff": 0.6369426751592357,
+  "pct_digit": 1.910828025477707,
+  "pct_tilde": 0.6369426751592357,
+  "pct_under": 1.2738853503184715,
+  "pct_enddash": 8.280254777070063,
+  "pct_apos": 0.0,
+  "pct_period": 3.821656050955414,
+  "pct_comma": 3.1847133757961785,
+  "cap_words": 0.18498267791074086,
+  "pct_said_cap": 0.6369426751592357,
+  "pct_said": 7.006369426751593,
+  "pct_sd": 19.745222929936308,
+  "distinct_words": [
+   "yt",
+   "sd",
+   "wch",
+   "Adm^rs",
+   "interest",
+   "may",
+   "title",
+   "&",
+   "ye",
+   "Robert",
+   "at",
+   "-",
+   "hundred",
+   "from",
+   "good",
+   "pounds",
+   "be",
+   "doe",
+   "other",
+   "heires",
+   "any",
+   "Thomas",
+   "unto",
+   "shall",
+   "thousand"
+  ],
+  "examples": [
+   "Susanah Leake our heires executors administrators",
+   "Sixty and Eight and in the Twentieth year of",
+   "I Robert Lea doe hereby accknowledge this day to have delivd",
+   "Sledge, and one Crowe, Three Padds One Packe Sadle tree",
+   "or any pte or pcell thereof except before excepted, onely or any",
+   "Sign Tho Gamber, Rich: Jones, mrk: X Hen Collingwood",
+   "Tobaccoe well made up in role or Two hundred pounds of",
+   "with the greate path near the Church & begining at a Slumpe"
+  ],
+  "val_n": 26,
+  "val_8b": 0.9090617715617716,
+  "val_ens": 0.909411421911422,
+  "err_classes": {
+   "spelling": 23,
+   "punct/markup": 6,
+   "casing": 6
+  },
+  "top_word_subs": [
+   [
+    "assigns->assignes",
+    1
+   ],
+   [
+    "Tho->Tho:",
+    1
+   ],
+   [
+    "assigne->assignes",
+    1
+   ],
+   [
+    "confirm->confirmed",
+    1
+   ],
+   [
+    "bargain->bargained",
+    1
+   ],
+   [
+    "seals->seale",
+    1
+   ],
+   [
+    "24^th->25^th",
+    1
+   ],
+   [
+    "mch->March",
+    1
+   ],
+   [
+    ".->-",
+    1
+   ],
+   [
+    "exprssed->expressed",
+    1
+   ],
+   [
+    "there->three",
+    1
+   ],
+   [
+    "schedules->Schedules",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    4
+   ],
+   [
+    "t",
+    3
+   ],
+   [
+    "e",
+    2
+   ],
+   [
+    ".",
+    2
+   ],
+   [
+    "o",
+    1
+   ],
+   [
+    ",",
+    1
+   ],
+   [
+    "^",
+    1
+   ],
+   [
+    "n",
+    1
+   ]
+  ],
+  "char_added": [
+   [
+    "e",
+    8
+   ],
+   [
+    " ",
+    3
+   ],
+   [
+    "i",
+    3
+   ],
+   [
+    "s",
+    2
+   ],
+   [
+    "d",
+    2
+   ],
+   [
+    "r",
+    2
+   ],
+   [
+    "M",
+    1
+   ],
+   [
+    "a",
+    1
+   ]
+  ]
+ },
+ "A05": {
+  "n_train": 1038,
+  "n_test": 383,
+  "n_unl": 193,
+  "height": 64.0,
+  "width": 1101.0,
+  "aspect": 17.353346901854366,
+  "paper": 201.92102813720703,
+  "tint": 50.20667266845703,
+  "contrast": 91.88026809692383,
+  "stroke_rel": 0.051675792001429396,
+  "sharp": 0.24819567093085693,
+  "edge_ratio": 0.2910741493653456,
+  "band_frac": 0.2647058823529412,
+  "chars": 72.0,
+  "words": 13.0,
+  "pct_caret": 16.76300578034682,
+  "pct_colon": 3.1791907514450863,
+  "pct_amp": 4.913294797687861,
+  "pct_plus": 0.1926782273603083,
+  "pct_thorn": 6.165703275529865,
+  "pct_ff": 0.1926782273603083,
+  "pct_digit": 5.684007707129094,
+  "pct_tilde": 2.119460500963391,
+  "pct_under": 0.09633911368015415,
+  "pct_enddash": 1.2524084778420037,
+  "pct_apos": 3.8535645472061653,
+  "pct_period": 2.697495183044316,
+  "pct_comma": 1.4450867052023122,
+  "cap_words": 0.15633762883590635,
+  "pct_said_cap": 0.09633911368015415,
+  "pct_said": 22.54335260115607,
+  "pct_sd": 1.6377649325626205,
+  "distinct_words": [
+   "Peeter",
+   "assynes",
+   "planters",
+   "exers",
+   "tenne",
+   "twentie",
+   "knowe",
+   "wooll",
+   "untill",
+   "admistrs",
+   "Everlastinge",
+   "theise",
+   "servants",
+   "send",
+   "bindeth",
+   "anie",
+   "withall",
+   "bargaines",
+   "excers",
+   "Capt",
+   "merchant",
+   "fallen",
+   "appeare",
+   "Knowe",
+   "planter"
+  ],
+  "examples": [
+   "Knowe all men by these presents that I John Simpson of the Island of Barbados in",
+   "with ye said John Thurbrane his heires executors administrators or",
+   "said Read or his Lawfull Attorney doe pay & deliver unto the said",
+   "said Thomas Grigg and James Chrichlow our heires exers or assignes or",
+   "exers admrs and ~assignes~ every of them that it shall and may belawfull",
+   "the right members and appurtenances to the same plantacon or land belonginge",
+   "assigne and settover unto him the said Isaac his lawfull attorney",
+   "quietly have hold use occupie possesse and enjoye the said plantacon with"
+  ],
+  "val_n": 206,
+  "val_8b": 0.9284826419535157,
+  "val_ens": 0.9365989997057957,
+  "err_classes": {
+   "spelling": 160,
+   "punct/markup": 31,
+   "casing": 37
+  },
+  "top_word_subs": [
+   [
+    "and->And",
+    4
+   ],
+   [
+    "adminstrs->admistrs",
+    3
+   ],
+   [
+    "excrs->exers",
+    2
+   ],
+   [
+    "assignes->assynes",
+    2
+   ],
+   [
+    "wt^soever->w^tsoever",
+    2
+   ],
+   [
+    "this->theis",
+    2
+   ],
+   [
+    "writeing->writing",
+    2
+   ],
+   [
+    "that->That",
+    2
+   ],
+   [
+    "being->beinge",
+    1
+   ],
+   [
+    "Barbados-->Barbados",
+    1
+   ],
+   [
+    "16th->16^th",
+    1
+   ],
+   [
+    "prsents->presents",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    17
+   ],
+   [
+    "e",
+    14
+   ],
+   [
+    "^",
+    11
+   ],
+   [
+    "s",
+    10
+   ],
+   [
+    "n",
+    9
+   ],
+   [
+    "~",
+    8
+   ],
+   [
+    "i",
+    7
+   ],
+   [
+    "d",
+    7
+   ]
+  ],
+  "char_added": [
+   [
+    "e",
+    19
+   ],
+   [
+    " ",
+    17
+   ],
+   [
+    "r",
+    10
+   ],
+   [
+    "i",
+    9
+   ],
+   [
+    "n",
+    7
+   ],
+   [
+    "^",
+    6
+   ],
+   [
+    "s",
+    6
+   ],
+   [
+    "x",
+    5
+   ]
+  ]
+ },
+ "A06": {
+  "n_train": 334,
+  "n_test": 106,
+  "n_unl": 69,
+  "height": 48.0,
+  "width": 1106.5,
+  "aspect": 23.22373188405797,
+  "paper": 206.46453857421875,
+  "tint": 45.55933380126953,
+  "contrast": 88.98793029785156,
+  "stroke_rel": 0.0860215664313056,
+  "sharp": 0.23081762974417175,
+  "edge_ratio": 0.1420181500905372,
+  "band_frac": 0.3131127450980392,
+  "chars": 65.0,
+  "words": 12.0,
+  "pct_caret": 5.089820359281437,
+  "pct_colon": 1.7964071856287425,
+  "pct_amp": 6.88622754491018,
+  "pct_plus": 0.29940119760479045,
+  "pct_thorn": 2.9940119760479043,
+  "pct_ff": 0.0,
+  "pct_digit": 3.592814371257485,
+  "pct_tilde": 2.095808383233533,
+  "pct_under": 0.0,
+  "pct_enddash": 1.4970059880239521,
+  "pct_apos": 0.0,
+  "pct_period": 2.3952095808383236,
+  "pct_comma": 3.293413173652695,
+  "cap_words": 0.15943057104337485,
+  "pct_said_cap": 0.29940119760479045,
+  "pct_said": 30.83832335329341,
+  "pct_sd": 1.4970059880239521,
+  "distinct_words": [
+   "owners",
+   "sum",
+   "ship",
+   "manifest",
+   "appearer",
+   "having",
+   "year",
+   "sixty",
+   "personally",
+   "heirs",
+   "Secretary",
+   "against",
+   "which",
+   "there",
+   "hath",
+   "did",
+   "do",
+   "appeared",
+   "administrators",
+   "six",
+   "also",
+   "protest",
+   "Executors",
+   "Christian",
+   "time"
+  ],
+  "examples": [
+   "of the goods and Merchandise aboard the said ship belonging to Capt",
+   "Come Consigned to us Jointly from any person or persons whatsoever",
+   "assignes one sixteenth parte of the above said ship called the hopewell",
+   "Sugar is to be recovered against him or any one with him concerned",
+   "Buckly which by the consent and request of each party being",
+   "Anne Carsbrick her heirs Executors administrators whatsoever or",
+   "hundred acres of land fallen & unfalllen be it more or lesse & alsoe",
+   "of lease granted without any lawfull lett or suite Trouble denial"
+  ],
+  "val_n": 60,
+  "val_8b": 0.9315151515151515,
+  "val_ens": 0.9381060606060606,
+  "err_classes": {
+   "spelling": 44,
+   "casing": 18,
+   "punct/markup": 4
+  },
+  "top_word_subs": [
+   [
+    "Sixty->sixty",
+    2
+   ],
+   [
+    "Seizin->Sign",
+    1
+   ],
+   [
+    "bargaind->bargained",
+    1
+   ],
+   [
+    "premises->premisses",
+    1
+   ],
+   [
+    "Piggot->Piggott",
+    1
+   ],
+   [
+    "loading->landing",
+    1
+   ],
+   [
+    "Tunnage->Turnage",
+    1
+   ],
+   [
+    "betwixt->behind",
+    1
+   ],
+   [
+    "Tonn->Tonne",
+    1
+   ],
+   [
+    "Tunnage->Sumege",
+    1
+   ],
+   [
+    "afore->aforesaid",
+    1
+   ],
+   [
+    "the->this",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    "r",
+    7
+   ],
+   [
+    "e",
+    6
+   ],
+   [
+    " ",
+    4
+   ],
+   [
+    "s",
+    4
+   ],
+   [
+    "i",
+    2
+   ],
+   [
+    "a",
+    2
+   ],
+   [
+    "n",
+    2
+   ],
+   [
+    "^",
+    2
+   ]
+  ],
+  "char_added": [
+   [
+    "e",
+    6
+   ],
+   [
+    "t",
+    3
+   ],
+   [
+    "i",
+    2
+   ],
+   [
+    " ",
+    2
+   ],
+   [
+    "n",
+    2
+   ],
+   [
+    "r",
+    2
+   ],
+   [
+    "^",
+    2
+   ],
+   [
+    "s",
+    1
+   ]
+  ]
+ },
+ "A07": {
+  "n_train": 569,
+  "n_test": 177,
+  "n_unl": 92,
+  "height": 49.0,
+  "width": 1122.0,
+  "aspect": 22.8,
+  "paper": 198.6861114501953,
+  "tint": 53.321197509765625,
+  "contrast": 100.32596588134766,
+  "stroke_rel": 0.0840698254364089,
+  "sharp": 0.2358976804390447,
+  "edge_ratio": 0.1403177941124893,
+  "band_frac": 0.3278688524590163,
+  "chars": 67.0,
+  "words": 12.0,
+  "pct_caret": 13.708260105448156,
+  "pct_colon": 11.950790861159929,
+  "pct_amp": 41.30052724077329,
+  "pct_plus": 0.35149384885764495,
+  "pct_thorn": 21.968365553602812,
+  "pct_ff": 0.17574692442882248,
+  "pct_digit": 5.623901581722319,
+  "pct_tilde": 4.042179261862917,
+  "pct_under": 0.17574692442882248,
+  "pct_enddash": 1.4059753954305798,
+  "pct_apos": 0.5272407732864675,
+  "pct_period": 1.2302284710017575,
+  "pct_comma": 0.35149384885764495,
+  "cap_words": 0.1777352896764226,
+  "pct_said_cap": 0.0,
+  "pct_said": 9.666080843585236,
+  "pct_sd": 16.87170474516696,
+  "distinct_words": [
+   "Admrs",
+   "Captn:",
+   "aforesd",
+   "Noell",
+   "Willm",
+   "1647",
+   "mchantable",
+   "evy",
+   "Exrs",
+   "divs",
+   "Our",
+   "wth",
+   "duties",
+   "Tho",
+   "sd",
+   "Hugh",
+   "yt",
+   "Ex^rs",
+   "pfitts",
+   "Gent",
+   "Adm^rs",
+   "myself",
+   "valuable",
+   "prmisses",
+   "die"
+  ],
+  "examples": [
+   "doe bargain & sell & confirm lett unto Mr William Hathcott",
+   "the six thousand pounds of Tobaccoe and if in case yt ye said Sixe",
+   "absolutely give grt: bgaine & sell unto ye sd John & Rich^d Two acres",
+   "dispose of all and evy ~all~ pcell of land which by deed or writing",
+   "be it more or less wthin the ould Bands Scituate lying & being",
+   "ejecon disturbance trouble or deniall of us ye aforesd John Broadhead",
+   "wth all & singuler houses Edifices & other buildings wth all and",
+   "& James & Martin Noell of the cittye of London gent all yt my pltacon sciatuate in the"
+  ],
+  "val_n": 112,
+  "val_8b": 0.9300662878787879,
+  "val_ens": 0.9327989718614719,
+  "err_classes": {
+   "punct/markup": 19,
+   "spelling": 86,
+   "casing": 20
+  },
+  "top_word_subs": [
+   [
+    "adm^rs->Adm^rs",
+    3
+   ],
+   [
+    "Captn->Captn:",
+    2
+   ],
+   [
+    "Adm^rs->Admrs",
+    2
+   ],
+   [
+    "consideracons->Consideracons",
+    2
+   ],
+   [
+    "o^r->or",
+    1
+   ],
+   [
+    "betwix->belwise",
+    1
+   ],
+   [
+    "30th->30^th",
+    1
+   ],
+   [
+    "Flecther->Fletcher",
+    1
+   ],
+   [
+    "Blacks->Blacke",
+    1
+   ],
+   [
+    "exec^rs->Exec^rs",
+    1
+   ],
+   [
+    "Porch->Parch",
+    1
+   ],
+   [
+    "As->as",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    13
+   ],
+   [
+    "^",
+    9
+   ],
+   [
+    "e",
+    8
+   ],
+   [
+    "i",
+    6
+   ],
+   [
+    "l",
+    5
+   ],
+   [
+    "~",
+    3
+   ],
+   [
+    "t",
+    2
+   ],
+   [
+    "s",
+    2
+   ]
+  ],
+  "char_added": [
+   [
+    "e",
+    16
+   ],
+   [
+    " ",
+    6
+   ],
+   [
+    "s",
+    5
+   ],
+   [
+    "r",
+    5
+   ],
+   [
+    "^",
+    4
+   ],
+   [
+    "t",
+    3
+   ],
+   [
+    "n",
+    3
+   ],
+   [
+    "i",
+    3
+   ]
+  ]
+ },
+ "B01": {
+  "n_train": 278,
+  "n_test": 91,
+  "n_unl": 44,
+  "height": 332.5,
+  "width": 4120.5,
+  "aspect": 12.635309788481496,
+  "paper": 181.84909057617188,
+  "tint": 64.42766571044922,
+  "contrast": 78.90124130249023,
+  "stroke_rel": 0.0489150661912552,
+  "sharp": 0.081800460153619,
+  "edge_ratio": 0.3949261871282965,
+  "band_frac": 0.3642506142506142,
+  "chars": 58.0,
+  "words": 10.0,
+  "pct_caret": 21.58273381294964,
+  "pct_colon": 8.992805755395683,
+  "pct_amp": 11.510791366906476,
+  "pct_plus": 0.0,
+  "pct_thorn": 3.9568345323741005,
+  "pct_ff": 4.316546762589928,
+  "pct_digit": 3.597122302158273,
+  "pct_tilde": 1.4388489208633095,
+  "pct_under": 0.7194244604316548,
+  "pct_enddash": 9.352517985611511,
+  "pct_apos": 0.0,
+  "pct_period": 10.431654676258994,
+  "pct_comma": 22.302158273381295,
+  "cap_words": 0.26834093165028416,
+  "pct_said_cap": 7.194244604316546,
+  "pct_said": 14.028776978417264,
+  "pct_sd": 1.7985611510791366,
+  "distinct_words": [
+   "Hundred",
+   "Acres",
+   "premises",
+   "Deed",
+   "y^e",
+   "Six",
+   "Charles",
+   "free",
+   "Land",
+   "written",
+   "bee",
+   "Said",
+   ",",
+   "yeare",
+   "Assignes",
+   "hold",
+   "This",
+   "-",
+   "every",
+   "above",
+   "their",
+   "whatsoever",
+   "theire",
+   "presents",
+   "hereby"
+  ],
+  "examples": [
+   "date at Westminster the fower and twentieth day of ffeb^ry",
+   "accons, Suite, or Suites, Debts, Judgets , Quare",
+   "their heires and Seales the day and yeare first above written",
+   "Every and either of them, Have given granted bargained Sold aliened",
+   "any other incumbrance or Incumbrances whatsoever and wee the said",
+   "wsoever , hade made comitted done or suffered by mee the said ffrancis",
+   "the S:^d Martha Westwood, doth hereby respectively, -",
+   "premises with their and euery of their up"
+  ],
+  "val_n": 51,
+  "val_8b": 0.8609625668449198,
+  "val_ens": 0.8685383244206774,
+  "err_classes": {
+   "spelling": 61,
+   "punct/markup": 18,
+   "casing": 20
+  },
+  "top_word_subs": [
+   [
+    "Said->said",
+    3
+   ],
+   [
+    "adm^rs.->adm^rs",
+    2
+   ],
+   [
+    "M^.r->M^r",
+    2
+   ],
+   [
+    "aforesaid->aforesaid,",
+    2
+   ],
+   [
+    "Allexander->Alexander",
+    1
+   ],
+   [
+    "~Dantee~->David",
+    1
+   ],
+   [
+    "He->I",
+    1
+   ],
+   [
+    "ass->ass^s",
+    1
+   ],
+   [
+    "Estimation->Estimacon",
+    1
+   ],
+   [
+    "Sucred->Sacred",
+    1
+   ],
+   [
+    "(->(Executors",
+    1
+   ],
+   [
+    "pounds->Pounds,",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    16
+   ],
+   [
+    "e",
+    12
+   ],
+   [
+    "r",
+    8
+   ],
+   [
+    ".",
+    7
+   ],
+   [
+    "s",
+    6
+   ],
+   [
+    "t",
+    6
+   ],
+   [
+    "-",
+    6
+   ],
+   [
+    "~",
+    5
+   ]
+  ],
+  "char_added": [
+   [
+    "e",
+    5
+   ],
+   [
+    " ",
+    5
+   ],
+   [
+    "^",
+    4
+   ],
+   [
+    "-",
+    4
+   ],
+   [
+    "s",
+    3
+   ],
+   [
+    ",",
+    3
+   ],
+   [
+    "t",
+    3
+   ],
+   [
+    "c",
+    3
+   ]
+  ]
+ },
+ "B02": {
+  "n_train": 592,
+  "n_test": 209,
+  "n_unl": 88,
+  "height": 357.0,
+  "width": 4186.0,
+  "aspect": 11.692715364231788,
+  "paper": 158.03913116455078,
+  "tint": 68.38494110107422,
+  "contrast": 53.69496536254883,
+  "stroke_rel": 0.03101454270771525,
+  "sharp": 0.14012968405939574,
+  "edge_ratio": 0.6155375499064988,
+  "band_frac": 0.46708245798319326,
+  "chars": 53.0,
+  "words": 10.0,
+  "pct_caret": 26.013513513513516,
+  "pct_colon": 26.013513513513516,
+  "pct_amp": 11.824324324324325,
+  "pct_plus": 0.0,
+  "pct_thorn": 3.3783783783783785,
+  "pct_ff": 4.898648648648648,
+  "pct_digit": 2.871621621621622,
+  "pct_tilde": 0.6756756756756757,
+  "pct_under": 0.0,
+  "pct_enddash": 4.5608108108108105,
+  "pct_apos": 0.0,
+  "pct_period": 6.418918918918918,
+  "pct_comma": 27.87162162162162,
+  "cap_words": 0.26783601034520155,
+  "pct_said_cap": 8.277027027027026,
+  "pct_said": 7.094594594594595,
+  "pct_sd": 1.0135135135135136,
+  "distinct_words": [
+   "John:",
+   "Exec:^rs",
+   "S:^t",
+   "heyres",
+   "Lawfully",
+   "Saide",
+   "Ever",
+   "saide",
+   "Adm:^rs",
+   "S:^d",
+   "parrish",
+   "Lands",
+   "Singular",
+   "Same",
+   "Seale",
+   ":",
+   ",",
+   "hee",
+   "Said",
+   "Deed",
+   "Six",
+   "Sett",
+   "y^e",
+   "theire",
+   "Shall"
+  ],
+  "examples": [
+   "the intent that W:^ch the proffitts frome the same ar",
+   "yeare of the reigne of our Sovereigne Lord Char",
+   "safty amen Dated in barbados the 30:^th July 1692",
+   "the Saide Phillip Bell and ffrancis Bell Severally",
+   "to his and theire solee proper use and uses for",
+   "her Voluntary Actt and Deed; Given under my",
+   "Barbados June 21.^st 1693 Exchange for 100 sterl",
+   "date the Sixth day of July One thousand Six hundred"
+  ],
+  "val_n": 119,
+  "val_8b": 0.8906862745098039,
+  "val_ens": 0.9010185892538833,
+  "err_classes": {
+   "spelling": 117,
+   "punct/markup": 41,
+   "casing": 38
+  },
+  "top_word_subs": [
+   [
+    "Said->said",
+    5
+   ],
+   [
+    "Euer->Ever",
+    2
+   ],
+   [
+    "S:^d->S^d",
+    2
+   ],
+   [
+    "Same->same",
+    2
+   ],
+   [
+    "Six->-",
+    2
+   ],
+   [
+    "bills->title",
+    1
+   ],
+   [
+    "Rent->Pent.",
+    1
+   ],
+   [
+    "do->doe",
+    1
+   ],
+   [
+    "Sec^rys:->Sec:^rys",
+    1
+   ],
+   [
+    "Satt->Satta",
+    1
+   ],
+   [
+    "Bargained->bargained",
+    1
+   ],
+   [
+    "Ann->Ann:",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    20
+   ],
+   [
+    ":",
+    17
+   ],
+   [
+    "e",
+    12
+   ],
+   [
+    "^",
+    11
+   ],
+   [
+    "r",
+    10
+   ],
+   [
+    ",",
+    7
+   ],
+   [
+    "s",
+    6
+   ],
+   [
+    ".",
+    5
+   ]
+  ],
+  "char_added": [
+   [
+    " ",
+    14
+   ],
+   [
+    "e",
+    13
+   ],
+   [
+    ":",
+    10
+   ],
+   [
+    "a",
+    8
+   ],
+   [
+    "s",
+    7
+   ],
+   [
+    "t",
+    6
+   ],
+   [
+    ",",
+    5
+   ],
+   [
+    ".",
+    4
+   ]
+  ]
+ },
+ "B03": {
+  "n_train": 169,
+  "n_test": 45,
+  "n_unl": 21,
+  "height": 355.0,
+  "width": 5326.0,
+  "aspect": 15.026178010471204,
+  "paper": 170.32594299316406,
+  "tint": 69.61665344238281,
+  "contrast": 69.79621124267578,
+  "stroke_rel": 0.0413021244452595,
+  "sharp": 0.0964253855024895,
+  "edge_ratio": 0.3876391457150662,
+  "band_frac": 0.3517241379310344,
+  "chars": 73.0,
+  "words": 13.0,
+  "pct_caret": 28.994082840236686,
+  "pct_colon": 13.609467455621301,
+  "pct_amp": 13.609467455621301,
+  "pct_plus": 0.0,
+  "pct_thorn": 3.5502958579881656,
+  "pct_ff": 2.9585798816568047,
+  "pct_digit": 7.100591715976331,
+  "pct_tilde": 1.183431952662722,
+  "pct_under": 0.591715976331361,
+  "pct_enddash": 2.9585798816568047,
+  "pct_apos": 0.0,
+  "pct_period": 7.100591715976331,
+  "pct_comma": 21.893491124260358,
+  "cap_words": 0.2462788487762383,
+  "pct_said_cap": 5.9171597633136095,
+  "pct_said": 24.85207100591716,
+  "pct_sd": 0.591715976331361,
+  "distinct_words": [
+   "_",
+   "money",
+   "part",
+   "bee",
+   "had",
+   "mee",
+   "under",
+   "without",
+   "Said",
+   "on",
+   "thereof",
+   "him",
+   "Richard",
+   ",",
+   "is",
+   "And",
+   "made",
+   "a",
+   "by",
+   "this",
+   "other",
+   "as",
+   "from",
+   "one",
+   "said"
+  ],
+  "examples": [
+   "Know yee that wee the said adam payne, and my wife for divers good causes",
+   "Att tenn dayes Sight of this my first of exchange my nor",
+   "of land being part of the Plantation mee the said Thomas Rennolls conteyneing",
+   "These are to Lye Certifie all whome it may concerne that upon",
+   "in this Island and made oath on the Holy Evangelists of Almighty God that hee did",
+   "and soe god send the good shipp to her desired port in safety Amen Dated",
+   "deced the twenty day of July (1676) and the charges amounting in the whole to the",
+   "Baird there shall be due acceptance And due paym^t made of"
+  ],
+  "val_n": 37,
+  "val_8b": 0.7880630630630632,
+  "val_ens": 0.7924651924651924,
+  "err_classes": {
+   "punct/markup": 18,
+   "spelling": 71,
+   "casing": 16
+  },
+  "top_word_subs": [
+   [
+    "This->(This",
+    1
+   ],
+   [
+    "Mackward->Martward",
+    1
+   ],
+   [
+    "Dumesnell->SimeSnell",
+    1
+   ],
+   [
+    "Soverigne->Sovereigne",
+    1
+   ],
+   [
+    "England->Engl",
+    1
+   ],
+   [
+    "Proffits->Profitts",
+    1
+   ],
+   [
+    "aboves:^d->abov^e",
+    1
+   ],
+   [
+    "Rich^d:->Rich:^d",
+    1
+   ],
+   [
+    "Done->Done,",
+    1
+   ],
+   [
+    "m^r->M^r",
+    1
+   ],
+   [
+    "promise->Promise",
+    1
+   ],
+   [
+    "M^:r->M:^r",
+    1
+   ]
+  ],
+  "char_dropped": [
+   [
+    " ",
+    13
+   ],
+   [
+    "e",
+    12
+   ],
+   [
+    "s",
+    8
+   ],
+   [
+    ":",
+    8
+   ],
+   [
+    "i",
+    5
+   ],
+   [
+    "d",
+    3
+   ],
+   [
+    "r",
+    3
+   ],
+   [
+    ".",
+    3
+   ]
+  ],
+  "char_added": [
+   [
+    " ",
+    11
+   ],
+   [
+    "t",
+    8
+   ],
+   [
+    "s",
+    7
+   ],
+   [
+    ",",
+    7
+   ],
+   [
+    "e",
+    5
+   ],
+   [
+    ":",
+    5
+   ],
+   [
+    "n",
+    5
+   ],
+   [
+    ".",
+    3
+   ]
+  ]
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "trial": "PSL_001__q25_base_fewshot_MBR_(own_5-best)",
+ "session": "PSL_001",
+ "description": "test_pesudo: pseudo-labels for test + unlisted from LABELERS + guide judged by every labeler, pooled by MBR, confidence calibrated on Fold-0 val",
+ "model": "q25_base_fewshot MBR (own 5-best)",
+ "variant": "pseudo-label",
+ "decode": null,
+ "cfg": {
+  "WHEELS_DIR": "/kaggle/input/datasets/haniagamal/teleco-wheels/wheels",
+  "BASE_MODELS": {
+   "q3": "D:/HANAFY/ROAD/work/tiny/q3",
+   "q25": "D:/HANAFY/ROAD/work/tiny/q25"
+  },
+  "LABELERS": [
+   {
+    "name": "q3_auto",
+    "model": "q3",
+    "adapter": "auto",
+    "prompt": "exp002",
+    "fewshot_k": 0
+   },
+   {
+    "name": "q3_subclass",
+    "model": "q3",
+    "scheme": "subclass",
+    "prompt": "classwise",
+    "adapter": "D:/HANAFY/ROAD/work/dryrun_mega_adapters/ROAD_work_tiny_q3/fold0",
+    "adapter_pattern": "q3_subclass__{key}"
+   },
+   {
+    "name": "q25_base_fewshot",
+    "model": "q25",
+    "adapter": null,
+    "prompt": "detailed",
+    "fewshot_k": 2
+   }
+  ],
+  "ADAPTER_SEARCH_ROOTS": [
+   "D:/HANAFY/ROAD/work/dryrun/qwen-vl-ocr/final"
+  ],
+  "REUSE_DIRS": [
+   "D:/HANAFY/ROAD/work/dryrun_psl_reuse_src"
+  ],
+  "DATA_DIR": "D:/HANAFY/ROAD",
+  "TRAIN_CSV": null,
+  "TEST_CSV": null,
+  "IMAGES_DIR": "D:/HANAFY/ROAD/images",
+  "AUTODISCOVER": true,
+  "OUTPUT_DIR": "D:/HANAFY/ROAD/work/dryrun_psl2/qwen-vl-ocr",
+  "FINAL_DIR": "D:/HANAFY/ROAD/work/dryrun_psl2/qwen-vl-ocr/final",
+  "WORK_DIR": "D:/HANAFY/ROAD/work/dryrun_psl2",
+  "SUBMISSION_CSV": "D:/HANAFY/ROAD/work/dryrun_psl2/submission.csv",
+  "PREV_RESULTS_DIRS": [],
+  "RUN_MODE": "fold0",
+  "FOLD": 0,
+  "N_FOLDS": 5,
+  "CKPT_SELECTION": "last",
+  "INNER_CKPT_FRAC": 0.0,
+  "VAL_LIMIT": null,
+  "PSEUDO_SPLITS": [
+   "test",
+   "unlisted"
+  ],
+  "TIME_BUDGET_H": 11.3,
+  "SUBCLASS_MODE": "fixed",
+  "N_SUBCLASSES": 10,
+  "SUBCLASS_MIN_LINES": 110,
+  "CLASS_HEIGHT_SPLIT": 150,
+  "GROUP_A1_MAX_HEIGHT": 58,
+  "GROUP_A2_MAX_PAPER": 194,
+  "PROMPT_TEXT_EXAMPLES": 6,
+  "USER_INSTRUCTION": "Transcribe this line.",
+  "MAX_PIXELS": 2000000,
+  "MIN_PIXELS": 200704,
+  "ATTN_IMPL": null,
+  "USE_BF16": false,
+  "MAX_NEW_TOKENS": 8,
+  "DECODE": {
+   "num_beams": 5,
+   "repetition_penalty": 1.0,
+   "no_repeat_ngram_size": 0,
+   "n_return": 5
+  },
+  "LOOP_GUARD": 3,
+  "MBR_TEMPERATURE": 1.0,
+  "LOG_EVERY_LINES": 5,
+  "GUIDE_CSV": "D:/HANAFY/ROAD/submission_offline_best.csv",
+  "GUIDE_VAL_CSV": "D:/HANAFY/ROAD/trils/EXP_002__ENS_7b8b_mbrq__D2_b5nb_ens__val.csv",
+  "GUIDE_WEIGHT": "auto",
+  "JUDGE_GUIDE": true,
+  "RESCORE_POOL": true,
+  "LABELER_WEIGHTS": "quality",
+  "PSEUDO_KEEP": "agree_or_lowrisk",
+  "PSEUDO_KEEP_FRAC": 0.7,
+  "MIN_CONFIDENCE": null,
+  "MIN_WORDS": 2,
+  "MAX_WORDS": 40,
+  "SEED": 42,
+  "CORRUPT_IDS": [
+   "JU7lRwk3jKkus24Z",
+   "79tMUVyfIdy3GzkG",
+   "F8DYDDp2AvW9Dytw",
+   "VmrEALeZiP1Y6nF9",
+   "t0UrASljcgzvBAnO"
+  ],
+  "PSEUDO_LABEL_CSV": null,
+  "PSEUDO_PER_CLASS": true,
+  "LEARNING_RATE": null,
+  "AUG_PROFILE": "-",
+  "CLASS_HINT": false,
+  "CLASS_AUG_COPIES": null,
+  "DECODE_VARIANTS": {
+   "beam5": {
+    "num_beams": 5,
+    "repetition_penalty": 1.0,
+    "no_repeat_ngram_size": 0,
+    "n_return": 5
+   }
+  },
+  "BASELINE_VARIANT": "beam5",
+  "MODEL_PATHS": [
+   "D:/HANAFY/ROAD/work/tiny/q3",
+   "D:/HANAFY/ROAD/work/tiny/q25"
+  ],
+  "GRAD_CKPT_MODELS": [
+   "q25"
+  ],
+  "PER_DEVICE_TRAIN_BATCH_SIZE": 2,
+  "EVAL_STEPS": 4,
+  "DATALOADER_NUM_WORKERS": 0,
+  "BATCH_SIZE": 4,
+  "DO_TRAIN": true
+ }
+}

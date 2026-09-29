@@ -1,0 +1,229 @@
+{
+ "trial": "MEGA_001__q25_shared__mbr",
+ "session": "MEGA_001",
+ "description": "Shared + class-wise (A/B) + sub-class-wise (A1/A2/A3/B) Qwen3-VL-8B systems and a shared Qwen2.5-VL-7B; inner validation every 100 steps with best-step restore; beam-5 N-best pooled; cross-system rescoring; MBR ensembles on all 819 Fold-0 val lines",
+ "model": "q25_shared",
+ "variant": "D2_b5nb/mbr",
+ "decode": null,
+ "cfg": {
+  "WHEELS_DIR": "/kaggle/input/datasets/haniagamal/teleco-wheels/wheels",
+  "BASE_MODELS": {
+   "q3": "D:/HANAFY/ROAD/work/tiny/q3",
+   "q25": "D:/HANAFY/ROAD/work/tiny/q25"
+  },
+  "SYSTEMS": [
+   {
+    "name": "q3_shared",
+    "model": "q3",
+    "scheme": "shared"
+   },
+   {
+    "name": "q3_class",
+    "model": "q3",
+    "scheme": "class"
+   },
+   {
+    "name": "q3_subclass",
+    "model": "q3",
+    "scheme": "subclass",
+    "class_hp": {
+     "A2": {
+      "MAX_STEPS": 2
+     }
+    }
+   },
+   {
+    "name": "q3_B_cont",
+    "model": "q3",
+    "scheme": "class",
+    "keys": [
+     "B"
+    ],
+    "init": "from:q3_shared",
+    "replay": 0.2,
+    "hp": {
+     "LR_SCHEDULER": "constant_with_warmup"
+    }
+   },
+   {
+    "name": "q25_shared",
+    "model": "q25",
+    "scheme": "shared"
+   }
+  ],
+  "BASELINE_SYSTEM": "q3_shared",
+  "GRAD_CKPT_MODELS": [
+   "q25"
+  ],
+  "DATA_DIR": "D:/HANAFY/ROAD",
+  "TRAIN_CSV": null,
+  "TEST_CSV": null,
+  "IMAGES_DIR": "D:/HANAFY/ROAD/images",
+  "AUTODISCOVER": true,
+  "OUTPUT_DIR": "D:/HANAFY/ROAD/work/dryrun_mega_reuse/qwen-vl-ocr",
+  "FINAL_DIR": "D:/HANAFY/ROAD/work/dryrun_mega_reuse/qwen-vl-ocr/final",
+  "WORK_DIR": "D:/HANAFY/ROAD/work/dryrun_mega_reuse",
+  "SUBMISSION_CSV": "D:/HANAFY/ROAD/work/dryrun_mega_reuse/submission.csv",
+  "KEEP_ADAPTERS": true,
+  "ADAPTERS_DIR": "D:/HANAFY/ROAD/work/dryrun_mega_adapters",
+  "PREV_RESULTS_DIRS": [],
+  "RUN_MODE": "fold0",
+  "FOLD": 0,
+  "N_FOLDS": 5,
+  "CKPT_SELECTION": "inner_loss",
+  "INNER_CKPT_FRAC": 0.08,
+  "TIME_BUDGET_H": 11.3,
+  "EVAL_EVERY": 2,
+  "EVAL_GEN_N": 3,
+  "EVAL_LOSS_N": 3,
+  "EVAL_BATCH": 2,
+  "EVAL_MAX_NEW_TOKENS": 8,
+  "CKPT_METRIC": "inner_official",
+  "MONITOR_VAL_N": 2,
+  "PER_DEVICE_TRAIN_BATCH_SIZE": 2,
+  "GRADIENT_ACCUMULATION_STEPS": 1,
+  "NUM_TRAIN_EPOCHS": 1,
+  "MAX_STEPS": 5,
+  "LEARNING_RATE": 0.0002,
+  "LR_SCHEDULER": "cosine",
+  "WARMUP_RATIO": 0.03,
+  "DATALOADER_NUM_WORKERS": 0,
+  "MAX_PIXELS": 2000000,
+  "MIN_PIXELS": 200704,
+  "ATTN_IMPL": null,
+  "USE_BF16": false,
+  "R": 32,
+  "LORA_ALPHA": 64,
+  "LORA_DROPOUT": 0.05,
+  "LORA_VISION": true,
+  "SEED": 42,
+  "MODEL_OVERRIDES": {
+   "32b": {
+    "LEARNING_RATE": 0.0001
+   }
+  },
+  "CLASS_HEIGHT_SPLIT": 150,
+  "GROUP_A1_MAX_HEIGHT": 58,
+  "GROUP_A2_MAX_PAPER": 194,
+  "CLASS_PROMPTS": {
+   "A": "Transcribe the handwritten line exactly as written. This is not modern English: keep the original spelling, capital letters, abbreviations and marks (^ for superscript letters, : for suspensions, &, ff). Do not modernize, expand or correct anything. If parts of neighbouring lines are visible, transcribe only the central line. This line comes from a Barbados legal record of the 1630s-1660s. Common conventions in these documents: & for 'and', ye and yt for 'the' and 'that', sd for 'said', and spellings such as heires, assignes, publique.",
+   "B": "Transcribe the handwritten line exactly as written. This is not modern English: keep the original spelling, capital letters, abbreviations and marks (^ for superscript letters, : for suspensions, &, ff). Do not modernize, expand or correct anything. If parts of neighbouring lines are visible, transcribe only the central line. This line comes from a Barbados legal record of the 1670s-1710s, scanned at high resolution. Common conventions in these documents: superscript abbreviations written with ^ (W^m, y^e, M^r, Adm^rs, Ex^rs), colon suspensions (Tho:, Exec:^rs, S:^d), ff at the start of words, and spellings such as heyres and saide.",
+   "A1": "Transcribe the handwritten line exactly as written. This is not modern English: keep the original spelling, capital letters, abbreviations and marks (^ for superscript letters, : for suspensions, &, ff). Do not modernize, expand or correct anything. If parts of neighbouring lines are visible, transcribe only the central line. This line comes from a Barbados legal record of the 1630s-1660s. Common conventions in these documents: & for 'and', ye and yt for 'the' and 'that', sd for 'said', and spellings such as heires, assignes, publique. The crop is tight around the line; '&' and ye/yt are very common.",
+   "A2": "Transcribe the handwritten line exactly as written. This is not modern English: keep the original spelling, capital letters, abbreviations and marks (^ for superscript letters, : for suspensions, &, ff). Do not modernize, expand or correct anything. If parts of neighbouring lines are visible, transcribe only the central line. This line comes from a Barbados legal record of the 1630s-1660s. Common conventions in these documents: & for 'and', ye and yt for 'the' and 'that', sd for 'said', and spellings such as heires, assignes, publique. The parchment is dark and the hand is large; in these documents '&' and ye are rare and lines are short.",
+   "A3": "Transcribe the handwritten line exactly as written. This is not modern English: keep the original spelling, capital letters, abbreviations and marks (^ for superscript letters, : for suspensions, &, ff). Do not modernize, expand or correct anything. If parts of neighbouring lines are visible, transcribe only the central line. This line comes from a Barbados legal record of the 1630s-1660s. Common conventions in these documents: & for 'and', ye and yt for 'the' and 'that', sd for 'said', and spellings such as heires, assignes, publique. The crop is loose and often shows parts of the lines above and below; the central line is usually long."
+  },
+  "SHARED_PROMPT": "This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.",
+  "SHARED_CLASS_HINT": false,
+  "CLASS_HINT": true,
+  "HINT_LEVEL": "group",
+  "CLASS_AUG_COPIES": null,
+  "USE_AUGMENT": true,
+  "AUG_COPIES": 1,
+  "AUG_PROFILE": "realistic",
+  "AUG_RESAMPLE": true,
+  "AUG_STROKE_MODE": "both",
+  "AUG_ROTATE": true,
+  "AUG_ROTATE_P": 0.5,
+  "AUG_ROTATE_DEG": 4.0,
+  "AUG_SHEAR": true,
+  "AUG_SHEAR_P": 0.4,
+  "AUG_SHEAR_MAX": 0.15,
+  "AUG_ELASTIC": true,
+  "AUG_ELASTIC_P": 0.4,
+  "AUG_ELASTIC_ALPHA": 6.0,
+  "AUG_ELASTIC_SIGMA": 8.0,
+  "AUG_HJITTER": true,
+  "AUG_HJITTER_P": 0.4,
+  "AUG_HJITTER_FRAC": 0.12,
+  "AUG_PAD": true,
+  "AUG_PAD_P": 0.3,
+  "AUG_PAD_FRAC": 0.06,
+  "AUG_PHOTO": true,
+  "AUG_PHOTO_P": 0.7,
+  "AUG_BRIGHT": 0.2,
+  "AUG_CONTRAST": 0.2,
+  "AUG_GAMMA": 1.4,
+  "AUG_TINT": true,
+  "AUG_TINT_P": 0.5,
+  "AUG_TINT_MAX": 0.12,
+  "AUG_DESAT_MAX": 0.4,
+  "AUG_ILLUM": true,
+  "AUG_ILLUM_P": 0.4,
+  "AUG_ILLUM_MAX": 0.35,
+  "AUG_STROKE": true,
+  "AUG_STROKE_P": 0.35,
+  "AUG_BLEED": true,
+  "AUG_BLEED_P": 0.25,
+  "AUG_BLEED_ALPHA": 0.12,
+  "AUG_NOISE": true,
+  "AUG_NOISE_P": 0.5,
+  "AUG_NOISE_STD": 0.1,
+  "AUG_JPEG": true,
+  "AUG_JPEG_P": 0.4,
+  "AUG_JPEG_QMIN": 40,
+  "AUG_JPEG_QMAX": 80,
+  "CORRUPT_IDS": [
+   "VmrEALeZiP1Y6nF9",
+   "F8DYDDp2AvW9Dytw",
+   "79tMUVyfIdy3GzkG",
+   "t0UrASljcgzvBAnO",
+   "JU7lRwk3jKkus24Z"
+  ],
+  "MAX_NEW_TOKENS": 10,
+  "BATCH_SIZE": 4,
+  "DECODE": {
+   "num_beams": 5,
+   "repetition_penalty": 1.0,
+   "no_repeat_ngram_size": 0,
+   "n_return": 5
+  },
+  "DECODE_VARIANTS": {
+   "D2_b5nb": {
+    "num_beams": 5,
+    "repetition_penalty": 1.0,
+    "no_repeat_ngram_size": 0,
+    "n_return": 5
+   }
+  },
+  "BASELINE_VARIANT": "D2_b5nb",
+  "LOOP_GUARD": 3,
+  "MBR_TEMPERATURE": 1.0,
+  "RESCORE": true,
+  "RESCORE_SPLITS": [
+   "val",
+   "test",
+   "unlisted"
+  ],
+  "RESCORE_BATCH": 3,
+  "RESCORE_T": 1.0,
+  "ENSEMBLE_METHODS": [
+   "pool_mbr_equal",
+   "pool_mbr_quality",
+   "pool_mbr_quality_median",
+   "rescore_mbr",
+   "rescore_mbr_median",
+   "rescore_map"
+  ],
+  "FINAL_METHOD": null,
+  "FINAL_WEIGHTS": null,
+  "FINAL_CHAMPION_JSON": null,
+  "PREDICT_UNLISTED": true,
+  "PSEUDO_LABEL_CSV": null,
+  "PSEUDO_KEEP_FRAC": 0.7,
+  "PSEUDO_PER_CLASS": true,
+  "DO_TRAIN": false,
+  "DO_INFER": true,
+  "PREDICT_TEST": true,
+  "OCR_PROMPT": "This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.",
+  "SPECIALISTS": {},
+  "SPECIALIST_MODELS": [],
+  "CLASS_SAMPLING_T": null,
+  "CLASS_ROUTING": false,
+  "ROUTING_LEVEL": "class",
+  "MODEL_PATHS": [
+   "D:/HANAFY/ROAD/work/tiny/q3",
+   "D:/HANAFY/ROAD/work/tiny/q25"
+  ],
+  "EVAL_STEPS": 4
+ }
+}

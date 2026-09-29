@@ -1,0 +1,99 @@
+[    0.1 min] [CLASSIFY] pixel features of 78 images in 3s
+[    0.1 min] [CLASSIFY] mode fixed: 10 sub-classes
+sub-class class  train  inner  val  test  unlisted  height  width   paper   tint  contrast  stroke_rel  sharp  edge_ratio
+      A01     A      3      0    0     1         0   104.0 1183.5 166.670 64.514    65.898       0.079  0.178       0.417
+      A02     A      2      0    0     1         0    65.0  772.0 204.030 49.233    84.614       0.056  0.251       0.226
+      A03     A      5      2    0     0         1    50.5 1012.5 205.666 48.064    95.181       0.064  0.227       0.125
+      A04     A      4      0    0     0         0    46.0 1030.0 200.180 51.200    92.847       0.084  0.235       0.135
+      A05     A     12      0    0     2         3    65.0 1100.0 199.389 51.383    91.132       0.052  0.243       0.430
+      A06     A      3      1    0     0         0    51.5 1199.5 208.470 45.605    90.038       0.083  0.233       0.213
+      A07     A     13      1    0     0         0    48.0 1149.5 198.522 53.689    99.628       0.084  0.247       0.142
+      B01     B      4      1    0     0         0   340.0 4087.0 180.612 64.358    74.046       0.039  0.089       0.497
+      B02     B     10      1    0     3         1   384.0 4181.0 158.035 68.614    53.288       0.030  0.132       0.724
+      B03     B      4      0    0     0         0   370.5 5264.0 172.605 71.095    67.454       0.035  0.101       0.390
+[    0.1 min] [CLASSIFY] train+val lines: sub-class x old A1/A2/A3/B group
+old group    A1   A2   A3     B
+sub-class                      
+A01           0    3    0     0
+A02           0    0    2     0
+A03           6    0    1     0
+A04           4    0    0     0
+A05        1642  379  999     0
+A06           4    0    0     0
+A07          13    0    1     0
+B01           0    0    0     5
+B02           0    0    0  1030
+B03           0    0    0     4
+[    0.1 min] [CLASSIFY] saved subclass_assignments.csv (ID, split, class, subclass, pixel features)
+[    0.1 min] [PROMPTS] conventions measured on the TRAIN lines of each sub-class (% of lines):
+        n  chars  words  caret  colon   amp  thorn    ff  digit  tilde  comma  Said    sd  cap_words
+A01   3.0   45.0    9.0    0.0    0.0   0.0    0.0   0.0    0.0    0.0    0.0  33.3   0.0       18.5
+A02   2.0   45.5    7.5    0.0    0.0   0.0    0.0   0.0    0.0    0.0   50.0   0.0   0.0       61.1
+A03   5.0   47.0    8.0    0.0    0.0   0.0    0.0   0.0    0.0    0.0    0.0   0.0   0.0        5.6
+A04   4.0   53.5    9.0    0.0    0.0  50.0    0.0   0.0    0.0    0.0    0.0   0.0   0.0       22.2
+A05  12.0   76.0   13.0    0.0    0.0   0.0    0.0   0.0    0.0    0.0    0.0   0.0   0.0        9.8
+A06   3.0   73.0   12.0    0.0    0.0  33.3    0.0   0.0    0.0    0.0    0.0   0.0   0.0        6.5
+A07  13.0   64.0   13.0   15.4    7.7  46.2   38.5   0.0    0.0    0.0    0.0   0.0  23.1       16.5
+B01   4.0   55.5   10.5   25.0   50.0  25.0    0.0   0.0   50.0    0.0   25.0   0.0  25.0       35.6
+B02  10.0   48.0    9.5   10.0   10.0  10.0    0.0  10.0   10.0    0.0   20.0   0.0   0.0       26.6
+B03   4.0   68.0   12.5   25.0   25.0   0.0    0.0   0.0   25.0    0.0   25.0   0.0   0.0       20.9
+[    0.1 min] [PROMPTS] characters per prompt: A01=176, A02=176, A03=176, A04=176, A05=176, A06=176, A07=176, B01=176, B02=176, B03=176
+[    0.1 min] [FEW-SHOT] example pools (Fold-0 TRAIN lines only): A01=3, A02=2, A03=5, A04=4, A05=12, A06=3, A07=13, B01=4, B02=10, B03=4
+[    0.1 min] [GUIDE] submission_offline_best.csv: 1374 lines from column 'Target'
+[    0.1 min] [GUIDE] EXP_002__ENS_7b8b_mbrq__D2_b5nb_ens__val.csv: 819 lines from column 'pred'
+[    0.1 min] [GUIDE] covers 7/7 test and 0/5 unlisted lines
+[    0.2 min] [MODEL] q3 + fresh LoRA r=32 (19 target module names, vision LoRA on) — B matrices start at zero, so 'before' = base model
+[    0.2 min] [MODEL] prompt lengths in tokens: A01=37, A02=37, A03=37, A04=37, A05=37, A06=37, A07=37, B01=37, B02=37, B03=37
+[    0.2 min] [CONVERSATION] test line MzQuRiUbPFsq6Azy (sub-class A05, 2 solved examples: ['O4NvcCsc91FgWCTm', 'nUeUuYElF05SSK06']) = 787 tokens
+
+==============================================================================================================
+[    0.2 min] INFERENCE BEFORE FINE-TUNING (sample)
+==============================================================================================================
+[    0.2 min] [before] test: 4/4 lines | 119 lines/min | ETA 0.0 min
+[    0.2 min] [before] MzQuRiUbPFsq6Azy [A05]
+      GT  : (test line: no ground truth)
+      PRED: flood الخلي蛹嚷 Proble Reading펠炀
+[    0.2 min] [before] voWkMuyhO8FAlLr5 [B02]
+      GT  : (test line: no ground truth)
+      PRED: incred轵吊ised ainysz "_TestingModule
+[    0.2 min] [before] fdbPL2qsoaciDFoi [A01]
+      GT  : (test line: no ground truth)
+      PRED: Dream Dream Dream
+[    0.2 min] [TRAIN] + 7 guide pseudo-labelled lines (test/unlisted) in the first fine-tune
+
+==============================================================================================================
+[    0.2 min] [TRAIN ft1] 67 lines -> 134 rows (by sub-class {'A01': 4, 'A02': 3, 'A03': 5, 'A04': 4, 'A05': 14, 'A06': 3, 'A07': 13, 'B01': 4, 'B02': 13, 'B03': 4}) | lr 0.0002 | batch 1 x accumulation 4 | ~4 steps | validation every 2 steps on 3 inner lines
+==============================================================================================================
+[    0.4 min] [VALID ft1] step 2/4 ep 0.06 | train loss nan | inner loss 11.9534 | inner official -0.1179 (word/line 13.667, char/line 60.333, n=3) | 1s  <- best so far
+[    0.5 min] [VALID ft1] step 4/4 ep 0.12 | train loss nan | inner loss 11.9395 | inner official -0.1301 (word/line 13.667, char/line 61.667, n=3) | 1s
+[    0.5 min] [CKPT ft1] RESTORED step 2 (inner_official -0.1179) instead of the last step 4 (inner official -0.1301)
+[    0.5 min] [TRAIN ft1] done in 0.3 min | answer-mask checks 3/3 OK
+[    0.5 min] [TRAIN ft1] adapter saved -> D:/HANAFY/ROAD/work/dryrun_tpl_full/qwen-vl-ocr/final\ROAD_work_tiny_q3\full\ft1
+
+==============================================================================================================
+[    0.5 min] INFERENCE AFTER FINE-TUNING
+==============================================================================================================
+[    0.6 min] [after] test: 5/7 lines | 127 lines/min | ETA 0.0 min
+[    0.6 min] [after] test: 7/7 lines | 120 lines/min | ETA 0.0 min
+[    0.6 min] [after] unlisted: 5/5 lines | 128 lines/min | ETA 0.0 min
+[    0.7 min] [JUDGE] the model scored 7 guide lines that were not in its 5-best (0.0 min)
+[    0.7 min] [PSEUDO] after: guide weight 0.5 | 12 lines -> pseudo_labels_after.csv | kept for training 9 (75%) | agreement with guide 0.0% | mean confidence 0.684
+[    0.7 min] [PSEUDO] after: kept per sub-class {"A01": 1, "A02": 1, "A03": 1, "A05": 3, "B02": 3}
+
+==============================================================================================================
+[    0.7 min] SUMMARY (RUN_MODE='full': no validation lines, options with test predictions):
+           option  has_test
+ before/model_mbr     False
+before/model_top1     False
+  after/model_mbr      True
+ after/model_top1      True
+     after/judged      True
+            guide      True
+==============================================================================================================
+[    0.7 min] submission.csv <- after/judged | rows 7 | empty replaced 0
+[    0.7 min] pseudo_labels.csv <- stage 'after' (12 lines, 9 kept for training)
+
+==============================================================================================================
+[    0.7 min] RUN FINISHED in 0.01 h
+==============================================================================================================
+[    0.7 min] final adapter (stage 'after') -> D:/HANAFY/ROAD/work/dryrun_tpl_full\final_lora

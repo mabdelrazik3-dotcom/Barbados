@@ -1,0 +1,226 @@
+
+######## executing code cell 0: # Cell 1 — OFFLINE install from the wheels dataset
+wheels dir: /kaggle/input/datasets/haniagamal/teleco-wheels/wheels   found: 0 wheels
+
+######## executing code cell 2: # Cell 2 — imports
+transformers 5.0.0 | VLM class: AutoModelForImageTextToText
+torch 2.13.0+cpu | cuda False | bf16 False
+
+######## executing code cell 3: # Cell 3 — CFG
+TRIAL: TPL_001 | test_pesudo: 10 pixel sub-classes, detailed sub-class prompts + K nearest solved train lines as few-shot turns, batch 1; inference -> fine-tune -> inference; guided + judged test pseudo-labels
+MODEL 8b | mode fold0 | fine-tune True | before sample | self-train rounds 1 | prompts detailed | few-shot K=2 | guide no
+
+######## executing code cell 4: # Cell 4 — resolve & sanity-check paths
+TRAIN_CSV : D:/HANAFY/ROAD\Train.csv -> True
+TEST_CSV  : D:/HANAFY/ROAD\Test.csv -> True
+IMAGES_DIR: D:/HANAFY/ROAD/images -> True
+MODEL     : D:/HANAFY/ROAD/work/tiny/q3 -> True
+
+######## executing code cell 5: # Cell 5 — text / image utils + augmentation stack
+[aug] profile=realistic resample=True rotate=±1.0° noise σ=3.1 jpeg q70-92 stroke=thicken@0.15 illum=0.12 fill=paper
+
+######## executing code cell 6: # Cell 6 — model & processor loaders (pixel limits enforced + verified)
+
+######## executing code cell 7: # Cell 7 — OFFICIAL metric, MBR / ROVER ensembling, error forensics, paired bootstrap
+official metric + ensemble helpers OK
+
+######## executing code cell 8: # Cell 8 — samples, Fold-0 split (identical IDs to barbados-2), repaired protocol
+[DATASET] found=4093, missing=0, excluded_corrupt=5
+mode=fold0 fold=0: train=3012 inner_ckpt=262 val=819 (ALL scored)
+group balance  train={'A1': 1248, 'A2': 284, 'A3': 714, 'B': 766}  inner={'A1': 110, 'A2': 23, 'A3': 63, 'B': 66}  val={'A1': 311, 'A2': 75, 'A3': 226, 'B': 207}
+test rows: 1374 | missing test images: 0
+unlisted images (in images/, in neither CSV): 687
+group balance  test= {'A1': 564, 'A2': 129, 'A3': 336, 'B': 345}  unlisted= {'A1': 308, 'A2': 57, 'A3': 169, 'B': 153}
+dry-run groups  val: ['A1', 'A1', 'A2', 'A1', 'B', 'A3', 'A3', 'A2', 'B', 'B', 'A2', 'A3']  test: ['A3', 'A3', 'B', 'B', 'A2', 'B', 'A1']
+dry-run pseudo samples: 0
+
+######## executing code cell 9: # Cell 11 — trial harness: persistence, champion tracking, standard report block
+
+######## executing code cell 10: # Cell 9 — CLASSIFICATION: pixel features -> class (A/B) and sub-class for every image
+[    0.1 min] [CLASSIFY] pixel features of 90 images in 4s
+[    0.2 min] [CLASSIFY] refit tree: A 1 leaves, B 1 leaves
+[    0.2 min] [CLASSIFY] mode refit: 2 sub-classes
+sub-class class  train  inner  val  test  unlisted  height  width   paper   tint  contrast  stroke_rel  sharp  edge_ratio
+      A01     A     39      6    9     4         4    56.0 1107.0 200.404 50.462     90.97       0.067  0.243       0.230
+      B01     B     21      0    3     3         1   367.0 4168.0 170.622 67.604     65.83       0.039  0.104       0.579
+[    0.2 min] [CLASSIFY] train+val lines: sub-class x old A1/A2/A3/B group
+old group    A1   A2    A3     B
+sub-class                       
+A01        1669  382  1003     0
+B01           0    0     0  1039
+[    0.2 min] [CLASSIFY] saved subclass_assignments.csv (ID, split, class, subclass, pixel features)
+
+######## executing code cell 11: # Cell 10 — sub-class profiles (TRAIN lines only) and the detailed prompt of every sub-class
+[    0.2 min] [PROMPTS] conventions measured on the TRAIN lines of each sub-class (% of lines):
+        n  chars  words  caret  colon   amp  thorn   ff  digit  tilde  comma  Said   sd  cap_words
+A01  39.0   67.0   12.0   15.4    2.6  20.5   12.8  2.6    5.1    0.0   10.3   0.0  2.6       15.6
+B01  21.0   54.0    9.0   14.3    9.5   0.0    0.0  4.8    4.8    0.0   14.3   4.8  0.0       24.6
+[    0.2 min] [PROMPTS] characters per prompt: A01=176, B01=176
+
+######## executing code cell 12: _show = max(SUB_KEYS, key=lambda k: PROFILES.get(k, {}).get("n", 0))
+==================== PROMPT of sub-class A01 ====================
+
+This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.
+
+######## executing code cell 13: # Cell 11 — few-shot retrieval, conversation, collator (batch 1), generation, forced scoring (judge)
+[    0.2 min] [FEW-SHOT] example pools (Fold-0 TRAIN lines only): A01=39, B01=21
+
+######## executing code cell 14: # Cell 12 — guide files, judge, pseudo-label writer
+[    0.2 min] [GUIDE] submission_offline_best.csv: 1374 lines from column 'Target'
+[    0.2 min] [GUIDE] EXP_002__ENS_7b8b_mbrq__D2_b5nb_ens__val.csv: 819 lines from column 'pred'
+[    0.2 min] [GUIDE] covers 7/7 test and 0/5 unlisted lines
+[    0.2 min] [GUIDE] guide on the 819 val lines: official 0.89861 | per sub-class {"A01": "n=   9 score=0.9104 w/line=1.667 c/line=2.222", "B01": "n=   3 score=0.8634 w/line=2.333 c/line=4.333"}
+
+######## executing code cell 15: # Cell 13 — load processor + model (+ LoRA)
+[processor] Qwen3VLProcessor | Qwen2VLImageProcessorFast | probe 1060x57 -> 1952x128 px, 244 visual tokens
+Loading weights:   0%|          | 0/64 [00:00<?, ?it/s]Loading weights:   2%|▏         | 1/64 [00:00<00:00, 10810.06it/s, Materializing param=lm_head.weight]Loading weights:   2%|▏         | 1/64 [00:00<00:00, 4382.76it/s, Materializing param=lm_head.weight] Loading weights:   3%|▎         | 2/64 [00:00<00:00, 3651.98it/s, Materializing param=model.language_model.embed_tokens.weight]Loading weights:   3%|▎         | 2/64 [00:00<00:00, 1997.29it/s, Materializing param=model.language_model.embed_tokens.weight]Loading weights:   5%|▍         | 3/64 [00:00<00:00, 1742.06it/s, Materializing param=model.language_model.layers.0.input_layernorm.weight]Loading weights:   5%|▍         | 3/64 [00:00<00:00, 1612.16it/s, Materializing param=model.language_model.layers.0.input_layernorm.weight]Loading weights:   6%|▋         | 4/64 [00:00<00:00, 1719.33it/s, Materializing param=model.language_model.layers.0.mlp.down_proj.weight]  Loading weights:   6%|▋         | 4/64 [00:00<00:00, 1631.23it/s, Materializing param=model.language_model.layers.0.mlp.down_proj.weight]Loading weights:   8%|▊         | 5/64 [00:00<00:00, 1690.98it/s, Materializing param=model.language_model.layers.0.mlp.gate_proj.weight]Loading weights:   8%|▊         | 5/64 [00:00<00:00, 1608.37it/s, Materializing param=model.language_model.layers.0.mlp.gate_proj.weight]Loading weights:   9%|▉         | 6/64 [00:00<00:00, 1635.74it/s, Materializing param=model.language_model.layers.0.mlp.up_proj.weight]  Loading weights:   9%|▉         | 6/64 [00:00<00:00, 1575.72it/s, Materializing param=model.language_model.layers.0.mlp.up_proj.weight]Loading weights:  11%|█         | 7/64 [00:00<00:00, 1545.84it/s, Materializing param=model.language_model.layers.0.post_attention_layernorm.weight]Loading weights:  11%|█         | 7/64 [00:00<00:00, 1494.53it/s, Materializing param=model.language_model.layers.0.post_attention_layernorm.weight]Loading weights:  12%|█▎        | 8/64 [00:00<00:00, 1604.25it/s, Materializing param=model.language_model.layers.0.self_attn.k_norm.weight]        Loading weights:  12%|█▎        | 8/64 [00:00<00:00, 1467.05it/s, Materializing param=model.language_model.layers.0.self_attn.k_norm.weight]Loading weights:  14%|█▍        | 9/64 [00:00<00:00, 1441.89it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.weight]Loading weights:  14%|█▍        | 9/64 [00:00<00:00, 1375.68it/s, Materializing param=model.language_model.layers.0.self_attn.k_proj.weight]Loading weights:  16%|█▌        | 10/64 [00:00<00:00, 1421.27it/s, Materializing param=model.language_model.layers.0.self_attn.o_proj.weight]Loading weights:  16%|█▌        | 10/64 [00:00<00:00, 1345.36it/s, Materializing param=model.language_model.layers.0.self_attn.o_proj.weight]Loading weights:  17%|█▋        | 11/64 [00:00<00:00, 1412.87it/s, Materializing param=model.language_model.layers.0.self_attn.q_norm.weight]Loading weights:  17%|█▋        | 11/64 [00:00<00:00, 1375.26it/s, Materializing param=model.language_model.layers.0.self_attn.q_norm.weight]Loading weights:  19%|█▉        | 12/64 [00:00<00:00, 1407.52it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.weight]Loading weights:  19%|█▉        | 12/64 [00:00<00:00, 1363.11it/s, Materializing param=model.language_model.layers.0.self_attn.q_proj.weight]Loading weights:  20%|██        | 13/64 [00:00<00:00, 1421.06it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.weight]Loading weights:  20%|██        | 13/64 [00:00<00:00, 1399.11it/s, Materializing param=model.language_model.layers.0.self_attn.v_proj.weight]Loading weights:  22%|██▏       | 14/64 [00:00<00:00, 1460.27it/s, Materializing param=model.language_model.layers.1.input_layernorm.weight] Loading weights:  22%|██▏       | 14/64 [00:00<00:00, 1412.05it/s, Materializing param=model.language_model.layers.1.input_layernorm.weight]Loading weights:  23%|██▎       | 15/64 [00:00<00:00, 1467.74it/s, Materializing param=model.language_model.layers.1.mlp.down_proj.weight]  Loading weights:  23%|██▎       | 15/64 [00:00<00:00, 1448.54it/s, Materializing param=model.language_model.layers.1.mlp.down_proj.weight]Loading weights:  25%|██▌       | 16/64 [00:00<00:00, 1488.76it/s, Materializing param=model.language_model.layers.1.mlp.gate_proj.weight]Loading weights:  25%|██▌       | 16/64 [00:00<00:00, 1445.60it/s, Materializing param=model.language_model.layers.1.mlp.gate_proj.weight]Loading weights:  27%|██▋       | 17/64 [00:00<00:00, 1456.03it/s, Materializing param=model.language_model.layers.1.mlp.up_proj.weight]  Loading weights:  27%|██▋       | 17/64 [00:00<00:00, 1425.52it/s, Materializing param=model.language_model.layers.1.mlp.up_proj.weight]Loading weights:  28%|██▊       | 18/64 [00:00<00:00, 1398.08it/s, Materializing param=model.language_model.layers.1.post_attention_layernorm.weight]Loading weights:  28%|██▊       | 18/64 [00:00<00:00, 1382.51it/s, Materializing param=model.language_model.layers.1.post_attention_layernorm.weight]Loading weights:  30%|██▉       | 19/64 [00:00<00:00, 1406.47it/s, Materializing param=model.language_model.layers.1.self_attn.k_norm.weight]        Loading weights:  30%|██▉       | 19/64 [00:00<00:00, 1374.26it/s, Materializing param=model.language_model.layers.1.self_attn.k_norm.weight]Loading weights:  31%|███▏      | 20/64 [00:00<00:00, 1388.75it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.weight]Loading weights:  31%|███▏      | 20/64 [00:00<00:00, 1377.08it/s, Materializing param=model.language_model.layers.1.self_attn.k_proj.weight]Loading weights:  33%|███▎      | 21/64 [00:00<00:00, 1419.05it/s, Materializing param=model.language_model.layers.1.self_attn.o_proj.weight]Loading weights:  33%|███▎      | 21/64 [00:00<00:00, 1408.47it/s, Materializing param=model.language_model.layers.1.self_attn.o_proj.weight]Loading weights:  34%|███▍      | 22/64 [00:00<00:00, 1408.17it/s, Materializing param=model.language_model.layers.1.self_attn.q_norm.weight]Loading weights:  34%|███▍      | 22/64 [00:00<00:00, 1390.20it/s, Materializing param=model.language_model.layers.1.self_attn.q_norm.weight]Loading weights:  36%|███▌      | 23/64 [00:00<00:00, 1410.43it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.weight]Loading weights:  36%|███▌      | 23/64 [00:00<00:00, 1386.87it/s, Materializing param=model.language_model.layers.1.self_attn.q_proj.weight]Loading weights:  38%|███▊      | 24/64 [00:00<00:00, 1400.63it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.weight]Loading weights:  38%|███▊      | 24/64 [00:00<00:00, 1340.39it/s, Materializing param=model.language_model.layers.1.self_attn.v_proj.weight]Loading weights:  39%|███▉      | 25/64 [00:00<00:00, 1370.96it/s, Materializing param=model.language_model.norm.weight]                     Loading weights:  39%|███▉      | 25/64 [00:00<00:00, 1354.94it/s, Materializing param=model.language_model.norm.weight]Loading weights:  41%|████      | 26/64 [00:00<00:00, 1362.64it/s, Materializing param=model.visual.blocks.0.attn.proj.bias]Loading weights:  41%|████      | 26/64 [00:00<00:00, 1332.00it/s, Materializing param=model.visual.blocks.0.attn.proj.bias]Loading weights:  42%|████▏     | 27/64 [00:00<00:00, 1352.55it/s, Materializing param=model.visual.blocks.0.attn.proj.weight]Loading weights:  42%|████▏     | 27/64 [00:00<00:00, 1345.75it/s, Materializing param=model.visual.blocks.0.attn.proj.weight]Loading weights:  44%|████▍     | 28/64 [00:00<00:00, 1352.71it/s, Materializing param=model.visual.blocks.0.attn.qkv.bias]   Loading weights:  44%|████▍     | 28/64 [00:00<00:00, 1343.24it/s, Materializing param=model.visual.blocks.0.attn.qkv.bias]Loading weights:  45%|████▌     | 29/64 [00:00<00:00, 1356.08it/s, Materializing param=model.visual.blocks.0.attn.qkv.weight]Loading weights:  45%|████▌     | 29/64 [00:00<00:00, 1327.37it/s, Materializing param=model.visual.blocks.0.attn.qkv.weight]Loading weights:  47%|████▋     | 30/64 [00:00<00:00, 1341.09it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.bias]Loading weights:  47%|████▋     | 30/64 [00:00<00:00, 1334.39it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.bias]Loading weights:  48%|████▊     | 31/64 [00:00<00:00, 1337.44it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.weight]Loading weights:  48%|████▊     | 31/64 [00:00<00:00, 1323.82it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc1.weight]Loading weights:  50%|█████     | 32/64 [00:00<00:00, 1339.28it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.bias]  Loading weights:  50%|█████     | 32/64 [00:00<00:00, 1305.62it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.bias]Loading weights:  52%|█████▏    | 33/64 [00:00<00:00, 1330.41it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.weight]Loading weights:  52%|█████▏    | 33/64 [00:00<00:00, 1323.36it/s, Materializing param=model.visual.blocks.0.mlp.linear_fc2.weight]Loading weights:  53%|█████▎    | 34/64 [00:00<00:00, 1355.34it/s, Materializing param=model.visual.blocks.0.norm1.bias]           Loading weights:  53%|█████▎    | 34/64 [00:00<00:00, 1351.65it/s, Materializing param=model.visual.blocks.0.norm1.bias]Loading weights:  55%|█████▍    | 35/64 [00:00<00:00, 1384.87it/s, Materializing param=model.visual.blocks.0.norm1.weight]Loading weights:  55%|█████▍    | 35/64 [00:00<00:00, 1381.35it/s, Materializing param=model.visual.blocks.0.norm1.weight]Loading weights:  56%|█████▋    | 36/64 [00:00<00:00, 1414.67it/s, Materializing param=model.visual.blocks.0.norm2.bias]  Loading weights:  56%|█████▋    | 36/64 [00:00<00:00, 1411.23it/s, Materializing param=model.visual.blocks.0.norm2.bias]Loading weights:  58%|█████▊    | 37/64 [00:00<00:00, 1444.44it/s, Materializing param=model.visual.blocks.0.norm2.weight]Loading weights:  58%|█████▊    | 37/64 [00:00<00:00, 1441.11it/s, Materializing param=model.visual.blocks.0.norm2.weight]Loading weights:  59%|█████▉    | 38/64 [00:00<00:00, 1474.12it/s, Materializing param=model.visual.blocks.1.attn.proj.bias]Loading weights:  59%|█████▉    | 38/64 [00:00<00:00, 1470.02it/s, Materializing param=model.visual.blocks.1.attn.proj.bias]Loading weights:  61%|██████    | 39/64 [00:00<00:00, 1498.38it/s, Materializing param=model.visual.blocks.1.attn.proj.weight]Loading weights:  61%|██████    | 39/64 [00:00<00:00, 1494.30it/s, Materializing param=model.visual.blocks.1.attn.proj.weight]Loading weights:  62%|██████▎   | 40/64 [00:00<00:00, 1526.09it/s, Materializing param=model.visual.blocks.1.attn.qkv.bias]   Loading weights:  62%|██████▎   | 40/64 [00:00<00:00, 1520.10it/s, Materializing param=model.visual.blocks.1.attn.qkv.bias]Loading weights:  64%|██████▍   | 41/64 [00:00<00:00, 1550.74it/s, Materializing param=model.visual.blocks.1.attn.qkv.weight]Loading weights:  64%|██████▍   | 41/64 [00:00<00:00, 1547.14it/s, Materializing param=model.visual.blocks.1.attn.qkv.weight]Loading weights:  66%|██████▌   | 42/64 [00:00<00:00, 1578.61it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.bias]Loading weights:  66%|██████▌   | 42/64 [00:00<00:00, 1575.04it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.bias]Loading weights:  67%|██████▋   | 43/64 [00:00<00:00, 1606.17it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.weight]Loading weights:  67%|██████▋   | 43/64 [00:00<00:00, 1602.59it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc1.weight]Loading weights:  69%|██████▉   | 44/64 [00:00<00:00, 1633.45it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.bias]  Loading weights:  69%|██████▉   | 44/64 [00:00<00:00, 1629.92it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.bias]Loading weights:  70%|███████   | 45/64 [00:00<00:00, 1660.57it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.weight]Loading weights:  70%|███████   | 45/64 [00:00<00:00, 1657.03it/s, Materializing param=model.visual.blocks.1.mlp.linear_fc2.weight]Loading weights:  72%|███████▏  | 46/64 [00:00<00:00, 1687.52it/s, Materializing param=model.visual.blocks.1.norm1.bias]           Loading weights:  72%|███████▏  | 46/64 [00:00<00:00, 1683.94it/s, Materializing param=model.visual.blocks.1.norm1.bias]Loading weights:  73%|███████▎  | 47/64 [00:00<00:00, 1714.21it/s, Materializing param=model.visual.blocks.1.norm1.weight]Loading weights:  73%|███████▎  | 47/64 [00:00<00:00, 1710.64it/s, Materializing param=model.visual.blocks.1.norm1.weight]Loading weights:  75%|███████▌  | 48/64 [00:00<00:00, 1740.24it/s, Materializing param=model.visual.blocks.1.norm2.bias]  Loading weights:  75%|███████▌  | 48/64 [00:00<00:00, 1736.56it/s, Materializing param=model.visual.blocks.1.norm2.bias]Loading weights:  77%|███████▋  | 49/64 [00:00<00:00, 1766.39it/s, Materializing param=model.visual.blocks.1.norm2.weight]Loading weights:  77%|███████▋  | 49/64 [00:00<00:00, 1762.75it/s, Materializing param=model.visual.blocks.1.norm2.weight]Loading weights:  78%|███████▊  | 50/64 [00:00<00:00, 1792.32it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.bias]Loading weights:  78%|███████▊  | 50/64 [00:00<00:00, 1788.42it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.bias]Loading weights:  80%|███████▉  | 51/64 [00:00<00:00, 1817.30it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.weight]Loading weights:  80%|███████▉  | 51/64 [00:00<00:00, 1813.42it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc1.weight]Loading weights:  81%|████████▏ | 52/64 [00:00<00:00, 1842.34it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.bias]  Loading weights:  81%|████████▏ | 52/64 [00:00<00:00, 1838.51it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.bias]Loading weights:  83%|████████▎ | 53/64 [00:00<00:00, 1867.08it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.weight]Loading weights:  83%|████████▎ | 53/64 [00:00<00:00, 1863.12it/s, Materializing param=model.visual.deepstack_merger_list.0.linear_fc2.weight]Loading weights:  84%|████████▍ | 54/64 [00:00<00:00, 1891.46it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.bias]        Loading weights:  84%|████████▍ | 54/64 [00:00<00:00, 1887.45it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.bias]Loading weights:  86%|████████▌ | 55/64 [00:00<00:00, 1915.37it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.weight]Loading weights:  86%|████████▌ | 55/64 [00:00<00:00, 1911.48it/s, Materializing param=model.visual.deepstack_merger_list.0.norm.weight]Loading weights:  88%|████████▊ | 56/64 [00:00<00:00, 1939.45it/s, Materializing param=model.visual.merger.linear_fc1.bias]             Loading weights:  88%|████████▊ | 56/64 [00:00<00:00, 1935.60it/s, Materializing param=model.visual.merger.linear_fc1.bias]Loading weights:  89%|████████▉ | 57/64 [00:00<00:00, 1963.42it/s, Materializing param=model.visual.merger.linear_fc1.weight]Loading weights:  89%|████████▉ | 57/64 [00:00<00:00, 1959.51it/s, Materializing param=model.visual.merger.linear_fc1.weight]Loading weights:  91%|█████████ | 58/64 [00:00<00:00, 1987.11it/s, Materializing param=model.visual.merger.linear_fc2.bias]  Loading weights:  91%|█████████ | 58/64 [00:00<00:00, 1983.19it/s, Materializing param=model.visual.merger.linear_fc2.bias]Loading weights:  92%|█████████▏| 59/64 [00:00<00:00, 2010.63it/s, Materializing param=model.visual.merger.linear_fc2.weight]Loading weights:  92%|█████████▏| 59/64 [00:00<00:00, 2006.68it/s, Materializing param=model.visual.merger.linear_fc2.weight]Loading weights:  94%|█████████▍| 60/64 [00:00<00:00, 2034.03it/s, Materializing param=model.visual.merger.norm.bias]        Loading weights:  94%|█████████▍| 60/64 [00:00<00:00, 2030.14it/s, Materializing param=model.visual.merger.norm.bias]Loading weights:  95%|█████████▌| 61/64 [00:00<00:00, 2057.01it/s, Materializing param=model.visual.merger.norm.weight]Loading weights:  95%|█████████▌| 61/64 [00:00<00:00, 2053.05it/s, Materializing param=model.visual.merger.norm.weight]Loading weights:  97%|█████████▋| 62/64 [00:00<00:00, 2079.98it/s, Materializing param=model.visual.patch_embed.proj.bias]Loading weights:  97%|█████████▋| 62/64 [00:00<00:00, 2076.04it/s, Materializing param=model.visual.patch_embed.proj.bias]Loading weights:  98%|█████████▊| 63/64 [00:00<00:00, 2102.27it/s, Materializing param=model.visual.patch_embed.proj.weight]Loading weights:  98%|█████████▊| 63/64 [00:00<00:00, 2098.27it/s, Materializing param=model.visual.patch_embed.proj.weight]Loading weights: 100%|██████████| 64/64 [00:00<00:00, 2124.67it/s, Materializing param=model.visual.pos_embed.weight]       Loading weights: 100%|██████████| 64/64 [00:00<00:00, 2120.76it/s, Materializing param=model.visual.pos_embed.weight]Loading weights: 100%|██████████| 64/64 [00:00<00:00, 2108.02it/s, Materializing param=model.visual.pos_embed.weight]
+[    0.2 min] [MODEL] q3 + adapter D:/HANAFY/ROAD/work/dryrun_tpl_adapter (trainable=False)
+[    0.2 min] [MODEL] prompt lengths in tokens: A01=37, B01=37
+[    0.2 min] [CONVERSATION] val line wVsxHXvGovSA5903 (sub-class A01, 2 solved examples: ['Pbsmeb3Zo18HPvAL', '7BZjlemlbtSecskN']) = 809 tokens
+<|im_start|>user
+This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.<|vision_start|><IMAGE><|vision_end|><|im_end|>
+<|im_start|>assistant
+his heires exers and assignes for ever and to his and that owne proper use and<|im_end|>
+<|im_start|>user
+This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.<|vision_start|><IMAGE><|vision_end|><|im_end|>
+<|im_start|>assistant
+other pson or psons wtsoever yt shall instly lay any claime right<|im_end|>
+<|im_start|>user
+This is not modern English, Transcribe the handwriting exactly. Keep the wrong spelling, abbreviations, and marks (^, ff, unusual letters).Do not modernize or correct anything.<|vision_start|><IMAGE><|vision_end|><|im_end|>
+<|im_start|>assistant
+
+
+######## executing code cell 16: if torch.cuda.is_available():
+no GPU
+
+######## executing code cell 17: # Cell 14 — INFERENCE BEFORE FINE-TUNING
+
+==============================================================================================================
+[    0.2 min] INFERENCE BEFORE FINE-TUNING (full)
+==============================================================================================================
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[    0.2 min] [before] val: 5/12 lines | 100 lines/min | ETA 0.1 min | running official score (top-1) 0.0606
+[    0.3 min] [before] val: 10/12 lines | 98 lines/min | ETA 0.0 min | running official score (top-1) 0.0203
+[    0.3 min] [before] val: 12/12 lines | 104 lines/min | ETA 0.0 min | running official score (top-1) 0.0021
+[    0.3 min] [before] VAL top1  : official 0.00208 | word/line 11.750 | char/line 55.917 | n=12
+[    0.3 min] [before]   per sub-class: {"A01": "n=   9 score=-0.0182 w/line=12.000 c/line=57.000", "B01": "n=   3 score=0.0629 w/line=11.000 c/line=52.667"}
+[    0.3 min] [before]   vs GUIDE (0.89861) on the same lines: -0.89653 CI95 [-1.01793,-0.78176] P(better)=0.000
+==================================================================
+TRIAL: TPL_001__before__top1
+DESCRIPTION: test_pesudo: 10 pixel sub-classes, detailed sub-class prompts + K nearest solved train lines as few-shot turns, batch 1; inference -> fine-tune -> inference; guided + judged test pseudo-labels
+MODEL: q3 | DECODE: before/top1
+==================================================================
+Official validation score : 0.00208
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 55.9167   corpus CER 0.8504
+Delta vs baseline          : -0.89653  CI95 [-1.01793, -0.78176]  P(better)=0.000  improved=0 worsened=12  word/char edits saved=-119/-638
+Delta vs champion          : +nan  (champion=nan)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 60   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0182 w/line=12.000 c/line=57.000', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0260 w/line=11.667 c/line=53.667', 'A2': 'n=   3 score=0.1561 w/line=10.000 c/line=47.000', 'A3': 'n=   3 score=-0.2366 w/line=14.333 c/line=70.333', 'B': 'n=   3 score=0.0629 w/line=11.000 c/line=52.667'}
+By label length          : {'50-69': 'n=   7 score=0.0741 w/line=11.000 c/line=51.429', '70+': 'n=   4 score=-0.2074 w/line=14.250 c/line=67.500', '<50': 'n=   1 score=0.3356 w/line=7.000 c/line=41.000'}
+==================================================================
+[    0.3 min] [before] VAL mbr   : official 0.00436 | word/line 11.750 | char/line 55.667 | n=12
+[    0.3 min] [before]   per sub-class: {"A01": "n=   9 score=-0.0202 w/line=12.000 c/line=57.222", "B01": "n=   3 score=0.0780 w/line=11.000 c/line=51.000"}
+[    0.3 min] [before]   vs GUIDE (0.89861) on the same lines: -0.89426 CI95 [-1.01844,-0.77493] P(better)=0.000
+==================================================================
+TRIAL: TPL_001__before__mbr
+DESCRIPTION: test_pesudo: 10 pixel sub-classes, detailed sub-class prompts + K nearest solved train lines as few-shot turns, batch 1; inference -> fine-tune -> inference; guided + judged test pseudo-labels
+MODEL: q3 | DECODE: before/mbr
+==================================================================
+Official validation score : 0.00436
+Word edits / line (LB WER) : 11.7500   corpus WER 1.0000
+Char edits / line (LB CER) : 55.6667   corpus CER 0.8466
+Delta vs baseline          : -0.89426  CI95 [-1.01844, -0.77493]  P(better)=0.000  improved=0 worsened=12  word/char edits saved=-119/-635
+Delta vs champion          : +0.00227  (champion=0.00208)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 60   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=-0.0202 w/line=12.000 c/line=57.222', 'B': 'n=   3 score=0.0780 w/line=11.000 c/line=51.000'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.0109 w/line=11.667 c/line=55.333', 'A2': 'n=   3 score=0.1712 w/line=10.000 c/line=45.333', 'A3': 'n=   3 score=-0.2427 w/line=14.333 c/line=71.000', 'B': 'n=   3 score=0.0780 w/line=11.000 c/line=51.000'}
+By label length          : {'50-69': 'n=   7 score=0.0767 w/line=11.000 c/line=51.143', '70+': 'n=   4 score=-0.2097 w/line=14.250 c/line=67.750', '<50': 'n=   1 score=0.3538 w/line=7.000 c/line=39.000'}
+==================================================================
+[    0.3 min] [before] test: 5/7 lines | 130 lines/min | ETA 0.0 min
+[    0.4 min] [before] test: 7/7 lines | 126 lines/min | ETA 0.0 min
+[    0.4 min] [before] unlisted: 5/5 lines | 152 lines/min | ETA 0.0 min
+[    0.5 min] [JUDGE] the model scored 12 guide lines that were not in its 5-best (0.1 min)
+[    0.5 min] [JUDGE] before: val score by guide weight 0.0:0.00436, 0.2:0.00739, 0.35:0.00739, 0.5:0.89861, 0.65:0.89861, 0.8:0.89861, 1.0:0.89861 | chosen 0.5 | honest 5-fold CV score of this choice 0.89861 +- 0.00000 (guide alone = weight 1.0, model + judge alone = weight 0.0). For RUN_MODE='full' set GUIDE_WEIGHT=0.5
+==================================================================
+TRIAL: TPL_001__before__judged
+DESCRIPTION: test_pesudo: 10 pixel sub-classes, detailed sub-class prompts + K nearest solved train lines as few-shot turns, batch 1; inference -> fine-tune -> inference; guided + judged test pseudo-labels
+MODEL: q3 | DECODE: before/judged(model+guide)
+==================================================================
+Official validation score : 0.89861
+Word edits / line (LB WER) : 1.8333   corpus WER 0.1560
+Char edits / line (LB CER) : 2.7500   corpus CER 0.0418
+Delta vs baseline          : +0.00000  CI95 [+0.00000, +0.00000]  P(better)=0.000  improved=0 worsened=0  word/char edits saved=0/0
+Delta vs champion          : +0.89426  (champion=0.00436)
+Runtime                    : 0.0 min   Peak GPU RAM : 0.0 GB
+Train examples             : 60   Validation examples : 12
+Empty predictions          : 0   Truncated predictions : 0
+By class (A<=150px, B>150px): {'A': 'n=   9 score=0.9104 w/line=1.667 c/line=2.222', 'B': 'n=   3 score=0.8634 w/line=2.333 c/line=4.333'}
+By group (A1/A2/A3/B)      : {'A1': 'n=   3 score=0.9601 w/line=0.667 c/line=1.333', 'A2': 'n=   3 score=0.8525 w/line=2.667 c/line=4.000', 'A3': 'n=   3 score=0.9184 w/line=1.667 c/line=1.333', 'B': 'n=   3 score=0.8634 w/line=2.333 c/line=4.333'}
+By label length          : {'50-69': 'n=   7 score=0.9189 w/line=1.571 c/line=1.714', '70+': 'n=   4 score=0.8803 w/line=2.000 c/line=4.000', '<50': 'n=   1 score=0.8295 w/line=3.000 c/line=5.000'}
+==================================================================
+[    0.5 min] [before] VAL judged (guide weight 0.5) per sub-class: {"A01": "n=   9 score=0.9104 w/line=1.667 c/line=2.222", "B01": "n=   3 score=0.8634 w/line=2.333 c/line=4.333"}
+[    0.5 min] [before] VAL comments: {"judge chose the guide over the model top-1": 12}
+[    0.5 min] [JUDGE] the model scored 7 guide lines that were not in its 5-best (0.0 min)
+[    0.5 min] [PSEUDO] before: 12 lines -> pseudo_labels_before.csv | kept for training 8 (67%) | agreement with guide 0.0% | mean confidence 0.678
+[    0.5 min] [PSEUDO] before: kept per sub-class {"A01": 5, "B01": 3}
+
+######## executing code cell 18: # Cell 15 — fine-tuning utilities: training rows, step validation, one fine-tune call
+
+######## executing code cell 19: # Cell 16 — FINE-TUNE
+[    0.5 min] DO_FINETUNE=False — inference only (the 'before' stage is the final model)
+
+######## executing code cell 20: if torch.cuda.is_available() and trainer_stats is not None:
+
+######## executing code cell 21: # Cell 17 — INFERENCE AFTER FINE-TUNING + pseudo-labels
+
+######## executing code cell 22: # Cell 18 — SELF-TRAINING ROUNDS
+
+######## executing code cell 23: # Cell 19 — SUBMISSION + summary
+
+==============================================================================================================
+[    0.5 min] SUMMARY (official score on the 819 Fold-0 val lines, per sub-class):
+           option  has_test  val_score  word/line  char/line     A01    B01
+            guide      True     0.8986     1.8333     2.7500  0.9104 0.8634
+    before/judged      True     0.8986     1.8333     2.7500  0.9104 0.8634
+ before/model_mbr      True     0.0044    11.7500    55.6667 -0.0202 0.0780
+before/model_top1      True     0.0021    11.7500    55.9167 -0.0182 0.0629
+==============================================================================================================
+[    0.5 min] submission.csv <- guide | rows 7 | empty replaced 0
+[    0.5 min] NOTE: the guide alone is still the best option on val — the model + judge did not beat it this run
+[    0.5 min] pseudo_labels.csv <- stage 'before' (12 lines, 8 kept for training)
+
+==============================================================================================================
+[    0.5 min] RUN FINISHED in 0.01 h
+==============================================================================================================
+
+######## executing code cell 24: # Cell 20 — save (again) the final adapter + how to reload it
+
+DRY RUN COMPLETE in 47s
+   fold0_val_ids.csv
+   pseudo_labels.csv
+   pseudo_labels_before.csv
+   qwen-vl-ocr
+   run_log.txt
+   stage_summary.csv
+   subclass_assignments.csv
+   subclass_prompts.json
+   submission.csv
+   submission__before__judged.csv
+   submission__before__model_mbr.csv
+   submission__before__model_top1.csv
+   submission__guide.csv
+   trial_configs
+   trial_predictions
+   trial_results.csv
+ID,Target
+MzQuRiUbPFsq6Azy,by these pnts to pay or cause to bee well and truely paid and delivered unto Humphrey
+1LrXN25dFz88Spt3,necessaries menconed and expressed in a schedule hereunto
+voWkMuyhO8FAlLr5,"Jameses, & Conteyning twenty six Acres of Land, with"
+iQqdWwQ7uXrATwei,"elongeinge, w^th all M
+EXIT_B 0

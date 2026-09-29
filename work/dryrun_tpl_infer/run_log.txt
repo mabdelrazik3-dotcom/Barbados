@@ -1,0 +1,65 @@
+[    0.1 min] [CLASSIFY] pixel features of 90 images in 4s
+[    0.2 min] [CLASSIFY] refit tree: A 1 leaves, B 1 leaves
+[    0.2 min] [CLASSIFY] mode refit: 2 sub-classes
+sub-class class  train  inner  val  test  unlisted  height  width   paper   tint  contrast  stroke_rel  sharp  edge_ratio
+      A01     A     39      6    9     4         4    56.0 1107.0 200.404 50.462     90.97       0.067  0.243       0.230
+      B01     B     21      0    3     3         1   367.0 4168.0 170.622 67.604     65.83       0.039  0.104       0.579
+[    0.2 min] [CLASSIFY] train+val lines: sub-class x old A1/A2/A3/B group
+old group    A1   A2    A3     B
+sub-class                       
+A01        1669  382  1003     0
+B01           0    0     0  1039
+[    0.2 min] [CLASSIFY] saved subclass_assignments.csv (ID, split, class, subclass, pixel features)
+[    0.2 min] [PROMPTS] conventions measured on the TRAIN lines of each sub-class (% of lines):
+        n  chars  words  caret  colon   amp  thorn   ff  digit  tilde  comma  Said   sd  cap_words
+A01  39.0   67.0   12.0   15.4    2.6  20.5   12.8  2.6    5.1    0.0   10.3   0.0  2.6       15.6
+B01  21.0   54.0    9.0   14.3    9.5   0.0    0.0  4.8    4.8    0.0   14.3   4.8  0.0       24.6
+[    0.2 min] [PROMPTS] characters per prompt: A01=176, B01=176
+[    0.2 min] [FEW-SHOT] example pools (Fold-0 TRAIN lines only): A01=39, B01=21
+[    0.2 min] [GUIDE] submission_offline_best.csv: 1374 lines from column 'Target'
+[    0.2 min] [GUIDE] EXP_002__ENS_7b8b_mbrq__D2_b5nb_ens__val.csv: 819 lines from column 'pred'
+[    0.2 min] [GUIDE] covers 7/7 test and 0/5 unlisted lines
+[    0.2 min] [GUIDE] guide on the 819 val lines: official 0.89861 | per sub-class {"A01": "n=   9 score=0.9104 w/line=1.667 c/line=2.222", "B01": "n=   3 score=0.8634 w/line=2.333 c/line=4.333"}
+[    0.2 min] [MODEL] q3 + adapter D:/HANAFY/ROAD/work/dryrun_tpl_adapter (trainable=False)
+[    0.2 min] [MODEL] prompt lengths in tokens: A01=37, B01=37
+[    0.2 min] [CONVERSATION] val line wVsxHXvGovSA5903 (sub-class A01, 2 solved examples: ['Pbsmeb3Zo18HPvAL', '7BZjlemlbtSecskN']) = 809 tokens
+
+==============================================================================================================
+[    0.2 min] INFERENCE BEFORE FINE-TUNING (full)
+==============================================================================================================
+[    0.2 min] [before] val: 5/12 lines | 100 lines/min | ETA 0.1 min | running official score (top-1) 0.0606
+[    0.3 min] [before] val: 10/12 lines | 98 lines/min | ETA 0.0 min | running official score (top-1) 0.0203
+[    0.3 min] [before] val: 12/12 lines | 104 lines/min | ETA 0.0 min | running official score (top-1) 0.0021
+[    0.3 min] [before] VAL top1  : official 0.00208 | word/line 11.750 | char/line 55.917 | n=12
+[    0.3 min] [before]   per sub-class: {"A01": "n=   9 score=-0.0182 w/line=12.000 c/line=57.000", "B01": "n=   3 score=0.0629 w/line=11.000 c/line=52.667"}
+[    0.3 min] [before]   vs GUIDE (0.89861) on the same lines: -0.89653 CI95 [-1.01793,-0.78176] P(better)=0.000
+[    0.3 min] [before] VAL mbr   : official 0.00436 | word/line 11.750 | char/line 55.667 | n=12
+[    0.3 min] [before]   per sub-class: {"A01": "n=   9 score=-0.0202 w/line=12.000 c/line=57.222", "B01": "n=   3 score=0.0780 w/line=11.000 c/line=51.000"}
+[    0.3 min] [before]   vs GUIDE (0.89861) on the same lines: -0.89426 CI95 [-1.01844,-0.77493] P(better)=0.000
+[    0.3 min] [before] test: 5/7 lines | 130 lines/min | ETA 0.0 min
+[    0.4 min] [before] test: 7/7 lines | 126 lines/min | ETA 0.0 min
+[    0.4 min] [before] unlisted: 5/5 lines | 152 lines/min | ETA 0.0 min
+[    0.5 min] [JUDGE] the model scored 12 guide lines that were not in its 5-best (0.1 min)
+[    0.5 min] [JUDGE] before: val score by guide weight 0.0:0.00436, 0.2:0.00739, 0.35:0.00739, 0.5:0.89861, 0.65:0.89861, 0.8:0.89861, 1.0:0.89861 | chosen 0.5 | honest 5-fold CV score of this choice 0.89861 +- 0.00000 (guide alone = weight 1.0, model + judge alone = weight 0.0). For RUN_MODE='full' set GUIDE_WEIGHT=0.5
+[    0.5 min] [before] VAL judged (guide weight 0.5) per sub-class: {"A01": "n=   9 score=0.9104 w/line=1.667 c/line=2.222", "B01": "n=   3 score=0.8634 w/line=2.333 c/line=4.333"}
+[    0.5 min] [before] VAL comments: {"judge chose the guide over the model top-1": 12}
+[    0.5 min] [JUDGE] the model scored 7 guide lines that were not in its 5-best (0.0 min)
+[    0.5 min] [PSEUDO] before: 12 lines -> pseudo_labels_before.csv | kept for training 8 (67%) | agreement with guide 0.0% | mean confidence 0.678
+[    0.5 min] [PSEUDO] before: kept per sub-class {"A01": 5, "B01": 3}
+[    0.5 min] DO_FINETUNE=False — inference only (the 'before' stage is the final model)
+
+==============================================================================================================
+[    0.5 min] SUMMARY (official score on the 819 Fold-0 val lines, per sub-class):
+           option  has_test  val_score  word/line  char/line     A01    B01
+            guide      True     0.8986     1.8333     2.7500  0.9104 0.8634
+    before/judged      True     0.8986     1.8333     2.7500  0.9104 0.8634
+ before/model_mbr      True     0.0044    11.7500    55.6667 -0.0202 0.0780
+before/model_top1      True     0.0021    11.7500    55.9167 -0.0182 0.0629
+==============================================================================================================
+[    0.5 min] submission.csv <- guide | rows 7 | empty replaced 0
+[    0.5 min] NOTE: the guide alone is still the best option on val — the model + judge did not beat it this run
+[    0.5 min] pseudo_labels.csv <- stage 'before' (12 lines, 8 kept for training)
+
+==============================================================================================================
+[    0.5 min] RUN FINISHED in 0.01 h
+==============================================================================================================

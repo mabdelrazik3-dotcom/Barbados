@@ -1,0 +1,21 @@
+issue_group,n,mean_chars,mean_words,amp,thorn,caret,colon,ff,digit,formula,rare,cap,minority_casing_per_line,multi_line_crop,edge_clipped,possible_multiline_label,purity,share_train,top_words
+A1 | P5_plain_prose,747,65.222,11.529,0.0,0.0,0.0,0.0,0.001,0.0,0.0,0.091,0.14,0.32,0.096,0.096,0.015,0.937,0.182,and the of or to said in for by all that his
+B | P5_plain_prose,538,56.95,10.162,0.0,0.0,0.0,0.0,0.045,0.0,0.0,0.131,0.247,0.9,0.591,0.426,0.022,0.878,0.131,"and the of or to in said all , by for his"
+A3 | P5_plain_prose,458,68.886,12.031,0.0,0.0,0.0,0.0,0.002,0.0,0.0,0.098,0.161,0.352,0.384,0.594,0.059,0.901,0.112,and the of or to said in all his for by unto
+A1 | P2_thorn/ampersand,383,63.07,12.159,0.684,0.473,0.0,0.0,0.003,0.037,0.11,0.067,0.15,0.405,0.023,0.039,0.0,0.909,0.093,& of ye the to and or in sd all said for
+B | P1_superscript/suspension,319,59.298,10.743,0.129,0.119,0.824,0.571,0.038,0.082,0.053,0.156,0.316,0.94,0.668,0.498,0.072,0.8,0.078,the of and or in his to & for Said by y^e
+A1 | P1_superscript/suspension,268,65.015,12.213,0.306,0.243,0.701,0.377,0.0,0.175,0.138,0.108,0.277,0.388,0.071,0.116,0.011,0.842,0.065,of the & and ye to or heires my in his all
+A1 | P4_legal_formula,245,63.531,11.371,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.029,0.154,0.424,0.086,0.094,0.004,0.954,0.06,and of the or in to said all by heires any assignes
+A2 | P5_plain_prose,238,47.618,8.361,0.0,0.0,0.0,0.0,0.029,0.0,0.0,0.131,0.245,0.748,0.483,0.803,0.029,0.884,0.058,and the of or to said in his for by that all
+A3 | P1_superscript/suspension,205,70.039,12.956,0.117,0.117,0.863,0.185,0.005,0.234,0.156,0.109,0.244,0.371,0.41,0.541,0.059,0.837,0.05,the of and or to in said all & for W^m Island
+A3 | P4_legal_formula,192,69.12,12.516,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.032,0.186,0.578,0.417,0.542,0.057,0.905,0.047,and the of all to I To or in by shall people
+A3 | P2_thorn/ampersand,111,63.36,11.883,0.486,0.568,0.0,0.0,0.009,0.018,0.189,0.071,0.156,0.36,0.189,0.495,0.009,0.855,0.027,ye of & and the or said to in his all I
+B | P2_thorn/ampersand,88,57.545,10.659,0.966,0.034,0.0,0.0,0.08,0.0,0.068,0.103,0.24,0.943,0.602,0.443,0.034,0.883,0.021,& the of and to all said his in one aforesaid as
+B | P4_legal_formula,84,55.036,10.357,0.0,0.0,0.0,0.0,0.024,0.0,1.0,0.045,0.206,0.833,0.619,0.429,0.024,0.907,0.02,and the of or to yeare To by have all in day
+A2 | P4_legal_formula,69,47.71,8.928,0.0,0.0,0.0,0.0,0.029,0.0,1.0,0.046,0.218,0.667,0.362,0.768,0.029,0.917,0.017,of the and or to by in all any said them be
+A2 | P1_superscript/suspension,63,49.81,8.524,0.048,0.079,0.952,0.19,0.063,0.016,0.159,0.136,0.264,0.714,0.413,0.841,0.048,0.85,0.015,"and the of or in all said to his , did by"
+A3 | P3_dates/numbers,37,72.324,13.892,0.0,0.0,0.0,0.0,0.0,1.0,0.378,0.072,0.196,0.595,0.378,0.541,0.0,0.893,0.009,of the day and 1640 my hand this seale in to all
+A1 | P3_dates/numbers,26,63.885,12.308,0.0,0.0,0.0,0.0,0.0,1.0,0.346,0.091,0.192,0.615,0.077,0.077,0.0,0.917,0.006,of and day the ___ this to my me sett seales 1640
+B | P3_dates/numbers,14,68.214,13.071,0.0,0.0,0.0,0.0,0.143,1.0,0.286,0.142,0.249,0.857,0.5,0.5,0.143,0.817,0.003,of the in and day 1674 Lord God October our yeare Island
+A2 | P2_thorn/ampersand,11,52.091,10.182,1.0,0.0,0.0,0.0,0.0,0.0,0.182,0.059,0.266,1.0,0.455,0.727,0.091,0.859,0.003,& of to the hereby and use doe it I their Deed
+A2 | P3_dates/numbers,2,50.5,9.5,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.045,0.324,1.0,1.0,1.0,0.0,0.972,0.0,Anno Dm 1667 psonally appeared before me Will This Indenture made this

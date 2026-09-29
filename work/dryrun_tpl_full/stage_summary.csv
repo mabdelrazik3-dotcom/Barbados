@@ -1,0 +1,7 @@
+option,has_test
+before/model_mbr,False
+before/model_top1,False
+after/model_mbr,True
+after/model_top1,True
+after/judged,True
+guide,True
