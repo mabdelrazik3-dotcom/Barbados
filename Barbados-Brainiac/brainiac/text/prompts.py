@@ -132,8 +132,14 @@ def build_prompt(cfg: Cfg, spec: dict, dual: bool = False, dual_order: str = "in
     return text
 
 
-def correction_prompt(cfg: Cfg, spec: dict, candidate: str) -> str:
-    return CORRECTION_HEADER + build_prompt(cfg, spec) + "\n\n=== CANDIDATE TRANSCRIPTION ===\n" + candidate
+def correction_prompt(cfg: Cfg, spec: dict) -> str:
+    """Shared prefix of the label-correction request (the candidate goes after the images)."""
+    return CORRECTION_HEADER + build_prompt(cfg, spec)
+
+
+def correction_instruction(view_text: str, candidate: str) -> str:
+    return (f"{view_text}\n\n=== CANDIDATE TRANSCRIPTION ===\n{candidate}\n\n"
+            'Return ONLY this JSON object: {"transcription": "..."}')
 
 
 def build_messages(prompt_text: str, n_images: int, instruction: str) -> list[dict]:

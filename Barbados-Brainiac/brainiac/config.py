@@ -34,6 +34,15 @@ class Cfg(dict):
         return node
 
 
+def to_plain(obj: Any) -> Any:
+    """Cfg -> plain dicts/lists (for yaml.safe_dump)."""
+    if isinstance(obj, dict):
+        return {k: to_plain(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [to_plain(v) for v in obj]
+    return obj
+
+
 def wrap(obj: Any) -> Any:
     if isinstance(obj, dict):
         return Cfg({k: wrap(v) for k, v in obj.items()})
@@ -105,12 +114,14 @@ def load_config(path: str | Path, overrides: Iterable[str] = ()) -> Cfg:
             raise ValueError(f"override '{item}' is not key=value")
         key, value = item.split("=", 1)
         _set_dotted(tree, key.strip(), yaml.safe_load(value))
-    tree = _interpolate(tree, tree)
-    cfg = wrap(tree)
-    for key, value in list(cfg.get("paths", {}).items()):
+    # paths first, so ${paths.x} elsewhere receives the resolved absolute path
+    paths = _interpolate(tree.get("paths", {}), tree)
+    for key, value in paths.items():
         if isinstance(value, str) and value:
             p = Path(value)
-            cfg.paths[key] = str(p if p.is_absolute() else (PROJECT_DIR / p).resolve())
+            paths[key] = str(p if p.is_absolute() else (PROJECT_DIR / p).resolve())
+    tree["paths"] = paths
+    cfg = wrap(_interpolate(tree, tree))
     cfg["config_file"] = str(path.resolve())
     return cfg
 

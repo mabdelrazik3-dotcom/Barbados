@@ -1,0 +1,24 @@
+# Core (training, inference, ranking)
+torch>=2.5
+torchvision>=0.20
+transformers>=4.57,<5          # Qwen2.5-VL and Qwen3-VL (AutoModelForImageTextToText)
+peft>=0.17
+accelerate>=1.0
+bitsandbytes>=0.45             # 4-bit loading (QLoRA) and paged 8-bit AdamW
+safetensors
+huggingface_hub
+packaging
+pillow
+numpy
+pandas
+pyyaml
+tqdm
+rapidfuzz>=3                   # fast edit distances (metric, MBR, grouping)
+scikit-learn>=1.3
+catboost>=1.2
+lightgbm>=4
+
+# Optional
+# unsloth==2025.10.3 unsloth_zoo==2025.10.3 trl==0.22.2   -> train preset "first_place" (backend: unsloth)
+# vllm>=0.10                                               -> backend: vllm (fast generation / judging)
+# paddleocr paddlepaddle-gpu                               -> external reader kind: paddleocr

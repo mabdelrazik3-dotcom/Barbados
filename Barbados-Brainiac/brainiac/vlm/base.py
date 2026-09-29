@@ -31,7 +31,8 @@ class Candidate:
     def as_row(self, image_id: str, source: str) -> dict:
         mean = self.logprob / self.ntok if self.ntok and not math.isnan(self.logprob) else math.nan
         return {"ID": image_id, "source": source, "text": self.text, "raw": self.raw, "method": self.method,
-                "rank": self.rank, "gen_logprob": self.logprob, "gen_ntok": self.ntok, "gen_mean": mean}
+                "rank": self.rank, "gen_logprob": self.logprob, "gen_ntok": self.ntok, "gen_mean": mean,
+                "ink": self.ink or ""}
 
 
 @dataclass

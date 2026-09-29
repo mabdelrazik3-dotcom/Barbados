@@ -108,7 +108,8 @@ approach_b:
     judge_weights: {j_q25_r64: 1.0, j_q25_r64_v2: 0.5, j_q25_soup_d3: 0.5, j_q3_soup3: 0.5}
     use: mean                          # judge statistic mixed: mean (per-token) | sum
     temperature: 0.5                   # posterior = softmax(mix / temperature)
-    ctc_overlay: 0.25                  # final = expected loss + ctc_overlay * z(CTC nll per char)
+    ctc_overlay: 0.005                 # final = expected loss + ctc_overlay * z(CTC nll per char, within line)
+                                       # (one char edit costs 0.5/55 = 0.009 of loss)
 
   # ---------------------------------------------------------------- features
   features:
