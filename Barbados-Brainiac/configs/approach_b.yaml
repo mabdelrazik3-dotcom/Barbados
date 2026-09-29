@@ -1,0 +1,141 @@
+# Approach B — generate / score / pick / stabilise (the workflow diagram).
+#
+#   Generate   several fine-tuned VLMs write ~14 candidate lines each (+ CTC beam-8 strings)
+#   Score      six VLM judges (forced-decode log-probs), CTC readers, a character n-gram LM
+#   Pick       a gradient-boosted ranker learns from the holdout-fold lines which evidence to trust
+#   Stabilise  3 CatBoost members x 5 seeds, pinned threads/seeds
+#   Gates      twin -> tier 1 -> Holm -> K5 -> seed flip <= 3 %
+approach_b:
+  enabled: true
+
+  # ---------------------------------------------------------------- generators
+  # data:  raw        Train.csv labels
+  #        corrected  labels with accepted corrections (label_correction stage)
+  #        dual       {"ink": corrected, "transcription": label}
+  #        pseudo     + approach-A pseudo labels (test + unlabelled images); combine with "+"
+  # soup:  cat        exact average of the seed LoRAs' weight updates (rank = sum of ranks)
+  #        linear     average of the A and B matrices (same rank; approximate)
+  #        none       single adapter (first seed)
+  generators:
+    - name: q3_soup3                   # diagram: "8B soup — Qwen3-VL-8B, 3 LoRAs averaged"
+      model: qwen3vl8b
+      lora: r64
+      train: default
+      seeds: [11, 12, 13]
+      soup: cat
+      data: raw
+      views: single
+      prompt: {version: v2, mode: compact}
+      decode:
+        greedy: true
+        beam: {num_beams: 8, num_return: 7}
+        sample: {n: 6, temperature: 0.8, top_p: 0.95}
+    - name: q25_r64                    # diagram judge "B7b_r64": Qwen2.5-VL-7B, LoRA rank 64
+      model: qwen25vl7b
+      lora: r64
+      train: default
+      seeds: [21]
+      soup: none
+      data: raw
+      views: single
+      prompt: {version: v1, mode: compact}
+      decode:
+        greedy: true
+        beam: {num_beams: 8, num_return: 7}
+        sample: {n: 6, temperature: 0.8, top_p: 0.95}
+    - name: q25_soup_d3                # diagram: "soup3d3 — 3 LoRAs on the data3 set"
+      model: qwen25vl7b
+      lora: r32
+      train: default
+      seeds: [31, 32, 33]
+      soup: cat
+      data: corrected+pseudo           # data3 = corrected labels + approach-A pseudo labels
+      views: multi
+      prompt: {version: v2, mode: compact}
+      decode:
+        greedy: true
+        beam: {num_beams: 8, num_return: 7}
+        sample: {n: 6, temperature: 0.8, top_p: 0.95}
+    # A Qwen3.5 (or any other) backbone is one more entry, once declared in models.yaml:
+    # - {name: q35_p3, model: qwen35_9b, lora: r64, train: default, seeds: [41], soup: none, ...}
+
+  include_approach_a: true             # fusion: approach-A models join the candidate pool and are judged
+
+  pool:
+    max_per_line: 32                   # keep the most-supported candidates if a line has more
+    min_sources_to_keep: 1
+
+  # ---------------------------------------------------------------- readers
+  ctc:                                 # CRNN line reader trained here ("E141 CRNN")
+    enabled: true
+    height: 64
+    max_width: 1600
+    hidden: 256
+    epochs: 40
+    batch_size: 32
+    lr: 1.0e-3
+    weight_decay: 1.0e-4
+    augment: true
+    valid_frac: 0.08
+    beam_width: 8                      # "CTC beam-8 strings"
+    candidates: 8
+    lm_weight: 0.3                     # shallow fusion with the char n-gram LM during beam search (0 = off)
+    prune: 1.0e-4
+    num_workers: 2
+  external_readers: []                 # "PP-OCRv6"-style readers; each adds candidates + agreement features
+  #  - {name: ppocr, kind: paddleocr, model_name: en_PP-OCRv5_mobile_rec}
+  #  - {name: trocr, kind: trocr, hf_id: microsoft/trocr-large-handwritten}
+  #  - {name: mine,  kind: csv, path: my_reader_predictions.csv}      # columns ID,text
+
+  charlm:                              # "LM-X char n-gram"
+    order: 7
+    discount: 0.75
+    include_pseudo: false
+
+  # ---------------------------------------------------------------- judges
+  # A judge is a fine-tuned generator (its oof / full adapter) scoring every pooled candidate
+  # by teacher forcing. The prompt may differ from the one it was trained with (diversity).
+  judges:
+    - {name: j_q3_soup3,    generator: q3_soup3}
+    - {name: j_q3_soup3_v1, generator: q3_soup3,    prompt: {version: v1, mode: compact}}
+    - {name: j_q25_r64,     generator: q25_r64}
+    - {name: j_q25_r64_v2,  generator: q25_r64,     prompt: {version: v2, mode: compact}}
+    - {name: j_q25_soup_d3, generator: q25_soup_d3}
+    - {name: j_a_qwen3vl8b, generator: a:qwen3vl8b}
+
+  # ---------------------------------------------------------------- baseline (no learning)
+  baseline:                            # "CONFIG B7b_r64 + q25j mix -> MBR -> CTC overlay"
+    judge_weights: {j_q25_r64: 1.0, j_q25_r64_v2: 0.5, j_q25_soup_d3: 0.5, j_q3_soup3: 0.5}
+    use: mean                          # judge statistic mixed: mean (per-token) | sum
+    temperature: 0.5                   # posterior = softmax(mix / temperature)
+    ctc_overlay: 0.25                  # final = expected loss + ctc_overlay * z(CTC nll per char)
+
+  # ---------------------------------------------------------------- features
+  features:
+    key_sources: [q3_soup3, q25_r64, q25_soup_d3, a:qwen3vl8b, a:qwen25vl7b, ctc]
+    within_line: [rank, z, margin]     # per-line normalisations added for judge / reader / LM scores
+    mbr_temperature: 0.5
+
+  # ---------------------------------------------------------------- ranker
+  ranker:
+    train_scope: oof                   # rows = holdout-fold lines, target = exact metric loss per candidate
+    outer_folds: 5                     # nested CV: outer folds give the out-of-fold score ...
+    inner_valid_frac: 0.2              # ... inner split sets the number of boosting rounds
+    threads: 4                         # pinned for reproducible CatBoost results
+    seeds: [0, 1, 2, 3, 4]
+    members:
+      - {name: cb_qrmse, kind: catboost_ranker, loss: QueryRMSE, depth: 6, lr: 0.05, iterations: 3000, l2: 3.0}
+      - {name: cb_yeti,  kind: catboost_ranker, loss: YetiRank,  depth: 6, lr: 0.05, iterations: 3000, l2: 3.0}
+      - {name: cb_rmse,  kind: catboost_regressor, loss: RMSE,   depth: 8, lr: 0.03, iterations: 3000, l2: 5.0}
+    # other kinds: lightgbm_regressor, lightgbm_lambdarank, sklearn_hgb
+    early_stopping_rounds: 200
+
+  # ---------------------------------------------------------------- gates
+  gates:
+    twin: true                         # re-run with two seeds: the noise floor an improvement must exceed
+    twin_factor: 2.0
+    tier1_p: 0.95                      # paired bootstrap P(ranker better than baseline)
+    bootstrap: 10000
+    holm_alpha: 0.05                   # Holm-Bonferroni over all configurations tested (members, blend)
+    k_folds_min: 4                     # K5: better than baseline in at least 4 of the 5 outer folds
+    max_seed_flip: 0.03                # picks that change between seeds, on the test lines

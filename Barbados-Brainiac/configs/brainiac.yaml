@@ -1,0 +1,97 @@
+# Barbados-Brainiac — main configuration.
+#
+# Run everything:   bash run_all.sh
+# Run some stages:  python -m brainiac.run --stages b_features,b_rank,fuse
+# Override values:  python -m brainiac.run seed=7 approach_b.ranker.threads=8
+#
+# The included files are merged in order; values in this file win over included ones,
+# and command-line overrides win over everything.
+include:
+  - paths.yaml
+  - models.yaml
+  - approach_a.yaml
+  - approach_b.yaml
+  - fusion.yaml
+
+experiment: brainiac_v1
+seed: 2026
+deterministic: true          # seeds + deterministic torch/cudnn settings (the 1st place's make_deterministic)
+backend: hf                  # inference backend for generation/judging: hf | vllm | mock
+log_level: INFO
+
+# Stages run strictly one after another, one model in GPU memory at a time.
+# A stage whose outputs exist is skipped unless --force is given.
+stages:
+  - prepare                  # line table, families, near-duplicate groups, folds
+  - views                    # render the model input views (1st-place patchify, for lines)
+  - label_correction         # A: VLM (+ optional external) corrections of noisy labels
+  - a_train_first            # A: first LoRA fine-tune
+  - a_pseudo                 # A: pseudo labels for test + unlabelled images
+  - a_train_final            # A: final LoRA fine-tune on labels + pseudo labels
+  - a_infer                  # A: candidates + approach-A submission
+  - b_train_generators       # B: generator LoRAs (several seeds per soup)
+  - b_soups                  # B: average LoRAs into soups
+  - b_generate               # B: ~14 candidate lines per model and line
+  - b_readers                # B: CTC reader(s): train, beam-8 candidates; external readers
+  - b_pool                   # B: union of all candidates (A + B + readers) per line
+  - b_judges                 # B: forced-decode log-probs of every candidate by every judge
+  - b_features               # B: F0-F3 + reader blocks (+ char n-gram LM)
+  - b_baseline               # B: judge mix -> MBR -> CTC overlay pick
+  - b_rank                   # B: GBDT ranker, nested CV, members x seeds, gates
+  - fuse                     # A + B fusion, final submissions
+  - report                   # out-of-fold scores per source / stage
+
+# "oof" models never see the holdout fold, so their candidates and scores on that fold
+# are honest training data for the ranker. "full" models see all labels and serve the test set.
+scopes: [oof, full]
+
+data:
+  folds: 5
+  holdout_fold: 0            # ranker training lines (about 800 lines)
+  group_window: 12           # rows compared with their neighbours to find parallel copies / duplicate crops
+  group_similarity: 0.85     # normalised similarity that puts two labels into one group (kept in one fold)
+  family_width: 2000         # wider (or taller than family_height) crops are family B (the 1669-1710 books)
+  family_height: 180
+  use_extra_images: true     # images in images/ that are in neither Train.csv nor Test.csv (pseudo-label pool)
+  max_rows: null             # debugging: cap rows per split
+
+metric:                      # R.O.A.D. leaderboard metric: 0.5*(1 - word_edits/12) + 0.5*(1 - char_edits/55)
+  word_xmax: 12
+  char_xmax: 55
+
+views:                       # how a line crop is shown to a VLM (see brainiac/data/views.py)
+  single:
+    mode: single             # the whole line, rescaled
+    height_a: 112            # target height for family-A strips (40-115 px originals -> letters fill 3-4 patch rows)
+    height_b: 192            # target height for family-B crops (220-500 px originals)
+    max_width: 2240
+    autocontrast: true
+  multi:
+    mode: multi              # 1st-place patchify: whole line + overlapping left/right parts, enlarged
+    height_a: 112
+    height_b: 192
+    part_height_a: 160
+    part_height_b: 256
+    parts: 2
+    overlap: 0.12
+    max_width: 2240
+    autocontrast: true
+  composite:
+    mode: composite          # one image: the parts stacked top to bottom
+    height_a: 140
+    height_b: 224
+    parts: 2
+    overlap: 0.12
+    max_width: 1792
+    autocontrast: true
+
+vllm:                        # used when backend: vllm
+  max_model_len: 16384
+  gpu_memory_utilization: 0.90
+  max_lora_rank: 256         # soups made by concatenation have rank = sum of member ranks
+  enforce_eager: false
+
+hf:                          # used when backend: hf
+  generate_batch_size: 8
+  score_batch_size: 6        # candidate sequences per forward pass when judging
+  max_new_tokens: 160
