@@ -45,3 +45,22 @@ Raw material for the prompt verdict. Each entry: batch, what was seen, evidence 
 - Family A: e can be a bare minim and i-dots are missing or displaced (e/i confusion),
   u/v hard to tell.
 - QA: I re-checked rows 36, 44, 47, 49 at high zoom — all four agent corrections hold.
+
+## Units 58–74 and 100–124 (parallel agents)
+
+- 58–74: 6 MATCH, 10 CORRECTED, 1 UNCERTAIN. 100–124: 4 MATCH, 15 CORRECTED, 6 UNCERTAIN.
+- Labels replace the scribe's letters with the formula/standard word: `whame`→`whome`,
+  `unte`→`unto`, `Margan`→`Morgan`, `assynes`→`assignes`, `pound`→`pounds`,
+  `Nouember`→`November`, `recouering`→`recovering`, `possesse`→`possess`,
+  `Witnes`→`Witness`, `Willett`→`Willet`, `alwayes`→`always`.
+- Labels add words the ink lacks (`of the Said` where the ink has `of Said`).
+- Labels flatten raised letters and drop their marks (`w:^ch`, `W:^m` written `wch`, `Wm`)
+  and miss insertions (`^soe`) and strikes (`~their~`).
+- Dots after abbreviations dropped (`viz^t.`, `Invacon.`, `To.`); a wavy end `~` written
+  as `-`; free-standing dashes attached (`-Signed by-`).
+- **Two more of the prompts' own examples are contradicted by the ink:**
+  `Supra -Signed by-` (v1/v2 §4.4) — the ink is `ut supra - Signed by -` (small u/s,
+  free dashes; row 112); `Mingo-` (v1/v2 §4.4 "dash touching the word") — the ink is
+  `Mingo, -` with a comma and a separate dash (row 120).
+- QA: I re-checked rows 58, 63, 69 (`Margan`, `whame`, `unte`) and 112, 116, 120 at high
+  zoom — all six agent corrections hold.
