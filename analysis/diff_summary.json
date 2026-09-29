@@ -1,29 +1,33 @@
 {
  "rows_total": 4098,
- "rows_verdicted": 50,
+ "rows_verdicted": 106,
  "verdicts": {
-  "CORRECTED": 19,
-  "MATCH": 25,
-  "UNCERTAIN": 6
+  "CORRECTED": 41,
+  "MATCH": 44,
+  "UNCERTAIN": 21
  },
  "diff_types": {
-  "capital": 15,
-  "spelling": 8,
-  "raised_mark": 6,
-  "punct_mark": 4,
+  "spelling": 22,
+  "capital": 20,
+  "raised_mark": 9,
+  "punct_mark": 6,
+  "multiword": 5,
+  "word_extra": 4,
+  "mark_missing": 3,
   "cut_word": 2,
-  "multiword": 1
+  "join_split": 2,
+  "word_missing": 1
  },
  "by_family": {
   "A": {
-   "CORRECTED": 16,
-   "MATCH": 22,
-   "UNCERTAIN": 4
+   "CORRECTED": 32,
+   "MATCH": 38,
+   "UNCERTAIN": 15
   },
   "B": {
-   "UNCERTAIN": 2,
-   "MATCH": 3,
-   "CORRECTED": 3
+   "UNCERTAIN": 6,
+   "MATCH": 6,
+   "CORRECTED": 9
   }
  }
 }
