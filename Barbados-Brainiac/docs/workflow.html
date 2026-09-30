@@ -1,0 +1,243 @@
+<title>Barbados-Brainiac Workflow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column; each diagram sits on its own paper panel (the same in both themes) and scrolls sideways if it is wider than the column. */
+:root {
+  --bg: #f6f4ef;
+  --fg: #25201a;
+  --muted: #6b6255;
+  --rule: #d8d0c2;
+  --accent: #7a5a2b;
+  --chip: #ece5d8;
+  --paper: #fbfaf6;
+  --paper-rule: #cfc5b3;
+  --font-display: "IBM Plex Sans Condensed", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #16140f; --fg: #ebe5da; --muted: #a59b8b; --rule: #3a3329; --accent: #d4b37a; --chip: #28231c;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #16140f; --fg: #ebe5da; --muted: #a59b8b; --rule: #3a3329; --accent: #d4b37a; --chip: #28231c;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; padding-block: 36px 64px; display: grid; gap: 44px; }
+header { display: grid; gap: 12px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+h1 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.1; margin: 0; text-wrap: balance; }
+h2 { font-family: var(--font-display); font-weight: 600; font-size: 1.45rem; line-height: 1.2; margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 68ch; }
+.lede { font-size: 1.05rem; color: var(--fg); }
+.formula { font-family: var(--font-mono); font-size: 13px; background: var(--chip); border-radius: 4px; padding: 6px 10px; justify-self: start; max-width: 100%; overflow-x: auto; white-space: nowrap; }
+section { display: grid; gap: 14px; min-width: 0; }
+.stages { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); }
+.table-scroll { overflow-x: auto; border-top: 1px solid var(--rule); }
+table { border-collapse: collapse; width: 100%; min-width: 560px; }
+th { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); }
+td { padding: 12px 14px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+td:first-child { font-weight: 600; white-space: nowrap; }
+td code, p code, li code { font-family: var(--font-mono); font-size: 0.86em; background: var(--chip); padding: 1px 5px; border-radius: 3px; }
+td.mono { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+figure { margin: 0; display: grid; gap: 8px; min-width: 0; }
+.panel { background: var(--paper); border: 1px solid var(--paper-rule); border-radius: 6px; padding: 22px 16px; overflow-x: auto; text-align: center; }
+.panel pre.mermaid { margin: 0; background: transparent; color: #2a241b; font-family: var(--font-mono); font-size: 12px; text-align: left; display: inline-block; }
+figcaption { font-size: 13px; color: var(--muted); max-width: 80ch; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px 28px; }
+.two p { font-size: 14px; }
+footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 16px; display: grid; gap: 4px; }
+footer code { font-family: var(--font-mono); font-size: 12.5px; }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Barbados-Brainiac · code flow and components</div>
+    <h1>Barbados-Brainiac workflow</h1>
+    <p class="lede">How the pipeline turns <code>Train.csv</code>, <code>Test.csv</code>, the line images and the two mega prompts into <code>submission.csv</code>: 18 stages run one after another, and the two approaches meet in one candidate pool.</p>
+    <div class="formula">R.O.A.D. score = 0.5 · (1 − word edits / 12) + 0.5 · (1 − char edits / 55)</div>
+  </header>
+
+  <section aria-labelledby="layers">
+    <h2 id="layers">Layers</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Layer</th><th>What it does</th><th>Stages</th></tr></thead>
+        <tbody>
+          <tr><td>Prepare</td><td>Builds the line table: split, family A (1639–1668 strips) or B (1669–1710 crops), near-duplicate groups kept in one fold, 5 folds. Renders the model input views.</td><td class="mono">prepare · views</td></tr>
+          <tr><td>Approach A</td><td>The 1st-place recipe: VLM label correction, dual-target LoRA (ink + transcription), pseudo labels on test and unlabelled images, final LoRA.</td><td class="mono">label_correction … a_infer</td></tr>
+          <tr><td>Generate</td><td>Fine-tuned VLMs (two soups, one rank-64 LoRA) and the approach A models write about 14 candidate lines each. The CRNN adds beam-8 strings.</td><td class="mono">b_train_generators … b_pool</td></tr>
+          <tr><td>Score</td><td>Six VLM judges (forced-decode log-probs), the CTC reader and a character n-gram LM score every candidate.</td><td class="mono">b_judges · b_features</td></tr>
+          <tr><td>Pick</td><td>A gradient-boosted ranker learns from the holdout-fold lines which evidence to trust. The judge-mix → MBR → CTC baseline is its reference.</td><td class="mono">b_baseline · b_rank</td></tr>
+          <tr><td>Stabilise</td><td>3 CatBoost members × 5 seeds, averaged within each line, with threads and seeds pinned.</td><td class="mono">b_rank</td></tr>
+          <tr><td>Gates</td><td>Twin → tier 1 → Holm → K5 → seed flip ≤ 3 % decide whether the ranker replaces the baseline.</td><td class="mono">b_rank</td></tr>
+          <tr><td>Fuse</td><td>Writes one submission per method, fills gaps along the fallback order, and picks the primary by the gates.</td><td class="mono">fuse · report</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="overview">
+    <h2 id="overview">End to end</h2>
+    <p class="stages">python -m brainiac.run  ·  bash run_all.sh</p>
+    <figure>
+      <div class="panel">
+<pre class="mermaid">
+%%{init: {"theme": "base", "flowchart": {"curve": "basis", "useMaxWidth": false, "nodeSpacing": 34, "rankSpacing": 42}, "themeVariables": {"primaryColor": "#f5f0e6", "mainBkg": "#f5f0e6", "primaryBorderColor": "#6e5b3f", "nodeBorder": "#6e5b3f", "primaryTextColor": "#2a241b", "textColor": "#2a241b", "titleColor": "#2a241b", "lineColor": "#7d6b53", "clusterBkg": "#f2f2ef", "clusterBorder": "#6e5b3f", "edgeLabelBackground": "#fbfaf6", "tertiaryColor": "#f2f2ef", "fontFamily": "IBM Plex Sans, system-ui, sans-serif", "fontSize": "14px"}}}%%
+flowchart TD
+  IN["Train.csv · Test.csv · images&lt;br/&gt;mega_prompt.md · mega_prompt_v2.md"]
+  PREP["prepare · views&lt;br/&gt;line table · families A/B&lt;br/&gt;near-duplicate groups · 5 folds"]
+  IN --> PREP
+  subgraph SA["Approach A · 1st-place pipeline"]
+    direction TB
+    LC["label_correction&lt;br/&gt;VLM checks every label"]
+    A1["a_train_first&lt;br/&gt;dual-target LoRA"]
+    PS["a_pseudo&lt;br/&gt;pseudo labels"]
+    A2["a_train_final&lt;br/&gt;labels + pseudo labels"]
+    AI["a_infer&lt;br/&gt;candidates + own submission"]
+    LC --> A1 --> PS --> A2 --> AI
+  end
+  subgraph SB["Approach B · generate → score → pick"]
+    direction TB
+    GEN["b_train_generators · b_soups&lt;br/&gt;b_generate · b_readers"]
+    POOL[("b_pool&lt;br/&gt;candidate pool per line")]
+    SCORE["b_judges · b_features"]
+    PICK["b_baseline · b_rank&lt;br/&gt;stabilise · gates"]
+    GEN --> POOL --> SCORE --> PICK
+  end
+  PREP --> LC
+  PREP --> GEN
+  AI -->|"fusion: A candidates join the pool"| POOL
+  PS -.->|"pseudo labels for the data3 soup"| GEN
+  PICK --> FUSE["fuse&lt;br/&gt;per-method submissions&lt;br/&gt;primary chosen by the gates"]
+  AI --> FUSE
+  FUSE --> SUBM[("submission.csv")]
+  FUSE --> REP["report&lt;br/&gt;holdout-fold scores"]
+</pre>
+      </div>
+      <figcaption>Approach A's final models write candidates into Approach B's pool, where the judges score them and the ranker can pick them. That is the main fusion. Every method also writes its own submission.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="approach-a">
+    <h2 id="approach-a">Approach A · the 1st-place pipeline, adapted to lines</h2>
+    <p class="stages">brainiac/pipeline/approach_a.py · brainiac/vlm/sft.py · brainiac/data/views.py · brainiac/text/clean.py</p>
+    <figure>
+      <div class="panel">
+<pre class="mermaid">
+%%{init: {"theme": "base", "flowchart": {"curve": "basis", "useMaxWidth": false, "nodeSpacing": 34, "rankSpacing": 40}, "themeVariables": {"primaryColor": "#f5f0e6", "mainBkg": "#f5f0e6", "primaryBorderColor": "#6e5b3f", "nodeBorder": "#6e5b3f", "primaryTextColor": "#2a241b", "textColor": "#2a241b", "titleColor": "#2a241b", "lineColor": "#7d6b53", "clusterBkg": "#f2f2ef", "clusterBorder": "#6e5b3f", "edgeLabelBackground": "#fbfaf6", "tertiaryColor": "#f2f2ef", "fontFamily": "IBM Plex Sans, system-ui, sans-serif", "fontSize": "14px"}}}%%
+flowchart TD
+  IMG["line image"] --> V["views · multi&lt;br/&gt;whole line + overlapping left and right parts&lt;br/&gt;rescaled to the vision patch grid&lt;br/&gt;from patchify_images.py (7 crops per plan)"]
+  LBL["Train.csv Target"] --> LC
+  EXT[("external corrections&lt;br/&gt;optional, e.g. opus_label")] -.-> LC
+  V --> LC["label_correction · base Qwen3-VL-8B&lt;br/&gt;full mega prompt + correction header&lt;br/&gt;accepted within 6 char edits · rejected rows marked noisy&lt;br/&gt;from automated_label_correction.py"]
+  LC --> A1["a_train_first · each backbone × scope&lt;br/&gt;answer JSON: ink (corrected) + transcription (label)&lt;br/&gt;LoRA r16 · dropout 0.35 · NEFTune 5 · Unsloth&lt;br/&gt;from train_and_create_pseudo.py"]
+  A1 --> PS["a_pseudo&lt;br/&gt;test + unlabelled images + the scope's own prediction lines&lt;br/&gt;kept when mean token log-prob ≥ −0.35"]
+  PS --> A2["a_train_final&lt;br/&gt;labels + pseudo labels&lt;br/&gt;from train_with_pseudos.py"]
+  A2 --> AI["a_infer&lt;br/&gt;greedy + beam 5 (4 returned) + the ink reading&lt;br/&gt;from text_inference.py"]
+  AI --> CL["clean&lt;br/&gt;collection charset · long s → s · plus sign → et-sign · superscripts → ^&lt;br/&gt;from clean_text_preds.py"]
+  CL --> SUBA[("submissions/a_qwen3vl8b.csv&lt;br/&gt;submissions/a_qwen25vl7b.csv")]
+  CL --> POOLA[("approach B candidate pool")]
+</pre>
+      </div>
+      <figcaption>The 1st place trained each field twice in one answer, the corrected value and the annotator's raw value, and submitted the raw one. Here the model answers with an <code>ink</code> reading and a <code>transcription</code> in the annotators' style, and the <code>transcription</code> is what gets submitted.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="approach-b">
+    <h2 id="approach-b">Approach B · generate, score, pick, stabilise, gates</h2>
+    <p class="stages">brainiac/pipeline/approach_b.py · features.py · selection.py · fusion.py</p>
+    <figure>
+      <div class="panel">
+<pre class="mermaid">
+%%{init: {"theme": "base", "flowchart": {"curve": "basis", "useMaxWidth": false, "nodeSpacing": 30, "rankSpacing": 44}, "themeVariables": {"primaryColor": "#f5f0e6", "mainBkg": "#f5f0e6", "primaryBorderColor": "#6e5b3f", "nodeBorder": "#6e5b3f", "primaryTextColor": "#2a241b", "textColor": "#2a241b", "titleColor": "#2a241b", "lineColor": "#7d6b53", "clusterBkg": "#f2f2ef", "clusterBorder": "#6e5b3f", "edgeLabelBackground": "#fbfaf6", "tertiaryColor": "#f2f2ef", "fontFamily": "IBM Plex Sans, system-ui, sans-serif", "fontSize": "14px"}}}%%
+flowchart TD
+  TRAIN["Training lines&lt;br/&gt;folds 1–4 · noisy rows dropped"]
+  TEST["TEST lines&lt;br/&gt;1,374"]
+  subgraph GEN["1 · Generate candidates"]
+    direction TB
+    G1["q3_soup3&lt;br/&gt;Qwen3-VL-8B · 3 LoRAs averaged"]
+    G2["q25_r64&lt;br/&gt;Qwen2.5-VL-7B · LoRA rank 64"]
+    G3["q25_soup_d3&lt;br/&gt;Qwen2.5-VL-7B · 3 LoRAs on corrected + pseudo labels"]
+    G4["a:qwen3vl8b · a:qwen25vl7b&lt;br/&gt;approach A models"]
+    G5["ctc&lt;br/&gt;CRNN beam-8 strings"]
+  end
+  TRAIN --> GEN
+  TEST --> GEN
+  GEN --> POOL[("Candidate pool&lt;br/&gt;greedy + beam 8 + 6 samples per model&lt;br/&gt;deduplicated · up to 32 per line")]
+  POOL --> JUD["2 · Six VLM judges&lt;br/&gt;forced-decode log-probs"]
+  POOL --> RD["3 · Independent readers&lt;br/&gt;CRNN CTC · external readers&lt;br/&gt;char n-gram LM"]
+  JUD --> BASE["b_baseline&lt;br/&gt;judge mix → MBR → CTC overlay"]
+  JUD --> FEAT["Features&lt;br/&gt;F0 sources · F1 judges · F2 MBR&lt;br/&gt;F3 char LM · reader block"]
+  RD --> FEAT
+  FEAT --> RANK["4 · GBDT ranker&lt;br/&gt;target = exact metric loss per candidate&lt;br/&gt;nested CV on the holdout fold"]
+  RANK --> STAB["Stabilise&lt;br/&gt;3 CatBoost members × 5 seeds&lt;br/&gt;pinned threads"]
+  STAB --> GATES["Gates&lt;br/&gt;twin → tier 1 → Holm → K5 → seed flip ≤ 3 %"]
+  BASE -->|"reference"| GATES
+  GATES --> FUSE["fuse&lt;br/&gt;ranker if every gate passes, else baseline"]
+  FUSE --> OUTB[("submissions&lt;br/&gt;ranker · blend · baseline · a_*")]
+</pre>
+      </div>
+      <figcaption>The judges are the generators' own adapters, some with the other mega prompt, scoring each candidate's answer by teacher forcing. The blend submission mixes the ranker with the MBR expected loss, the character LM and the CTC reader.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="scopes">
+    <h2 id="scopes">Scopes · why the ranker's training data is honest</h2>
+    <p class="stages">scopes: [oof, full] · data.holdout_fold: 0</p>
+    <figure>
+      <div class="panel">
+<pre class="mermaid">
+%%{init: {"theme": "base", "flowchart": {"curve": "basis", "useMaxWidth": false, "nodeSpacing": 30, "rankSpacing": 36}, "themeVariables": {"primaryColor": "#f5f0e6", "mainBkg": "#f5f0e6", "primaryBorderColor": "#6e5b3f", "nodeBorder": "#6e5b3f", "primaryTextColor": "#2a241b", "textColor": "#2a241b", "titleColor": "#2a241b", "lineColor": "#7d6b53", "clusterBkg": "#f2f2ef", "clusterBorder": "#6e5b3f", "edgeLabelBackground": "#fbfaf6", "tertiaryColor": "#f2f2ef", "fontFamily": "IBM Plex Sans, system-ui, sans-serif", "fontSize": "14px"}}}%%
+flowchart LR
+  subgraph OOF["scope oof"]
+    direction TB
+    O1["train on every fold&lt;br/&gt;except the holdout fold"] --> O2["LoRAs · CRNN · char LM"] --> O3["candidates + scores&lt;br/&gt;for the holdout lines"] --> O4["ranker training rows&lt;br/&gt;target = metric loss"]
+  end
+  subgraph FULL["scope full"]
+    direction TB
+    F1["train on all&lt;br/&gt;labelled lines"] --> F2["LoRAs · CRNN · char LM"] --> F3["candidates + scores&lt;br/&gt;for the test lines"] --> F4["ranker picks&lt;br/&gt;for the submission"]
+  end
+  O4 -->|"fitted ranker"| F4
+</pre>
+      </div>
+      <figcaption>Every trainable part is built twice. The <code>oof</code> models never see the holdout fold, so their candidates and scores there are fair training data for the ranker. The <code>full</code> models serve the test lines. Parallel copies and duplicate crops of one line share a group and therefore a fold.</figcaption>
+    </figure>
+  </section>
+
+  <section aria-labelledby="components">
+    <h2 id="components">Components</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Module</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td><code>brainiac/run.py</code></td><td>Stage runner: the 18 stages one after another, resumable, config overrides as <code>key=value</code>.</td></tr>
+          <tr><td><code>brainiac/config.py</code></td><td>YAML includes, <code>${…}</code> interpolation, command-line overrides.</td></tr>
+          <tr><td><code>brainiac/data/dataset.py</code></td><td>Line table, families, near-duplicate groups, folds, scopes.</td></tr>
+          <tr><td><code>brainiac/data/views.py</code></td><td>Model input views, the patchify step for lines.</td></tr>
+          <tr><td><code>brainiac/text/prompts.py</code></td><td>Mega-prompt sections (full, compact or chosen), correction prompt, answer JSON, parsing.</td></tr>
+          <tr><td><code>brainiac/text/clean.py</code></td><td>Output cleaning to the collection's character set.</td></tr>
+          <tr><td><code>brainiac/vlm/</code></td><td>Model registry (Qwen2.5-VL-7B, Qwen3-VL-8B), hf / vllm / mock backends, LoRA training, LoRA soups.</td></tr>
+          <tr><td><code>brainiac/readers/</code></td><td>CRNN CTC reader (training, beam search, candidate likelihoods) and external readers.</td></tr>
+          <tr><td><code>brainiac/lm/charlm.py</code></td><td>Kneser-Ney character n-gram LM.</td></tr>
+          <tr><td><code>brainiac/pipeline/approach_a.py</code></td><td>Label correction, first fine-tune, pseudo labels, final fine-tune, inference.</td></tr>
+          <tr><td><code>brainiac/pipeline/approach_b.py</code></td><td>Generators, soups, candidate generation, readers, candidate pool, judges.</td></tr>
+          <tr><td><code>brainiac/pipeline/features.py</code></td><td>F0–F3 and reader features; target = exact metric loss.</td></tr>
+          <tr><td><code>brainiac/pipeline/selection.py</code></td><td>MBR baseline, GBDT ranker with nested CV, stabilisation, gates.</td></tr>
+          <tr><td><code>brainiac/pipeline/fusion.py</code></td><td>Per-method submissions, primary pick, holdout-fold report.</td></tr>
+          <tr><td><code>brainiac/metric.py</code></td><td>R.O.A.D. metric, per-line loss, loss matrices, paired bootstrap.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div>Source: <code>Barbados-Brainiac/</code> in <code>mabdelrazik3-dotcom/Barbados</code></div>
+    <div>Stage order: <code>python -m brainiac.run --list</code> · configuration: <code>configs/*.yaml</code></div>
+  </footer>
+</div>

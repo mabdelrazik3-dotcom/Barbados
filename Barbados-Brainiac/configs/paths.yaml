@@ -1,0 +1,12 @@
+# Paths. Relative paths are resolved against the Barbados-Brainiac directory.
+paths:
+  train_csv: ../Train.csv
+  test_csv: ../Test.csv
+  sample_submission: ../SampleSubmission.csv
+  images_dir: ../images            # directory holding <ID>.jpg for every Train/Test line
+  prompt_v1: ../mega_prompt.md
+  prompt_v2: ../mega_prompt_v2.md
+  work_dir: runs/${experiment}     # every stage writes below this directory
+  models_dir: runs/${experiment}/models
+  hf_cache: null                   # optional HF_HOME for model downloads
+  external_corrections: null       # optional CSV with verified corrections, e.g. ../analysis/Train_opus.csv

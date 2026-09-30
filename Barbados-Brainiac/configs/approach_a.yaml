@@ -1,0 +1,53 @@
+# Approach A — the 1st-place text-extraction pipeline, adapted to single-line transcription.
+#
+#   1st place (survey plans)                      here (deed-book lines)
+#   download models                               models.yaml hf_id / local_path
+#   patchify: 7 crops per plan                     views.multi: whole line + left/right parts
+#   automated label correction (base Qwen3-VL)     label_correction: VLM verifies each Target
+#   first fine-tune + pseudo labels on test        a_train_first + a_pseudo (test + unlabelled images)
+#   final fine-tune on labels + pseudo labels      a_train_final
+#   inference + clean_text_preds                   a_infer (+ brainiac/text/clean.py)
+#   answer = corrected field + raw field           dual_target: {"ink": corrected, "transcription": label}
+approach_a:
+  enabled: true
+  backbones: [qwen3vl8b, qwen25vl7b]   # one A model per backbone; each joins the candidate pool
+  lora: first_place
+  train: first_place                   # set to "default" to train with plain transformers + peft
+  views: multi
+  prompt: {version: v2, mode: compact}
+  dual_target: true                    # teach both readings; the submission uses "transcription"
+  dual_order: ink_first                # ink_first | transcription_first
+  infer_backend: hf                    # A adapters also tune the vision tower (first_place LoRA), which vLLM's
+                                       # LoRA support skips -> keep them on hf (null = the global backend)
+
+  label_correction:
+    enabled: true
+    model: qwen3vl8b                   # zero-shot base model, as in the 1st place
+    adapter: null                      # or a fine-tuned adapter directory
+    prompt: {version: v2, mode: full}  # the full mega prompt + the correction instruction
+    views: multi
+    batch_size: 4
+    max_char_edits: 6                  # accept a VLM correction only this close to the label (no rewrites)
+    noisy_char_edits: 25               # a correction this far from the label marks the row noisy ...
+    drop_noisy: true                   # ... and noisy rows are left out of training ("minus 40 noisy rows")
+    max_noisy_rows: 60                 # never drop more than this many rows
+    external:                          # optional verified corrections (e.g. the opus_label study)
+      csv: ${paths.external_corrections}
+      id_col: ID
+      text_col: opus_label
+      verdict_col: verdict             # rows with verdict CORRECTED are used
+      confidence_col: confidence
+      min_confidence: high             # high | medium | low
+
+  pseudo:
+    enabled: true
+    splits: [test, extra]              # extra = images in neither Train.csv nor Test.csv
+    min_mean_logprob: -0.35            # keep confident pseudo labels only (null keeps all, as the 1st place did)
+    max_rows: null
+    decode: {greedy: true}
+
+  infer:
+    decode:
+      greedy: true
+      beam: {num_beams: 5, num_return: 4}
+      include_ink: true                # the "ink" reading of a dual-target answer becomes a candidate too

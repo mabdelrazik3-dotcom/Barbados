@@ -241,14 +241,12 @@ def format_dataset(df: pd.DataFrame) -> pd.DataFrame:
         "Unit of Measurement",
         "Parish",
         "LT Num",
-        "geometry",
     ]
     return df[columns_to_keep]
 
 
 df["Land Surveyor"] = df["Land Surveyor"].apply(clean_land_surveyor_names)
 LS = df["Land Surveyor"].tolist()
-df["geometry"] = " "
 df = format_dataset(df)
 df["Land Surveyor"] = LS  # Restore cleaned names
 

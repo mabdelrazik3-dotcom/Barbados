@@ -1,7 +1,7 @@
 """
 Download base VLM checkpoints from HuggingFace for Unsloth fine-tuning.
 
-Downloads Qwen3-VL-8B and Qwen3-VL-32B models to models/ directory.
+Downloads the Qwen3-VL-8B model to models/ directory.
 Uses HF transfer for faster downloads.
 """
 
@@ -25,10 +25,9 @@ MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
 repo_ids = [
     TEXT_CONFIG.qwen3vl8b.repo_id,
-    TEXT_CONFIG.qwen3vl32b.repo_id,
 ]
 
-# Download both models with resumable downloads
+# Download the model with resumable downloads
 for repo_id in repo_ids:
     local_dir = MODELS_DIR / repo_id.split("/")[-1]
     local_dir.mkdir(parents=True, exist_ok=True)

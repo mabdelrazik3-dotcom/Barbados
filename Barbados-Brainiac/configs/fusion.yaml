@@ -1,0 +1,13 @@
+# Fusion of approach A and approach B, and the final submissions.
+fusion:
+  # primary submission (written as submission.csv):
+  #   auto      -> the stabilised ranker if every gate passes, else the MBR baseline
+  #   ranker | blend | baseline | a:<backbone>
+  primary: auto
+  blend:                     # "gblmx": ranker score mixed with MBR expected loss and the char LM
+    ranker: 1.0
+    mbr: 0.4
+    charlm: 0.15
+    ctc: 0.15
+  fallback_order: [ranker, baseline, a:qwen3vl8b, a:qwen25vl7b]   # used for any empty prediction
+  write: [ranker, blend, baseline, a:qwen3vl8b, a:qwen25vl7b]
